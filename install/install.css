@@ -1,0 +1,163 @@
+/*
+ * Copyright Studio 384
+ * Bootstrap Template: Trent
+ * Version:            1.0-dev
+ * Based on:           Trent v1.2 (http://studio384.be/trent.php)
+ * Since:              0.1.3311
+ * Bootstrap:          3.3.1-dev
+ */
+
+/* General fonts */
+* {
+	font-family: "Segoe UI";
+	box-shadow: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Segoe UI Light";
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	color: #fff;
+	text-align: center;
+}
+
+.ready {
+	background-color: #5cb85c;
+}
+
+.error, .modal-footer, .modal-header {
+	background-color: #d9534f;
+}
+
+.default {
+	background-color: #337ab7;
+}
+
+.modal-title {
+	font-size: 40px;
+}
+
+.table, .table > thead > tr > th {
+	color: #444;
+	font-size: 17px;
+	text-align: center;
+}
+
+.masthead-brand {
+	font-size: 70px;
+	text-transform: uppercase;
+}
+
+.luna-brand {
+	font-family: "Segoe UI Semibold";
+}
+
+.cover-heading {
+	font-size: 50px;
+}
+
+/* Button */
+.btn-default, .btn-default:hover, .btn-default:focus {
+	text-shadow: none;
+	background-color: #fff;
+	text-transform: uppercase;
+}
+
+.default .btn-default, .default .btn-default:hover, .default .btn-default:focus {
+	color: #337ab7;
+	border: 1px solid #337ab7;
+}
+
+.ready .btn-default, .ready .btn-default:hover, .ready .btn-default:focus {
+	color: #5cb85c;
+	border: 1px solid #5cb85c;
+}
+
+.error .btn-default, .error .btn-default:hover, .error .btn-default:focus {
+	color: #d9534f;
+	border: 1px solid #d9534f;
+}
+
+/* Content */
+.site-wrapper {
+	display: table;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+}
+
+.site-wrapper-inner {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.cover-container {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.inner {
+	padding: 30px;
+}
+
+.modal-dialog {
+	margin-top: 10%;
+}
+
+.table {
+	margin-bottom: 0;
+}
+
+textarea {
+	max-width: 60%;
+	padding: 0 auto;
+}
+
+@media (max-width: 768px) {
+	.site-wrapper-inner {
+		vertical-align: middle;
+	}
+
+	.cover-container {
+		width: 100%;
+	}
+	
+	textarea {
+		max-width: 100%;
+	}
+}
+
+@media (min-width: 768px) {
+	.site-wrapper-inner {
+		vertical-align: middle;
+	}
+
+	.cover-container {
+		width: 100%;
+	}
+	
+	textarea {
+		max-width: 100%;
+	}
+}
+
+@media (min-width: 992px) {
+	.cover-container {
+		width: 780px;
+	}
+	
+	textarea {
+		max-width: 100%;
+	}
+}
+
+@media (min-width: 1200px) {
+	.cover-container {
+		width: 1140px;
+	}
+}
