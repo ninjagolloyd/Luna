@@ -6,7 +6,7 @@ if(!isset($_SESSION['luna_install_database']))
 	die('Installation access denied.');
 
 if (isset($_POST['form_sent'])) {
-	$_SESSION['luna_install_essential'] = true;
+	$_SESSION['luna_finished'] = true;
 	header('Location: success.php');
 }
 

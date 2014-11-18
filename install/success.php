@@ -2,7 +2,7 @@
 
 session_start();
 
-if(!isset($_SESSION['luna_install_essential']))
+if(!isset($_SESSION['luna_finished']))
 	die('Installation access denied.');
 
 ?>
