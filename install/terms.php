@@ -26,7 +26,7 @@ if (isset($_POST['form_sent'])) {
 			<div class="site-wrapper-inner">
 				<div class="cover-container">
 					<div class="masthead clearfix">
-						<h3 class="masthead-brand"><span class="luna-brand">Luna</span>Terms<span class="visible-xs-block"></span><span class="luna-brand">&amp;</span>Lincense</h3>
+						<h3 class="masthead-brand"><span class="luna-brand">Luna</span>Terms<span class="visible-xs-block"></span><span class="luna-brand">&amp;</span>License</h3>
 					</div>
 					<div class="inner cover">
 						<form method="post" action="terms.php">
