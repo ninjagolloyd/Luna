@@ -24,11 +24,9 @@ if(!isset($_SESSION['luna_install_check']))
 						<h3 class="masthead-brand"><span class="luna-brand">Luna</span>Terms<span class="visible-xs-block"></span><span class="luna-brand">&amp;</span>Lincense</h3>
                     </div>
                     <div class="inner cover">
-                        <textarea class="form-control" rows="20">
-These are the terms for using Luna.
+<textarea class="form-control" rows="20">These are the terms for using Luna.
 
-That's it, continue.
-						</textarea><br />
+That's it, continue.</textarea><br />
                         <p class="lead">
                             <a href="setup.php" class="btn btn-lg btn-default">Agree</a>
                         </p>
