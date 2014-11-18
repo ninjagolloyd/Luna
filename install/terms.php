@@ -5,6 +5,11 @@ session_start();
 if(!isset($_SESSION['luna_install_check']))
 	die('Installation access denied.');
 
+if (isset($_POST['form_sent'])) {
+	$_SESSION['luna_install_terms'] = true;
+	header('Location: setup.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,15 +21,17 @@ if(!isset($_SESSION['luna_install_check']))
         <link href="../include/css/bootstrap.min.css" rel="stylesheet">
         <link href="install.css" rel="stylesheet">
     </head>
-    <body class="default">
-        <div class="site-wrapper">
-            <div class="site-wrapper-inner">
-                <div class="cover-container">
-                    <div class="masthead clearfix">
+	<body class="default">
+		<div class="site-wrapper">
+			<div class="site-wrapper-inner">
+				<div class="cover-container">
+					<div class="masthead clearfix">
 						<h3 class="masthead-brand"><span class="luna-brand">Luna</span>Terms<span class="visible-xs-block"></span><span class="luna-brand">&amp;</span>Lincense</h3>
-                    </div>
-                    <div class="inner cover">
-<textarea class="form-control" rows="20" readonly>LICENSE FOR LUNA MINUS SUNRISE AND LUNA SETUP &amp; UPDATE
+					</div>
+					<div class="inner cover">
+						<form method="post" action="terms.php">
+							<input type="hidden" name="form_sent" value="1" />
+							<textarea class="form-control" rows="20" readonly>LICENSE FOR LUNA MINUS SUNRISE AND LUNA SETUP &amp; UPDATE
 
 Copyright &copy; 2013-2014 Luna Group
 
@@ -47,14 +54,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 LICENSE FOR COMPONENTS
 
 Components used in Luna might be released under other licenses. Bootstrap, jQuery and Font Awesome are not part of the Luna Group but developed by third parties. Released, respectively, under the MIT, GPLv2 and MIT license. Please visit the developer's website for more information.</textarea><br />
-                        <p class="lead">
-                            <a href="setup.php" class="btn btn-lg btn-default">Agree</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="../include/js/jquery.js"></script>
-        <script src="../include/js/bootstrap.min.js"></script>
-    </body>
+							<p class="lead">
+								<button class="btn btn-lg btn-default" type="submit" name="agree">Agree</button>
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../include/js/jquery.js"></script>
+		<script src="../include/js/bootstrap.min.js"></script>
+	</body>
 </html>
