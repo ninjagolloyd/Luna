@@ -26,7 +26,7 @@ if (isset($_POST['form_sent'])) {
 						<h3 class="masthead-brand"><span class="luna-brand">Luna</span>Preview<span class="luna-brand">Update</span></h3>
                     </div>
                     <div class="inner cover">
-						<form method="post" action="terms.php">
+						<form method="post" action="update.php">
 							<input type="hidden" name="form_sent" value="1" />
                         	<h1 class="cover-heading">There's an update available to be installed</h1>
 							<p class="lead">
