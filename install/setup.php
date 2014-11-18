@@ -5,6 +5,11 @@ session_start();
 if(!isset($_SESSION['luna_install_terms']))
 	die('Installation access denied.');
 
+if (isset($_POST['form_sent'])) {
+	$_SESSION['luna_install_database'] = true;
+	header('Location: essential.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +30,7 @@ if(!isset($_SESSION['luna_install_terms']))
                     </div>
                     <div class="inner cover">
 						<form class="form-horizontal" method="post" action="setup.php">
+							<input type="hidden" name="form_sent" value="1" />
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<fieldset>
@@ -75,7 +81,7 @@ if(!isset($_SESSION['luna_install_terms']))
 								</div>
 							</div>
 							<p class="lead">
-								<a href="setup.php" class="btn btn-lg btn-default">Install Luna</a>
+								<button class="btn btn-lg btn-default" type="submit" name="install">Install Luna</button>
 							</p>
 						</form>
                     </div>
