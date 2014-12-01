@@ -2,6 +2,9 @@
 
 require ('header.php');
 
+$background_user_color = 'style="background:'.$luna_user['color'].';"';
+$background_border_user_color = 'style="background:'.$luna_user['color'].';border-color:'.$luna_user['color'].';"';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +24,7 @@ if (!defined('FORUM_ALLOW_INDEX'))
 	</head>
 	<body>
         <div id="header">
-			<div class="navbar navbar-inverse navbar-static-top">
+			<div class="navbar navbar-inverse navbar-static-top"<?php echo $background_user_color ?>>
 				<div class="container">
 					<a class="navbar-brand" href="index.php"><?php echo $menu_title ?></a>
 					<div class="navbar-header">

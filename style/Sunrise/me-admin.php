@@ -26,7 +26,7 @@ if (!defined('FORUM'))
         <div class="panel-body">
             <input type="hidden" name="form_sent" value="1" />
             <fieldset>
-                <p><input class="btn btn-primary" type="submit" name="ban" value="<?php echo $lang['Ban user'] ?>" /></p>
+                <p><input class="btn btn-danger" type="submit" name="ban" value="<?php echo $lang['Ban user'] ?>" /></p>
             </fieldset>
         </div>
     </div>
@@ -42,7 +42,8 @@ if (!defined('FORUM'))
         </div>
         <div class="panel-body">
             <fieldset>
-                <select id="group_id" class="form-control" name="group_id">
+				<div class="input-group">
+					<select id="group_id" class="form-control" name="group_id">
 <?php
 
             $result = $db->query('SELECT g_id, g_title FROM '.$db->prefix.'groups WHERE g_id!='.FORUM_GUEST.' ORDER BY g_title') or error('Unable to fetch user group list', __FILE__, __LINE__, $db->error());
@@ -55,8 +56,11 @@ if (!defined('FORUM'))
             }
 
 ?>
-                </select>
-                <input type="submit" class="btn btn-primary" name="update_group_membership" value="<?php echo $lang['Save'] ?>" />
+					</select> 
+					<span class="input-group-btn"> 
+						<input type="submit" class="btn btn-primary" name="update_group_membership" value="<?php echo $lang['Save'] ?>" /> 
+					</span> 
+				</div> 
             </fieldset>
         </div>
     </div>
@@ -71,7 +75,7 @@ if (!defined('FORUM'))
         </div>
         <div class="panel-body">
             <fieldset>
-                <input type="submit" class="btn btn-danger" name="delete_user" value="<?php echo $lang['Delete user'] ?>" /> <input type="submit" class="btn btn-danger" name="ban" value="<?php echo $lang['Ban user'] ?>" />
+                <button type="submit" class="btn btn-danger" name="delete_user"?><?php echo $lang['Delete user'] ?></button> <button type="submit" class="btn btn-danger" name="ban"><?php echo $lang['Ban user'] ?></button>
             </fieldset>
         </div>
     </div>

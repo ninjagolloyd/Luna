@@ -744,7 +744,7 @@ function update_forum($forum_id) {
 
 		$db->query('UPDATE '.$db->prefix.'forums SET num_topics='.$num_topics.', num_posts='.$num_posts.', last_post='.$last_post.', last_post_id='.$last_post_id.', last_poster_id=\''.$db->escape($last_poster_id).'\' WHERE id='.$forum_id) or error('Unable to update last_post/last_post_id', __FILE__, __LINE__, $db->error());
 	} else // There are no topics
-		$db->query('UPDATE '.$db->prefix.'forums SET num_topics='.$num_topics.', num_posts='.$num_posts.', last_post=NULL, last_post_id=NULL, last_poster_id=NULL WHERE id='.$forum_id) or error('Unable to update last_post/last_post_id/last_topic', __FILE__, __LINE__, $db->error());
+		$db->query('UPDATE '.$db->prefix.'forums SET num_topics='.$num_topics.', num_posts='.$num_posts.', last_post=NULL, last_post_id=NULL, last_poster_id=NULL WHERE id='.$forum_id) or error('Unable to update last_post/last_post_id', __FILE__, __LINE__, $db->error());
 }
 
 
@@ -1348,95 +1348,17 @@ function maintenance_message() {
 	header('Content-type: text/html; charset=utf-8');
 
 	// Deal with newlines, tabs and multiple spaces
-	$pattern = array("\t", '  ', '  ');
-	$replace = array('&#160; &#160; ', '&#160; ', ' &#160;');
 	$message = str_replace($pattern, $replace, $luna_config['o_maintenance_message']);
 
-	if (file_exists(FORUM_ROOT.'style/'.$luna_user['style'].'/maintenance.tpl')) {
-		$tpl_file = FORUM_ROOT.'style/'.$luna_user['style'].'/maintenance.tpl';
-		$tpl_inc_dir = FORUM_ROOT.'style/'.$luna_user['style'].'/';
-	} else {
-		$tpl_file = FORUM_ROOT.'style/Core/templates/maintenance.tpl';
-		$tpl_inc_dir = FORUM_ROOT.'style/User/';
-	}
-
-	$tpl_maint = file_get_contents($tpl_file);
-
-	// START SUBST - <luna_include "*">
-	preg_match_all('%<luna_include "([^/\\\\]*?)\.(php[45]?|inc|html?|txt)">%i', $tpl_maint, $luna_includes, PREG_SET_ORDER);
-
-	foreach ($luna_includes as $cur_include) {
-		ob_start();
-
-		// Allow for overriding user includes, too.
-		if (file_exists($tpl_inc_dir.$cur_include[1].'.'.$cur_include[2]))
-			require $tpl_inc_dir.$cur_include[1].'.'.$cur_include[2];
-		else if (file_exists(FORUM_ROOT.'include/user/'.$cur_include[1].'.'.$cur_include[2]))
-			require FORUM_ROOT.'include/user/'.$cur_include[1].'.'.$cur_include[2];
-		else
-			error(sprintf($lang['Pun include error'], htmlspecialchars($cur_include[0]), basename($tpl_file)));
-
-		$tpl_temp = ob_get_contents();
-		$tpl_maint = str_replace($cur_include[0], $tpl_temp, $tpl_maint);
-		ob_end_clean();
-	}
-	// END SUBST - <luna_include "*">
-
-
-	// START SUBST - <luna_language>
-	$tpl_maint = str_replace('<luna_language>', $lang['lang_identifier'], $tpl_maint);
-	// END SUBST - <luna_language>
-
-
-	// START SUBST - <luna_content_direction>
-	$tpl_maint = str_replace('<luna_content_direction>', $lang['lang_direction'], $tpl_maint);
-	// END SUBST - <luna_content_direction>
-
-
-	// START SUBST - <luna_head>
-	ob_start();
-
-	$page_title = array(luna_htmlspecialchars($luna_config['o_board_title']), $lang['Maintenance']);
-
-?>
-<title><?php echo generate_page_title($page_title) ?></title>
-<link rel="stylesheet" type="text/css" href="style/<?php echo $luna_user['style'].'/style.css' ?>" />
-<?php
-
-	$tpl_temp = trim(ob_get_contents());
-	$tpl_maint = str_replace('<luna_head>', $tpl_temp, $tpl_maint);
-	ob_end_clean();
-	// END SUBST - <luna_head>
-
-
-	// START SUBST - <luna_maint_main>
-	ob_start();
-
-?>
-<div class="container">
-    <div class="form">
-        <h1 class="form-heading"><?php echo $lang['Maintenance'] ?></h1>
-        <div class="form-content">
-            <p><?php echo $message ?></p>
-        </div>
-    </div>
-</div>
-<?php
-
-	$tpl_temp = trim(ob_get_contents());
-	$tpl_maint = str_replace('<luna_maint_main>', $tpl_temp, $tpl_maint);
-	ob_end_clean();
-	// END SUBST - <luna_maint_main>
-
+	require load_page('maintenance.php');
 
 	// End the transaction
 	$db->end_transaction();
 
-
 	// Close the db connection (and free up any result data)
 	$db->close();
 
-	exit($tpl_maint);
+	exit();
 }
 
 
@@ -2204,19 +2126,6 @@ function get_forum_id($post_id)
 
     if($row)
         return $row[0];
-    else
-        return false;
-}
-
-// Update forum's last_topic
-function set_forum_topic($fid, $fmessage)
-{
-	global $db;
-
-    $result = $db->query('UPDATE '.$db->prefix.'forums SET last_topic=\''.$db->escape($fmessage).'\' WHERE id='.intval($fid), true) or error('Unable to set forum last topic', __FILE__, __LINE__, $db->error());
-
-    if($db->affected_rows($result))
-        return true;
     else
         return false;
 }

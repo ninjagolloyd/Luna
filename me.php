@@ -19,6 +19,8 @@ require FORUM_ROOT.'include/utf8/substr_replace.php';
 require FORUM_ROOT.'include/utf8/ucwords.php'; // utf8_ucwords needs utf8_substr_replace
 require FORUM_ROOT.'include/utf8/strcasecmp.php';
 
+require load_page('me-modals.php');
+
 $action = isset($_GET['action']) ? $_GET['action'] : null;
 $section = isset($_GET['section']) ? $_GET['section'] : null;
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -459,9 +461,6 @@ if ($action == 'change_pass') {
 				else if ($form['signature'] && $luna_config['p_sig_all_caps'] == '0' && is_all_uppercase($form['signature']) && !$luna_user['is_admmod'])
 					$form['signature'] = utf8_ucwords(utf8_strtolower($form['signature']));
 
-				// Validate BBCode syntax
-				require FORUM_ROOT.'include/parser.php';
-
 				$errors = array();
 				$form['signature'] = preparse_bbcode($form['signature'], $errors, true);
 
@@ -596,7 +595,7 @@ if ($action == 'change_pass') {
 	redirect('me.php?section='.$section.'&amp;id='.$id);
 } else {
 
-	$result = $db->query('SELECT u.username, u.email, u.title, u.realname, u.url, u.facebook, u.msn, u.twitter, u.google, u.location, u.signature, u.disp_topics, u.disp_posts, u.email_setting, u.notify_with_post, u.auto_notify, u.show_smilies, u.show_img, u.show_img_sig, u.show_avatars, u.show_sig, u.timezone, u.dst, u.language, u.style, u.color, u.num_posts, u.last_post, u.registered, u.registration_ip, u.admin_note, u.date_format, u.time_format, u.last_visit, g.g_id, g.g_user_title, g.g_moderator FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
+	$result = $db->query('SELECT u.id, u.username, u.email, u.title, u.realname, u.url, u.facebook, u.msn, u.twitter, u.google, u.location, u.signature, u.disp_topics, u.disp_posts, u.email_setting, u.notify_with_post, u.auto_notify, u.show_smilies, u.show_img, u.show_img_sig, u.show_avatars, u.show_sig, u.timezone, u.dst, u.language, u.style, u.color, u.num_posts, u.last_post, u.registered, u.registration_ip, u.admin_note, u.date_format, u.time_format, u.last_visit, g.g_id, g.g_user_title, g.g_moderator FROM '.$db->prefix.'users AS u LEFT JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id WHERE u.id='.$id) or error('Unable to fetch user info', __FILE__, __LINE__, $db->error());
 	if (!$db->num_rows($result))
 		message($lang['Bad request'], false, '404 Not Found');
 	
@@ -605,7 +604,6 @@ if ($action == 'change_pass') {
 	$last_post = format_time($user['last_post']);
 	
 	if ($user['signature'] != '') {
-		require FORUM_ROOT.'include/parser.php';
 		$parsed_signature = parse_signature($user['signature']);
 	}
 	
@@ -620,7 +618,7 @@ if ($action == 'change_pass') {
 		define('FORUM_ACTIVE_PAGE', 'me');
 		require load_page('header.php');
 	
-		require get_view_path('me-personality.tpl.php');
+		require load_page('personality.php');
 	} else if ($section == 'settings') {
 		if ($luna_user['id'] != $id && (!$luna_user['is_admmod'] || ($luna_user['g_id'] != FORUM_ADMIN && ($luna_user['g_mod_edit_users'] == '0' || $user['g_id'] == FORUM_ADMIN || $user['g_moderator'] == '1'))))
 			message($lang['Bad request'], false, '403 Forbidden');
@@ -629,7 +627,7 @@ if ($action == 'change_pass') {
 		define('FORUM_ACTIVE_PAGE', 'me');
 		require load_page('header.php');
 	
-		require get_view_path('me-settings.tpl.php');
+		require load_page('settings.php');
 	} else if ($section == 'admin') {
 		if (!$luna_user['is_admmod'] || ($luna_user['g_moderator'] == '1' && $luna_user['g_mod_ban_users'] == '0'))
 			message($lang['Bad request'], false, '403 Forbidden');
@@ -638,7 +636,7 @@ if ($action == 'change_pass') {
 		define('FORUM_ACTIVE_PAGE', 'me');
 		require load_page('header.php');
 	
-		require get_view_path('me-admin.tpl.php');
+		require load_page('me-admin.php');
 	} else {
 		message($lang['Bad request'], false, '404 Not Found');
 	}

@@ -81,6 +81,8 @@ function load_admin_nav($section, $page) {
 
                     else if ($page == 'board')
                         echo '<span class="fa fa-fw fa-sort-amount-desc"></span> Board structure';
+                    else if ($page == 'moderate')
+                        echo '<span class="fa fa-fw fa-tasks"></span> Moderate';
                     else if ($page == 'censoring')
                         echo '<span class="fa fa-fw fa-eye-slash"></span> Censoring';
                     else if ($page == 'reports')
@@ -103,8 +105,6 @@ function load_admin_nav($section, $page) {
                         echo '<span class="fa fa-fw fa-sliders"></span> Features';
                     else if ($page == 'registration')
                         echo '<span class="fa fa-fw fa-plus-circle"></span> Registration';
-                    else if ($page == 'inbox')
-                        echo '<span class="fa fa-fw fa-paper-plane-o"></span> Inbox';
                     else if ($page == 'email')
                         echo '<span class="fa fa-fw fa-envelope"></span> Email';
                     else if ($page == 'appearance')
@@ -136,6 +136,7 @@ function load_admin_nav($section, $page) {
             <?php } if ($section == 'content') { ?>
             <ul class="nav nav-tabs" role="tablist">
                 <li<?php if($page == 'board') echo ' class="active"' ?>><a href="board.php"><span class="fa fa-sort-amount-desc"></span> Board structure</a></li>
+                <li<?php if($page == 'moderate') echo ' class="active"' ?>><a href="moderate.php"><span class="fa fa-tasks"></span> Moderate</a></li>
                 <li<?php if($page == 'censoring') echo ' class="active"' ?>><a href="censoring.php"><span class="fa fa-eye-slash"></span> Censoring</a></li>
                 <li<?php if($page == 'reports') echo ' class="active"' ?>><a href="reports.php"><span class="fa fa-exclamation-triangle"></span> Reports</a></li>
             </ul>
@@ -152,7 +153,6 @@ function load_admin_nav($section, $page) {
                 <li<?php if($page == 'settings') echo ' class="active"' ?>><a href="settings.php"><span class="fa fa-cogs"></span> Settings</a></li>
                 <li<?php if($page == 'features') echo ' class="active"' ?>><a href="features.php"><span class="fa fa-sliders"></span> Features</a></li>
                 <li<?php if($page == 'registration') echo ' class="active"' ?>><a href="registration.php"><span class="fa fa-plus-circle"></span> Registration</a></li>
-				<li<?php if($page == 'inbox') echo ' class="active"' ?>><a href="inbox.php"><span class="fa fa-paper-plane-o"></span> Inbox</a></li>
                 <li<?php if($page == 'email') echo ' class="active"' ?>><a href="email.php"><span class="fa fa-envelope"></span> Email</a></li>
                 <li<?php if($page == 'appearance') echo ' class="active"' ?>><a href="appearance.php"><span class="fa fa-eye"></span> Appearance</a></li>
                 <li<?php if($page == 'menu') echo ' class="active"' ?>><a href="menu.php"><span class="fa fa-bars"></span> Menu</a></li>

@@ -267,7 +267,7 @@ function draw_category_list() {
 			$forum_count = 0;
 
 ?>
-<div class="row"><div class="col-xs-12"><h3 class="category-title"><?php echo luna_htmlspecialchars($cur_forum['cat_name']) ?></h3></div></div>
+<h3 class="category-title"><?php echo luna_htmlspecialchars($cur_forum['cat_name']) ?></h3>
 <div class="row">
 <?php
 	
@@ -309,14 +309,14 @@ function draw_category_list() {
 	
 	// Did we output any categories and forums?
 	if ($cur_category > 0)
-		echo '</div>';
+		echo '';
 	else
 		echo '<div><p>'.$lang['Empty board'].'</p></div>';
 
 }
 
 function draw_topic_list() {
-	global $lang, $result, $db, $luna_config, $zset, $post_ids;
+	global $lang, $result, $db, $luna_config, $zset, $post_ids, $is_admmod, $start_from, $post_count, $admin_ids;
 
 	// Retrieve the posts (and their respective poster/online status)
 	$result = $db->query('SELECT u.email, u.title, u.url, u.location, u.signature, u.email_setting, u.num_posts, u.registered, u.admin_note, p.id, p.poster AS username, p.poster_id, p.poster_ip, p.poster_email, p.message, p.hide_smilies, p.posted, p.edited, p.edited_by, p.marked, g.g_id, g.g_user_title, o.user_id AS is_online FROM '.$db->prefix.'posts AS p INNER JOIN '.$db->prefix.'users AS u ON u.id=p.poster_id INNER JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id LEFT JOIN '.$db->prefix.'online AS o ON (o.user_id=u.id AND o.user_id!=1 AND o.idle=0) WHERE p.id IN ('.implode(',', $post_ids).') ORDER BY p.id', true) or error('Unable to fetch post info', __FILE__, __LINE__, $db->error());
@@ -680,4 +680,63 @@ function draw_report_form($post_id) {
 	</div>
 </form>
 <?php
+}
+
+
+function draw_search_forum_list() {
+	global $db, $luna_config, $luna_user;
+
+	$result = $db->query('SELECT c.id AS cid, c.cat_name, f.id AS fid, f.forum_name FROM '.$db->prefix.'categories AS c INNER JOIN '.$db->prefix.'forums AS f ON c.id=f.cat_id LEFT JOIN '.$db->prefix.'forum_perms AS fp ON (fp.forum_id=f.id AND fp.group_id='.$luna_user['g_id'].') WHERE (fp.read_forum IS NULL OR fp.read_forum=1) ORDER BY c.disp_position, c.id, f.disp_position', true) or error('Unable to fetch category/forum list', __FILE__, __LINE__, $db->error());
+
+	// We either show a list of forums of which multiple can be selected
+	if ($luna_config['o_search_all_forums'] == '1' || $luna_user['is_admmod']) {
+		echo "\t\t\t\t\t\t".'<div class="col-xs-4"><div class="conl multiselect"><b>'.$lang['Forum'].'</b>'."\n";
+		echo "\t\t\t\t\t\t".'<br />'."\n";
+		echo "\t\t\t\t\t\t".'<div>'."\n";
+	
+		$cur_category = 0;
+		while ($cur_forum = $db->fetch_assoc($result)) {
+			if ($cur_forum['cid'] != $cur_category) { // A new category since last iteration?
+				if ($cur_category) {
+					echo "\t\t\t\t\t\t\t\t".'</div>'."\n";
+					echo "\t\t\t\t\t\t\t".'</fieldset>'."\n";
+				}
+				echo "\t\t\t\t\t\t\t".'<fieldset><h3><span>'.luna_htmlspecialchars($cur_forum['cat_name']).'</span></h3>'."\n";
+				echo "\t\t\t\t\t\t\t\t".'<div>';
+				$cur_category = $cur_forum['cid'];
+			}
+			echo "\t\t\t\t\t\t\t\t".'<input type="checkbox" name="forums[]" id="forum-'.$cur_forum['fid'].'" value="'.$cur_forum['fid'].'" /> '.luna_htmlspecialchars($cur_forum['forum_name']).'<br />'."\n";
+		}
+	
+		if ($cur_category) {
+			echo "\t\t\t\t\t\t\t\t".'</div>'."\n";
+			echo "\t\t\t\t\t\t\t".'</fieldset>'."\n";
+		}
+	
+		echo "\t\t\t\t\t\t".'</div>'."\n";
+		echo "\t\t\t\t\t\t".'</div></div>'."\n";
+	}
+	// ... or a simple select list for one forum only
+	else {
+		echo "\t\t\t\t\t\t".'<div class="col-xs-4"><label class="conl">'.$lang['Forum']."\n";
+		echo "\t\t\t\t\t\t".'<br />'."\n";
+		echo "\t\t\t\t\t\t".'<select id="forum" name="forum">'."\n";
+	
+		$cur_category = 0;
+		while ($cur_forum = $db->fetch_assoc($result)) {
+			if ($cur_forum['cid'] != $cur_category) { // A new category since last iteration?
+				if ($cur_category)
+					echo "\t\t\t\t\t\t\t".'</optgroup>'."\n";
+	
+				echo "\t\t\t\t\t\t\t".'<optgroup label="'.luna_htmlspecialchars($cur_forum['cat_name']).'">'."\n";
+				$cur_category = $cur_forum['cid'];
+			}
+	
+			echo "\t\t\t\t\t\t\t\t".'<option value="'.$cur_forum['fid'].'">'.($cur_forum['parent_forum_id'] == 0 ? '' : '&nbsp;&nbsp;&nbsp;').luna_htmlspecialchars($cur_forum['forum_name']).'</option>'."\n";
+		}
+	
+		echo "\t\t\t\t\t\t\t".'</optgroup>'."\n";
+		echo "\t\t\t\t\t\t".'</select>'."\n";
+		echo "\t\t\t\t\t\t".'<br /></label></div>'."\n";
+	}
 }
