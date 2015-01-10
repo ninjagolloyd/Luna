@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -9,7 +9,6 @@
 
 define('FORUM_ROOT', dirname(__FILE__).'/');
 require FORUM_ROOT.'include/common.php';
-require FORUM_ROOT.'include/general_functions.php';
 
 // If we are logged in, we shouldn't be here
 if (!$luna_user['is_guest']) {
@@ -106,7 +105,7 @@ if (isset($_POST['form_sent'])) {
 		$password_hash = luna_hash($password1);
 
 		// Add the user
-		$db->query('INSERT INTO '.$db->prefix.'users (username, group_id, password, email, language, style, registered, registration_ip, last_visit) VALUES(\''.$db->escape($username).'\', '.$intial_group_id.', \''.$password_hash.'\', \''.$db->escape($email1).'\', \''.$luna_config['o_default_lang'].'\', \''.$luna_config['o_default_style'].'\', '.$now.', \''.$db->escape(get_remote_address()).'\', '.$now.')') or error('Unable to create user', __FILE__, __LINE__, $db->error());
+		$db->query('INSERT INTO '.$db->prefix.'users (username, group_id, password, email, language, style, registered, registration_ip, last_visit, timezone) VALUES(\''.$db->escape($username).'\', '.$intial_group_id.', \''.$password_hash.'\', \''.$db->escape($email1).'\', \''.$luna_config['o_default_lang'].'\', \''.$luna_config['o_default_style'].'\', '.$now.', \''.$db->escape(get_remote_address()).'\', '.$now.', '.$luna_config['o_default_timezone'].')') or error('Unable to create user', __FILE__, __LINE__, $db->error());
 		$new_uid = $db->insert_id();
 
 		if ($luna_config['o_regs_verify'] == '0') {
@@ -131,8 +130,8 @@ if (isset($_POST['form_sent'])) {
 
 				$mail_message = str_replace('<username>', $username, $mail_message);
 				$mail_message = str_replace('<email>', $email1, $mail_message);
-				$mail_message = str_replace('<profile_url>', get_base_url().'/profile.php?id='.$new_uid, $mail_message);
-				$mail_message = str_replace('<admin_url>', get_base_url().'/profile.php?section=admin&id='.$new_uid, $mail_message);
+				$mail_message = str_replace('<profile_url>', get_base_url().'/me.php?id='.$new_uid, $mail_message);
+				$mail_message = str_replace('<admin_url>', get_base_url().'/me.php?section=admin&id='.$new_uid, $mail_message);
 				$mail_message = str_replace('<board_mailer>', $luna_config['o_board_title'], $mail_message);
 
 				luna_mail($luna_config['o_mailing_list'], $mail_subject, $mail_message);
@@ -150,7 +149,7 @@ if (isset($_POST['form_sent'])) {
 
 				$mail_message = str_replace('<username>', $username, $mail_message);
 				$mail_message = str_replace('<dupe_list>', implode(', ', $dupe_list), $mail_message);
-				$mail_message = str_replace('<profile_url>', get_base_url().'/profile.php?id='.$new_uid, $mail_message);
+				$mail_message = str_replace('<profile_url>', get_base_url().'/me.php?id='.$new_uid, $mail_message);
 				$mail_message = str_replace('<board_mailer>', $luna_config['o_board_title'], $mail_message);
 
 				luna_mail($luna_config['o_mailing_list'], $mail_subject, $mail_message);
@@ -168,7 +167,7 @@ if (isset($_POST['form_sent'])) {
 
 				$mail_message = str_replace('<username>', $username, $mail_message);
 				$mail_message = str_replace('<base_url>', get_base_url().'/', $mail_message);
-				$mail_message = str_replace('<profile_url>', get_base_url().'/profile.php?id='.$new_uid, $mail_message);
+				$mail_message = str_replace('<profile_url>', get_base_url().'/me.php?id='.$new_uid, $mail_message);
 				$mail_message = str_replace('<board_mailer>', $luna_config['o_board_title'], $mail_message);
 
 				luna_mail($luna_config['o_mailing_list'], $mail_subject, $mail_message);

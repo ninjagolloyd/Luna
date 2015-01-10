@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * License: http://opensource.org/licenses/MIT MIT
@@ -537,45 +537,6 @@ function update_users_online() {
 
 
 //
-// Display the profile navigation menu
-//
-function generate_profile_menu($page = '') {
-	global $lang, $luna_config, $luna_user, $id;
-
-?>
-<div class="list-group">
-    <a class="<?php if ($page == 'view') echo 'active'; ?> list-group-item" href="profile.php?section=view&amp;id=<?php echo $id ?>"><?php echo $lang['Profile'] ?></a>
-	<?php if ($luna_user['g_id'] == FORUM_ADMIN || ($luna_user['g_moderator'] == '1' && $luna_user['g_mod_ban_users'] == '1')): ?>
-		<a class="<?php if ($page == 'admin') echo 'active'; ?> list-group-item" href="profile.php?section=admin&amp;id=<?php echo $id ?>"><?php echo $lang['Section admin'] ?></a>
-	<?php endif; ?>
-</div>
-<?php
-
-}
-
-
-//
-// Display the profile navigation menu
-//
-function generate_me_menu($page = '') {
-	global $lang, $luna_config, $luna_user, $id;
-
-?>
-<div class="list-group">
-    <a class="<?php if ($page == 'view') echo 'active'; ?> list-group-item" href="me.php?section=view&amp;id=<?php echo $id ?>">Me</a>
-    <?php if ($luna_user['id'] == $id && !$luna_user['is_guest'] || ($luna_user['g_id'] == FORUM_ADMIN || ($luna_user['g_moderator'] == '1' && $luna_user['g_mod_ban_users'] == '1'))): ?>
-        <a class="<?php if ($page == 'personality') echo 'active'; ?> list-group-item" href="me.php?section=personality&amp;id=<?php echo $id ?>"><?php echo $lang['Section personality'] ?></a>
-        <a class="<?php if ($page == 'settings') echo 'active'; ?> list-group-item" href="me.php?section=settings&amp;id=<?php echo $id ?>"><?php echo $lang['Settings'] ?></a>
-    <?php endif; if ($luna_user['g_id'] == FORUM_ADMIN || ($luna_user['g_moderator'] == '1' && $luna_user['g_mod_ban_users'] == '1')): ?>
-		<a class="<?php if ($page == 'admin') echo 'active'; ?> list-group-item" href="me.php?section=admin&amp;id=<?php echo $id ?>"><?php echo $lang['Section admin'] ?></a>
-	<?php endif; ?>
-</div>
-<?php
-
-}
-
-
-//
 // Outputs markup to display a user's avatar
 //
 function generate_avatar_markup($user_id) {
@@ -588,10 +549,10 @@ function generate_avatar_markup($user_id) {
 		$path = $luna_config['o_avatars_dir'].'/'.$user_id.'.'.$cur_type;
 
 		if (file_exists(FORUM_ROOT.$path) && $img_size = getimagesize(FORUM_ROOT.$path)) {
-			$avatar_markup = '<img class="avatar" src="'.luna_htmlspecialchars(get_base_url(true).'/'.$path.'?m='.filemtime(FORUM_ROOT.$path)).'" '.$img_size[3].' alt="" />';
+			$avatar_markup = '<img class="img-responsive" src="'.luna_htmlspecialchars(get_base_url(true).'/'.$path.'?m='.filemtime(FORUM_ROOT.$path)).'" '.$img_size[3].' alt="" />';
 			break;
 		} else {
-			$avatar_markup = '<img class="avatar" src="'.luna_htmlspecialchars(get_base_url(true)).'/img/avatars/placeholder.png" alt="" />';
+			$avatar_markup = '<img class="img-responsive" src="'.luna_htmlspecialchars(get_base_url(true)).'/img/avatars/placeholder.png" alt="" />';
 		}
 	}
 
@@ -614,10 +575,10 @@ function draw_user_avatar($user_id, $class) {
 		$path = $luna_config['o_avatars_dir'].'/'.$user_id.'.'.$cur_type;
 
 		if (file_exists(FORUM_ROOT.$path) && $img_size = getimagesize(FORUM_ROOT.$path)) {
-			$avatar_markup = '<img class="avatar'.$class.'" src="'.luna_htmlspecialchars(get_base_url(true).'/'.$path.'?m='.filemtime(FORUM_ROOT.$path)).'" '.$img_size[3].' alt="" />';
+			$avatar_markup = '<img class="img-responsive '.$class.'" src="'.luna_htmlspecialchars(get_base_url(true).'/'.$path.'?m='.filemtime(FORUM_ROOT.$path)).'" '.$img_size[3].' alt="" />';
 			break;
 		} else {
-			$avatar_markup = '<img class="avatar'.$class.'" src="'.luna_htmlspecialchars(get_base_url(true)).'/img/avatars/placeholder.png" alt="" />';
+			$avatar_markup = '<img class="img-responsive '.$class.'" src="'.luna_htmlspecialchars(get_base_url(true)).'/img/avatars/placeholder.png" alt="" />';
 		}
 	}
 
@@ -941,9 +902,9 @@ function paginate($num_pages, $cur_page, $link) {
 		$link_to_all = true;
 	}
 
-	if ($num_pages <= 1)
-		$pages = array('');
-	else {
+	if ($num_pages <= 1) {
+		return '';
+	} else {
 		// Add a previous page link
 		if ($num_pages > 1 && $cur_page > 1)
 			$pages[] = '<li><a rel="prev" '.(empty($pages) ? ' class="item1"' : '').' href="'.$link.'&amp;p='.($cur_page - 1).'">&laquo;</a></li>';
@@ -979,9 +940,9 @@ function paginate($num_pages, $cur_page, $link) {
 			$pages[] = '<li><a rel="next" '.(empty($pages) ? ' class="item1"' : '').' href="'.$link.'&amp;p='.($cur_page +1).'">&raquo;</a></li>';
 		else
 			$pages[] = '<li class="disabled"><span>&raquo;</span></li>';
-	}
 
-	return implode(' ', $pages);
+		return '<ul class="pagination">'.implode(' ', $pages).'</ul>';
+	}
 }
 
 
@@ -1056,6 +1017,8 @@ function message($message, $no_back_link = false, $http_status = null) {
 </div>
 <?php
 	require load_page('footer.php');
+	
+	exit;
 }
 
 
@@ -1063,17 +1026,16 @@ function message($message, $no_back_link = false, $http_status = null) {
 // Display a message in the Backstage
 //
 function message_backstage($message, $no_back_link = false, $http_status = null) {
-	global $db, $lang, $luna_config, $luna_start, $luna_user;
+	global $lang, $luna_config;
 
 	// Did we receive a custom header?
-	if(!is_null($http_status)) {
+	if(!is_null($http_status))
 		header('HTTP/1.1 ' . $http_status);
-	}
 
 	$page_title = array(luna_htmlspecialchars($luna_config['o_board_title']), $lang['Admin'], $lang['Info']);
 	define('FORUM_ACTIVE_PAGE', 'admin');
 	require 'header.php';
-	load_admin_nav('');
+	load_admin_nav('', '');
 
 ?>
 <h2><?php echo $lang['Info'] ?></h2>
@@ -1084,16 +1046,36 @@ function message_backstage($message, $no_back_link = false, $http_status = null)
 	<div class="panel-body">
 		<p><?php echo $message ?></p>
 	</div>
-	<div class="panel-footer">
-		<?php if (!$no_back_link): ?>
+	<?php if (!$no_back_link): ?>
+		<div class="panel-footer">
 			<a href="javascript: history.go(-1)" href="btn btn-link"><?php echo $lang['Go back'] ?></a>
-		<?php endif; ?>
-	</div>
+		</div>
+	<?php endif; ?>
 </div>
 <?php
 	require 'footer.php';
 }
 
+//
+// Check if we have to show a list of subforums
+//
+function is_subforum($id) {
+	global $db;
+
+	$result = $db->query('SELECT count(*) FROM '.$db->prefix.'forums WHERE parent_id='.$id) or error ('Unable to fetch information about the current forum', __FILE__, __LINE__, $db->error());
+	$num_subforums = $db->result($result);
+	
+	if ($num_subforums == '0') {
+		$result = $db->query('SELECT parent_id FROM '.$db->prefix.'forums WHERE id='.$id) or error ('Unable to fetch information about the current forum', __FILE__, __LINE__, $db->error());
+		$forum_is_subforum = $db->result($result);
+		
+		if ($forum_is_subforum != '0')
+			return true;
+		else
+			return false;
+	} else
+		return true;
+}
 
 //
 // Format a time string according to $time_format and time zones

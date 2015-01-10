@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2014 Luna
+ * Copyright (C) 2014-2015 Luna
  * Based on work by Adaur (2010), Vincent Garnier, Connorhd and David 'Chacmool' Djurback
  * Licensed under GPLv3 (http://modernbb.be/license.php)
  */
@@ -14,7 +14,7 @@ require FORUM_ROOT.'include/inbox_functions.php';
 // No guest here !
 if ($luna_user['is_guest'])
 	message($lang['No permission']);
-	
+
 // User enable PM ?
 if (!$luna_user['use_pm'] == '1')
 	message($lang['No permission']);
@@ -208,7 +208,7 @@ if ($db->num_rows($result))
 						<td>
 		<?php
 		if ($luna_user['g_view_users'] == '1')
-			echo '<a href="profile.php?id='.$cur_mess['sender_id'].'">'.luna_htmlspecialchars($cur_mess['sender']).'</a>';
+			echo '<a href="me.php?id='.$cur_mess['sender_id'].'">'.luna_htmlspecialchars($cur_mess['sender']).'</a>';
 		else
 			echo luna_htmlspecialchars($cur_mess['sender']);
 		?>
@@ -222,7 +222,7 @@ if ($db->num_rows($result))
 				$sender_list = str_replace('Deleted', $lang_pms['Deleted'], $sender_list);
 				
 				for($i = '0'; $i < count($ids_list); $i++){
-				echo '<a href="profile.php?id='.$ids_list[$i].'">'.luna_htmlspecialchars($sender_list[$i]).'</a>';
+				echo '<a href="me.php?id='.$ids_list[$i].'">'.luna_htmlspecialchars($sender_list[$i]).'</a>';
 				
 				if($ids_list[$i][count($ids_list[$i])-'1'])
 					echo'<br />';

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -80,7 +80,7 @@ if (($luna_config['o_feed_type'] == 1 || $luna_config['o_feed_type'] == 2) && (i
 
 if (!defined('FORUM_FORM')) { ?>
 		<?php echo $markread ?>
-		<span class="pull-right" id="poweredby"><?php printf($lang['Powered by'], ' <a href="http://modernbb.be/">Luna</a> '.$luna_config['o_cur_version']) ?></span>
+		<span class="pull-right" id="poweredby"><?php printf($lang['Powered by'], ' <a href="http://getluna.org/">Luna</a> '.$luna_config['o_cur_version']) ?></span>
 		<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <?php } ?>
@@ -92,7 +92,7 @@ if (!defined('FORUM_FORM')) { ?>
 		<p class="navbar-text"><?php echo $lang['Cookie info'] ?></p>
 		<form class="navbar-form navbar-right">
 			<div class="form-group">
-				<div class="btn-toolbar"><a class="btn btn-link" href="http://modernbb.be/docs/cookies.php"><?php echo $lang['More info'] ?></a><a class="btn btn-default" href="index.php?action=disable_cookiebar"><?php echo $lang['Do not show again'] ?></a></div>
+				<div class="btn-toolbar"><a class="btn btn-link" href="http://getluna.org/docs/cookies.php"><?php echo $lang['More info'] ?></a><a class="btn btn-default" href="index.php?action=disable_cookiebar"><?php echo $lang['Do not show again'] ?></a></div>
 			</div>
 		</form>
 	</div>

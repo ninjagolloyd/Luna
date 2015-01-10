@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -176,7 +176,7 @@ if (isset($_GET['saved']))
 
 		foreach ($languages as $temp) {
 			if ($luna_config['o_default_lang'] == $temp)
-				echo "\t\t\t\t\t\t\t\t\t\t\t".'<option value="'.$temp.'" selected="selected">'.$temp.'</option>'."\n";
+				echo "\t\t\t\t\t\t\t\t\t\t\t".'<option value="'.$temp.'" selected>'.$temp.'</option>'."\n";
 			else
 				echo "\t\t\t\t\t\t\t\t\t\t\t".'<option value="'.$temp.'">'.$temp.'</option>'."\n";
 		}
@@ -216,50 +216,50 @@ if (isset($_GET['saved']))
                     <label class="col-sm-3 control-label"><?php echo $lang['Timezone label'] ?></label>
                     <div class="col-sm-9">
                         <select class="form-control" name="form[default_timezone]">
-                            <option value="-12"<?php if ($luna_config['o_default_timezone'] == -12) echo ' selected="selected"' ?>><?php echo $lang['UTC-12:00'] ?></option>
-                            <option value="-11"<?php if ($luna_config['o_default_timezone'] == -11) echo ' selected="selected"' ?>><?php echo $lang['UTC-11:00'] ?></option>
-                            <option value="-10"<?php if ($luna_config['o_default_timezone'] == -10) echo ' selected="selected"' ?>><?php echo $lang['UTC-10:00'] ?></option>
-                            <option value="-9.5"<?php if ($luna_config['o_default_timezone'] == -9.5) echo ' selected="selected"' ?>><?php echo $lang['UTC-09:30'] ?></option>
-                            <option value="-9"<?php if ($luna_config['o_default_timezone'] == -9) echo ' selected="selected"' ?>><?php echo $lang['UTC-09:00'] ?></option>
-                            <option value="-8.5"<?php if ($luna_config['o_default_timezone'] == -8.5) echo ' selected="selected"' ?>><?php echo $lang['UTC-08:30'] ?></option>
-                            <option value="-8"<?php if ($luna_config['o_default_timezone'] == -8) echo ' selected="selected"' ?>><?php echo $lang['UTC-08:00'] ?></option>
-                            <option value="-7"<?php if ($luna_config['o_default_timezone'] == -7) echo ' selected="selected"' ?>><?php echo $lang['UTC-07:00'] ?></option>
-                            <option value="-6"<?php if ($luna_config['o_default_timezone'] == -6) echo ' selected="selected"' ?>><?php echo $lang['UTC-06:00'] ?></option>
-                            <option value="-5"<?php if ($luna_config['o_default_timezone'] == -5) echo ' selected="selected"' ?>><?php echo $lang['UTC-05:00'] ?></option>
-                            <option value="-4"<?php if ($luna_config['o_default_timezone'] == -4) echo ' selected="selected"' ?>><?php echo $lang['UTC-04:00'] ?></option>
-                            <option value="-3.5"<?php if ($luna_config['o_default_timezone'] == -3.5) echo ' selected="selected"' ?>><?php echo $lang['UTC-03:30'] ?></option>
-                            <option value="-3"<?php if ($luna_config['o_default_timezone'] == -3) echo ' selected="selected"' ?>><?php echo $lang['UTC-03:00'] ?></option>
-                            <option value="-2"<?php if ($luna_config['o_default_timezone'] == -2) echo ' selected="selected"' ?>><?php echo $lang['UTC-02:00'] ?></option>
-                            <option value="-1"<?php if ($luna_config['o_default_timezone'] == -1) echo ' selected="selected"' ?>><?php echo $lang['UTC-01:00'] ?></option>
-                            <option value="0"<?php if ($luna_config['o_default_timezone'] == 0) echo ' selected="selected"' ?>><?php echo $lang['UTC'] ?></option>
-                            <option value="1"<?php if ($luna_config['o_default_timezone'] == 1) echo ' selected="selected"' ?>><?php echo $lang['UTC+01:00'] ?></option>
-                            <option value="2"<?php if ($luna_config['o_default_timezone'] == 2) echo ' selected="selected"' ?>><?php echo $lang['UTC+02:00'] ?></option>
-                            <option value="3"<?php if ($luna_config['o_default_timezone'] == 3) echo ' selected="selected"' ?>><?php echo $lang['UTC+03:00'] ?></option>
-                            <option value="3.5"<?php if ($luna_config['o_default_timezone'] == 3.5) echo ' selected="selected"' ?>><?php echo $lang['UTC+03:30'] ?></option>
-                            <option value="4"<?php if ($luna_config['o_default_timezone'] == 4) echo ' selected="selected"' ?>><?php echo $lang['UTC+04:00'] ?></option>
-                            <option value="4.5"<?php if ($luna_config['o_default_timezone'] == 4.5) echo ' selected="selected"' ?>><?php echo $lang['UTC+04:30'] ?></option>
-                            <option value="5"<?php if ($luna_config['o_default_timezone'] == 5) echo ' selected="selected"' ?>><?php echo $lang['UTC+05:00'] ?></option>
-                            <option value="5.5"<?php if ($luna_config['o_default_timezone'] == 5.5) echo ' selected="selected"' ?>><?php echo $lang['UTC+05:30'] ?></option>
-                            <option value="5.75"<?php if ($luna_config['o_default_timezone'] == 5.75) echo ' selected="selected"' ?>><?php echo $lang['UTC+05:45'] ?></option>
-                            <option value="6"<?php if ($luna_config['o_default_timezone'] == 6) echo ' selected="selected"' ?>><?php echo $lang['UTC+06:00'] ?></option>
-                            <option value="6.5"<?php if ($luna_config['o_default_timezone'] == 6.5) echo ' selected="selected"' ?>><?php echo $lang['UTC+06:30'] ?></option>
-                            <option value="7"<?php if ($luna_config['o_default_timezone'] == 7) echo ' selected="selected"' ?>><?php echo $lang['UTC+07:00'] ?></option>
-                            <option value="8"<?php if ($luna_config['o_default_timezone'] == 8) echo ' selected="selected"' ?>><?php echo $lang['UTC+08:00'] ?></option>
-                            <option value="8.75"<?php if ($luna_config['o_default_timezone'] == 8.75) echo ' selected="selected"' ?>><?php echo $lang['UTC+08:45'] ?></option>
-                            <option value="9"<?php if ($luna_config['o_default_timezone'] == 9) echo ' selected="selected"' ?>><?php echo $lang['UTC+09:00'] ?></option>
-                            <option value="9.5"<?php if ($luna_config['o_default_timezone'] == 9.5) echo ' selected="selected"' ?>><?php echo $lang['UTC+09:30'] ?></option>
-                            <option value="10"<?php if ($luna_config['o_default_timezone'] == 10) echo ' selected="selected"' ?>><?php echo $lang['UTC+10:00'] ?></option>
-                            <option value="10.5"<?php if ($luna_config['o_default_timezone'] == 10.5) echo ' selected="selected"' ?>><?php echo $lang['UTC+10:30'] ?></option>
-                            <option value="11"<?php if ($luna_config['o_default_timezone'] == 11) echo ' selected="selected"' ?>><?php echo $lang['UTC+11:00'] ?></option>
-                            <option value="11.5"<?php if ($luna_config['o_default_timezone'] == 11.5) echo ' selected="selected"' ?>><?php echo $lang['UTC+11:30'] ?></option>
-                            <option value="12"<?php if ($luna_config['o_default_timezone'] == 12) echo ' selected="selected"' ?>><?php echo $lang['UTC+12:00'] ?></option>
-                            <option value="12.75"<?php if ($luna_config['o_default_timezone'] == 12.75) echo ' selected="selected"' ?>><?php echo $lang['UTC+12:45'] ?></option>
-                            <option value="13"<?php if ($luna_config['o_default_timezone'] == 13) echo ' selected="selected"' ?>><?php echo $lang['UTC+13:00'] ?></option>
-                            <option value="14"<?php if ($luna_config['o_default_timezone'] == 14) echo ' selected="selected"' ?>><?php echo $lang['UTC+14:00'] ?></option>
+                            <option value="-12"<?php if ($luna_config['o_default_timezone'] == -12) echo ' selected' ?>><?php echo $lang['UTC-12:00'] ?></option>
+                            <option value="-11"<?php if ($luna_config['o_default_timezone'] == -11) echo ' selected' ?>><?php echo $lang['UTC-11:00'] ?></option>
+                            <option value="-10"<?php if ($luna_config['o_default_timezone'] == -10) echo ' selected' ?>><?php echo $lang['UTC-10:00'] ?></option>
+                            <option value="-9.5"<?php if ($luna_config['o_default_timezone'] == -9.5) echo ' selected' ?>><?php echo $lang['UTC-09:30'] ?></option>
+                            <option value="-9"<?php if ($luna_config['o_default_timezone'] == -9) echo ' selected' ?>><?php echo $lang['UTC-09:00'] ?></option>
+                            <option value="-8.5"<?php if ($luna_config['o_default_timezone'] == -8.5) echo ' selected' ?>><?php echo $lang['UTC-08:30'] ?></option>
+                            <option value="-8"<?php if ($luna_config['o_default_timezone'] == -8) echo ' selected' ?>><?php echo $lang['UTC-08:00'] ?></option>
+                            <option value="-7"<?php if ($luna_config['o_default_timezone'] == -7) echo ' selected' ?>><?php echo $lang['UTC-07:00'] ?></option>
+                            <option value="-6"<?php if ($luna_config['o_default_timezone'] == -6) echo ' selected' ?>><?php echo $lang['UTC-06:00'] ?></option>
+                            <option value="-5"<?php if ($luna_config['o_default_timezone'] == -5) echo ' selected' ?>><?php echo $lang['UTC-05:00'] ?></option>
+                            <option value="-4"<?php if ($luna_config['o_default_timezone'] == -4) echo ' selected' ?>><?php echo $lang['UTC-04:00'] ?></option>
+                            <option value="-3.5"<?php if ($luna_config['o_default_timezone'] == -3.5) echo ' selected' ?>><?php echo $lang['UTC-03:30'] ?></option>
+                            <option value="-3"<?php if ($luna_config['o_default_timezone'] == -3) echo ' selected' ?>><?php echo $lang['UTC-03:00'] ?></option>
+                            <option value="-2"<?php if ($luna_config['o_default_timezone'] == -2) echo ' selected' ?>><?php echo $lang['UTC-02:00'] ?></option>
+                            <option value="-1"<?php if ($luna_config['o_default_timezone'] == -1) echo ' selected' ?>><?php echo $lang['UTC-01:00'] ?></option>
+                            <option value="0"<?php if ($luna_config['o_default_timezone'] == 0) echo ' selected' ?>><?php echo $lang['UTC'] ?></option>
+                            <option value="1"<?php if ($luna_config['o_default_timezone'] == 1) echo ' selected' ?>><?php echo $lang['UTC+01:00'] ?></option>
+                            <option value="2"<?php if ($luna_config['o_default_timezone'] == 2) echo ' selected' ?>><?php echo $lang['UTC+02:00'] ?></option>
+                            <option value="3"<?php if ($luna_config['o_default_timezone'] == 3) echo ' selected' ?>><?php echo $lang['UTC+03:00'] ?></option>
+                            <option value="3.5"<?php if ($luna_config['o_default_timezone'] == 3.5) echo ' selected' ?>><?php echo $lang['UTC+03:30'] ?></option>
+                            <option value="4"<?php if ($luna_config['o_default_timezone'] == 4) echo ' selected' ?>><?php echo $lang['UTC+04:00'] ?></option>
+                            <option value="4.5"<?php if ($luna_config['o_default_timezone'] == 4.5) echo ' selected' ?>><?php echo $lang['UTC+04:30'] ?></option>
+                            <option value="5"<?php if ($luna_config['o_default_timezone'] == 5) echo ' selected' ?>><?php echo $lang['UTC+05:00'] ?></option>
+                            <option value="5.5"<?php if ($luna_config['o_default_timezone'] == 5.5) echo ' selected' ?>><?php echo $lang['UTC+05:30'] ?></option>
+                            <option value="5.75"<?php if ($luna_config['o_default_timezone'] == 5.75) echo ' selected' ?>><?php echo $lang['UTC+05:45'] ?></option>
+                            <option value="6"<?php if ($luna_config['o_default_timezone'] == 6) echo ' selected' ?>><?php echo $lang['UTC+06:00'] ?></option>
+                            <option value="6.5"<?php if ($luna_config['o_default_timezone'] == 6.5) echo ' selected' ?>><?php echo $lang['UTC+06:30'] ?></option>
+                            <option value="7"<?php if ($luna_config['o_default_timezone'] == 7) echo ' selected' ?>><?php echo $lang['UTC+07:00'] ?></option>
+                            <option value="8"<?php if ($luna_config['o_default_timezone'] == 8) echo ' selected' ?>><?php echo $lang['UTC+08:00'] ?></option>
+                            <option value="8.75"<?php if ($luna_config['o_default_timezone'] == 8.75) echo ' selected' ?>><?php echo $lang['UTC+08:45'] ?></option>
+                            <option value="9"<?php if ($luna_config['o_default_timezone'] == 9) echo ' selected' ?>><?php echo $lang['UTC+09:00'] ?></option>
+                            <option value="9.5"<?php if ($luna_config['o_default_timezone'] == 9.5) echo ' selected' ?>><?php echo $lang['UTC+09:30'] ?></option>
+                            <option value="10"<?php if ($luna_config['o_default_timezone'] == 10) echo ' selected' ?>><?php echo $lang['UTC+10:00'] ?></option>
+                            <option value="10.5"<?php if ($luna_config['o_default_timezone'] == 10.5) echo ' selected' ?>><?php echo $lang['UTC+10:30'] ?></option>
+                            <option value="11"<?php if ($luna_config['o_default_timezone'] == 11) echo ' selected' ?>><?php echo $lang['UTC+11:00'] ?></option>
+                            <option value="11.5"<?php if ($luna_config['o_default_timezone'] == 11.5) echo ' selected' ?>><?php echo $lang['UTC+11:30'] ?></option>
+                            <option value="12"<?php if ($luna_config['o_default_timezone'] == 12) echo ' selected' ?>><?php echo $lang['UTC+12:00'] ?></option>
+                            <option value="12.75"<?php if ($luna_config['o_default_timezone'] == 12.75) echo ' selected' ?>><?php echo $lang['UTC+12:45'] ?></option>
+                            <option value="13"<?php if ($luna_config['o_default_timezone'] == 13) echo ' selected' ?>><?php echo $lang['UTC+13:00'] ?></option>
+                            <option value="14"<?php if ($luna_config['o_default_timezone'] == 14) echo ' selected' ?>><?php echo $lang['UTC+14:00'] ?></option>
                         </select>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="form[default_dst]" value="1" <?php if ($luna_config['o_default_dst'] == '1') echo ' checked="checked"' ?> />
+                                <input type="checkbox" name="form[default_dst]" value="1" <?php if ($luna_config['o_default_dst'] == '1') echo ' checked' ?> />
                                 <?php echo $lang['DST help'] ?>
                             </label>
                         </div>
@@ -298,15 +298,15 @@ if (isset($_GET['saved']))
                     <label class="col-sm-3 control-label"><?php echo $lang['Default feed label'] ?><span class="help-block"><?php echo $lang['Default feed help'] ?></span></label>
                     <div class="col-sm-9">
                         <label class="radio-inline">
-                            <input type="radio" name="form[feed_type]" value="0"<?php if ($luna_config['o_feed_type'] == '0') echo ' checked="checked"' ?>>
+                            <input type="radio" name="form[feed_type]" value="0"<?php if ($luna_config['o_feed_type'] == '0') echo ' checked' ?>>
                             <?php echo $lang['None'] ?>
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="form[feed_type]" value="1"<?php if ($luna_config['o_feed_type'] == '1') echo ' checked="checked"' ?>>
+                            <input type="radio" name="form[feed_type]" value="1"<?php if ($luna_config['o_feed_type'] == '1') echo ' checked' ?>>
                             <?php echo $lang['RSS'] ?>
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="form[feed_type]" value="2"<?php if ($luna_config['o_feed_type'] == '2') echo ' checked="checked"' ?>>
+                            <input type="radio" name="form[feed_type]" value="2"<?php if ($luna_config['o_feed_type'] == '2') echo ' checked' ?>>
                             <?php echo $lang['Atom'] ?>
                         </label>
                     </div>
@@ -315,13 +315,13 @@ if (isset($_GET['saved']))
                     <label class="col-sm-3 control-label"><?php echo $lang['Feed TTL label'] ?><span class="help-block"><?php echo $lang['Feed TTL help'] ?></span></label>
                     <div class="col-sm-9">
                         <select class="form-control" name="form[feed_ttl]">
-                            <option value="0"<?php if ($luna_config['o_feed_ttl'] == '0') echo ' selected="selected"'; ?>><?php echo $lang['No cache'] ?></option>
+                            <option value="0"<?php if ($luna_config['o_feed_ttl'] == '0') echo ' selected'; ?>><?php echo $lang['No cache'] ?></option>
 <?php
 
 		$times = array(5, 15, 30, 60);
 
 		foreach ($times as $time)
-			echo "\t\t\t\t\t\t\t\t\t\t\t".'<option value="'.$time.'"'.($luna_config['o_feed_ttl'] == $time ? ' selected="selected"' : '').'>'.sprintf($lang['Minutes'], $time).'</option>'."\n";
+			echo "\t\t\t\t\t\t\t\t\t\t\t".'<option value="'.$time.'"'.($luna_config['o_feed_ttl'] == $time ? ' selected' : '').'>'.sprintf($lang['Minutes'], $time).'</option>'."\n";
 
 ?>
                         </select>
@@ -340,15 +340,15 @@ if (isset($_GET['saved']))
                     <label class="col-sm-3 control-label"><?php echo $lang['Reporting method label'] ?><span class="help-block"><?php echo $lang['Reporting method help'] ?></span></label>
                     <div class="col-sm-9">
                         <label class="radio-inline">
-                            <input type="radio" name="form[report_method]" value="0"<?php if ($luna_config['o_report_method'] == '0') echo ' checked="checked"' ?> />
+                            <input type="radio" name="form[report_method]" value="0"<?php if ($luna_config['o_report_method'] == '0') echo ' checked' ?> />
                             <?php echo $lang['Internal'] ?>
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="form[report_method]" value="1"<?php if ($luna_config['o_report_method'] == '1') echo ' checked="checked"' ?> />
+                            <input type="radio" name="form[report_method]" value="1"<?php if ($luna_config['o_report_method'] == '1') echo ' checked' ?> />
                             <?php echo $lang['Email'] ?>
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="form[report_method]" value="2"<?php if ($luna_config['o_report_method'] == '2') echo ' checked="checked"' ?> />
+                            <input type="radio" name="form[report_method]" value="2"<?php if ($luna_config['o_report_method'] == '2') echo ' checked' ?> />
                             <?php echo $lang['Both'] ?>
                         </label>
                     </div>
@@ -369,11 +369,11 @@ if (isset($_GET['saved']))
         <div class="panel-body">
             <fieldset>
                 <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Cookie bar'] ?><span class="help-block"><a href="http://modernbb.be/docs/cookies.php"><?php echo $lang['More info'] ?></a></span></label>
+                    <label class="col-sm-3 control-label"><?php echo $lang['Cookie bar'] ?><span class="help-block"><a href="http://getluna.org/docs/cookies.php"><?php echo $lang['More info'] ?></a></span></label>
                     <div class="col-sm-9">
                         <div class="checkbox">
 							<label>
-								<input type="checkbox" name="form[cookie_bar]" value="1" <?php if ($luna_config['o_cookie_bar'] == '1') echo ' checked="checked"' ?> />
+								<input type="checkbox" name="form[cookie_bar]" value="1" <?php if ($luna_config['o_cookie_bar'] == '1') echo ' checked' ?> />
 								<?php echo $lang['Cookie set info'] ?>
 							</label>
 						</div>
@@ -393,7 +393,7 @@ if (isset($_GET['saved']))
                     <div class="col-sm-9">
                         <div class="checkbox">
 							<label>
-								<input type="checkbox" name="form[avatars]" value="1" <?php if ($luna_config['o_avatars'] == '1') echo ' checked="checked"' ?> />
+								<input type="checkbox" name="form[avatars]" value="1" <?php if ($luna_config['o_avatars'] == '1') echo ' checked' ?> />
 								<?php echo $lang['Use avatars help'] ?>
 							</label>
 						</div>
@@ -446,7 +446,7 @@ if (isset($_GET['saved']))
                     <div class="col-sm-9">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="form[announcement]" value="1" <?php if ($luna_config['o_announcement'] == '1') echo ' checked="checked"' ?> />
+                                <input type="checkbox" name="form[announcement]" value="1" <?php if ($luna_config['o_announcement'] == '1') echo ' checked' ?> />
                                 <?php echo $lang['Display announcement help'] ?>
                             </label>
                         </div>

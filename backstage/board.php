@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -121,6 +121,7 @@ else if (isset($_POST['update_positions'])) {
 		// Start with the forum details
 		$forum_name = luna_trim($_POST['forum_name']);
 		$forum_desc = luna_linebreaks(luna_trim($_POST['forum_desc']));
+		$parent_id = intval($_POST['parent_id']);
 		$cat_id = intval($_POST['cat_id']);
 		$sort_by = intval($_POST['sort_by']);
 		$color = luna_trim($_POST['color']);
@@ -133,7 +134,7 @@ else if (isset($_POST['update_positions'])) {
 
 		$forum_desc = ($forum_desc != '') ? '\''.$db->escape($forum_desc).'\'' : 'NULL';
 
-		$db->query('UPDATE '.$db->prefix.'forums SET forum_name=\''.$db->escape($forum_name).'\', forum_desc='.$forum_desc.', sort_by='.$sort_by.', cat_id='.$cat_id.', color=\''.$color.'\' WHERE id='.$forum_id) or error('Unable to update forum', __FILE__, __LINE__, $db->error());
+		$db->query('UPDATE '.$db->prefix.'forums SET forum_name=\''.$db->escape($forum_name).'\', forum_desc='.$forum_desc.', parent_id='.$parent_id.', sort_by='.$sort_by.', cat_id='.$cat_id.', color=\''.$color.'\' WHERE id='.$forum_id) or error('Unable to update forum', __FILE__, __LINE__, $db->error());
 		
 		// Now let's deal with the permissions
 		if (isset($_POST['read_forum_old'])) {
@@ -168,12 +169,17 @@ else if (isset($_POST['update_positions'])) {
 	}
 
 	// Fetch forum info
-	$result = $db->query('SELECT id, forum_name, forum_desc, num_topics, sort_by, cat_id, color FROM '.$db->prefix.'forums WHERE id='.$forum_id) or error('Unable to fetch forum info', __FILE__, __LINE__, $db->error());
+	$result = $db->query('SELECT id, forum_name, forum_desc, parent_id, num_topics, sort_by, cat_id, color FROM '.$db->prefix.'forums WHERE id='.$forum_id) or error('Unable to fetch forum info', __FILE__, __LINE__, $db->error());
 
 	if (!$db->num_rows($result))
 		message_backstage($lang['Bad request'], false, '404 Not Found');
 
 	$cur_forum = $db->fetch_assoc($result);
+
+	$parent_forums = Array();
+	$result = $db->query('SELECT DISTINCT parent_id FROM '.$db->prefix.'forums WHERE parent_id != 0');
+	while ($r = $db->fetch_row($result))
+		$parent_forums[] = $r[0];
 	
 	$cur_index = 7;
 	
@@ -203,6 +209,38 @@ else if (isset($_POST['update_positions'])) {
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">Parent section</label>
+                    <div class="col-sm-9">
+						<select name="parent_id" class="form-control">
+							<option value="0">No parent forum selected</option>
+<?php
+
+	if (!in_array($cur_forum['id'],$parent_forums)) {
+		$result = $db->query('SELECT c.id AS cid, c.cat_name, f.id, f.forum_name, f.parent_id FROM '.$db->prefix.'categories AS c INNER JOIN '.$db->prefix.'forums AS f ON c.id=f.cat_id ORDER BY c.disp_position, c.id, f.disp_position', true) or error('Unable to fetch category/forum list', __FILE__, __LINE__, $db->error());
+
+		$cur_category = 0;
+		while ($forum_list = $db->fetch_assoc($result)) {
+			if ($forum_list['cid'] != $cur_category) { // A new category since last iteration?
+				if ($cur_category)
+					echo "\t\t\t\t\t\t".'</optgroup>'."\n";
+
+				echo "\t\t\t\t\t\t".'<optgroup label="'.luna_htmlspecialchars($forum_list['cat_name']).'">'."\n";
+				$cur_category = $forum_list['cid'];
+			}
+
+			$selected = ($forum_list['id'] == $cur_forum['parent_id']) ? ' selected' : '';
+
+			if(!$forum_list['parent_id'] && $forum_list['id'] != $cur_forum['id'])
+				echo "\t\t\t\t\t\t\t".'<option value="'.$forum_list['id'].'"'.$selected.'>'.luna_htmlspecialchars($forum_list['forum_name']).'</option>'."\n";
+		}
+	}
+
+?>
+							</optgroup>
+						</select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label"><?php echo $lang['Category label'] ?></label>
                     <div class="col-sm-9">
 						<select class="form-control" name="cat_id" tabindex="3">
@@ -210,7 +248,7 @@ else if (isset($_POST['update_positions'])) {
 
 	$result = $db->query('SELECT id, cat_name FROM '.$db->prefix.'categories ORDER BY disp_position') or error('Unable to fetch category list', __FILE__, __LINE__, $db->error());
 	while ($cur_cat = $db->fetch_assoc($result)) {
-		$selected = ($cur_cat['id'] == $cur_forum['cat_id']) ? ' selected="selected"' : '';
+		$selected = ($cur_cat['id'] == $cur_forum['cat_id']) ? ' selected' : '';
 		echo "\t\t\t\t\t\t\t\t\t\t\t".'<option value="'.$cur_cat['id'].'"'.$selected.'>'.luna_htmlspecialchars($cur_cat['cat_name']).'</option>'."\n";
 	}
 
@@ -222,9 +260,9 @@ else if (isset($_POST['update_positions'])) {
                     <label class="col-sm-3 control-label"><?php echo $lang['Sort by label'] ?></label>
 					<div class="col-sm-9">
                         <select class="form-control" name="sort_by" tabindex="4">
-                            <option value="0"<?php if ($cur_forum['sort_by'] == '0') echo ' selected="selected"' ?>><?php echo $lang['Last post'] ?></option>
-                            <option value="1"<?php if ($cur_forum['sort_by'] == '1') echo ' selected="selected"' ?>><?php echo $lang['Topic start'] ?></option>
-                            <option value="2"<?php if ($cur_forum['sort_by'] == '2') echo ' selected="selected"' ?>><?php echo $lang['Subject'] ?></option>
+                            <option value="0"<?php if ($cur_forum['sort_by'] == '0') echo ' selected' ?>><?php echo $lang['Last post'] ?></option>
+                            <option value="1"<?php if ($cur_forum['sort_by'] == '1') echo ' selected' ?>><?php echo $lang['Topic start'] ?></option>
+                            <option value="2"<?php if ($cur_forum['sort_by'] == '2') echo ' selected' ?>><?php echo $lang['Subject'] ?></option>
                         </select>
                     </div>
                 </div>
@@ -232,27 +270,42 @@ else if (isset($_POST['update_positions'])) {
                     <label class="col-sm-3 control-label">Forum color</label>
                     <div class="col-sm-9">
                         <div class="btn-group accent-group" data-toggle="buttons">
-                            <label class="btn btn-primary color-accent accent-blue<?php if ($cur_forum['color'] == '#33b5e5') echo ' active' ?>">
-                                <input type="radio" name="color" id="blue" value="#33b5e5"<?php if ($cur_forum['color'] == '#33b5e5') echo ' checked' ?>>
-                            </label>
-                            <label class="btn btn-primary color-accent accent-purple<?php if ($cur_forum['color'] == '#c58be2') echo ' active' ?>">
-                                <input type="radio" name="color" id="purple" value="#c58be2"<?php if ($cur_forum['color'] == '#c58be2') echo ' checked' ?>>
-                            </label>
-                            <label class="btn btn-primary color-accent accent-green<?php if ($cur_forum['color'] == '#99cc00') echo ' active' ?>">
-                                <input type="radio" name="color" id="green" value="#99cc00"<?php if ($cur_forum['color'] == '#99cc00') echo ' checked' ?>>
-                            </label>
-                            <label class="btn btn-primary color-accent accent-yellow<?php if ($cur_forum['color'] == '#ffcd21') echo ' active' ?>">
-                                <input type="radio" name="color" id="yellow" value="#ffcd21"<?php if ($cur_forum['color'] == '#ffcd21') echo ' checked' ?>>
-                            </label>
-                            <label class="btn btn-primary color-accent accent-red<?php if ($cur_forum['color'] == '#ff4444') echo ' active' ?>">
-                                <input type="radio" name="color" id="red" value="#ff4444"<?php if ($cur_forum['color'] == '#ff4444') echo ' checked' ?>>
-                            </label>
-                            <label class="btn btn-primary color-accent accent-luna<?php if ($cur_forum['color'] == '#0d4382') echo ' active' ?>">
-                                <input type="radio" name="color" id="red" value="#0d4382"<?php if ($cur_forum['color'] == '#0d4382') echo ' checked' ?>>
-                            </label>
-                            <label class="btn btn-primary color-accent accent-grey<?php if ($cur_forum['color'] == '#cccccc') echo ' active' ?>">
-                                <input type="radio" name="color" id="red" value="#cccccc"<?php if ($cur_forum['color'] == '#cccccc') echo ' checked' ?>>
-                            </label>
+							<label class="btn btn-primary color-accent accent-blue<?php if ($cur_forum['color'] == '#14a3ff') echo ' active' ?>">
+								<input type="radio" name="color" id="blue" value="#14a3ff"<?php if ($cur_forum['color'] == '#14a3ff') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-denim<?php if ($cur_forum['color'] == '#2788cb') echo ' active' ?>">
+								<input type="radio" name="color" id="denim" value="#2788cb"<?php if ($cur_forum['color'] == '#2788cb') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-luna<?php if ($cur_forum['color'] == '#0d4382') echo ' active' ?>">
+								<input type="radio" name="color" id="luna" value="#0d4382"<?php if ($cur_forum['color'] == '#0d4382') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-purple<?php if ($cur_forum['color'] == '#c58be2') echo ' active' ?>">
+								<input type="radio" name="color" id="purple" value="#c58be2"<?php if ($cur_forum['color'] == '#c58be2') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-green<?php if ($cur_forum['color'] == '#99cc00') echo ' active' ?>">
+								<input type="radio" name="color" id="green" value="#99cc00"<?php if ($cur_forum['color'] == '#99cc00') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-ao<?php if ($cur_forum['color'] == '#047a36') echo ' active' ?>">
+								<input type="radio" name="color" id="ao" value="#047a36"<?php if ($cur_forum['color'] == '#047a36') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-yellow<?php if ($cur_forum['color'] == '#ffcd21') echo ' active' ?>">
+								<input type="radio" name="color" id="yellow" value="#ffcd21"<?php if ($cur_forum['color'] == '#ffcd21') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-orange<?php if ($cur_forum['color'] == '#ff7521') echo ' active' ?>">
+								<input type="radio" name="color" id="orange" value="#ff7521"<?php if ($cur_forum['color'] == '#ff7521') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-red<?php if ($cur_forum['color'] == '#ff4444') echo ' active' ?>">
+								<input type="radio" name="color" id="red" value="#ff4444"<?php if ($cur_forum['color'] == '#ff4444') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-white<?php if ($cur_forum['color'] == '#cccccc') echo ' active' ?>">
+								<input type="radio" name="color" id="white" value="#cccccc"<?php if ($cur_forum['color'] == '#cccccc') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-grey<?php if ($cur_forum['color'] == '#999999') echo ' active' ?>">
+								<input type="radio" name="color" id="grey" value="#999999"<?php if ($cur_forum['color'] == '#999999') echo ' checked' ?>>
+							</label>
+							<label class="btn btn-primary color-accent accent-black<?php if ($cur_forum['color'] == '#444444') echo ' active' ?>">
+								<input type="radio" name="color" id="black" value="#444444"<?php if ($cur_forum['color'] == '#444444') echo ' checked' ?>>
+							</label>
                         </div>
                     </div>
                 </div>
@@ -297,15 +350,15 @@ else if (isset($_POST['update_positions'])) {
 						<th class="atcl"><?php echo luna_htmlspecialchars($cur_perm['g_title']) ?></th>
 						<td<?php if (!$read_forum_def) echo ' class="danger"'; ?>>
 							<input type="hidden" name="read_forum_old[<?php echo $cur_perm['g_id'] ?>]" value="<?php echo ($read_forum) ? '1' : '0'; ?>" />
-							<input type="checkbox" name="read_forum_new[<?php echo $cur_perm['g_id'] ?>]" value="1"<?php echo ($read_forum) ? ' checked="checked"' : ''; ?><?php echo ($cur_perm['g_read_board'] == '0') ? ' disabled="disabled"' : ''; ?> tabindex="<?php echo $cur_index++ ?>" />
+							<input type="checkbox" name="read_forum_new[<?php echo $cur_perm['g_id'] ?>]" value="1"<?php echo ($read_forum) ? ' checked' : ''; ?><?php echo ($cur_perm['g_read_board'] == '0') ? ' disabled="disabled"' : ''; ?> tabindex="<?php echo $cur_index++ ?>" />
 						</td>
 						<td<?php if (!$post_replies_def) echo ' class="danger"'; ?>>
 							<input type="hidden" name="post_replies_old[<?php echo $cur_perm['g_id'] ?>]" value="<?php echo ($post_replies) ? '1' : '0'; ?>" />
-							<input type="checkbox" name="post_replies_new[<?php echo $cur_perm['g_id'] ?>]" value="1"<?php echo ($post_replies) ? ' checked="checked"' : ''; ?> tabindex="<?php echo $cur_index++ ?>" />
+							<input type="checkbox" name="post_replies_new[<?php echo $cur_perm['g_id'] ?>]" value="1"<?php echo ($post_replies) ? ' checked' : ''; ?> tabindex="<?php echo $cur_index++ ?>" />
 						</td>
 						<td<?php if (!$post_topics_def) echo ' class="danger"'; ?>>
 							<input type="hidden" name="post_topics_old[<?php echo $cur_perm['g_id'] ?>]" value="<?php echo ($post_topics) ? '1' : '0'; ?>" />
-							<input type="checkbox" name="post_topics_new[<?php echo $cur_perm['g_id'] ?>]" value="1"<?php echo ($post_topics) ? ' checked="checked"' : ''; ?> tabindex="<?php echo $cur_index++ ?>" />
+							<input type="checkbox" name="post_topics_new[<?php echo $cur_perm['g_id'] ?>]" value="1"<?php echo ($post_topics) ? ' checked' : ''; ?> tabindex="<?php echo $cur_index++ ?>" />
 						</td>
 					</tr>
 <?php

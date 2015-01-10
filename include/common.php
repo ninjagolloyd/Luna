@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -9,9 +9,6 @@
 
 if (!defined('FORUM_ROOT'))
 	exit('The constant FORUM_ROOT must be defined and point to a valid Luna installation root directory.');
-
-if (file_exists('z.txt'))
-	$zset = '1';
 
 // Load the version class
 require FORUM_ROOT.'include/version.php';
@@ -199,3 +196,7 @@ if (!defined('FORUM_SEARCH_MAX_WORD'))
 
 if (!defined('FORUM_MAX_COOKIE_SIZE'))
 	define('FORUM_MAX_COOKIE_SIZE', 4048);
+
+require FORUM_ROOT.'include/general_functions.php';
+require FORUM_ROOT.'include/draw_functions.php';
+require FORUM_ROOT.'include/statistic_functions.php';

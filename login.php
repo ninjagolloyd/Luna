@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -135,7 +135,7 @@ else if ($action == 'forget' || $action == 'forget_2')
 
 					// Do the user specific replacements to the template
 					$cur_mail_message = str_replace('<username>', $cur_hit['username'], $mail_message);
-					$cur_mail_message = str_replace('<activation_url>', get_base_url().'/profile.php?id='.$cur_hit['id'].'&action=change_pass&key='.$new_password_key, $cur_mail_message);
+					$cur_mail_message = str_replace('<activation_url>', get_base_url().'/me.php?id='.$cur_hit['id'].'&action=change_pass&key='.$new_password_key, $cur_mail_message);
 					$cur_mail_message = str_replace('<new_password>', $new_password, $cur_mail_message);
 
 					luna_mail($email, $mail_subject, $cur_mail_message);

@@ -1,10 +1,10 @@
 /*
- * Copyright Studio 384
+ * Copyright Studio 384 and Luna Group
  * Bootstrap Template: Trent
  * Version:            0.2
- * Based on:           Trent v1.2 (http://studio384.be/trent.php)
- * Since:              0.0.2900
- * Bootstrap:          3.3.1-dev
+ * Based on:           Trent v1.3 (http://studio384.be/trent.php)
+ * Since:              0.0.40.2900
+ * Bootstrap:          3.3.1
  */
  
 @import url('../../include/css/font-awesome.min.css');
@@ -61,6 +61,25 @@ label .help-block {
     font-size: 85%;
 }
 
+.panel-about #brand h3 {
+	margin-top: 0;
+}
+
+.panel-about h3 {
+	font-size: 32px !important;
+	margin-top: 15px;
+}
+
+.panel-about h4 {
+	font-size: 24px !important;
+	margin-bottom: 3px;
+	color: #1f62b0;
+}
+
+.change-list {
+	line-height: 1.7;
+}
+
 /* Navbars */
 .navbar-default {
 	background: #1f62b0;
@@ -72,7 +91,7 @@ label .help-block {
 }
 
 .navbar-default .navbar-toggle, .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-	background-color: rgba(255,255,255,.6);
+	background-color: #fff;
 }
 
 .navbar-default .navbar-toggle, .navbar-default .navbar-collapse, .navbar-default .navbar-form {
@@ -147,13 +166,24 @@ label .help-block {
 	background-color: #555;
 }
 
+@media all and (max-width:767px) {
+	.jumbotron {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.nav-tabs {
+		padding-top: 10px;
+	}
+
+	.nav-tabs > li > a {
+		margin-right: 0;
+	}
+}
+
 /* Panels */
 .panel-heading {
 	height: 38px;
-}
-
-.panel, .alert {
-	margin-top: 11px;
 }
 
 h3.panel-title {
@@ -174,7 +204,8 @@ h3.panel-title {
 }
 
 .panel-default .panel-heading {
-	color: #1f62b0;
+	color: #fff;
+	background-color: #1f62b0;
 	border-bottom-color: #1f62b0;
 }
 
@@ -187,8 +218,8 @@ h3.panel-title {
 }
 
 .panel-primary > .panel-heading {
-	background-color: #fe99e5;
-	border-color: #ed6bcd;
+	background-color: #0d4382;
+	border-color: #0d4382;
 	color: #fff;
 }
 
@@ -198,7 +229,7 @@ h3.panel-title {
 
 .panel-success > .panel-heading {
 	background-color: #78bb28;
-	border-color: #5ea707;
+	border-color: #78bb28;
 	color: #fff;
 }
 
@@ -208,7 +239,7 @@ h3.panel-title {
 
 .panel-info > .panel-heading {
 	background-color: #007ed6;
-	border-color: #0065ac;
+	border-color: #007ed6;
 	color: #fff;
 }
 
@@ -218,7 +249,7 @@ h3.panel-title {
 
 .panel-warning > .panel-heading {
 	background-color: #ffc600;
-	border-color: #f1a400;
+	border-color: #ffc600;
 	color: #fff;
 }
 
@@ -228,12 +259,24 @@ h3.panel-title {
 
 .panel-danger > .panel-heading {
 	background-color: #f65625;
-	border-color: #d23100;
+	border-color: #f65625;
 	color: #fff;
 }
 
 .panel-body .form-group:last-child, .panel-body p:last-child {
 	margin-bottom: 0;
+}
+
+@media all and (min-width:768px) {
+	.panel, .alert {
+		margin-top: 11px;
+	}
+}
+
+@media all and (max-width:767px) {
+	.panel {
+		margin-bottom: 0;
+	}
 }
 
 /* Forms */
@@ -517,15 +560,31 @@ h3.panel-title {
 }
 
 .accent-blue {
-    background-color: #33b5e5 !important;
+    background-color: #14a3ff !important;
+}
+
+.accent-denim {
+    background-color: #2788cb !important;
+}
+
+.accent-luna {
+	background-color: #0d4382 !important;
 }
 
 .accent-green {
     background-color: #99cc00 !important;
 }
 
+.accent-ao {
+	background-color: #047a36 !important;
+}
+
 .accent-yellow {
     background-color: #ffcd21 !important;
+}
+
+.accent-orange {
+    background-color: #ff7521 !important;
 }
 
 .accent-red {
@@ -540,6 +599,14 @@ h3.panel-title {
 	background-color: #0d4382 !important;
 }
 
-.accent-grey {
+.accent-white {
 	background-color: #ccc !important;
+}
+
+.accent-grey {
+	background-color: #999 !important;
+}
+
+.accent-black {
+	background-color: #444 !important;
 }

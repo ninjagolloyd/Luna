@@ -1,11 +1,14 @@
 <?php
 
 /*
- * Copyright (C) 2014 Luna
+ * Copyright (C) 2014-2015 Luna
  * Based on work by PunBB (2002-2009), FluxBB (2009-2012)
  * Licensed under GPLv3 (http://modernbb.be/license.php)
  */
 
+if (!defined('FORUM_CACHE_DIR'))
+	define('FORUM_CACHE_DIR', FORUM_ROOT.'cache/');
+	
 if (file_exists(FORUM_CACHE_DIR.'cache_users_info.php'))
 	include FORUM_CACHE_DIR.'cache_users_info.php';
 
@@ -43,7 +46,7 @@ function newest_user() {
 	global $lang, $stats, $luna_user;
 
 	if ($luna_user['g_view_users'] == '1')
-		$stats['newest_user'] = '<a href="profile.php?id='.$stats['last_user']['id'].'">'.luna_htmlspecialchars($stats['last_user']['username']).'</a>';
+		$stats['newest_user'] = '<a href="me.php?id='.$stats['last_user']['id'].'">'.luna_htmlspecialchars($stats['last_user']['username']).'</a>';
 	else
 		$stats['newest_user'] = luna_htmlspecialchars($stats['last_user']['username']);
 
@@ -71,17 +74,14 @@ function online_list() {
 		$result = $db->query('SELECT user_id, ident FROM '.$db->prefix.'online WHERE idle=0 AND user_id>1 ORDER BY ident', true) or error('Unable to fetch online list', __FILE__, __LINE__, $db->error());
 	
 		if ($db->num_rows($result) > 0) {
-			echo $lang['Online'];
-	
 			$ctr = 1;
 			while ($luna_user_online = $db->fetch_assoc($result)) {
 				if ($luna_user['g_view_users'] == '1')
-					echo "\n\t\t\t\t".'<a href="profile.php?id='.$luna_user_online['user_id'].'">'.luna_htmlspecialchars($luna_user_online['ident']).'</a>';
+					echo "\n\t\t\t\t".'<li><a href="me.php?id='.$luna_user_online['user_id'].'">'.luna_htmlspecialchars($luna_user_online['ident']).'</a></li>';
 				else
-					echo "\n\t\t\t\t".luna_htmlspecialchars($luna_user_online['ident']);
-	
-				if ($ctr < $num_users_online) echo ', '; $ctr++;
+					echo "\n\t\t\t\t".'<li>'.luna_htmlspecialchars($luna_user_online['ident']).'</li>';
 			}
-		}
+		} else
+			echo '<li>No users online</li>';
 	}
 }

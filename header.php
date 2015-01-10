@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -62,7 +62,7 @@ function process_form(the_form) {
 }
 
 // Generate avatar
-$user_avatar = draw_user_avatar($luna_user['id'], '');
+$user_avatar = draw_user_avatar($luna_user['id'], 'avatar');
 
 // Navbar data
 $links = array();
@@ -75,62 +75,69 @@ if ($luna_config['o_pms_enabled'] == '1' && $luna_user['g_pm'] == '1' && $luna_u
 	$num_new_pm = $db->result($result);
 	
 	if ($num_new_pm > 0)
-		$new_inbox = '<span class="label label-danger">'.$num_new_pm.'</span>&nbsp;&nbsp;&nbsp;&nbsp;';	
+		$new_inbox = $num_new_pm.' ';
 	else
 		$new_inbox = '';	
 }
 
+// Check for new notifications
+$result = $db->query('SELECT COUNT(id) FROM '.$db->prefix.'notifications WHERE viewed = 0 AND user_id = '.$luna_user['id']) or error ('Unable to load notifications', __FILE__, __LINE__, $db->error());
+$num_notifications = $db->result($result);
+
+if ($luna_config['o_notification_flyout'] == 1) {
+	if ($num_notifications == '0') {
+		$notificon = '<span class="fa fa-circle-o"></span>';
+		$ind_notification[] = '<li><a href="me.php?section=notifications&id='.$luna_user['id'].'">No new notifications</a></li>';
+	} else {
+		$notificon = $num_notifications.' <span class="fa fa-circle"></span>';
+		
+		$notification_result = $db->query('SELECT * FROM '.$db->prefix.'notifications WHERE user_id = '.$luna_user['id'].' AND viewed = 0 ORDER BY time DESC LIMIT 10') or error ('Unable to load notifications', __FILE__, __LINE__, $db->error());
+		while ($cur_notifi = $db->fetch_assoc($notification_result)) {
+			$notifitime = format_time($cur_notifi['time'], false, null, $time_format, true, true);
+			$ind_notification[] = '<li><a href="'.$cur_notifi['link'].'"><span class="fa fa-fw '.$cur_notifi['icon'].'"></span> '.$cur_notifi['message'].' <span class="timestamp pull-right">'.$notifitime.'</span></a></li>';
+		}
+	}
+
+	$notifications = implode('<li class="divider"></li>', $ind_notification);
+	$notification_menu_item = '
+					<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">'.$notificon.'<span class="visible-xs-inline"> Notifications</span></a>
+					<ul class="dropdown-menu notification-menu">
+						<li role="presentation" class="dropdown-header">Notifications</li>
+						<li class="divider"></li>
+						'.$notifications.'
+						<li class="divider"></li>
+						<li><a class="pull-right" href="me.php?section=notifications&id='.$luna_user['id'].'">More <i class="fa fa-arrow-right"></i></a></li>
+					</ul>
+				</li>';
+} else {
+	if ($num_notifications == '0')
+		$notificon = '<span class="fa fa-circle-o"></span>';
+	else
+		$notificon = $num_notifications.' <span class="fa fa-circle"></span>';
+
+	$notification_menu_item = '<li><a href="me.php?section=notifications&id='.$luna_user['id'].'">'.$notificon.'<span class="visible-xs-inline"> Notifications</span></a></li>';
+}
+
+// Generate navigation items
 if (!$luna_user['is_admmod'])
 	$backstage = '';
 else
-	$backstage = '<li><a href="backstage/"><span class="fa fa-fw fa-tachometer"></span></a></li>';
+	$backstage = '<li><a href="backstage/"><span class="fa fa-fw fa-tachometer"></span><span class="visible-xs-inline"> Backstage</span></a></li>';
 
 $result = $db->query('SELECT id, url, name, disp_position, visible FROM '.$db->prefix.'menu ORDER BY disp_position') or error('Unable to fetch menu items', __FILE__, __LINE__, $db->error());
 
 if ($luna_user['is_guest'])
 	$usermenu = '<li id="navregister"'.((FORUM_ACTIVE_PAGE == 'register') ? ' class="active"' : '').'><a href="register.php">'.$lang['Register'].'</a></li>
 				 <li><a href="#" data-toggle="modal" data-target="#login">'.$lang['Login'].'</a></li>';
-elseif ($zset && $luna_config['o_notifications'] == '1')
-	$usermenu = $backstage.'
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-circle"></i></a>
-					<ul class="dropdown-menu notification-menu">
-						<li role="presentation" class="dropdown-header">Notifications</li>
-						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-user text-success"></i> Odd mentioned you in "You can do anything"</a></li>
-						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-inbox text-warning"></i> New PM from Mellow</a></li>
-						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-arrow-circle-up text-danger"></i> Luna 0.1.3400 is available</a></li>
-						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-user text-info"></i> New comment in "Luna Preview 1"</a></li>
-						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-user text-success"></i> Zoe mentioned you in "Express Yourself"</a></li>
-						<li class="divider"></li>
-						<li><a class="pull-right" href="#">More <i class="fa fa-arrow-right"></i></a></li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle avatar-item" data-toggle="dropdown">'.$new_inbox."".$user_avatar.' <span class="fa fa-fw fa-angle-down"></a>
-					<ul class="dropdown-menu">
-						<li><a href="inbox.php">Inbox</a></li>
-						<li><a href="profile.php?id='.$luna_user['id'].'">'.$lang['Profile'].'</a></li>
-						<li><a href="me.php?id='.$luna_user['id'].'">Me</a></li>
-						<li class="divider"></li>
-						<li><a href="help.php">'.$lang['Help'].'</a></li>
-						<li class="divider"></li>
-						<li><a href="login.php?action=out&amp;id='.$luna_user['id'].'&amp;csrf_token='.luna_hash($luna_user['id'].luna_hash(get_remote_address())).'">'.$lang['Logout'].'</a></li>
-					</ul>
-				</li>
-	';
 else
-	$usermenu = $backstage.'
+	$usermenu = $backstage.$notification_menu_item.'
+				<li><a href="inbox.php">'.$new_inbox.'<span class="fa fa-paper-plane-o"></span><span class="visible-xs-inline"> Inbox</span></a></li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle avatar-item" data-toggle="dropdown">'.$user_avatar.' <span class="fa fa-angle-down"></a>
+					<a href="#" class="dropdown-toggle avatar-item" data-toggle="dropdown">'.luna_htmlspecialchars($luna_user['username']).' '.$user_avatar.' <span class="fa fa-fw fa-angle-down"></a>
 					<ul class="dropdown-menu">
-						<li><a href="inbox.php">Inbox</a></li>
-						<li><a href="profile.php?id='.$luna_user['id'].'">'.$lang['Profile'].'</a></li>
-						<li><a href="me.php?id='.$luna_user['id'].'">Me</a></li>
+						<li><a href="me.php?id='.$luna_user['id'].'">'.$lang['Profile'].'</a></li>
+						<li><a href="settings.php">Settings</a></li>
 						<li class="divider"></li>
 						<li><a href="help.php">'.$lang['Help'].'</a></li>
 						<li class="divider"></li>

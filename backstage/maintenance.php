@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -344,7 +344,7 @@ if (isset($_GET['cache_cleared']))
                     <div class="col-sm-9">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="form[maintenance]" value="1" <?php if ($luna_config['o_maintenance'] == '1') echo ' checked="checked"' ?> />
+                                <input type="checkbox" name="form[maintenance]" value="1" <?php if ($luna_config['o_maintenance'] == '1') echo ' checked' ?> />
                                 <?php echo $lang['Maintenance mode help'] ?>
                             </label>
                         </div>
@@ -394,7 +394,7 @@ if (isset($_GET['cache_cleared']))
                     <div class="col-sm-9">
                         <div class="checkbox">
                             <label>
-                            	<input type="checkbox" name="i_empty_index" value="1" tabindex="3" checked="checked" />
+                            	<input type="checkbox" name="i_empty_index" value="1" tabindex="3" checked />
 								<?php echo $lang['Empty index help'] ?></label>
                             </label>
                         </div>
@@ -424,7 +424,7 @@ if (isset($_GET['cache_cleared']))
                     <label class="col-sm-3 control-label"><?php echo $lang['Prune sticky label'] ?></label>
                     <div class="col-sm-9">
                         <label class="radio-inline">
-                            <input type="radio" name="prune_sticky" value="1" tabindex="6" checked="checked" />
+                            <input type="radio" name="prune_sticky" value="1" tabindex="6" checked />
                             <?php echo $lang['Yes'] ?>
                         </label>
                         <label class="radio-inline">
@@ -476,7 +476,7 @@ if (isset($_GET['cache_cleared']))
                     <label class="col-sm-3 control-label"><?php echo $lang['Prune by'] ?><span class="help-block"><?php echo $lang['Prune by info'] ?></span></label>
                     <div class="col-sm-9">
 						<label class="radio-inline">
-                        	<input type="radio" name="prune_by" value="1" checked="checked" />
+                        	<input type="radio" name="prune_by" value="1" checked />
                             <?php echo $lang['Registed date'] ?>
                         </label>
 						<label class="radio-inline">
@@ -504,7 +504,7 @@ if (isset($_GET['cache_cleared']))
                         	<input type="radio" name="admods_delete" value="1" />
                             <?php echo $lang['Yes'] ?>
                         </label>
-                            <label class="radio-inline"><input type="radio" name="admods_delete" value="0" checked="checked" />
+                            <label class="radio-inline"><input type="radio" name="admods_delete" value="0" checked />
                             <?php echo $lang['No'] ?>
                         </label>
                     </div>
@@ -517,7 +517,7 @@ if (isset($_GET['cache_cleared']))
                             <?php echo $lang['Delete any'] ?>
                         </label>
 						<label class="radio-inline">
-                            <input type="radio" name="verified" value="0" checked="checked" />
+                            <input type="radio" name="verified" value="0" checked />
                             <?php echo $lang['Delete only verified'] ?>
                         </label>
 						<label class="radio-inline">

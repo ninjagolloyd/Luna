@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * License: http://opensource.org/licenses/MIT MIT
@@ -71,7 +71,7 @@ function bbcode2email($text, $wrap_length = 72) {
 		'topic' => '/viewtopic.php?id=$1',
 		'post' => '/viewtopic.php?pid=$1#p$1',
 		'forum' => '/viewforum.php?id=$1',
-		'user' => '/profile.php?id=$1',
+		'user' => '/me.php?id=$1',
 	);
 
 	// Split code blocks and text so BBcode in codeblocks won't be touched

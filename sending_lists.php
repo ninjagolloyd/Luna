@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2014 Luna
+ * Copyright (C) 2014-2015 Luna
  * Based on work by Adaur (2010), Vincent Garnier, Connorhd and David 'Chacmool' Djurback
  * Licensed under GPLv3 (http://modernbb.be/license.php)
  */
@@ -220,7 +220,7 @@ if ($db->num_rows($result))
 		for($i = 0; $i < count($ids_list); $i++){
 			if ($i > 0 && $i < count($ids_list))
 					$usernames = $usernames.', ';
-			$usernames = $usernames.'<a href="profile.php?id='.$ids_list[$i].'">'.luna_htmlspecialchars($usernames_list[$i]).'</a>';
+			$usernames = $usernames.'<a href="me.php?id='.$ids_list[$i].'">'.luna_htmlspecialchars($usernames_list[$i]).'</a>';
 		} 
 ?>
 				<tr>

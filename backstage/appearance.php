@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -21,13 +21,20 @@ if (isset($_POST['form_sent'])) {
 	confirm_referrer('backstage/appearance.php', $lang['Bad HTTP Referer message']);
 	
 	$form = array(
-		'default_style'			=> luna_trim($_POST['form']['default_style']),
 		'show_user_info'		=> isset($_POST['form']['show_user_info']) ? '1' : '0',
 		'show_post_count'		=> isset($_POST['form']['show_post_count']) ? '1' : '0',
 		'moderated_by'		    => isset($_POST['form']['moderated_by']) ? '1' : '0',
+		'emoji_size'			=> intval($_POST['form']['emoji_size']),
 		'topic_review'			=> (intval($_POST['form']['topic_review']) >= 0) ? intval($_POST['form']['topic_review']) : 0,
 		'disp_topics_default'	=> intval($_POST['form']['disp_topics_default']),
 		'disp_posts_default'	=> intval($_POST['form']['disp_posts_default']),
+		'board_statistics'		=> isset($_POST['form']['board_statistics']) ? '1' : '0',
+		'back_to_top'		    => isset($_POST['form']['back_to_top']) ? '1' : '0',
+		'notification_flyout'	=> isset($_POST['form']['notification_flyout']) ? '1' : '0',
+		'header_search'			=> isset($_POST['form']['header_search']) ? '1' : '0',
+		'show_copyright'		=> isset($_POST['form']['show_copyright']) ? '1' : '0',
+		'copyright_type'		=> intval($_POST['form']['copyright_type']),
+		'custom_copyright'		=> luna_trim($_POST['form']['custom_copyright']),
 	);
 
 	// Make sure the number of displayed topics and posts is between 3 and 75
@@ -84,13 +91,13 @@ if (isset($_GET['saved']))
                     <div class="col-sm-9">
                         <div class="checkbox">
                             <label>
-								<input type="checkbox" name="form[show_user_info]" value="1" <?php if ($luna_config['o_show_user_info'] == '1') echo ' checked="checked"' ?> />
+								<input type="checkbox" name="form[show_user_info]" value="1" <?php if ($luna_config['o_show_user_info'] == '1') echo ' checked' ?> />
 								<?php echo $lang['Info in posts help'] ?>
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-								<input type="checkbox" name="form[show_post_count]" value="1" <?php if ($luna_config['o_show_post_count'] == '1') echo ' checked="checked"' ?> />
+								<input type="checkbox" name="form[show_post_count]" value="1" <?php if ($luna_config['o_show_post_count'] == '1') echo ' checked' ?> />
 								<?php echo $lang['Post count help'] ?>
                             </label>
                         </div>
@@ -101,10 +108,19 @@ if (isset($_GET['saved']))
                     <div class="col-sm-9">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="form[moderated_by]" value="1" <?php if ($luna_config['o_moderated_by'] == '1') echo ' checked="checked"' ?> />
+                                <input type="checkbox" name="form[moderated_by]" value="1" <?php if ($luna_config['o_moderated_by'] == '1') echo ' checked' ?> />
 								<?php echo $lang['Moderated by help'] ?>
                             </label>
                         </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Emojis<span class="help-block">The font size emojis should be displayed in</span></label>
+                    <div class="col-sm-9">
+						<div class="input-group">
+							<input type="text" class="form-control" name="form[emoji_size]" maxlength="2" value="<?php echo $luna_config['o_emoji_size'] ?>" />
+							<span class="input-group-addon"><?php echo $lang['pixels'] ?></span>
+						</div>
                     </div>
                 </div>
                 <hr />
@@ -124,6 +140,99 @@ if (isset($_GET['saved']))
                     <label class="col-sm-3 control-label"><?php echo $lang['Posts per page label'] ?><span class="help-block"><?php echo $lang['Posts per page help'] ?></span></label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="form[disp_posts_default]" maxlength="3" value="<?php echo $luna_config['o_disp_posts_default'] ?>" />
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Header settings<span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
+        </div>
+        <div class="panel-body">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Notifications</label>
+                    <div class="col-sm-9">
+                        <div class="checkbox">
+                            <label>
+								<input type="checkbox" name="form[notification_flyout]" value="1" <?php if ($luna_config['o_notification_flyout'] == '1') echo ' checked' ?> />
+								Show a fly-out when clicking the notification icon instead of going to the notification page. Disableing this feature might improve performance.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+				<hr />
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Search</label>
+                    <div class="col-sm-9">
+                        <div class="checkbox">
+                            <label>
+								<input type="checkbox" name="form[header_search]" value="1" <?php if ($luna_config['o_header_search'] == '1') echo ' checked' ?> />
+								Show the search bar in the heading.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Footer settings<span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
+        </div>
+        <div class="panel-body">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Statistics</label>
+                    <div class="col-sm-9">
+                        <div class="checkbox">
+                            <label>
+								<input type="checkbox" name="form[board_statistics]" value="1" <?php if ($luna_config['o_board_statistics'] == '1') echo ' checked' ?> />
+								Show the board statistics in the footer.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Back to top</label>
+                    <div class="col-sm-9">
+                        <div class="checkbox">
+                            <label>
+								<input type="checkbox" name="form[back_to_top]" value="1" <?php if ($luna_config['o_back_to_top'] == '1') echo ' checked' ?> />
+								Show a "Back to top" link in the footer.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+				<hr />
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Copyright</label>
+                    <div class="col-sm-9">
+                        <div class="checkbox">
+                            <label>
+								<input type="checkbox" name="form[show_copyright]" value="1" <?php if ($luna_config['o_show_copyright'] == '1') echo ' checked' ?> />
+								Show the copyright notice in the footer.
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Copyright content</label>
+                    <div class="col-sm-9">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="form[copyright_type]" id="o_copyright_type_0" value="0"<?php if ($luna_config['o_copyright_type'] == '0') echo ' checked' ?> />
+                                Show default copyright
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="form[copyright_type]" id="o_copyright_type_1" value="1"<?php if ($luna_config['o_copyright_type'] == '1') echo ' checked' ?> />
+								show personalized copyright notices:
+                            </label><br /><br />
+							<input type="text" class="form-control" name="form[custom_copyright]" placeholder="Your copyright" value="<?php echo $luna_config['o_custom_copyright'] ?>" />
+                        </div>
                     </div>
                 </div>
             </fieldset>

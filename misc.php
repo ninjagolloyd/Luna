@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -12,7 +12,6 @@ if (isset($_GET['action']))
 
 define('FORUM_ROOT', dirname(__FILE__).'/');
 require FORUM_ROOT.'include/common.php';
-require FORUM_ROOT.'include/general_functions.php';
 
 $action = isset($_GET['action']) ? $_GET['action'] : null;
 
@@ -110,7 +109,7 @@ else if ($action == 'markforumread') {
 		$redirect_url = validate_redirect($_SERVER['HTTP_REFERER'], null);
 
 	if (!isset($redirect_url))
-		$redirect_url = get_base_url(true).'/profile.php?id='.$recipient_id;
+		$redirect_url = get_base_url(true).'/me.php?id='.$recipient_id;
 	else if (preg_match('%viewtopic\.php\?pid=(\d+)$%', $redirect_url, $matches))
 		$redirect_url .= '#p'.$matches[1];
 

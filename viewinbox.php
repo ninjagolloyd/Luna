@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2014 Luna
+ * Copyright (C) 2014-2015 Luna
  * Based on work by Adaur (2010), Vincent Garnier, Connorhd and David 'Chacmool' Djurback
  * Licensed under GPLv3 (http://modernbb.be/license.php)
  */
@@ -337,7 +337,7 @@ while ($cur_post = $db->fetch_assoc($result))
 	if ($cur_post['id'])
 	{
 		if ($luna_user['g_view_users'] == '1')
-			$username = '<a href="profile.php?id='.$cur_post['sender_id'].'">'.luna_htmlspecialchars($cur_post['sender']).'</a>';
+			$username = '<a href="me.php?id='.$cur_post['sender_id'].'">'.luna_htmlspecialchars($cur_post['sender']).'</a>';
 		else
 			$username = luna_htmlspecialchars($cur_post['sender']);
 			

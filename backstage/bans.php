@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -17,7 +17,7 @@ if ($luna_user['g_id'] != FORUM_ADMIN && ($luna_user['g_moderator'] != '1' || $l
 // Add/edit a ban (stage 1)
 if (isset($_REQUEST['add_ban']) || isset($_GET['edit_ban'])) {
 	if (isset($_GET['add_ban']) || isset($_POST['add_ban'])) {
-		// If the ID of the user to ban was provided through GET (a link from ../profile.php)
+		// If the ID of the user to ban was provided through GET (a link from ../me.php)
 		if (isset($_GET['add_ban'])) {
 			$user_id = intval($_GET['add_ban']);
 			if ($user_id < 2)
@@ -343,9 +343,7 @@ else if (isset($_GET['find_ban'])) {
         <h3 class="panel-title"><?php echo $lang['Results head'] ?></h3>
     </div>
     <div class="panel-body">
-		<ul class="pagination">
-			<?php echo $paging_links ?>
-		</ul>
+		<?php echo $paging_links ?>
 	</div>
 	<table class="table table-striped table-hover">
 		<thead>
@@ -376,7 +374,7 @@ else if (isset($_GET['find_ban'])) {
 				<td class="tc3"><?php echo ($ban_data['ip'] != '') ? luna_htmlspecialchars($ban_data['ip']) : '&#160;' ?></td>
 				<td class="tc4"><?php echo $expire ?></td>
 				<td class="tc5"><?php echo ($ban_data['message'] != '') ? luna_htmlspecialchars($ban_data['message']) : '&#160;' ?></td>
-				<td class="tc6"><?php echo ($ban_data['ban_creator_username'] != '') ? '<a href="../profile.php?id='.$ban_data['ban_creator'].'">'.luna_htmlspecialchars($ban_data['ban_creator_username']).'</a>' : $lang['Unknown'] ?></td>
+				<td class="tc6"><?php echo ($ban_data['ban_creator_username'] != '') ? '<a href="../me.php?id='.$ban_data['ban_creator'].'">'.luna_htmlspecialchars($ban_data['ban_creator_username']).'</a>' : $lang['Unknown'] ?></td>
 				<td class="tcr"><?php echo $actions ?></td>
 			</tr>
 <?php
@@ -389,9 +387,7 @@ else if (isset($_GET['find_ban'])) {
 		</tbody>
 	</table>
 	<div class="panel-body">
-		<ul class="pagination">
-			<?php echo $paging_links ?>
-		</ul>
+		<?php echo $paging_links ?>
     </div>
 </div>
 <?php
@@ -456,12 +452,12 @@ require 'header.php';
 					<th><?php echo $lang['Order by label'] ?></th>
 					<td colspan="3">
 						<select class="form-control" name="order_by" tabindex="10">
-							<option value="username" selected="selected"><?php echo $lang['Username'] ?></option>
+							<option value="username" selected><?php echo $lang['Username'] ?></option>
 							<option value="ip"><?php echo $lang['Order by ip'] ?></option>
 							<option value="email"><?php echo $lang['Email'] ?></option>
 							<option value="expire"><?php echo $lang['Order by expire'] ?></option>
 						</select>&#160;&#160;&#160;<select class="form-control" name="direction" tabindex="11">
-							<option value="ASC" selected="selected"><?php echo $lang['Ascending'] ?></option>
+							<option value="ASC" selected><?php echo $lang['Ascending'] ?></option>
 							<option value="DESC"><?php echo $lang['Descending'] ?></option>
 						</select>
 					</td>

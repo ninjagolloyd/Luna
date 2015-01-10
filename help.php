@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -114,6 +114,7 @@ if ($db->num_rows($result) > 0)
             </div>
 			<div class="tab-pane" id="smilies">
                 <p><a name="smilies"></a><?php echo $lang['Smilies info'] ?></p>
+				<div class="row">
 <?php
 
 // Display the smiley set
@@ -125,9 +126,10 @@ foreach ($smilies as $smiley_text => $smiley_img)
 	$smiley_groups[$smiley_img][] = $smiley_text;
 
 foreach ($smiley_groups as $smiley_img => $smiley_texts)
-	echo "\t\t".'<p><code>'.implode('</code> '.$lang['and'].' <code>', $smiley_texts).'</code> <span>'.$lang['produces'].'</span> <img src="'.luna_htmlspecialchars(get_base_url(true)).'/style/Sunrise/smilies/'.$smiley_img.'" width="15" height="15" alt="'.$smiley_texts[0].'" /></p>'."\n";
+	echo "\t\t".'<div class="col-sm-3"><p><code>'.implode('</code> '.$lang['and'].' <code>', $smiley_texts).'</code> <span>'.$lang['produces'].'</span> <span class="emoji">'.$smiley_img.'</span></p></div>'."\n";
 
 ?>
+				</div>
             </div>
 		</div>
     </div>
@@ -145,40 +147,6 @@ foreach ($smiley_groups as $smiley_img => $smiley_texts)
 		</ul>
 		<div class="tab-content">
 		  <div class="tab-pane active" id="forum">
-                <h3><?php echo $lang['Labels question'] ?></h3>
-                <p><?php echo $lang['Labels info'] ?></p>
-				<table class="table">
-                	<thead>
-                        <tr>
-                            <th><?php echo $lang['Label'] ?></th>
-                            <th><?php echo $lang['Explanation'] ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><span class="label label-success"><?php echo $lang['Sticky'] ?></span></td>
-                            <td><?php echo $lang['Sticky explanation'] ?></td>
-                        </tr>
-                        <tr>
-                            <td><span class="label label-danger"><?php echo $lang['Closed'] ?></span></td>
-                            <td><?php echo $lang['Closed explanation'] ?></td>
-                        </tr>
-                        <tr>
-                            <td><span class="label label-info"><?php echo $lang['Moved'] ?></span></td>
-                            <td><?php echo $lang['Moved explanation'] ?></td>
-                        </tr>
-                        <!-- <tr>
-                            <td><span class="label label-warning"><?php echo $lang['Star'] ?></span></td>
-                            <td><?php echo $lang['Star explanation'] ?></td>
-                        </tr> -->
-                        <?php if (!$luna_user['is_guest'] && $luna_config['o_has_posted'] == '1') { ?>
-                        <tr>
-                            <td><span class="fa fa-asterisk"></span></td>
-                            <td><?php echo $lang['Posted explanation'] ?></td>
-                        </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
                 <h3><?php echo $lang['Content question'] ?></h3>
                 <p><?php echo $lang['Content answer'] ?></p>
                 <h3><?php echo $lang['Topics question'] ?></h3>

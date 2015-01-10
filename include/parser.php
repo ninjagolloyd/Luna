@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * License: http://opensource.org/licenses/MIT MIT
@@ -41,30 +41,29 @@ $re_list = '%\[list(?:=([1*]))?+\]((?:[^\[]*+(?:(?!\[list(?:=[1*])?+\]|\[/list\]
 
 // Here you can add additional smilies if you like (please note that you must escape single quote and backslash)
 $smilies = array(
-	':)' => 'smile.png',
-	':|' => 'neutral.png',
-	':(' => 'sad.png',
-	':d' => 'big_smile.png',
-	':D' => 'big_smile.png',
-	':o' => 'yikes.png',
-	':O' => 'yikes.png',
-	';)' => 'wink.png',
-	':/' => 'hmm.png',
-	':P' => 'tongue.png',
-	':p' => 'tongue.png',
-	':lol:' => 'lol.png',
-	':-))' => 'lol.png',
-	':@' => 'mad.png',
-	'%)' => 'roll.png',
-	'b:' => 'cool.png',
-	'B:' => 'cool.png',
-	':hc:' => 'happycry.png',
-	'(A)' => 'angel.png',
-	'^-^' => 'ohyeah.png',
-	'(a)' => 'angel.png',
-	'(A)' => 'angel.png',
-	'^.^' => 'happy.png'
-	);
+	':)' => '&#x263a;',
+	':|' => '&#x1f611;',
+	':(' => '&#x1f629;',
+	':d' => '&#x1f604;',
+	':D' => '&#x1f604;',
+	':o' => '&#x1f632;',
+	':O' => '&#x1f632;',
+	';)' => '&#x1f609;',
+	':/' => '&#x1f612;',
+	':P' => '&#x1f60b;',
+	':p' => '&#x1f60b;',
+	':lol:' => '&#x1f600;',
+	':-))' => '&#x1f600;',
+	':@' => '&#x1f620;',
+	'%)' => '&#x1f606;',
+	'b:' => '&#x1f60e;',
+	'B:' => '&#x1f60e;',
+	':hc:' => '&#x1f605;',
+	'(A)' => '&#x1f607;',
+	'(a)' => '&#x1f607;',
+	'^-^' => '&#x1f60f;',
+	'^.^' => '&#x1f600;'
+);
 
 //
 // Make sure all BBCodes are lower case and do a little cleanup
@@ -702,11 +701,11 @@ function do_bbcode($text, $is_signature = false) {
 	$replace[] = '<sub>$1</sub>';
 
 	// DailyMotion videos
-	$replace[] = '<iframe width="'.$luna_config['o_video_width'].'" frameborder="0" height="'.$luna_config['o_video_height'].'" src="http://www.dailymotion.com/embed/video/$3"></iframe>';
+	$replace[] = '<iframe class="player" width="'.$luna_config['o_video_width'].'" frameborder="0" height="'.$luna_config['o_video_height'].'" src="http://www.dailymotion.com/embed/video/$3"></iframe>';
 	// Youtube Videos
-	$replace[] = '<iframe width="'.$luna_config['o_video_width'].'" frameborder="0" height="'.$luna_config['o_video_height'].'" src="http://www.youtube.com/embed/$4"></iframe>';
+	$replace[] = '<iframe class="player" width="'.$luna_config['o_video_width'].'" frameborder="0" height="'.$luna_config['o_video_height'].'" src="http://www.youtube.com/embed/$4"></iframe>';
 	// Vimeo Videos
-	$replace[] = '<iframe width="'.$luna_config['o_video_width'].'" frameborder="0" height="'.$luna_config['o_video_height'].'" src="http://player.vimeo.com/video/$4"></iframe>';
+	$replace[] = '<iframe class="player" width="'.$luna_config['o_video_width'].'" frameborder="0" height="'.$luna_config['o_video_height'].'" src="http://player.vimeo.com/video/$4"></iframe>';
 
 	if (($is_signature && $luna_config['p_sig_img_tag'] == '1') || (!$is_signature && $luna_config['p_message_img_tag'] == '1')) {
 		$pattern_callback[] = '%\[img\]((ht|f)tps?://)([^\s<"]*?)\[/img\]%';
@@ -762,7 +761,7 @@ function do_smilies($text) {
 
 	foreach ($smilies as $smiley_text => $smiley_img) {
 		if (strpos($text, $smiley_text) !== false)
-			$text = ucp_preg_replace('%(?<=[>\s])'.preg_quote($smiley_text, '%').'(?=[^\p{L}\p{N}])%um', '<img src="'.luna_htmlspecialchars(get_base_url(true).'/style/Sunrise/smilies/'.$smiley_img).'" width="15" height="15" alt="'.substr($smiley_img, 0, strrpos($smiley_img, '.')).'" />', $text);
+			$text = ucp_preg_replace('%(?<=[>\s])'.preg_quote($smiley_text, '%').'(?=[^\p{L}\p{N}])%um', '<span class="emoji">'.$smiley_img.'</span>', $text);
 	}
 
 	return substr($text, 1, -1);

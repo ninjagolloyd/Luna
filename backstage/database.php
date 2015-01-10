@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -575,7 +575,7 @@ require 'header.php';
                     <label class="col-sm-3 control-label"><?php echo $lang['Backup type'] ?></label>
                     <div class="col-sm-9">
 						<label class="radio-inline">
-                            <input type="radio" name="backup_type" value="full" checked="checked" />
+                            <input type="radio" name="backup_type" value="full" checked />
                             <?php echo $lang['Full'] ?>
                         </label>
 						<label class="radio-inline">
@@ -596,7 +596,7 @@ require 'header.php';
                             <?php echo $lang['Yes'] ?>
                         </label>
 						<label class="radio-inline">
-                            <input type="radio" name="gzipcompress" value="0" checked="checked" />
+                            <input type="radio" name="gzipcompress" value="0" checked />
                             <?php echo $lang['No'] ?>
                         </label>
                     </div>

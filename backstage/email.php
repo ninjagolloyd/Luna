@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -105,13 +105,13 @@ if (isset($_GET['saved']))
                     <div class="col-sm-9">
                         <div class="checkbox">
                             <label>
-								<input type="checkbox" name="form[forum_subscriptions]" value="1" <?php if ($luna_config['o_forum_subscriptions'] == '1') echo ' checked="checked"' ?> />
+								<input type="checkbox" name="form[forum_subscriptions]" value="1" <?php if ($luna_config['o_forum_subscriptions'] == '1') echo ' checked' ?> />
 								<?php echo $lang['Forum subscriptions help'] ?>
                             </label>
                         </div>
                         <div class="checkbox">
                             <label>
-								<input type="checkbox" name="form[topic_subscriptions]" value="1" <?php if ($luna_config['o_topic_subscriptions'] == '1') echo ' checked="checked"' ?> />
+								<input type="checkbox" name="form[topic_subscriptions]" value="1" <?php if ($luna_config['o_topic_subscriptions'] == '1') echo ' checked' ?> />
 								<?php echo $lang['Topic subscriptions help'] ?>
                             </label>
                         </div>
@@ -162,7 +162,7 @@ if (isset($_GET['saved']))
                 <div class="form-group">
                     <label class="col-sm-3 control-label"></label>
                     <div class="col-sm-9">
-                        <input type="checkbox" name="form[smtp_ssl]" value="1" <?php if ($luna_config['o_smtp_ssl'] == '1') echo ' checked="checked"' ?> />
+                        <input type="checkbox" name="form[smtp_ssl]" value="1" <?php if ($luna_config['o_smtp_ssl'] == '1') echo ' checked' ?> />
 						<?php echo $lang['SMTP SSL help'] ?>
                     </div>
                 </div>

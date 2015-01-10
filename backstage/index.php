@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -16,22 +16,23 @@ if (!$luna_user['is_admmod']) {
 
 if (isset($_POST['form_sent'])) {
 	confirm_referrer('backstage/index.php', $lang['Bad HTTP Referer message']);
-	
-	$form = array(
-		'admin_note'			=> luna_trim($_POST['form']['admin_note'])
-	);
 
-	foreach ($form as $key => $input) {
-		// Only update values that have changed
-		if (array_key_exists('o_'.$key, $luna_config) && $luna_config['o_'.$key] != $input) {
-			if ($input != '' || is_int($input))
-				$value = '\''.$db->escape($input).'\'';
-			else
-				$value = 'NULL';
+	$db->query('UPDATE '.$db->prefix.'config SET conf_value=\''.luna_htmlspecialchars($_POST['form']['admin_note']).'\' WHERE conf_name=\'o_admin_note\'') or error('Unable to update board config', __FILE__, __LINE__, $db->error());
 
-			$db->query('UPDATE '.$db->prefix.'config SET conf_value='.$value.' WHERE conf_name=\'o_'.$db->escape($key).'\'') or error('Unable to update board config', __FILE__, __LINE__, $db->error());
-		}
-	}
+	// Regenerate the config cache
+	if (!defined('FORUM_CACHE_FUNCTIONS_LOADED'))
+		require FORUM_ROOT.'include/cache.php';
+
+	generate_config_cache();
+	clear_feed_cache();
+
+	redirect('backstage/index.php?saved=true');
+}
+
+if (isset($_POST['first_run_disable'])) {
+	confirm_referrer('backstage/index.php', $lang['Bad HTTP Referer message']);
+
+	$db->query('UPDATE '.$db->prefix.'config SET conf_value=1 WHERE conf_name=\'o_first_run_backstage\'') or error('Unable to update board config', __FILE__, __LINE__, $db->error());
 
 	// Regenerate the config cache
 	if (!defined('FORUM_CACHE_FUNCTIONS_LOADED'))
@@ -86,11 +87,49 @@ require 'header.php';
 if (isset($_GET['saved']))
 	echo '<div class="alert alert-success"><h4>'.$lang['Settings saved'].'</h4></div>';
 
-if (file_exists('../z.txt') && ($luna_config['o_notifications'] == '1' || $luna_config['o_forum_new_style'] == '1' || $luna_config['o_reading_list'] == '1')) {
-?>
-<div class="alert alert-danger">
-	<h4>zSettings enabled!</h4>
-	We've found out that some zSettings have been enabled. These settings control feature that are still in major development, might not work at all and/or can possibly corrupt your forum. We strongly recommend you to use these features only when necessary (for example, when you're developing Luna). Otherwise, you can disable them in <span class="fa fa-cog"></span> Settings > <span class="fa fa-cogs"></span> zSettings.
+if(is_writable(FORUM_ROOT.'config.php')): ?>
+<div class="alert alert-warning">The config file is writeable at this moment, you might want to set the CHMOD to 640 or 644.</div>
+<?php endif;
+
+if ($luna_config['o_first_run_backstage'] == 0) { ?>
+<div class="panel panel-primary hidden-xs">
+	<div class="panel-heading">
+		<h3 class="panel-title">Welcome to Luna
+			<span class="pull-right">
+				<form class="form-horizontal" method="post" action="index.php">
+					<input type="hidden" name="first_run_disable" value="1" />
+					<button class="btn btn-success" type="submit" name="save"><span class="fa fa-check"></span> Got it</button>
+				</form>
+			</span>
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-sm-4">
+				<p>Welcome to the Backstage. Here, you can manage your newly set up board. We're ready to go now, but there might be a couple of settings you might want to change. So let us help you with that first!</p>
+				<p>If you're done, you can click on "Got it" in the upper right corner of this panel to disable this field.</p>
+				<div class="list-group">
+					<a href="about.php" class="list-group-item">What's new?</a>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="list-group">
+					<a href="board.php" class="list-group-item">Create new sections</a>
+					<a href="censoring.php" class="list-group-item">Censor words</a>
+					<a href="groups.php" class="list-group-item">Add more groups</a>
+					<a href="ranks.php" class="list-group-item">Add additional ranks</a>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="list-group">
+					<a href="menu.php" class="list-group-item">Customize the menu</a>
+					<a href="theme.php" class="list-group-item">Change the appearance</a>
+					<a href="features.php" class="list-group-item">Alter the community's functionality</a>
+					<a href="settings.php" class="list-group-item">Change general settings</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <?php } ?>
 <div class="row">
@@ -116,7 +155,7 @@ $result = $db->query('SELECT r.id, r.topic_id, r.forum_id, r.reported_by, r.crea
 
 if ($db->num_rows($result)) {
 	while ($cur_report = $db->fetch_assoc($result)) {
-		$reporter = ($cur_report['reporter'] != '') ? '<a href="../profile.php?id='.$cur_report['reported_by'].'">'.luna_htmlspecialchars($cur_report['reporter']).'</a>' : $lang['Deleted user'];
+		$reporter = ($cur_report['reporter'] != '') ? '<a href="../me.php?id='.$cur_report['reported_by'].'">'.luna_htmlspecialchars($cur_report['reporter']).'</a>' : $lang['Deleted user'];
 		$forum = ($cur_report['forum_name'] != '') ? '<span><a href="../viewforum.php?id='.$cur_report['forum_id'].'">'.luna_htmlspecialchars($cur_report['forum_name']).'</a></span>' : '<span>'.$lang['Deleted'].'</span>';
 		$topic = ($cur_report['subject'] != '') ? '<span> <span class="divider">/</span> <a href="../viewtopic.php?id='.$cur_report['topic_id'].'">'.luna_htmlspecialchars($cur_report['subject']).'</a></span>' : '<span>»&#160;'.$lang['Deleted'].'</span>';
 		$post = str_replace("\n", '<br />', luna_htmlspecialchars($cur_report['message']));
@@ -153,7 +192,7 @@ if ($db->num_rows($result)) {
 						<h3 class="panel-title"><?php echo $lang['Backup head'] ?></h3>
 					</div>
 					<div class="panel-body">
-						<a class="btn btn-block btn-primary" href="database.php"><?php echo $lang['Backup button'] ?></a>
+						<a class="btn btn-block btn-primary disabled" href="database.php"><?php echo $lang['Backup button'] ?></a>
 					</div>
 				 </div>
 			</div>
@@ -195,30 +234,10 @@ if (version_compare(Version::FORUM_VERSION, $latest_version, '<')) {
 							<h3 class="panel-title">Admin notes<span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
 						</div>
 						<div class="panel-body">
-							<textarea class="form-control" name="form[admin_note]" placeholder="Add a note..." accesskey="n" rows="10"><?php echo luna_htmlspecialchars($luna_config['o_admin_note']) ?></textarea>
+							<textarea class="form-control" name="form[admin_note]" placeholder="Add a note..." accesskey="n" rows="10"><?php echo $luna_config['o_admin_note'] ?></textarea>
 						</div>
 					</div>
 				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-sm-12">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<h3 class="panel-title">Welcome to the Luna Preview</h3>
-			</div>
-			<div class="panel-body">
-				<p>Hello and welcome to the Luna Preview 1. It's great that you are using this software. However, we hope you are using it far away from a productive environment. This preview is only ment to show what's coming next to Luna.</p>
-				<p>Keep an eye on new releases, we release every now and then a new build for Luna, one more stable then the other, for you to check out. You can keep track of it at <a href="http://modernbb.be/lunareleases.php">our website</a>. New builds can contain new features, improved features, or bugfixes (mostly all at once).</p>
-				<p>We would like to ask you to send in feedback. Feedback is very important for us. Feedback can be about everything: bugs that need to be fixed, features you would like to see, etc. Be sure to check our shiplist (see links below) before you request a feature or fill a bug, as it might be noted already. Most obvious bugs that you'll find are already known and beeing solved. If you find any issues in the interface, we don't need to know those either, as we're still working on that too (through ideas are always welcome).</p>
-			</div>
-			<div class="panel-footer">
-				<div class="btn-group">
-					<a class="btn btn-info" href="https://github.com/ModernBB/Luna/issues/863">Shiplist</a>
-					<a class="btn btn-info" href="http://modernbb.be/releases/luna1.0.php">Changelog</a>
-				</div>
 			</div>
 		</div>
 	</div>

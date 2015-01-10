@@ -229,7 +229,7 @@ $lang = array(
 'No board title'				=>	'You must enter a board title.',
 'Error default language'		=>	'The default language chosen doesn\'t seem to exist.',
 'Error default style'			=>	'The default style chosen doesn\'t seem to exist.',
-'No DB extensions'				=>	'PHP needs to have support for either MySQL or SQLite to run Luna to be installed. Non is available, through.',
+'No DB extensions'				=>	'PHP needs to have support for either MySQL or SQLite to run Luna to be installed. Non is available, through',
 'Administrator username'		=>	'Username',
 'Administrator password 1'		=>	'Administrator password 1',
 'Administrator password 2'		=>	'Administrator password 2',
@@ -424,7 +424,7 @@ $lang = array(
 //
 
 'Topics'		=>	'Topics',
-'Link to'		=>	'Link to:', // As in "Link to: http://modernbb.be/"
+'Link to'		=>	'Link to:', // As in "Link to: http://getluna.org/"
 'Empty board'	=>	'Board is empty.',
 'Newest user'	=>	'Newest user',
 'Users online'	=>	'Users online',
@@ -567,7 +567,7 @@ $lang = array(
 'Edit post'			=>	'Edit post',
 
 //
-// Language for both profile.php and register.php
+// Language for both me.php and register.php
 //
 
 'Email legend'				=>	'Enter a valid email address',
@@ -598,7 +598,7 @@ $lang = array(
 'Bad ICQ'					=>	'You entered an invalid ICQ UIN. Please go back and correct.',
 
 //
-// Language for profile.php
+// Language for me.php
 //
 
 'Section personality'			=>	'Personality',
@@ -843,7 +843,7 @@ $lang = array(
 
 'User search info'	=>	'Enter a username to search for and/or a user group to filter by. Use the wildcard character * for partial matches.',
 'User group'		=>	'User group',
-'No of posts'		=>	'Number of posts',
+'No of posts'		=>	'Posts',
 'All users'			=>	'All users',
 'Sort no of posts'	=>	'Sort by number of posts',
 'Sort username'		=>	'Sort by username',

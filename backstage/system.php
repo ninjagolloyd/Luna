@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -121,7 +121,7 @@ load_admin_nav('backstage', 'stats');
                 <td>Database version</td>
                 <td><?php echo $luna_config['o_database_revision']; ?></td>
                 <td>jQuery version</td>
-                <td>2.1.1</td>
+                <td>2.1.3</td>
             </tr>
         </tbody>
     </table>

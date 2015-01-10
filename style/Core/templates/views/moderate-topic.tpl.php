@@ -16,9 +16,7 @@ if (!defined('FORUM'))
         </div>
     </div>
     <div class="col-sm-6">
-        <ul class="pagination">
-            <?php echo $paging_links ?>
-        </ul>
+		<?php echo $paging_links ?>
     </div>
 </div>
 
@@ -45,7 +43,7 @@ if (!defined('FORUM'))
         // If the poster is a registered user
         if ($cur_post['poster_id'] > 1) {
             if ($luna_user['g_view_users'] == '1')
-                $poster = '<a href="profile.php?id='.$cur_post['poster_id'].'">'.luna_htmlspecialchars($cur_post['poster']).'</a>';
+                $poster = '<a href="me.php?id='.$cur_post['poster_id'].'">'.luna_htmlspecialchars($cur_post['poster']).'</a>';
             else
                 $poster = luna_htmlspecialchars($cur_post['poster']);
 
@@ -109,10 +107,8 @@ if (!defined('FORUM'))
         </div>
     </div>
     <div class="col-sm-6">
-        <ul class="pagination">
-            <?php echo $paging_links ?>
-            <div class="btn-group"><input type="submit" class="btn btn-primary" name="split_posts" value="<?php echo $lang['Split'] ?>"<?php echo $button_status ?> /><input type="submit" class="btn btn-primary" name="delete_posts" value="<?php echo $lang['Delete'] ?>"<?php echo $button_status ?> /></div>
-        </ul>
+		<?php echo $paging_links ?>
+		<div class="btn-group"><input type="submit" class="btn btn-primary" name="split_posts" value="<?php echo $lang['Split'] ?>"<?php echo $button_status ?> /><input type="submit" class="btn btn-primary" name="delete_posts" value="<?php echo $lang['Delete'] ?>"<?php echo $button_status ?> /></div>
     </div>
 </div>
 </form>

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (C) 2013-2014 Luna
+ * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
  * Licensed under GPLv3 (http://modernbb.be/license.php)
@@ -48,6 +48,7 @@ if (!defined('FORUM_DEBUG'))
 
 // Load the functions script
 require FORUM_ROOT.'include/functions.php';
+require FORUM_ROOT.'include/general_functions.php';
 
 // Load UTF-8 functions
 require FORUM_ROOT.'include/utf8/utf8.php';
@@ -245,6 +246,9 @@ switch ($stage) {
 		if (array_key_exists('o_index_update_check', $luna_config))
 			$db->query('DELETE FROM '.$db->prefix.'config WHERE conf_name = \'o_index_update_check\'') or error('Unable to remove config value \'o_index_update_check\'', __FILE__, __LINE__, $db->error());
 
+		// Since 0.0.37.2564: Add the parent_id column to the forums table
+		$db->add_field('forums', 'parent_id', 'INT', true, 0) or error('Unable to add parent_id field', __FILE__, __LINE__, $db->error());
+
 		// Since 0.0.40.2944: Drop the redirect_url column to the forums table
 		$db->drop_field($db->prefix.'forums', 'redirect_url', 'VARCHAR(100)', true, 0) or error('Unable to drop redirect_url field', __FILE__, __LINE__, $db->error());
 
@@ -354,14 +358,6 @@ switch ($stage) {
 		// Since 0.0.3177: Add the color column to the users table
 		$db->add_field('users', 'color', 'VARCHAR(25)', false, '#0d4382') or error('Unable to add column "color" to table "users"', __FILE__, __LINE__, $db->error());
 
-		// Since 0.0.3190: Add o_notifications/experimental feature
-		if (!array_key_exists('o_notifications', $luna_config))
-			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_notifications\', \'0\')') or error('Unable to insert config value \'o_notifications\'', __FILE__, __LINE__, $db->error());
-
-		// Since 0.0.3190: Add o_forum_new_style/experimental feature
-		if (!array_key_exists('o_forum_new_style', $luna_config))
-			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_forum_new_style\', \'0\')') or error('Unable to insert config value \'o_forum_new_style\'', __FILE__, __LINE__, $db->error());
-
 		// Since 0.0.3221: Drop the last_poster column to the forums table
 		$db->drop_field($db->prefix.'forums', 'last_poster', 'VARCHAR(200)', true) or error('Unable to drop last_poster field', __FILE__, __LINE__, $db->error());
 
@@ -402,10 +398,6 @@ switch ($stage) {
 		
 			$db->create_table('reading_list', $schema) or error('Unable to create reading list table', __FILE__, __LINE__, $db->error());
 		}
-
-		// Since 0.0.3226: Add o_reading_list/experimental feature
-		if (!array_key_exists('o_reading_list', $luna_config))
-			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_reading_list\', \'0\')') or error('Unable to insert config value \'o_reading_list\'', __FILE__, __LINE__, $db->error());
 
 		// Since 0.0.3247: Remove obsolete o_quickpost permission from config table
 		if (array_key_exists('o_quickpost', $luna_config))
@@ -620,6 +612,101 @@ switch ($stage) {
 		if (array_key_exists('o_backstage_dark', $luna_config))
 			$db->query('DELETE FROM '.$db->prefix.'config WHERE conf_name = \'o_backstage_dark\'') or error('Unable to remove config value \'o_backstage_dark\'', __FILE__, __LINE__, $db->error());
 
+		// Since 0.2.3414: Remove obsolete o_forum_new_style permission from config table
+		if (array_key_exists('o_forum_new_style', $luna_config))
+			$db->query('DELETE FROM '.$db->prefix.'config WHERE conf_name = \'o_forum_new_style\'') or error('Unable to remove config value \'o_forum_new_style\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3415: Remove obsolete o_notifications permission from config table
+		if (array_key_exists('o_notifications', $luna_config))
+			$db->query('DELETE FROM '.$db->prefix.'config WHERE conf_name = \'o_notifications\'') or error('Unable to remove config value \'o_notifications\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3423: Add the messages table
+		if (!$db->table_exists('notifications')) {
+			$schema = array(
+				'FIELDS'			=> array(
+					'id'				=> array(
+						'datatype'			=> 'SERIAL',
+						'allow_null'    	=> false
+					),
+					'user_id'			=> array(
+						'datatype'			=> 'INT(10)',
+						'allow_null'		=> false,
+						'default'			=> '0'
+					),
+					'message'			=> array(
+						'datatype'			=> 'VARCHAR(255)',
+						'allow_null'		=> false,
+						'default'			=> '0'
+					),
+					'icon'				=> array(
+						'datatype'			=> 'VARCHAR(255)',
+						'allow_null'		=> false,
+						'default'			=> '0'
+					),
+					'link'			=> array(
+						'datatype'			=> 'VARCHAR(255)',
+						'allow_null'		=> false,
+						'default'			=> '0'
+					),
+					'time'				=> array(
+						'datatype'			=> 'INT(11)',
+						'allow_null'		=> false,
+						'default'			=> '0'
+					),
+					'viewed'			=> array(
+						'datatype'		=> 'TINYINT(1)',
+						'allow_null'		=> false,
+						'default'			=> '0'
+					),
+				),
+				'PRIMARY KEY'		=> array('id'),
+			);
+			
+			$db->create_table('notifications', $schema) or error('Unable to create notifications table', __FILE__, __LINE__, $db->error());
+		}
+
+		// Since 0.2.3425: Drop the color column from the notifications table
+		$db->drop_field($db->prefix.'notifications', 'color', 'VARCHAR(255)', false, 0) or error('Unable to drop color field', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3459: Add o_first_run_backstage feature
+		if (!array_key_exists('o_first_run_backstage', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_first_run_backstage\', \'0\')') or error('Unable to insert config value \'o_first_run_backstage\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3495: Add o_emoji_size feature
+		if (!array_key_exists('o_emoji_size', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_emoji_size\', \'14\')') or error('Unable to insert config value \'o_emoji_size\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3495: Add o_back_to_top feature
+		if (!array_key_exists('o_back_to_top', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_back_to_top\', \'1\')') or error('Unable to insert config value \'o_back_to_top\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3495: Add o_show_copyright feature
+		if (!array_key_exists('o_show_copyright', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_show_copyright\', \'1\')') or error('Unable to insert config value \'o_show_copyright\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3495: Add o_copyright_type feature
+		if (!array_key_exists('o_copyright_type', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_copyright_type\', \'0\')') or error('Unable to insert config value \'o_copyright_type\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3495: Add o_copyright_type feature
+		if (!array_key_exists('o_custom_copyright', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_custom_copyright\', NULL)') or error('Unable to insert config value \'o_custom_copyright\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3558: Remove obsolete o_reading_list permission from config table
+		if (array_key_exists('o_reading_list', $luna_config))
+			$db->query('DELETE FROM '.$db->prefix.'config WHERE conf_name = \'o_reading_list\'') or error('Unable to remove config value \'o_reading_list\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3561: Add o_header_search feature
+		if (!array_key_exists('o_header_search', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_header_search\', \'1\')') or error('Unable to insert config value \'o_header_search\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3562: Add o_board_statistics feature
+		if (!array_key_exists('o_board_statistics', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_board_statistics\', \'1\')') or error('Unable to insert config value \'o_board_statistics\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.2.3563: Add o_notification_flyout feature
+		if (!array_key_exists('o_notification_flyout', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_notification_flyout\', \'1\')') or error('Unable to insert config value \'o_notification_flyout\'', __FILE__, __LINE__, $db->error());
 
 		break;
 
@@ -747,6 +834,11 @@ switch ($stage) {
 
 	// Show results page
 	case 'finish':
+		
+		// Give a "Success" notifcation
+		if ($luna_config['o_cur_version'] != Version::FORUM_VERSION)
+			new_notification('2', 'backstage/index.php', 'Luna has been updated to '.Version::FORUM_VERSION, 'fa-cloud-upload');
+
 		// We update the version numbers
 		$db->query('UPDATE '.$db->prefix.'config SET conf_value = \''.Version::FORUM_VERSION.'\' WHERE conf_name = \'o_cur_version\'') or error('Unable to update version', __FILE__, __LINE__, $db->error());
 		$db->query('UPDATE '.$db->prefix.'config SET conf_value = \''.Version::FORUM_CORE_VERSION.'\' WHERE conf_name = \'o_core_version\'') or error('Unable to update core version', __FILE__, __LINE__, $db->error());
