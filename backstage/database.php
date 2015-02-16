@@ -4,16 +4,14 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', '../');
 require FORUM_ROOT.'include/common.php';
 
-if (!$luna_user['is_admmod']) {
-    header("Location: ../login.php");
-}
-
+if (!$luna_user['is_admmod'])
+	header("Location: ../login.php");
 if ($luna_user['g_id'] != FORUM_ADMIN)
 	message_backstage($lang['No permission'], false, '403 Forbidden');
 
@@ -41,11 +39,11 @@ function field_name($offset, $query_id = 0) {
 	if($query_id) {
 		switch($db_type) {
 			case 'mysql':
-            case 'mysql_innodb':
+			case 'mysql_innodb':
 				$result = @mysql_field_name($query_id, $offset);
 			break;
 			case 'mysqli':
-            case 'mysqli_innodb':
+			case 'mysqli_innodb':
 				$finfo = @mysqli_fetch_field_direct($query_id, $offset);
 				$result = $finfo->name;
 		}
@@ -60,11 +58,11 @@ function num_fields($query_id = 0) {
 		$query_id = $this->query_result;
 		switch($db_type) {
 			case 'mysql':
-            case 'mysql_innodb':
+			case 'mysql_innodb':
 				return ($query_id) ? @mysql_num_fields($query_id) : false;
 			break;
 			case 'mysqli':
-            case 'mysqli_innodb':
+			case 'mysqli_innodb':
 				return ($query_id) ? @mysqli_num_fields($query_id) : false;
 		}
 }
@@ -88,7 +86,7 @@ function get_table_def_mysql($table, $crlf) {
 	$result = $db->query($field_query);
 	if(!$result) {
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 		message_backstage('Failed to get field list');
 	}
 
@@ -120,7 +118,7 @@ function get_table_def_mysql($table, $crlf) {
 	$result = $db->query($key_query);
 	if(!$result) {
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 		message_backstage('Failed to get Indexed Fields');
 	}
 
@@ -170,7 +168,7 @@ function get_table_content_mysql($table, $handler) {
 	// Grab the data from the table.
 	if (!($result = $db->query("SELECT * FROM $table"))) {
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 		message_backstage('Failed to get table content');
 	}
 
@@ -339,13 +337,13 @@ function split_sql_file($sql, $delimiter) {
 // Check this is a mysql Luna setup
 switch($db_type) {
 	case 'mysql':
-    case 'mysql_innodb':
+	case 'mysql_innodb':
 	case 'mysqli':
-    case 'mysqli_innodb':
+	case 'mysqli_innodb':
 		break;
 	default:
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 		message_backstage('Sorry your database type is not supported');
 }
 // Start actual db stuff
@@ -415,7 +413,7 @@ exit;
 	$backup_file_type = (!empty($HTTP_POST_FILES['backup_file']['type'])) ? $HTTP_POST_FILES['backup_file']['type'] : "";
 	if($backup_file_tmpname == "" || $backup_file_name == "") {
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 		message_backstage('No file was uploaed or the upload failed, the database was not restored');
 	}
 	if( preg_match("/^(text\/[a-zA-Z]+)|(application\/(x\-)?gzip(\-compressed)?)|(application\/octet-stream)$/is", $backup_file_type) ) {
@@ -435,7 +433,7 @@ exit;
 				}
 			} else {
 				require 'header.php';
-				load_admin_nav('database', 'database');
+				load_admin_nav('maintenance', 'database');
 				message_backstage('Sorry the database could not be restored');
 			}
 		} else {
@@ -443,7 +441,7 @@ exit;
 		}
 	} else {
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 		message_backstage('Error the file name or file format caused an error, the database was not restored');
 	}
 	if($sql_query != "") {
@@ -452,7 +450,7 @@ exit;
 		$pieces = split_sql_file($sql_query, ";");
 		if(defined('FORUM_DEBUG')) {
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 ?>
 	<div>
 		<h2>Debug info</h2>
@@ -470,7 +468,7 @@ exit;
 				$result = $db->query($sql);
 				if(!$result) {
 					require 'header.php';
-					load_admin_nav('database', 'database');
+					load_admin_nav('maintenance', 'database');
 					message_backstage('Error imported backup file, the database probably has not been restored');
 				}
 			}
@@ -493,7 +491,7 @@ exit;
 <?php
 	} else {
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 		message_backstage('Restore Complete');
 	}
 } elseif (isset($_POST['repairall'])) {
@@ -503,7 +501,7 @@ exit;
 	if (!$result = $db->query($sql)) {
 		// This makes no sense, the board would be dead :P
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 		message_backstage('Tables error, repair failed');
 	}
 	$tables = array();
@@ -519,7 +517,7 @@ exit;
 		$sql = 'REPAIR TABLE ' . $tables[$i];
 		if (!$result = $db->query($sql)) {
 			require 'header.php';
-			load_admin_nav('database', 'database');
+			load_admin_nav('maintenance', 'database');
 			message_backstage('SQL error, repair failed');
 		}
 	}
@@ -532,7 +530,7 @@ exit;
 	if (!$result = $db->query($sql)) {
 		// This makes no sense, the board would be dead :P
 		require 'header.php';
-		load_admin_nav('database', 'database');
+		load_admin_nav('maintenance', 'database');
 		message_backstage('Tables error, optimise failed');
 	}
 	$tables = array();
@@ -548,12 +546,12 @@ exit;
 		$sql = 'OPTIMIZE TABLE ' . $tables[$i];
 		if (!$result = $db->query($sql)) {
 			require 'header.php';
-			load_admin_nav('database', 'database');
+			load_admin_nav('maintenance', 'database');
 			message_backstage('SQL error, optimise failed');
 		}
 	}
 	require 'header.php';
-	load_admin_nav('database', 'database');
+	load_admin_nav('maintenance', 'database');
 	message_backstage('All tables optimised');
 } else {
 	
@@ -561,80 +559,80 @@ $action = isset($_GET['action']) ? $_GET['action'] : null;
 $page_title = array(luna_htmlspecialchars($luna_config['o_board_title']), $lang['Admin'], $lang['Database']);
 define('FORUM_ACTIVE_PAGE', 'admin');
 require 'header.php';
-	load_admin_nav('database', 'database');
+	load_admin_nav('maintenance', 'database');
 ?>
 <form class="form-horizontal" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Backup options'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="backupstart" value="<?php echo $lang['Start backup'] ?>" class="mainoption" /></span></h3>
-        </div>
-        <div class="panel-body">
-            <fieldset>
-                <p><?php echo $lang['Backup info 1'] ?></p>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Backup type'] ?></label>
-                    <div class="col-sm-9">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Backup options'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="backupstart" value="<?php echo $lang['Start backup'] ?>" class="mainoption" /></span></h3>
+		</div>
+		<div class="panel-body">
+			<fieldset>
+				<p><?php echo $lang['Backup info 1'] ?></p>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Backup type'] ?></label>
+					<div class="col-sm-9">
 						<label class="radio-inline">
-                            <input type="radio" name="backup_type" value="full" checked />
-                            <?php echo $lang['Full'] ?>
-                        </label>
+							<input type="radio" name="backup_type" value="full" checked />
+							<?php echo $lang['Full'] ?>
+						</label>
 						<label class="radio-inline">
-                            <input type="radio" name="backup_type" value="structure" />
-                            <?php echo $lang['Structure only'] ?>
-                        </label>
+							<input type="radio" name="backup_type" value="structure" />
+							<?php echo $lang['Structure only'] ?>
+						</label>
 						<label class="radio-inline">
-                            <input type="radio" name="backup_type" value="data" />
-                            <?php echo $lang['Data only'] ?>
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Gzip compression'] ?></label>
-                    <div class="col-sm-9">
+							<input type="radio" name="backup_type" value="data" />
+							<?php echo $lang['Data only'] ?>
+						</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Gzip compression'] ?></label>
+					<div class="col-sm-9">
 						<label class="radio-inline">
-                            <input type="radio" name="gzipcompress" value="1" />
-                            <?php echo $lang['Yes'] ?>
-                        </label>
+							<input type="radio" name="gzipcompress" value="1" />
+							<?php echo $lang['Yes'] ?>
+						</label>
 						<label class="radio-inline">
-                            <input type="radio" name="gzipcompress" value="0" checked />
-                            <?php echo $lang['No'] ?>
-                        </label>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
+							<input type="radio" name="gzipcompress" value="0" checked />
+							<?php echo $lang['No'] ?>
+						</label>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
 </form>
 <form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Restore options'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="restore_start" value="<?php echo $lang['Start restore'] ?>" class="mainoption" /></span></h3>
-        </div>
-        <div class="panel-body">
-            <fieldset>
-                <p><?php echo $lang['Restore info 1'] ?></p>
-                <input type="file" name="backup_file" />
-            </fieldset>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Restore options'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="restore_start" value="<?php echo $lang['Start restore'] ?>" class="mainoption" /></span></h3>
 		</div>
-    </div>
+		<div class="panel-body">
+			<fieldset>
+				<p><?php echo $lang['Restore info 1'] ?></p>
+				<input type="file" name="backup_file" />
+			</fieldset>
+		</div>
+	</div>
 </form>
 <form action="<?php echo $_SERVER['REQUEST_URI'] ?>" method="post">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Additional functions'] ?></h3>
-        </div>
-        <div class="panel-body">
-            <p><?php echo $lang['Additional info 1'] ?></p>
-        </div>
-        <div class="panel-footer">
-            <fieldset>
-                <span class="btn-group">
-                    <input class="btn btn-primary" type="submit" name="repairall" value="<?php echo $lang['Repair all tables'] ?>" />
-                    <input class="btn btn-primary" type="submit" name="optimizeall" value="<?php echo $lang['Optimise all tables'] ?>" />
-                </span>
-            </fieldset>
-        </div>
-    </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Additional functions'] ?></h3>
+		</div>
+		<div class="panel-body">
+			<p><?php echo $lang['Additional info 1'] ?></p>
+		</div>
+		<div class="panel-footer">
+			<fieldset>
+				<span class="btn-group">
+					<input class="btn btn-primary" type="submit" name="repairall" value="<?php echo $lang['Repair all tables'] ?>" />
+					<input class="btn btn-primary" type="submit" name="optimizeall" value="<?php echo $lang['Optimise all tables'] ?>" />
+				</span>
+			</fieldset>
+		</div>
+	</div>
 </form>
 <?php
 }

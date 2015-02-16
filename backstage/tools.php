@@ -4,16 +4,14 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', '../');
 require FORUM_ROOT.'include/common.php';
 
-if (!$luna_user['is_admmod']) {
-    header("Location: ../login.php");
-}
-
+if (!$luna_user['is_admmod'])
+	header("Location: ../login.php");
 // Create new user
 if (isset($_POST['add_user'])) {
 	$page_title = array(luna_htmlspecialchars($luna_config['o_board_title']), $lang['Admin'], $lang['Users'], $lang['Results head']);
@@ -24,15 +22,15 @@ if (isset($_POST['add_user'])) {
 	$username = luna_trim($_POST['username']);
 	$email1 = strtolower(trim($_POST['email']));
 	$email2 = strtolower(trim($_POST['email']));
-        
-    $trimpassword = trim($_POST['password']);
+		
+	$trimpassword = trim($_POST['password']);
 
-    if (isset($_POST['random_pass']))
-        $password = random_pass(8);
-    else if (!empty($trimpassword))
-        $password = trim($_POST['password']);
-    else
-        redirect('backstage/users.php?user_failed=true');
+	if (isset($_POST['random_pass']))
+		$password = random_pass(8);
+	elseif (!empty($trimpassword))
+		$password = trim($_POST['password']);
+	else
+		redirect('backstage/users.php?user_failed=true');
 
 	$errors = array();
 
@@ -42,15 +40,15 @@ if (isset($_POST['add_user'])) {
 	// Validate username and passwords
 	if (strlen($username) < 2)
 		message_backstage($lang['Username too short']);
-	else if (luna_strlen($username) > 25)	// This usually doesn't happen since the form element only accepts 25 characters
+	elseif (luna_strlen($username) > 25)	// This usually doesn't happen since the form element only accepts 25 characters
 		message_backstage($lang['Pass too short']);
-	else if (!strcasecmp($username, 'Guest') || !strcasecmp($username, $lang['Guest']))
+	elseif (!strcasecmp($username, 'Guest') || !strcasecmp($username, $lang['Guest']))
 		message_backstage($lang['Username guest']);
-	else if (preg_match('/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/', $username))
+	elseif (preg_match('/[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/', $username))
 		message_backstage($lang['Username IP']);
-	else if ((strpos($username, '[') !== false || strpos($username, ']') !== false) && strpos($username, '\'') !== false && strpos($username, '"') !== false)
+	elseif ((strpos($username, '[') !== false || strpos($username, ']') !== false) && strpos($username, '\'') !== false && strpos($username, '"') !== false)
 		message_backstage($lang['Username reserved chars']);
-	else if (preg_match('#\[b\]|\[/b\]|\[u\]|\[/u\]|\[i\]|\[/i\]|\[color|\[/color\]|\[quote\]|\[quote=|\[/quote\]|\[code\]|\[/code\]|\[img\]|\[/img\]|\[url|\[/url\]|\[email|\[/email\]#i', $username))
+	elseif (preg_match('#\[b\]|\[/b\]|\[u\]|\[/u\]|\[i\]|\[/i\]|\[color|\[/color\]|\[quote\]|\[quote=|\[/quote\]|\[code\]|\[/code\]|\[img\]|\[/img\]|\[url|\[/url\]|\[email|\[/email\]#i', $username))
 		message_backstage($lang['Username BBCode']);
 
 	// Check that the username (or a too similar username) is not already registered
@@ -78,8 +76,8 @@ if (isset($_POST['add_user'])) {
 
 	// Must the user verify the registration?
 	if ($_POST['random_pass'] == '1') {
-        // Validate e-mail
-        require FORUM_ROOT.'include/email.php';
+		// Validate e-mail
+		require FORUM_ROOT.'include/email.php';
 
 		// Load the "welcome" template
 		$mail_tpl = trim($lang['welcome.tpl']);
@@ -102,7 +100,7 @@ if (isset($_POST['add_user'])) {
 		require FORUM_ROOT.'include/cache.php';
 
 	generate_users_info_cache();
-    
+	
 	redirect('backstage/users.php?user_created=true');
 }
 
@@ -119,39 +117,39 @@ if (isset($_GET['user_failed']))
 	echo '<div class="alert alert-danger"><h4>'.$lang['User failed'].'</h4></div>';
 ?>
 <form class="form-horizontal" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Add user head'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="add_user" value="<?php echo $lang['Submit'] ?>" tabindex="30" /></span></h3>
-        </div>
-        <div class="panel-body">
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Username'] ?></label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="username" tabindex="26" required="required" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Email'] ?></label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="email" tabindex="27" required="required" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Password'] ?></label>
-                    <div class="col-sm-9">
-                        <input type="password" class="form-control" name="password" tabindex="28" />
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="random_pass" value="1" checked tabindex="29" />
-                                <?php echo $lang['Random password info'] ?>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Add user head'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="add_user" value="<?php echo $lang['Submit'] ?>" tabindex="30" /></span></h3>
+		</div>
+		<div class="panel-body">
+			<fieldset>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Username'] ?></label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="username" tabindex="26" required="required" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Email'] ?></label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="email" tabindex="27" required="required" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Password'] ?></label>
+					<div class="col-sm-9">
+						<input type="password" class="form-control" name="password" tabindex="28" />
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="random_pass" value="1" checked tabindex="29" />
+								<?php echo $lang['Random password info'] ?>
+							</label>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
 </form>
 <?php
 

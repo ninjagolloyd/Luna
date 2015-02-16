@@ -2,18 +2,18 @@
 
 /*
  * Copyright (C) 2014-2015 Luna
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 class Version {
 	// See http://getluna.org/docs/version.php for more info
-	const FORUM_VERSION = '0.2-beta';
+	const FORUM_VERSION = '0.3.1-dev';
 
 	// The Luna Core version
-	const FORUM_CORE_VERSION = '0.2.3593';
+	const FORUM_CORE_VERSION = '0.3.3784';
 
 	// The database version number, every change in the database requires this number to go one up
-	const FORUM_DB_VERSION = '87.14';
+	const FORUM_DB_VERSION = '87.50';
 
 	// The parser version number, every change to the parser requires this number to go one up
 	const FORUM_PARSER_VERSION = '11.1.2';

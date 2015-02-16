@@ -4,7 +4,7 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 // Tell header.php to use the form template
@@ -31,8 +31,8 @@ if (isset($_POST['form_sent']) && $action == 'in') {
 	$authorized = false;
 
 	if (!empty($cur_user['password'])) {
-        $form_password_hash = luna_hash($form_password); // Will result in a SHA-1 hash
-        $authorized = ($cur_user['password'] == $form_password_hash);
+		$form_password_hash = luna_hash($form_password); // Will result in a SHA-1 hash
+		$authorized = ($cur_user['password'] == $form_password_hash);
 	}
 
 	if (!$authorized)
@@ -65,7 +65,7 @@ if (isset($_POST['form_sent']) && $action == 'in') {
 }
 
 
-else if ($action == 'out')
+elseif ($action == 'out')
 {
 	if ($luna_user['is_guest'] || !isset($_GET['id']) || $_GET['id'] != $luna_user['id'] || !isset($_GET['csrf_token']) || $_GET['csrf_token'] != luna_hash($luna_user['id'].luna_hash(get_remote_address())))
 	{
@@ -86,7 +86,7 @@ else if ($action == 'out')
 }
 
 
-else if ($action == 'forget' || $action == 'forget_2')
+elseif ($action == 'forget' || $action == 'forget_2')
 {
 	if (!$luna_user['is_guest'])
 	{
@@ -155,5 +155,5 @@ else if ($action == 'forget' || $action == 'forget_2')
 
 	if (!isset($redirect_url))
 		$redirect_url = get_base_url(true).'/index.php';
-	else if (preg_match('%viewtopic\.php\?pid=(\d+)$%', $redirect_url, $matches))
+	elseif (preg_match('%viewtopic\.php\?pid=(\d+)$%', $redirect_url, $matches))
 		$redirect_url .= '#p'.$matches[1];

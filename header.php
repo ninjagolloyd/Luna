@@ -4,7 +4,7 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 // Make sure no one attempts to run this script "directly"
@@ -87,7 +87,7 @@ $num_notifications = $db->result($result);
 if ($luna_config['o_notification_flyout'] == 1) {
 	if ($num_notifications == '0') {
 		$notificon = '<span class="fa fa-circle-o"></span>';
-		$ind_notification[] = '<li><a href="me.php?section=notifications&id='.$luna_user['id'].'">No new notifications</a></li>';
+		$ind_notification[] = '<li><a href="notifications.php?id='.$luna_user['id'].'">No new notifications</a></li>';
 	} else {
 		$notificon = $num_notifications.' <span class="fa fa-circle"></span>';
 		
@@ -107,7 +107,7 @@ if ($luna_config['o_notification_flyout'] == 1) {
 						<li class="divider"></li>
 						'.$notifications.'
 						<li class="divider"></li>
-						<li><a class="pull-right" href="me.php?section=notifications&id='.$luna_user['id'].'">More <i class="fa fa-arrow-right"></i></a></li>
+						<li><a class="pull-right" href="notifications.php?id='.$luna_user['id'].'">More <i class="fa fa-arrow-right"></i></a></li>
 					</ul>
 				</li>';
 } else {
@@ -116,7 +116,7 @@ if ($luna_config['o_notification_flyout'] == 1) {
 	else
 		$notificon = $num_notifications.' <span class="fa fa-circle"></span>';
 
-	$notification_menu_item = '<li><a href="me.php?section=notifications&id='.$luna_user['id'].'">'.$notificon.'<span class="visible-xs-inline"> Notifications</span></a></li>';
+	$notification_menu_item = '<li><a href="notifications.php?id='.$luna_user['id'].'">'.$notificon.'<span class="visible-xs-inline"> Notifications</span></a></li>';
 }
 
 // Generate navigation items
@@ -134,7 +134,7 @@ else
 	$usermenu = $backstage.$notification_menu_item.'
 				<li><a href="inbox.php">'.$new_inbox.'<span class="fa fa-paper-plane-o"></span><span class="visible-xs-inline"> Inbox</span></a></li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle avatar-item" data-toggle="dropdown">'.luna_htmlspecialchars($luna_user['username']).' '.$user_avatar.' <span class="fa fa-fw fa-angle-down"></a>
+					<a href="#" class="dropdown-toggle avatar-item" data-toggle="dropdown">'.luna_htmlspecialchars($luna_user['username']).' '.$user_avatar.' <span class="fa fa-fw fa-angle-down"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="me.php?id='.$luna_user['id'].'">'.$lang['Profile'].'</a></li>
 						<li><a href="settings.php">Settings</a></li>
@@ -150,8 +150,6 @@ if ($db->num_rows($result) > 0)
 	while ($cur_item = $db->fetch_assoc($result))
 		if ($cur_item['visible'] == '1')
 			$links[] = '<li><a href="'.$cur_item['url'].'">'.$cur_item['name'].'</a></li>';
-
-require load_page('login.php');
 
 // Announcement
 if ($luna_config['o_announcement'] == '1')

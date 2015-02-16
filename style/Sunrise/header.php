@@ -12,14 +12,21 @@ require ('header.php');
 		<link rel="stylesheet" type="text/css" href="include/css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="include/css/font-awesome.css" />
 		<link rel="stylesheet" type="text/css" href="include/css/prism.css" />
-		<link rel="stylesheet" type="text/css" href="style/Sunrise/style.css" />
+		<script src="include/js/jquery.js"></script>
+		<script src="include/js/bootstrap.min.js"></script>
+		<script src="include/js/prism.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
+// Allow childs
+load_css();
+include ('style/'.$luna_config['o_default_style'].'/style.php');
+
 if (!defined('FORUM_ALLOW_INDEX'))
 	echo '<meta name="ROBOTS" content="NOINDEX, FOLLOW" />'."\n";
 ?>
 	</head>
 	<body>
+		<?php if ($luna_user['is_guest']): require load_page('login.php'); endif; ?>
 		<div id="main">
 			<div id="header">
 				<div class="navbar navbar-inverse navbar-static-top">
@@ -74,6 +81,3 @@ if (!defined('FORUM_ALLOW_INDEX'))
 			</div>
 			<div class="container">
 				<?php echo $announcement; ?>	
-<?php 
-include ('style/Sunrise/style.php');
-?>

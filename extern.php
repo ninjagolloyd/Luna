@@ -4,7 +4,7 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 /*-----------------------------------------------------------------------------
@@ -37,13 +37,13 @@
 			xml - output as XML
 			html - output as HTML (<li>'s)
 
-	fid:    One or more forum IDs (comma-separated). If ignored,
+	fid:	One or more forum IDs (comma-separated). If ignored,
 			topics from all readable forums will be pulled.
 
 	nfid:   One or more forum IDs (comma-separated) that are to be
 			excluded. E.g. the ID of a a test forum.
 
-	tid:    A topic ID from which to show posts. If a tid is supplied,
+	tid:	A topic ID from which to show posts. If a tid is supplied,
 			fid and nfid are ignored.
 
 	show:   Any integer value between 1 and 50. The default is 15.
@@ -315,7 +315,7 @@ if ($action == 'feed') {
 					$item['author']['email'] = $cur_post['email'];
 
 				$item['author']['uri'] = get_base_url(true).'/me.php?id='.$cur_post['poster_id'];
-			} else if ($cur_post['poster_email'] != '' && !$luna_user['is_guest'])
+			} elseif ($cur_post['poster_email'] != '' && !$luna_user['is_guest'])
 				$item['author']['email'] = $cur_post['poster_email'];
 
 			$feed['items'][] = $item;
@@ -396,7 +396,7 @@ if ($action == 'feed') {
 						$item['author']['email'] = $cur_topic['email'];
 
 					$item['author']['uri'] = '/me.php?id='.$cur_topic['poster_id'];
-				} else if ($cur_topic['poster_email'] != '' && !$luna_user['is_guest'])
+				} elseif ($cur_topic['poster_email'] != '' && !$luna_user['is_guest'])
 					$item['author']['email'] = $cur_topic['poster_email'];
 
 				$feed['items'][] = $item;
@@ -434,7 +434,7 @@ if ($action == 'feed') {
 }
 
 // Show users online
-else if ($action == 'online' || $action == 'online_full') {
+elseif ($action == 'online' || $action == 'online_full') {
 	// Fetch users online info and generate strings for output
 	$num_guests = $num_users = 0;
 	$users = array();
@@ -466,7 +466,7 @@ else if ($action == 'online' || $action == 'online_full') {
 }
 
 // Show board statistics
-else if ($action == 'stats') {
+elseif ($action == 'stats') {
 	// Collect some statistics from the database
 	if (file_exists(FORUM_CACHE_DIR.'cache_users_info.php'))
 		include FORUM_CACHE_DIR.'cache_users_info.php';

@@ -4,16 +4,14 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', '../');
 require FORUM_ROOT.'include/common.php';
 
-if (!$luna_user['is_admmod']) {
-    header("Location: ../login.php");
-}
-
+if (!$luna_user['is_admmod'])
+	header("Location: ../login.php");
 if ($luna_user['g_id'] != FORUM_ADMIN)
 	message_backstage($lang['No permission'], false, '403 Forbidden');
 
@@ -45,7 +43,7 @@ if (isset($_POST['add_rank'])) {
 }
 
 // Update a rank
-else if (isset($_POST['update'])) {
+elseif (isset($_POST['update'])) {
 	confirm_referrer('backstage/ranks.php');
 	
 	$rank = $_POST['rank'];
@@ -58,7 +56,7 @@ else if (isset($_POST['update'])) {
 
 		if ($cur_rank['rank'] == '')
 			message_backstage($lang['Must enter title message']);
-		else if ($cur_rank['min_posts'] == '' || preg_match('%[^0-9]%', $cur_rank['min_posts']))
+		elseif ($cur_rank['min_posts'] == '' || preg_match('%[^0-9]%', $cur_rank['min_posts']))
 			message_backstage($lang['Must be integer message']);
 		else
 			$rank_check = $db->query('SELECT 1 FROM '.$db->prefix.'ranks WHERE id!='.intval($item_id).' AND min_posts='.$cur_rank['min_posts']) or error('Unable to fetch rank info', __FILE__, __LINE__, $db->error());
@@ -72,7 +70,7 @@ else if (isset($_POST['update'])) {
 }
 
 // Remove a rank
-else if (isset($_POST['remove'])) {
+elseif (isset($_POST['remove'])) {
 	$id = intval(key($_POST['remove']));
 
 	$db->query('DELETE FROM '.$db->prefix.'ranks WHERE id='.$id) or error('Unable to delete rank', __FILE__, __LINE__, $db->error());
@@ -103,7 +101,7 @@ if ($luna_config['o_ranks'] == 0) {
 		<div class="col-sm-4">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title"><?php echo $lang['Add rank subhead'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="add_rank" value="<?php echo $lang['Add'] ?>" tabindex="3" /></span></h3>
+					<h3 class="panel-title"><?php echo $lang['Add rank subhead'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="add_rank" tabindex="3"><span class="fa fa-plus"></span> <?php echo $lang['Add'] ?></button></span></h3>
 				</div>
 				<fieldset>
 					<table class="table">

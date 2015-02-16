@@ -4,7 +4,7 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', dirname(__FILE__).'/');
@@ -45,14 +45,10 @@ if (!$luna_user['is_guest']) {
 
 if ($luna_config['o_feed_type'] == '1')
 	$page_head = array('feed' => '<link rel="alternate" type="application/rss+xml" href="extern.php?action=feed&amp;type=rss" title="'.$lang['RSS active topics feed'].'" />');
-else if ($luna_config['o_feed_type'] == '2')
+elseif ($luna_config['o_feed_type'] == '2')
 	$page_head = array('feed' => '<link rel="alternate" type="application/atom+xml" href="extern.php?action=feed&amp;type=atom" title="'.$lang['Atom active topics feed'].'" />');
 
 $forum_actions = array();
-
-// Display a "mark as read" link
-if (!$luna_user['is_guest'])
-	$forum_actions[] = '<a href="misc.php?action=markread">'.$lang['Mark as read'].'</a>';
 
 // Someone clicked "Do not show again"
 $action = isset($_GET['action']) ? $_GET['action'] : null;
@@ -124,7 +120,7 @@ if ($id != 0) {
 	
 	if ($luna_config['o_feed_type'] == '1')
 		$page_head = array('feed' => '<link rel="alternate" type="application/rss+xml" href="extern.php?action=feed&amp;fid='.$id.'&amp;type=rss" title="'.$lang['RSS forum feed'].'" />');
-	else if ($luna_config['o_feed_type'] == '2')
+	elseif ($luna_config['o_feed_type'] == '2')
 		$page_head = array('feed' => '<link rel="alternate" type="application/atom+xml" href="extern.php?action=feed&amp;fid='.$id.'&amp;type=atom" title="'.$lang['Atom forum feed'].'" />');
 	
 	$forum_actions = array();

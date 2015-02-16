@@ -4,16 +4,14 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', '../');
 require FORUM_ROOT.'include/common.php';
 
-if (!$luna_user['is_admmod']) {
-    header("Location: ../login.php");
-}
-
+if (!$luna_user['is_admmod'])
+	header("Location: ../login.php");
 // Zap a report
 if (isset($_POST['zap_id'])) {
 	confirm_referrer('backstage/reports.php');
@@ -48,9 +46,9 @@ require 'header.php';
 
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?php echo $lang['New reports head'] ?></h3>
-    </div>
+	<div class="panel-heading">
+		<h3 class="panel-title"><?php echo $lang['New reports head'] ?></h3>
+	</div>
 	<form method="post" action="reports.php?action=zap">
 		<fieldset>
 			<table class="table">
@@ -106,17 +104,17 @@ if ($db->num_rows($result)) {
 	</form>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?php echo $lang['Last 10 head'] ?></h3>
-    </div>
+	<div class="panel-heading">
+		<h3 class="panel-title"><?php echo $lang['Last 10 head'] ?></h3>
+	</div>
 	<table class="table">
 		<thead>
-            <tr>
-                <th class="col-xs-2"><?php echo $lang['Reported by'] ?></th>
-                <th class="col-xs-2"><?php echo $lang['Readed by'] ?></th>
-                <th class="col-xs-2"><?php echo $lang['Date and time'] ?></th>
-                <th class="col-xs-6"><?php echo $lang['Message'] ?></th>
-            </tr>
+			<tr>
+				<th class="col-xs-2"><?php echo $lang['Reported by'] ?></th>
+				<th class="col-xs-2"><?php echo $lang['Readed by'] ?></th>
+				<th class="col-xs-2"><?php echo $lang['Date and time'] ?></th>
+				<th class="col-xs-6"><?php echo $lang['Message'] ?></th>
+			</tr>
 		</thead>
 		<tbody>
 <?php

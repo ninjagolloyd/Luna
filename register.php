@@ -4,7 +4,7 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', dirname(__FILE__).'/');
@@ -19,14 +19,14 @@ if (!$luna_user['is_guest']) {
 if ($luna_config['o_regs_allow'] == '0')
 	message($lang['No new regs']);
 
-else if ($luna_config['o_rules'] == '1' && !isset($_GET['agree']) && !isset($_POST['form_sent'])) {
+elseif ($luna_config['o_rules'] == '1' && !isset($_GET['agree']) && !isset($_POST['form_sent'])) {
 	$page_title = array(luna_htmlspecialchars($luna_config['o_board_title']), $lang['Register'], $lang['Forum rules']);
 	define('FORUM_ACTIVE_PAGE', 'register');
 	require load_page('header.php');
 
-    require load_page('rules.php');
+	require load_page('rules.php');
 
-    require load_page('footer.php');
+	require load_page('footer.php');
 }
 
 // Start with a clean slate
@@ -58,7 +58,7 @@ if (isset($_POST['form_sent'])) {
 
 	if (luna_strlen($password1) < 6)
 		$errors[] = $lang['Pass too short'];
-	else if ($password1 != $password2)
+	elseif ($password1 != $password2)
 		$errors[] = $lang['Pass not match'];
 
 	// Validate email
@@ -66,7 +66,7 @@ if (isset($_POST['form_sent'])) {
 
 	if (!is_valid_email($email1))
 		$errors[] = $lang['Invalid email'];
-	else if ($luna_config['o_regs_verify'] == '1' && $email1 != $email2)
+	elseif ($luna_config['o_regs_verify'] == '1' && $email1 != $email2)
 		$errors[] = $lang['Email not match'];
 
 	// Check if it's a banned email address
@@ -131,7 +131,7 @@ if (isset($_POST['form_sent'])) {
 				$mail_message = str_replace('<username>', $username, $mail_message);
 				$mail_message = str_replace('<email>', $email1, $mail_message);
 				$mail_message = str_replace('<profile_url>', get_base_url().'/me.php?id='.$new_uid, $mail_message);
-				$mail_message = str_replace('<admin_url>', get_base_url().'/me.php?section=admin&id='.$new_uid, $mail_message);
+				$mail_message = str_replace('<admin_url>', get_base_url().'/settings.php?id='.$new_uid, $mail_message);
 				$mail_message = str_replace('<board_mailer>', $luna_config['o_board_title'], $mail_message);
 
 				luna_mail($luna_config['o_mailing_list'], $mail_subject, $mail_message);

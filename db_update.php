@@ -4,7 +4,7 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_SEARCH_MIN_WORD', 3);
@@ -151,10 +151,6 @@ if (isset($luna_config['o_database_revision']) && $luna_config['o_database_revis
 	error($lang['No update error']);
 }
 
-$default_style = $luna_config['o_default_style'];
-if (!file_exists(FORUM_ROOT.'style/'.$default_style.'.css'))
-	$default_style = 'Sunrise';
-
 // Empty all output buffers and stop buffering
 while (@ob_end_clean());
 
@@ -196,20 +192,22 @@ if (empty($stage)) {
 	<head>
 		<meta charset="utf-8">
 		<title>Luna &middot; <?php echo $lang['Update'] ?></title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="robots" content="noindex, nofollow">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="robots" content="noindex, nofollow">
 		<link href="include/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-        <link href="backstage/css/style.css" type="text/css" rel="stylesheet">
+		<link href="backstage/css/style.css" type="text/css" rel="stylesheet">
 	</head>
 	<body onload="document.getElementById('install').start.disabled=false;">
-        <form class="form" id="install" method="post" action="db_update.php">
-            <h1 class="form-heading">Luna</h1>
+		<div class="well form-box">
+			<h3 class="form-title">Luna</h3>
 			<p class="alert alert-danger">This is a preview version! Do not install this upon a working ModernBB installation if you're using it in a productive environment!</p>
-            <fieldset>
-                <input type="hidden" name="stage" value="start" />
-				<input class="btn btn-default btn-block btn-update" type="submit" name="start" value="<?php echo $lang['Start update'] ?>" />
-            </fieldset>
-		</form>
+			<form id="install" method="post" action="db_update.php">
+				<input type="hidden" name="stage" value="start" />
+				<div class="form-group">
+					<input class="btn btn-primary btn-block btn-update" type="submit" name="start" value="<?php echo $lang['Start update'] ?>" />
+				</div>
+			</form>
+		</div>
 	</body>
 </html>
 <?php
@@ -364,41 +362,6 @@ switch ($stage) {
 		// Since 0.0.3221: Drop the last_topic column to the forums table
 		$db->drop_field($db->prefix.'forums', 'last_topic', 'VARCHAR(255)', false, 0) or error('Unable to drop last_topic field', __FILE__, __LINE__, $db->error());
 
-		// Since 0.0.3224: Add the menu table
-		if (!$db->table_exists('reading_list')) {
-			$schema = array(
-				'FIELDS'		=> array(
-					'id'			=> array(
-						'datatype'		=> 'SERIAL',
-						'allow_null'	=> false
-					),
-					'user_id'		=> array(
-						'datatype'		=> 'INT(10) UNSIGNED',
-						'allow_null'	=> false,
-						'default'		=> '0'
-					),
-					'topic_id'		=> array(
-						'datatype'		=> 'INT(10) UNSIGNED',
-						'allow_null'	=> false,
-						'default'		=> '0'
-					),
-					'forum_id'		=> array(
-						'datatype'		=> 'INT(10) UNSIGNED',
-						'allow_null'	=> false,
-						'default'		=> '0'
-					),
-					'date'			=> array(
-						'datatype'		=> 'INT(10) UNSIGNED',
-						'allow_null'	=> false,
-						'default'		=> '0'
-					)
-				),
-				'PRIMARY KEY'	=> array('id')
-			);
-		
-			$db->create_table('reading_list', $schema) or error('Unable to create reading list table', __FILE__, __LINE__, $db->error());
-		}
-
 		// Since 0.0.3247: Remove obsolete o_quickpost permission from config table
 		if (array_key_exists('o_quickpost', $luna_config))
 			$db->query('DELETE FROM '.$db->prefix.'config WHERE conf_name = \'o_quickpost\'') or error('Unable to remove config value \'o_quickpost\'', __FILE__, __LINE__, $db->error());
@@ -409,7 +372,7 @@ switch ($stage) {
 				'FIELDS'			=> array(
 					'id'				=> array(
 						'datatype'		=> 'SERIAL',
-						'allow_null'    => false
+						'allow_null'	=> false
 					),
 					'shared_id'		=> array(
 						'datatype'		=> 'INT(10)',
@@ -497,72 +460,6 @@ switch ($stage) {
 			$db->create_table('messages', $schema) or error('Unable to create messages table', __FILE__, __LINE__, $db->error());
 		}
 
-		// Since 0.0.3250: Add the messages table
-		if (!$db->table_exists('contacts')) {
-			$schema = array(
-				'FIELDS'			=> array(
-					'id'				=> array(
-						'datatype'			=> 'SERIAL',
-						'allow_null'    	=> false
-					),
-					'user_id'			=> array(
-						'datatype'			=> 'INT(10)',
-						'allow_null'		=> false,
-						'default'			=> '0'
-					),
-					'contact_id'		=> array(
-						'datatype'			=> 'INT(10)',
-						'allow_null'		=> false,
-						'default'			=> '0'
-					),
-					'contact_name'		=> array(
-						'datatype'			=> 'VARCHAR(255)',
-						'allow_null'		=> false,
-					),
-					'allow_msg'			=> array(
-						'datatype'			=> 'TINYINT(1)',
-						'allow_null'		=> false,
-						'default'		=> '1'
-					)
-				),
-				'PRIMARY KEY'		=> array('id'),
-			);
-	
-			$db->create_table('contacts', $schema) or error('Unable to create contacts table', __FILE__, __LINE__, $db->error());
-		}
-
-		// Since 0.0.3250: Add the messages table
-		if (!$db->table_exists('sending_lists')) {
-			$schema = array(
-				'FIELDS'			=> array(
-					'id'				=> array(
-						'datatype'			=> 'SERIAL',
-						'allow_null'    	=> false
-					),
-					'user_id'			=> array(
-						'datatype'			=> 'INT(10)',
-						'allow_null'		=> false,
-						'default'			=> '0'
-					),
-					'array_id'			=> array(
-						'datatype'			=> 'VARCHAR(255)',
-						'allow_null'		=> false,
-					),
-					'name'				=> array(
-						'datatype'			=> 'VARCHAR(255)',
-						'allow_null'		=> false,
-					),
-					'receivers'		=> array(
-						'datatype'			=> 'VARCHAR(255)',
-						'allow_null'		=> false,
-					),
-				),
-				'PRIMARY KEY'		=> array('id'),
-			);
-			
-			$db->create_table('sending_lists', $schema) or error('Unable to create sending lists table', __FILE__, __LINE__, $db->error());
-		}
-
 		// Since 0.0.3263: Add the g_pm column to the groups table
 		$db->add_field('groups', 'g_pm', 'TINYINT(1)', false, '1', 'g_email_flood') or error('Unable to add column "g_pm" to table "groups"', __FILE__, __LINE__, $db->error());
 
@@ -626,7 +523,7 @@ switch ($stage) {
 				'FIELDS'			=> array(
 					'id'				=> array(
 						'datatype'			=> 'SERIAL',
-						'allow_null'    	=> false
+						'allow_null'		=> false
 					),
 					'user_id'			=> array(
 						'datatype'			=> 'INT(10)',
@@ -674,7 +571,7 @@ switch ($stage) {
 
 		// Since 0.2.3495: Add o_emoji_size feature
 		if (!array_key_exists('o_emoji_size', $luna_config))
-			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_emoji_size\', \'14\')') or error('Unable to insert config value \'o_emoji_size\'', __FILE__, __LINE__, $db->error());
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_emoji_size\', \'16\')') or error('Unable to insert config value \'o_emoji_size\'', __FILE__, __LINE__, $db->error());
 
 		// Since 0.2.3495: Add o_back_to_top feature
 		if (!array_key_exists('o_back_to_top', $luna_config))
@@ -707,6 +604,51 @@ switch ($stage) {
 		// Since 0.2.3563: Add o_notification_flyout feature
 		if (!array_key_exists('o_notification_flyout', $luna_config))
 			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_notification_flyout\', \'1\')') or error('Unable to insert config value \'o_notification_flyout\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.3.3721: Remove reading_list table
+		if ($db->table_exists('reading_list'))
+			$db->drop_table('reading_list') or error('Unable to drop reading_list table', __FILE__, __LINE__, $db->error());
+
+		// Since 0.3.3724: Remove sending_lists table
+		if ($db->table_exists('sending_lists'))
+			$db->drop_table('sending_lists') or error('Unable to drop sending_lists table', __FILE__, __LINE__, $db->error());
+
+		// Since 0.3.3734: Remove contacts table
+		if ($db->table_exists('contacts'))
+			$db->drop_table('contacts') or error('Unable to drop contacts table', __FILE__, __LINE__, $db->error());
+
+		// Since 0.3.3752: Add the soft column to the posts table
+		$db->add_field('posts', 'soft', 'TINYINT(1)', false, 0, null) or error('Unable to add soft field', __FILE__, __LINE__, $db->error());
+
+		// Since 0.3.3752: Add the soft column to the topics table
+		$db->add_field('topics', 'soft', 'TINYINT(1)', false, 0, null) or error('Unable to add soft field', __FILE__, __LINE__, $db->error());
+		
+		// Since 0.3.3765: Add new g_soft_delete_view field to the groups table
+		if (!$db->field_exists('groups', 'g_soft_delete_view')) {
+			// Add g_moderator column to groups table
+			$db->add_field('groups', 'g_soft_delete_view', 'TINYINT(1)', false, 0, 'g_user_title') or error('Unable to add g_soft_delete_view field', __FILE__, __LINE__, $db->error());
+
+			// Give the moderator group moderator privileges
+			$db->query('UPDATE '.$db->prefix.'groups SET g_soft_delete_view = 1 WHERE g_id < 3') or error('Unable to update moderator powers', __FILE__, __LINE__, $db->error());
+		}
+		
+		// Since 0.3.3765: Add new g_soft_delete_posts field to the groups table
+		if (!$db->field_exists('groups', 'g_soft_delete_posts')) {
+			// Add g_moderator column to groups table
+			$db->add_field('groups', 'g_soft_delete_posts', 'TINYINT(1)', false, 0, 'g_user_title') or error('Unable to add g_soft_delete_posts field', __FILE__, __LINE__, $db->error());
+
+			// Give the moderator group moderator privileges
+			$db->query('UPDATE '.$db->prefix.'groups SET g_soft_delete_posts = 1 WHERE g_id < 3') or error('Unable to update moderator powers', __FILE__, __LINE__, $db->error());
+		}
+		
+		// Since 0.3.3765: Add new g_soft_delete_posts field to the groups table
+		if (!$db->field_exists('groups', 'g_soft_delete_topics')) {
+			// Add g_moderator column to groups table
+			$db->add_field('groups', 'g_soft_delete_topics', 'TINYINT(1)', false, 0, 'g_user_title') or error('Unable to add g_soft_delete_topics field', __FILE__, __LINE__, $db->error());
+
+			// Give the moderator group moderator privileges
+			$db->query('UPDATE '.$db->prefix.'groups SET g_soft_delete_topics = 1 WHERE g_id < 3') or error('Unable to update moderator powers', __FILE__, __LINE__, $db->error());
+		}
 
 		break;
 

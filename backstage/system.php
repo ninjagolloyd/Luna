@@ -4,14 +4,14 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', '../');
 require FORUM_ROOT.'include/common.php';
 
 if (!$luna_user['is_admmod'])
-    header("Location: ../login.php");
+	header("Location: ../login.php");
 
 $action = isset($_GET['action']) ? $_GET['action'] : null;
 
@@ -42,7 +42,7 @@ if (@file_exists('/proc/loadavg') && is_readable('/proc/loadavg')) {
 
 	$load_averages = @explode(' ', $load_averages);
 	$server_load = isset($load_averages[2]) ? $load_averages[0].' '.$load_averages[1].' '.$load_averages[2] : $lang['Not available'];
-} else if (!in_array(PHP_OS, array('WINNT', 'WIN32')) && preg_match('%averages?: ([0-9\.]+),?\s+([0-9\.]+),?\s+([0-9\.]+)%i', @exec('uptime'), $load_averages))
+} elseif (!in_array(PHP_OS, array('WINNT', 'WIN32')) && preg_match('%averages?: ([0-9\.]+),?\s+([0-9\.]+),?\s+([0-9\.]+)%i', @exec('uptime'), $load_averages))
 	$server_load = $load_averages[1].' '.$load_averages[2].' '.$load_averages[3];
 else
 	$server_load = $lang['Not available'];
@@ -71,15 +71,15 @@ if ($db_type == 'mysql' || $db_type == 'mysqli' || $db_type == 'mysql_innodb' ||
 // Check for the existence of various PHP opcode caches/optimizers
 if (function_exists('mmcache'))
 	$php_accelerator = '<a href="http://'.$lang['Turck MMCache link'].'">'.$lang['Turck MMCache'].'</a>';
-else if (isset($_PHPA))
+elseif (isset($_PHPA))
 	$php_accelerator = '<a href="http://'.$lang['ionCube PHP Accelerator link'].'">'.$lang['ionCube PHP Accelerator'].'</a>';
-else if (ini_get('apc.enabled'))
+elseif (ini_get('apc.enabled'))
 	$php_accelerator ='<a href="http://'.$lang['Alternative PHP Cache (APC) link'].'">'.$lang['Alternative PHP Cache (APC)'].'</a>';
-else if (ini_get('zend_optimizer.optimization_level'))
+elseif (ini_get('zend_optimizer.optimization_level'))
 	$php_accelerator = '<a href="http://'.$lang['Zend Optimizer link'].'">'.$lang['Zend Optimizer'].'</a>';
-else if (ini_get('eaccelerator.enable'))
+elseif (ini_get('eaccelerator.enable'))
 	$php_accelerator = '<a href="http://'.$lang['eAccelerator link'].'">'.$lang['eAccelerator'].'</a>';
-else if (ini_get('xcache.cacher'))
+elseif (ini_get('xcache.cacher'))
 	$php_accelerator = '<a href="http://'.$lang['XCache link'].'">'.$lang['XCache'].'</a>';
 else
 	$php_accelerator = $lang['NA'];
@@ -92,74 +92,74 @@ load_admin_nav('backstage', 'stats');
 
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Luna version information</h3>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="col-md-3"></th>
-                <th class="col-md-3">Version</th>
-                <th class="col-md-3"></th>
-                <th class="col-md-3">Version</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Software version</td>
-                <td><?php echo $luna_config['o_cur_version']; ?></td>
-                <td>Bootstrap version</td>
-                <td>3.3.1</td>
-            </tr>
-            <tr>
-                <td>Core version</td>
-                <td><?php echo $luna_config['o_core_version']; ?></td>
-                <td>Font Awesome version</td>
-                <td>4.2.0</td>
-            </tr>
-            <tr>
-                <td>Database version</td>
-                <td><?php echo $luna_config['o_database_revision']; ?></td>
-                <td>jQuery version</td>
-                <td>2.1.3</td>
-            </tr>
-        </tbody>
-    </table>
+	<div class="panel-heading">
+		<h3 class="panel-title">Luna version information</h3>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th class="col-md-3"></th>
+				<th class="col-md-3">Version</th>
+				<th class="col-md-3"></th>
+				<th class="col-md-3">Version</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Software version</td>
+				<td><?php echo $luna_config['o_cur_version']; ?></td>
+				<td>Bootstrap version</td>
+				<td>3.3.1</td>
+			</tr>
+			<tr>
+				<td>Core version</td>
+				<td><?php echo $luna_config['o_core_version']; ?></td>
+				<td>Font Awesome version</td>
+				<td>4.2.0</td>
+			</tr>
+			<tr>
+				<td>Database version</td>
+				<td><?php echo $luna_config['o_database_revision']; ?></td>
+				<td>jQuery version</td>
+				<td>2.1.3</td>
+			</tr>
+		</tbody>
+	</table>
 </div>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?php echo $lang['Server statistics head'] ?></h3>
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="col-md-4"><?php echo $lang['Server load label'] ?></th>
-                <?php if ($luna_user['g_id'] == FORUM_ADMIN): ?>
-                <th class="col-md-4"><?php echo $lang['Environment label'] ?></th>
-                <th class="col-md-4"><?php echo $lang['Database label'] ?></th>
-                <?php endif; ?>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><?php printf($lang['Server load data']."\n", $server_load, $num_online) ?></td>
-                <?php if ($luna_user['g_id'] == FORUM_ADMIN): ?>
-                <td>
-                    <?php printf($lang['Environment data OS'], PHP_OS) ?><br />
-                    <?php printf($lang['Environment data version'], phpversion(), '<a href="statistics.php?action=phpinfo">'.$lang['Show info'].'</a>') ?><br />
-                    <?php printf($lang['Environment data acc']."\n", $php_accelerator) ?>
-                </td>
-                <td>
-                    <?php echo implode(' ', $db->get_version())."\n" ?>
-                    <?php if (isset($total_records) && isset($total_size)): ?>
-                    <br /><?php printf($lang['Database data rows']."\n", forum_number_format($total_records)) ?>
-                    <br /><?php printf($lang['Database data size']."\n", $total_size) ?>
-                    <?php endif; ?>
-                </td>
-                <?php endif; ?>
-            </tr>
-        </tbody>
-    </table>
+	<div class="panel-heading">
+		<h3 class="panel-title"><?php echo $lang['Server statistics head'] ?></h3>
+	</div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th class="col-md-4"><?php echo $lang['Server load label'] ?></th>
+				<?php if ($luna_user['g_id'] == FORUM_ADMIN): ?>
+				<th class="col-md-4"><?php echo $lang['Environment label'] ?></th>
+				<th class="col-md-4"><?php echo $lang['Database label'] ?></th>
+				<?php endif; ?>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?php printf($lang['Server load data']."\n", $server_load, $num_online) ?></td>
+				<?php if ($luna_user['g_id'] == FORUM_ADMIN): ?>
+				<td>
+					<?php printf($lang['Environment data OS'], PHP_OS) ?><br />
+					<?php printf($lang['Environment data version'], phpversion(), '<a href="system.php?action=phpinfo">'.$lang['Show info'].'</a>') ?><br />
+					<?php printf($lang['Environment data acc']."\n", $php_accelerator) ?>
+				</td>
+				<td>
+					<?php echo implode(' ', $db->get_version())."\n" ?>
+					<?php if (isset($total_records) && isset($total_size)): ?>
+					<br /><?php printf($lang['Database data rows']."\n", forum_number_format($total_records)) ?>
+					<br /><?php printf($lang['Database data size']."\n", $total_size) ?>
+					<?php endif; ?>
+				</td>
+				<?php endif; ?>
+			</tr>
+		</tbody>
+	</table>
 </div>
 <?php
 

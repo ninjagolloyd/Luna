@@ -11,17 +11,17 @@ function draw_error_panel($errors) {
 
 	if (!empty($errors)) {
 ?>
-    <div class="panel panel-danger">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Post errors'] ?></h3>
-        </div>
-        <div class="panel-body">
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Post errors'] ?></h3>
+		</div>
+		<div class="panel-body">
 <?php
-    foreach ($errors as $cur_error)
-        echo $cur_error;
+	foreach ($errors as $cur_error)
+		echo $cur_error;
 ?>
-        </div>
-    </div>
+		</div>
+	</div>
 <?php
 	}
 
@@ -76,35 +76,35 @@ function draw_editor($height) {
 <div class="panel panel-default panel-editor">
 	<fieldset class="postfield">
 		<input type="hidden" name="form_sent" value="1" />
-		<div class="btn-toolbar textarea-toolbar">
+		<div class="btn-toolbar textarea-toolbar textarea-top">
 			<?php echo $pin_btn ?>
 			<?php echo $silence_btn ?>
 			<div class="btn-group">
 				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','b');" title="<?php echo $lang['Bold']; ?>"><span class="fa fa-bold fa-fw"></span></a>
 				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','u');" title="<?php echo $lang['Underline']; ?>"><span class="fa fa-underline fa-fw"></span></a>
-				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','i');" title="<?php echo $lang['Italic']; ?>"><span class="fa fa-italic fa-fw"></span></a>
-				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','s');" title="<?php echo $lang['Strike']; ?>"><span class="fa fa-strikethrough fa-fw"></span></a>
+				<a class="btn btn-default btn-editor hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','i');" title="<?php echo $lang['Italic']; ?>"><span class="fa fa-italic fa-fw"></span></a>
+				<a class="btn btn-default btn-editor hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','s');" title="<?php echo $lang['Strike']; ?>"><span class="fa fa-strikethrough fa-fw"></span></a>
 			</div>
 			<div class="btn-group">
 				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','h');" title="<?php echo $lang['Heading']; ?>"><span class="fa fa-header fa-fw"></span></a>
-				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','sub');" title="<?php echo $lang['Subscript']; ?>"><span class="fa fa-subscript fa-fw"></span></a>
-				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','sup');" title="<?php echo $lang['Superscript']; ?>"><span class="fa fa-superscript fa-fw"></span></a>
+				<a class="btn btn-default btn-editor hidden-md hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','sub');" title="<?php echo $lang['Subscript']; ?>"><span class="fa fa-subscript fa-fw"></span></a>
+				<a class="btn btn-default btn-editor hidden-md hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','sup');" title="<?php echo $lang['Superscript']; ?>"><span class="fa fa-superscript fa-fw"></span></a>
 			</div>
-			<div class="btn-group hidden-xs">
+			<div class="btn-group">
 				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','quote');" title="<?php echo $lang['Quote']; ?>"><span class="fa fa-quote-left fa-fw"></span></a>
-				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('code','code');" title="<?php echo $lang['Code']; ?>"><span class="fa fa-code fa-fw"></span></a>
-				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','c');" title="<?php echo $lang['Inline code']; ?>"><span class="fa fa-file-code-o fa-fw"></span></a>
+				<a class="btn btn-default btn-editor hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('code','code');" title="<?php echo $lang['Code']; ?>"><span class="fa fa-code fa-fw"></span></a>
+				<a class="btn btn-default btn-editor hidden-md hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','c');" title="<?php echo $lang['Inline code']; ?>"><span class="fa fa-file-code-o fa-fw"></span></a>
 			</div>
-			<div class="btn-group hidden-xs">
+			<div class="btn-group">
 				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','url');" title="<?php echo $lang['URL']; ?>"><span class="fa fa-link fa-fw"></span></a>
 				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','img');" title="<?php echo $lang['Image']; ?>"><span class="fa fa-image fa-fw"></span></a>
 				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','video');" title="<?php echo $lang['Video']; ?>"><span class="fa fa-play-circle fa-fw"></span></a>
 			</div>
-			<div class="btn-group hidden-xs">
+			<div class="btn-group">
 				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('list', 'list');" title="<?php echo $lang['List']; ?>"><span class="fa fa-list-ul fa-fw"></span></a>
 				<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','*');" title="<?php echo $lang['List item']; ?>"><span class="fa fa-asterisk fa-fw"></span></a>
 			</div>
-			<div class="btn-group hidden-xs">
+			<div class="btn-group">
 				<div class="btn-group">
 					<a class="btn btn-default btn-editor btn-emoji dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 						<span class="fa fa-fw text-emoji emoji-ed">&#x263a;</span>
@@ -128,17 +128,19 @@ function draw_editor($height) {
 					</ul>
 				</div>
 			</div>
-			<div class="btn-group pull-right">
-				<button class="btn btn-with-text btn-default<?php if ($luna_config['o_post_responsive'] == 0) echo ' hidden-sm hidden-xs'; ?>" type="submit" name="preview" accesskey="p"><span class="fa fa-eye"></span><span class="hidden-xs"> <?php echo $lang['Preview'] ?></span></button>
-				<button class="btn btn-with-text btn-primary" type="submit" name="submit" accesskey="s"><span class="fa fa-plus"></span><span class="hidden-xs hidden-sm"> <?php echo $lang['Submit'] ?></span></button>
-			</div>
 		</div>
 		<textarea class="form-control textarea"  placeholder="<?php echo $lang['Start typing'] ?>" name="req_message" id="post_field" rows="<?php echo $height ?>"><?php
 			if (FORUM_ACTIVE_PAGE == 'post')
 				echo isset($_POST['req_message']) ? luna_htmlspecialchars($orig_message) : (isset($quote) ? $quote : '');
-			else if (FORUM_ACTIVE_PAGE == 'edit')
+			elseif (FORUM_ACTIVE_PAGE == 'edit')
 				echo luna_htmlspecialchars(isset($_POST['req_message']) ? $message : $cur_post['message']);
 ?></textarea>
+		<div class="btn-toolbar textarea-toolbar textarea-bottom">
+			<div class="btn-group pull-right">
+				<button class="btn btn-with-text btn-default<?php if ($luna_config['o_post_responsive'] == 0) echo ' hidden-sm hidden-xs'; ?>" type="submit" name="preview" accesskey="p"><span class="fa fa-fw fa-eye"></span> <?php echo $lang['Preview'] ?></button>
+				<button class="btn btn-with-text btn-primary" type="submit" name="submit" accesskey="s"><span class="fa fa-fw fa-plus"></span> <?php echo $lang['Submit'] ?></button>
+			</div>
+		</div>
 	</fieldset>
 </div>
 <script>
@@ -165,7 +167,10 @@ function draw_topics_list() {
 	global $luna_user, $luna_config, $db, $sort_by, $start_from, $id, $lang;
 	
 	// Retrieve a list of topic IDs, LIMIT is (really) expensive so we only fetch the IDs here then later fetch the remaining data
-	$result = $db->query('SELECT id FROM '.$db->prefix.'topics WHERE forum_id='.$id.' ORDER BY sticky DESC, '.$sort_by.', id DESC LIMIT '.$start_from.', '.$luna_user['disp_topics']) or error('Unable to fetch topic IDs', __FILE__, __LINE__, $db->error());
+	if ($luna_user['is_admmod'])
+		$result = $db->query('SELECT id FROM '.$db->prefix.'topics WHERE forum_id='.$id.' ORDER BY sticky DESC, '.$sort_by.', id DESC LIMIT '.$start_from.', '.$luna_user['disp_topics']) or error('Unable to fetch topic IDs', __FILE__, __LINE__, $db->error());
+	else
+		$result = $db->query('SELECT id FROM '.$db->prefix.'topics WHERE soft = 0 AND forum_id='.$id.' ORDER BY sticky DESC, '.$sort_by.', id DESC LIMIT '.$start_from.', '.$luna_user['disp_topics']) or error('Unable to fetch topic IDs', __FILE__, __LINE__, $db->error());
 	
 	// If there are topics in this forum
 	if ($db->num_rows($result)) {
@@ -176,10 +181,16 @@ function draw_topics_list() {
 		// Fetch list of topics to display on this page
 		if ($luna_user['is_guest'] || $luna_config['o_has_posted'] == '0') {
 			// When not showing a posted label
-			$sql = 'SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, last_poster_id, num_views, num_replies, closed, sticky, moved_to FROM '.$db->prefix.'topics WHERE id IN('.implode(',', $topic_ids).') ORDER BY sticky DESC, '.$sort_by.', id DESC';
+			if ($luna_user['is_admmod'])
+				$sql = 'SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, last_poster_id, num_views, num_replies, closed, sticky, moved_to, soft FROM '.$db->prefix.'topics WHERE id IN('.implode(',', $topic_ids).') ORDER BY sticky DESC, '.$sort_by.', id DESC';
+			else
+				$sql = 'SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, last_poster_id, num_views, num_replies, closed, sticky, moved_to, soft FROM '.$db->prefix.'topics WHERE SOFT = 0 AND id IN('.implode(',', $topic_ids).') ORDER BY sticky DESC, '.$sort_by.', id DESC';
 		} else {
 			// When showing a posted label
-			$sql = 'SELECT p.poster_id AS has_posted, t.id, t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to FROM '.$db->prefix.'topics AS t LEFT JOIN '.$db->prefix.'posts AS p ON t.id=p.topic_id AND p.poster_id='.$luna_user['id'].' WHERE t.id IN('.implode(',', $topic_ids).') GROUP BY t.id'.($db_type == 'pgsql' ? ', t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, p.poster_id' : '').' ORDER BY t.sticky DESC, t.'.$sort_by.', t.id DESC';
+			if ($luna_user['is_admmod'])
+				$sql = 'SELECT p.poster_id AS has_posted, t.id, t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, t.soft FROM '.$db->prefix.'topics AS t LEFT JOIN '.$db->prefix.'posts AS p ON t.id=p.topic_id AND p.poster_id='.$luna_user['id'].' WHERE t.id IN('.implode(',', $topic_ids).') GROUP BY t.id'.($db_type == 'pgsql' ? ', t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, p.poster_id' : '').' ORDER BY t.sticky DESC, t.'.$sort_by.', t.id DESC';
+			else
+				$sql = 'SELECT p.poster_id AS has_posted, t.id, t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, t.soft FROM '.$db->prefix.'topics AS t LEFT JOIN '.$db->prefix.'posts AS p ON t.id=p.topic_id AND p.poster_id='.$luna_user['id'].' WHERE soft = 0 AND t.id IN('.implode(',', $topic_ids).') GROUP BY t.id'.($db_type == 'pgsql' ? ', t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, p.poster_id' : '').' ORDER BY t.sticky DESC, t.'.$sort_by.', t.id DESC';
 		}
 	
 		$result = $db->query($sql) or error('Unable to fetch topic list', __FILE__, __LINE__, $db->error());
@@ -213,7 +224,7 @@ function draw_topics_list() {
 				$by = '<span class="byuser">'.$lang['by'].' '.luna_htmlspecialchars($cur_topic['poster']).'</span>';
 				$status_text[] = '<span class="label label-info">'.$lang['Moved'].'</span>';
 				$item_status .= ' moved-item';
-			} else if ($cur_topic['closed'] == '0') {
+			} elseif ($cur_topic['closed'] == '0') {
 				$subject = '<a href="viewtopic.php?id='.$cur_topic['id'].'">'.luna_htmlspecialchars($cur_topic['subject']).'</a>';
 				$by = '<span class="byuser">'.$lang['by'].' '.luna_htmlspecialchars($cur_topic['poster']).'</span>';
 			} else {
@@ -225,7 +236,6 @@ function draw_topics_list() {
 	
 			if (!$luna_user['is_guest'] && $luna_config['o_has_posted'] == '1') {
 				if ($cur_topic['has_posted'] == $luna_user['id']) {
-					$status_text[] = '<span class="fa fa-asterisk"></span>';
 					$item_status .= ' posted-item';
 				}
 			}
@@ -276,8 +286,8 @@ function draw_topics_list() {
 	
 }
 
-function draw_forum_list($page, $current_id) {
-	global $lang, $db, $luna_config, $luna_user;
+function draw_forum_list($page, $forum_object_name = 'forum.php', $use_cat = 0, $cat_object_name = 'category.php', $close_tags = '') {
+	global $lang, $db, $luna_config, $luna_user, $id;
 	
 	// Print the categories and forums
 	$result = $db->query('SELECT c.id AS cid, c.cat_name, f.id AS fid, f.forum_name, f.forum_desc, f.parent_id, f.moderators, f.num_topics, f.num_posts, f.last_post, f.last_post_id, f.last_poster_id, f.color, u.username AS username, t.subject AS subject FROM '.$db->prefix.'categories AS c INNER JOIN '.$db->prefix.'forums AS f ON c.id=f.cat_id LEFT JOIN '.$db->prefix.'users AS u ON f.last_poster_id=u.id LEFT JOIN '.$db->prefix.'topics AS t ON t.last_post_id=f.last_post_id LEFT JOIN '.$db->prefix.'forum_perms AS fp ON (fp.forum_id=f.id AND fp.group_id='.$luna_user['g_id'].') WHERE fp.read_forum IS NULL OR fp.read_forum=1 ORDER BY c.disp_position, c.id, f.disp_position', true) or error('Unable to fetch category/forum list', __FILE__, __LINE__, $db->error());
@@ -288,6 +298,18 @@ function draw_forum_list($page, $current_id) {
 	while ($cur_forum = $db->fetch_assoc($result)) {
 		if(!isset($cur_forum['parent_id']) || $cur_forum['parent_id'] == 0) {
 			$moderators = '';
+			
+			if ($cur_forum['cid'] != $cur_category && $use_cat == 1) {
+				if ($cur_category != 0)
+					echo '</div></div>';
+
+				++$cat_count;
+				$forum_count = 0;
+
+				require get_view_path($cat_object_name);
+
+				$cur_category = $cur_forum['cid'];
+			}
 	
 			++$forum_count;
 			$item_status = ($forum_count % 2 == 0) ? 'roweven' : 'rowodd';
@@ -318,22 +340,44 @@ function draw_forum_list($page, $current_id) {
 			else
 				$posts_label = $lang['posts'];
 			
-			if ($current_id == $cur_forum['fid'])
+			if ($id == $cur_forum['fid'])
 				$item_status .= ' active';
+
+			// If there is a last_post/last_poster
+			if ($cur_forum['last_post'] != '') {
+				if (luna_strlen($cur_forum['subject']) > 43)
+					$cur_forum['subject'] = utf8_substr($cur_forum['subject'], 0, 40).'...';
 		
-			require get_view_path('forum.php');
+					if ($luna_user['g_view_users'] == '1' && $cur_forum['last_poster_id'] > '1')
+						$last_post = '<a href="viewtopic.php?pid='.$cur_forum['last_post_id'].'#p'.$cur_forum['last_post_id'].'">'.luna_htmlspecialchars($cur_forum['subject']).'</a><br /><span class="bytime  hidden-xs">'.format_time($cur_forum['last_post']).' </span><span class="byuser">'.$lang['by'].' <a href="me.php?id='.$cur_forum['last_poster_id'].'">'.luna_htmlspecialchars($cur_forum['username']).'</a></span>';
+					else
+						$last_post = '<a href="viewtopic.php?pid='.$cur_forum['last_post_id'].'#p'.$cur_forum['last_post_id'].'">'.luna_htmlspecialchars($cur_forum['subject']).'</a><br /><span class="bytime  hidden-xs">'.format_time($cur_forum['last_post']).' </span><span class="byuser">'.$lang['by'].' '.luna_htmlspecialchars($cur_forum['username']).'</span>';
+			} elseif ($cur_forum['redirect_url'] != '')
+				$last_post = '- - -';
+			else
+				$last_post = $lang['Never'];
+		
+			require get_view_path($forum_object_name);
 		}
+	}
+			
+	// Any need to close of a category?
+	if ($use_cat == 1) {
+		if ($cur_category > 0)
+			echo $close_tags;
+		else
+			echo '<div class="no-board"><p>'.$lang['Empty board'].'</p></div>';
 	}
 }
 
-function draw_subforum_list($page, $current_id) {
-	global $lang, $db, $luna_config, $luna_user;
+function draw_subforum_list($page, $object_name = 'forum.php') {
+	global $lang, $db, $luna_config, $luna_user, $id;
 	
-	$result = $db->query('SELECT parent_id FROM '.$db->prefix.'forums WHERE id='.$current_id) or error ('Unable to fetch information about the current forum', __FILE__, __LINE__, $db->error());
+	$result = $db->query('SELECT parent_id FROM '.$db->prefix.'forums WHERE id='.$id) or error ('Unable to fetch information about the current forum', __FILE__, __LINE__, $db->error());
 	$cur_parent = $db->fetch_assoc($result);
 	
 	if ($cur_parent['parent_id'] == '0')
-		$subforum_parent_id = $current_id;
+		$subforum_parent_id = $id;
 	else
 		$subforum_parent_id = $cur_parent['parent_id'];
 	
@@ -379,10 +423,10 @@ function draw_subforum_list($page, $current_id) {
 			else
 				$posts_label = $lang['posts'];
 			
-			if ($current_id == $cur_forum['fid'])
+			if ($id == $cur_forum['fid'])
 				$item_status .= ' active';
 		
-			require get_view_path('forum.php');
+			require get_view_path($object_name);
 		}
 	}
 }
@@ -412,7 +456,7 @@ function draw_index_topics_list($section_id) {
 	if ($section_id != 0)
 		$result = $db->query('SELECT id FROM '.$db->prefix.'topics WHERE forum_id='.$section_id.' ORDER BY sticky DESC, '.$sort_by.', id DESC LIMIT '.$start_from.', '.$luna_user['disp_topics']) or error('Unable to fetch topic IDs', __FILE__, __LINE__, $db->error());
 	else
-		$result = $db->query('SELECT id FROM '.$db->prefix.'topics ORDER BY sticky DESC, id DESC LIMIT 30') or error('Unable to fetch topic IDs', __FILE__, __LINE__, $db->error());
+		$result = $db->query('SELECT id FROM '.$db->prefix.'topics WHERE moved_to IS NULL ORDER BY id DESC LIMIT 30') or error('Unable to fetch topic IDs', __FILE__, __LINE__, $db->error());
 	
 	// If there are topics in this forum
 	if ($db->num_rows($result)) {
@@ -422,18 +466,36 @@ function draw_index_topics_list($section_id) {
 
 		// Fetch list of topics to display on this page
 		if ($luna_user['is_guest'] || $luna_config['o_has_posted'] == '0') {
-			// When not showing a posted label
-			if ($section_id != 0) {
-				$sql = 'SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, last_poster_id, num_views, num_replies, closed, sticky, moved_to FROM '.$db->prefix.'topics WHERE id IN('.implode(',', $topic_ids).') ORDER BY sticky DESC, '.$sort_by.', id DESC';
+			if ($luna_user['is_admmod']) {
+				// When not showing a posted label
+				if ($section_id != 0) {
+					$sql = 'SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, last_poster_id, num_views, num_replies, closed, sticky, moved_to, soft FROM '.$db->prefix.'topics WHERE id IN('.implode(',', $topic_ids).') ORDER BY sticky DESC, '.$sort_by.', id DESC';
+				} else {
+					$sql = 'SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, last_poster_id, num_views, num_replies, closed, sticky, moved_to, soft FROM '.$db->prefix.'topics WHERE id IN('.implode(',', $topic_ids).') ORDER BY last_post DESC';
+				}
 			} else {
-				$sql = 'SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, last_poster_id, num_views, num_replies, closed, sticky, moved_to FROM '.$db->prefix.'topics WHERE id IN('.implode(',', $topic_ids).') ORDER BY sticky DESC, id DESC';
+				// When not showing a posted label
+				if ($section_id != 0) {
+					$sql = 'SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, last_poster_id, num_views, num_replies, closed, sticky, moved_to, soft FROM '.$db->prefix.'topics WHERE soft = 0 AND id IN('.implode(',', $topic_ids).') ORDER BY sticky DESC, '.$sort_by.', id DESC';
+				} else {
+					$sql = 'SELECT id, poster, subject, posted, last_post, last_post_id, last_poster, last_poster_id, num_views, num_replies, closed, sticky, moved_to, soft FROM '.$db->prefix.'topics WHERE soft = 0 AND id IN('.implode(',', $topic_ids).') ORDER BY last_post DESC';
+				}
 			}
 		} else {
-			// When showing a posted label
-			if ($section_id != 0) {
-				$sql = 'SELECT p.poster_id AS has_posted, t.id, t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to FROM '.$db->prefix.'topics AS t LEFT JOIN '.$db->prefix.'posts AS p ON t.id=p.topic_id AND p.poster_id='.$luna_user['id'].' WHERE t.id IN('.implode(',', $topic_ids).') GROUP BY t.id'.($db_type == 'pgsql' ? ', t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, p.poster_id' : '').' ORDER BY t.sticky DESC, t.'.$sort_by.', t.id DESC';
+			if ($luna_user['is_admmod']) {
+				// When showing a posted label
+				if ($section_id != 0) {
+					$sql = 'SELECT p.poster_id AS has_posted, t.id, t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, t.soft FROM '.$db->prefix.'topics AS t LEFT JOIN '.$db->prefix.'posts AS p ON t.id=p.topic_id AND p.poster_id='.$luna_user['id'].' WHERE t.id IN('.implode(',', $topic_ids).') GROUP BY t.id'.($db_type == 'pgsql' ? ', t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, p.poster_id' : '').' ORDER BY t.sticky DESC, t.'.$sort_by.', t.id DESC';
+				} else {
+					$sql = 'SELECT p.poster_id AS has_posted, t.id, t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, t.soft FROM '.$db->prefix.'topics AS t LEFT JOIN '.$db->prefix.'posts AS p ON t.id=p.topic_id AND p.poster_id='.$luna_user['id'].' WHERE t.id IN('.implode(',', $topic_ids).') GROUP BY t.id'.($db_type == 'pgsql' ? ', t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, p.poster_id' : '').' ORDER BY t.last_post DESC';
+				}
 			} else {
-				$sql = 'SELECT p.poster_id AS has_posted, t.id, t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to FROM '.$db->prefix.'topics AS t LEFT JOIN '.$db->prefix.'posts AS p ON t.id=p.topic_id AND p.poster_id='.$luna_user['id'].' WHERE t.id IN('.implode(',', $topic_ids).') GROUP BY t.id'.($db_type == 'pgsql' ? ', t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, p.poster_id' : '').' ORDER BY t.sticky DESC, t.id DESC';
+				// When showing a posted label
+				if ($section_id != 0) {
+					$sql = 'SELECT p.poster_id AS has_posted, t.id, t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, t.soft FROM '.$db->prefix.'topics AS t LEFT JOIN '.$db->prefix.'posts AS p ON t.id=p.topic_id AND p.poster_id='.$luna_user['id'].' WHERE t.soft = 0 AND t.id IN('.implode(',', $topic_ids).') GROUP BY t.id'.($db_type == 'pgsql' ? ', t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, p.poster_id' : '').' ORDER BY t.sticky DESC, t.'.$sort_by.', t.id DESC';
+				} else {
+					$sql = 'SELECT p.poster_id AS has_posted, t.id, t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, t.soft FROM '.$db->prefix.'topics AS t LEFT JOIN '.$db->prefix.'posts AS p ON t.id=p.topic_id AND p.poster_id='.$luna_user['id'].' WHERE t.soft = 0 AND t.id IN('.implode(',', $topic_ids).') GROUP BY t.id'.($db_type == 'pgsql' ? ', t.subject, t.poster, t.posted, t.last_post, t.last_post_id, t.last_poster, t.num_views, t.num_replies, t.closed, t.sticky, t.moved_to, p.poster_id' : '').' ORDER BY t.last_post DESC';
+				}
 			}
 		}
 	
@@ -468,7 +530,7 @@ function draw_index_topics_list($section_id) {
 				$by = '<span class="byuser">'.$lang['by'].' '.luna_htmlspecialchars($cur_topic['poster']).'</span>';
 				$status_text[] = '<span class="label label-info">'.$lang['Moved'].'</span>';
 				$item_status .= ' moved-item';
-			} else if ($cur_topic['closed'] == '0') {
+			} elseif ($cur_topic['closed'] == '0') {
 				$subject = '<a href="viewtopic.php?id='.$cur_topic['id'].'">'.luna_htmlspecialchars($cur_topic['subject']).'</a>';
 				$by = '<span class="byuser">'.$lang['by'].' '.luna_htmlspecialchars($cur_topic['poster']).'</span>';
 			} else {
@@ -520,21 +582,23 @@ function draw_index_topics_list($section_id) {
 				$views_label = $lang['views'];
 			}
 	
-			require get_view_path('topic2.php');
+			require get_view_path('topic.php');
 	
 		}
 	
-	} else {
+	} elseif ($section_id != 0) {
 		echo '<h3 class="nothing">There are no thread in this forum, <a href="post.php?fid='.$id.'">be the first one!</a></h3>';
+	} else {
+		echo '<h3 class="nothing">There are no thread on this board, choose a forum and be the first one.</h3>';
 	}
 	
 }
 
 function draw_topic_list() {
-	global $lang, $result, $db, $luna_config, $post_ids, $is_admmod, $start_from, $post_count, $admin_ids, $luna_user;
+	global $lang, $result, $db, $luna_config, $id, $post_ids, $is_admmod, $start_from, $post_count, $admin_ids, $luna_user;
 
 	// Retrieve the posts (and their respective poster/online status)
-	$result = $db->query('SELECT u.email, u.title, u.url, u.location, u.signature, u.email_setting, u.num_posts, u.registered, u.admin_note, p.id, p.poster AS username, p.poster_id, p.poster_ip, p.poster_email, p.message, p.hide_smilies, p.posted, p.edited, p.edited_by, p.marked, g.g_id, g.g_user_title, o.user_id AS is_online FROM '.$db->prefix.'posts AS p INNER JOIN '.$db->prefix.'users AS u ON u.id=p.poster_id INNER JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id LEFT JOIN '.$db->prefix.'online AS o ON (o.user_id=u.id AND o.user_id!=1 AND o.idle=0) WHERE p.id IN ('.implode(',', $post_ids).') ORDER BY p.id', true) or error('Unable to fetch post info', __FILE__, __LINE__, $db->error());
+	$result = $db->query('SELECT u.email, u.title, u.url, u.location, u.signature, u.email_setting, u.num_posts, u.registered, u.admin_note, p.id, p.poster AS username, p.poster_id, p.poster_ip, p.poster_email, p.message, p.hide_smilies, p.posted, p.edited, p.edited_by, p.marked, p.soft, g.g_id, g.g_user_title, o.user_id AS is_online FROM '.$db->prefix.'posts AS p INNER JOIN '.$db->prefix.'users AS u ON u.id=p.poster_id INNER JOIN '.$db->prefix.'groups AS g ON g.g_id=u.group_id LEFT JOIN '.$db->prefix.'online AS o ON (o.user_id=u.id AND o.user_id!=1 AND o.idle=0) WHERE p.id IN ('.implode(',', $post_ids).') ORDER BY p.id', true) or error('Unable to fetch post info', __FILE__, __LINE__, $db->error());
 	while ($cur_post = $db->fetch_assoc($result)) {
 		$post_count++;
 		$user_avatar = '';
@@ -574,7 +638,7 @@ function draw_topic_list() {
 				// Now let's deal with the contact links (Email and URL)
 				if ((($cur_post['email_setting'] == '0' && !$luna_user['is_guest']) || $luna_user['is_admmod']) && $luna_user['g_send_email'] == '1')
 					$user_actions[] = '<a class="btn btn-primary btn-xs" href="mailto:'.luna_htmlspecialchars($cur_post['email']).'">'.$lang['Email'].'</a>';
-				else if ($cur_post['email_setting'] == '1' && !$luna_user['is_guest'] && $luna_user['g_send_email'] == '1')
+				elseif ($cur_post['email_setting'] == '1' && !$luna_user['is_guest'] && $luna_user['g_send_email'] == '1')
 					$user_actions[] = '<a class="btn btn-primary btn-xs" href="misc.php?email='.$cur_post['poster_id'].'">'.$lang['Email'].'</a>';
 	
 				if ($cur_post['url'] != '') {
@@ -586,7 +650,7 @@ function draw_topic_list() {
 	
 	
 				if ($luna_user['is_admmod']) {
-					$user_actions[] = '<a class="btn btn-primary btn-xs" href="moderate.php?get_host='.$cur_post['id'].'" title="'.luna_htmlspecialchars($cur_post['poster_ip']).'">'.$lang['IP address logged'].'</a>';
+					$user_actions[] = '<a class="btn btn-primary btn-xs" href="backstage/moderate.php?get_host='.$cur_post['id'].'" title="'.luna_htmlspecialchars($cur_post['poster_ip']).'">'.$lang['IP address logged'].'</a>';
 				}
 			}
 	
@@ -602,7 +666,7 @@ function draw_topic_list() {
 			$user_title = get_title($cur_post);
 	
 			if ($luna_user['is_admmod'])
-				$user_info[] = '<dd><span><a href="moderate.php?get_host='.$cur_post['id'].'" title="'.luna_htmlspecialchars($cur_post['poster_ip']).'">'.$lang['IP address logged'].'</a></span></dd>';
+				$user_info[] = '<dd><span><a href="backstage/moderate.php?get_host='.$cur_post['id'].'" title="'.luna_htmlspecialchars($cur_post['poster_ip']).'">'.$lang['IP address logged'].'</a></span></dd>';
 	
 			if ($luna_config['o_show_user_info'] == '1' && $cur_post['poster_email'] != '' && !$luna_user['is_guest'] && $luna_user['g_send_email'] == '1')
 				$user_actions[] = '<span class="email"><a href="mailto:'.luna_htmlspecialchars($cur_post['poster_email']).'">'.$lang['Email'].'</a></span>';
@@ -613,7 +677,7 @@ function draw_topic_list() {
 			if (isset($user_avatar_cache[$cur_post['poster_id']]))
 				$user_avatar = $user_avatar_cache[$cur_post['poster_id']];
 			else
-				$user_avatar = generate_avatar_markup($cur_post['poster_id']);
+				$user_avatar = draw_user_avatar($cur_post['poster_id'], 'thread-avatar');
 		}
 	
 		// Generation post action array (quote, edit, delete etc.)
@@ -626,15 +690,21 @@ function draw_topic_list() {
 				}
 			}
 	
-			if ($cur_topic['closed'] == '0') {
+			if ($cur_topic['closed'] == 0) {
 				if ($cur_post['poster_id'] == $luna_user['id']) {
-					if ((($start_from + $post_count) == 1 && $luna_user['g_delete_topics'] == '1') || (($start_from + $post_count) > 1 && $luna_user['g_delete_posts'] == '1'))
+					if ((($start_from + $post_count) == 1 && $luna_user['g_delete_topics'] == 0) || (($start_from + $post_count) > 1 && $luna_user['g_delete_posts'] == 1))
 						$post_actions[] = '<a href="delete.php?id='.$cur_post['id'].'">'.$lang['Delete'].'</a>';
-					if ($luna_user['g_edit_posts'] == '1')
+					if ((($start_from + $post_count) == 1 && $luna_user['g_soft_delete_topics'] == 0) || (($start_from + $post_count) > 1 && $luna_user['g_soft_delete_posts'] == 1)) {
+						if ($cur_post['soft'] == 0)
+							$post_actions[] = '<a href="delete.php?id='.$cur_post['id'].'&action=soft">Soft delete</a>';
+						else
+							$post_actions[] = '<a href="delete.php?id='.$cur_post['id'].'&action=reset">Soft reset</a>';
+					}
+					if ($luna_user['g_edit_posts'] == 1)
 						$post_actions[] = '<a href="edit.php?id='.$cur_post['id'].'">'.$lang['Edit'].'</a>';
 				}
 	
-				if (($cur_topic['post_replies'] == '' && $luna_user['g_post_replies'] == '1') || $cur_topic['post_replies'] == '1')
+				if (($cur_topic['post_replies'] == 0 && $luna_user['g_post_replies'] == 1) || $cur_topic['post_replies'] == 1)
 					$post_actions[] = '<a href="post.php?tid='.$id.'&amp;qid='.$cur_post['id'].'">'.$lang['Quote'].'</a>';
 			}
 		} else {
@@ -645,6 +715,10 @@ function draw_topic_list() {
 			}
 			if ($luna_user['g_id'] == FORUM_ADMIN || !in_array($cur_post['poster_id'], $admin_ids)) {
 				$post_actions[] = '<a href="delete.php?id='.$cur_post['id'].'">'.$lang['Delete'].'</a>';
+				if ($cur_post['soft'] == 0)
+					$post_actions[] = '<a href="delete.php?id='.$cur_post['id'].'&action=soft">Soft delete</a>';
+				else
+					$post_actions[] = '<a href="delete.php?id='.$cur_post['id'].'&action=reset">Soft reset</a>';
 				$post_actions[] = '<a href="edit.php?id='.$cur_post['id'].'">'.$lang['Edit'].'</a>';
 			}
 			$post_actions[] = '<a href="post.php?tid='.$id.'&amp;qid='.$cur_post['id'].'">'.$lang['Quote'].'</a>';
@@ -697,10 +771,32 @@ function draw_delete_form($id) {
 	global $is_topic_post, $lang;
 
 ?>
-        <form method="post" action="delete.php?id=<?php echo $id ?>">
-            <p><?php echo ($is_topic_post) ? '<strong>'.$lang['Topic warning'].'</strong>' : '<strong>'.$lang['Warning'].'</strong>' ?><br /><?php echo $lang['Delete info'] ?></p>
-            <input type="submit" class="btn btn-danger" name="delete" value="<?php echo $lang['Delete'] ?>" />
-        </form>
+		<form method="post" action="delete.php?id=<?php echo $id ?>">
+			<p><?php echo ($is_topic_post) ? '<strong>'.$lang['Topic warning'].'</strong>' : '' ?><br /><?php echo $lang['Delete info'] ?></p>
+			<input type="submit" class="btn btn-danger" name="delete" value="<?php echo $lang['Delete'] ?>" />
+		</form>
+<?php
+}
+
+function draw_soft_delete_form($id) {
+	global $is_topic_post, $lang;
+
+?>
+		<form method="post" action="delete.php?id=<?php echo $id ?>&action=soft">
+			<p><?php echo ($is_topic_post) ? '<strong>'.$lang['Topic warning'].'</strong>' : '' ?><br />The post you have chosen to delete is set out below for you to review before proceeding. Deleting this post is not permanent. If you want to delete a post permanently, please use delete instead.</p>
+			<input type="submit" class="btn btn-danger" name="soft_delete" value="Soft delete" />
+		</form>
+<?php
+}
+
+function draw_soft_reset_form($id) {
+	global $is_topic_post, $lang;
+
+?>
+		<form method="post" action="delete.php?id=<?php echo $id ?>&action=reset">
+			<p>This post has been soft deleted. We'll enable it again with a click on the button.</p>
+			<input type="submit" class="btn btn-primary" name="reset" value="Reset post" />
+		</form>
 <?php
 }
 
@@ -715,55 +811,55 @@ function draw_registration_form() {
 ?>
 
 <form class="form-horizontal" id="register" method="post" action="register.php?action=register" onsubmit="this.register.disabled=true;if(process_form(this)){return true;}else{this.register.disabled=false;return false;}">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Register legend'] ?><span class="pull-right"><input type="submit" class="btn btn-primary" name="register" value="<?php echo $lang['Register'] ?>" /></span></h3>
-        </div>
-        <div class="panel-body">
-            <fieldset>
-                <input type="hidden" name="form_sent" value="1" />
-                <label class="required hidden"><?php echo $lang['If human'] ?><input type="text" class="form-control" name="req_username" value="" maxlength="25" /></label>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Username'] ?><span class="help-block"><?php echo $lang['Username legend'] ?></span></label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="req_user" value="<?php if (isset($_POST['req_user'])) echo luna_htmlspecialchars($_POST['req_user']); ?>" maxlength="25" />
-                    </div>
-                </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Register legend'] ?><span class="pull-right"><input type="submit" class="btn btn-primary" name="register" value="<?php echo $lang['Register'] ?>" /></span></h3>
+		</div>
+		<div class="panel-body">
+			<fieldset>
+				<input type="hidden" name="form_sent" value="1" />
+				<label class="required hidden"><?php echo $lang['If human'] ?><input type="text" class="form-control" name="req_username" value="" maxlength="25" /></label>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Username'] ?><span class="help-block"><?php echo $lang['Username legend'] ?></span></label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="req_user" value="<?php if (isset($_POST['req_user'])) echo luna_htmlspecialchars($_POST['req_user']); ?>" maxlength="25" />
+					</div>
+				</div>
 <?php if ($luna_config['o_regs_verify'] == '0'): ?>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Password'] ?><span class="help-block"><?php echo $lang['Pass info'] ?></span></label>
-                    <div class="col-sm-9">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <input type="password" class="form-control" name="req_password1" value="<?php if (isset($_POST['req_password1'])) echo luna_htmlspecialchars($_POST['req_password1']); ?>" />
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="password" class="form-control" name="req_password2" value="<?php if (isset($_POST['req_password2'])) echo luna_htmlspecialchars($_POST['req_password2']); ?>" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Password'] ?><span class="help-block"><?php echo $lang['Pass info'] ?></span></label>
+					<div class="col-sm-9">
+						<div class="row">
+							<div class="col-sm-6">
+								<input type="password" class="form-control" name="req_password1" value="<?php if (isset($_POST['req_password1'])) echo luna_htmlspecialchars($_POST['req_password1']); ?>" />
+							</div>
+							<div class="col-sm-6">
+								<input type="password" class="form-control" name="req_password2" value="<?php if (isset($_POST['req_password2'])) echo luna_htmlspecialchars($_POST['req_password2']); ?>" />
+							</div>
+						</div>
+					</div>
+				</div>
 <?php endif; ?>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Email'] ?><?php if ($luna_config['o_regs_verify'] == '1'): ?><span class="help-block"><?php echo $lang['Email help info'] ?></span><?php endif; ?></label>
-                    <div class="col-sm-9">
-                        <?php if ($luna_config['o_regs_verify'] == '1'): ?>
-                        <div class="row">
-                            <div class="col-sm-6">
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Email'] ?><?php if ($luna_config['o_regs_verify'] == '1'): ?><span class="help-block"><?php echo $lang['Email help info'] ?></span><?php endif; ?></label>
+					<div class="col-sm-9">
+						<?php if ($luna_config['o_regs_verify'] == '1'): ?>
+						<div class="row">
+							<div class="col-sm-6">
 						<?php endif; ?>
-                                <input type="text" class="form-control" name="req_email1" value="<?php if (isset($_POST['req_email1'])) echo luna_htmlspecialchars($_POST['req_email1']); ?>" maxlength="80" />
-                        <?php if ($luna_config['o_regs_verify'] == '1'): ?>
-                            </div>
-                            <div class="col-sm-6">
-                                <input type="text" class="form-control" name="req_email2" value="<?php if (isset($_POST['req_email2'])) echo luna_htmlspecialchars($_POST['req_email2']); ?>" maxlength="80" />
-                            </div>
-                        </div>
+								<input type="text" class="form-control" name="req_email1" value="<?php if (isset($_POST['req_email1'])) echo luna_htmlspecialchars($_POST['req_email1']); ?>" maxlength="80" />
+						<?php if ($luna_config['o_regs_verify'] == '1'): ?>
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" name="req_email2" value="<?php if (isset($_POST['req_email2'])) echo luna_htmlspecialchars($_POST['req_email2']); ?>" maxlength="80" />
+							</div>
+						</div>
 						<?php endif; ?>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
 </form>
 <?php
 }
@@ -773,19 +869,19 @@ function draw_rules_form() {
 ?>
 
 <form method="get" action="register.php">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Rules legend'] ?></h3>
-        </div>
-        <div class="panel-body">
-            <fieldset>
-                <div class="usercontent"><?php echo $luna_config['o_rules_message'] ?></div>
-            </fieldset>
-        </div>
-        <div class="panel-footer">
-        	<div class="btn-group"><input type="submit" class="btn btn-primary" name="agree" value="<?php echo $lang['Agree'] ?>" /></div>
-        </div>
-    </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Rules legend'] ?></h3>
+		</div>
+		<div class="panel-body">
+			<fieldset>
+				<div class="usercontent"><?php echo $luna_config['o_rules_message'] ?></div>
+			</fieldset>
+		</div>
+		<div class="panel-footer">
+			<div class="btn-group"><input type="submit" class="btn btn-primary" name="agree" value="<?php echo $lang['Agree'] ?>" /></div>
+		</div>
+	</div>
 </form>
 <?php
 }
@@ -865,12 +961,12 @@ function draw_mail_form($recipient_id) {
 	<div class="panel panel-default panel-editor">
 		<fieldset class="postfield">
 			<input type="hidden" name="form_sent" value="1" />
-            <input type="hidden" name="redirect_url" value="<?php echo luna_htmlspecialchars($redirect_url) ?>" />
-            <textarea name="req_message" class="form-control textarea" rows="10" tabindex="2"></textarea>
-        </fieldset>
-        <div class="panel-footer">
-            <div class="btn-group"><input type="submit" class="btn btn-primary" name="submit" value="Send" tabindex="3" accesskey="s" /></div>
-        </div>
+			<input type="hidden" name="redirect_url" value="<?php echo luna_htmlspecialchars($redirect_url) ?>" />
+			<textarea name="req_message" class="form-control textarea" rows="10" tabindex="2"></textarea>
+		</fieldset>
+		<div class="panel-footer">
+			<div class="btn-group"><input type="submit" class="btn btn-primary" name="submit" value="Send" tabindex="3" accesskey="s" /></div>
+		</div>
 	</div>
 </form>
 <?php
@@ -885,13 +981,13 @@ function draw_report_form($post_id) {
 		<div class="panel-heading">
 			<h3 class="panel-title">Tell us why you are reporting this</h3>
 		</div>
-        <fieldset>
-            <input type="hidden" name="form_sent" value="1" />
-            <textarea class="form-control textarea" name="req_reason" rows="5"></textarea>
-        </fieldset>
-        <div class="panel-footer">
-            <input type="submit" class="btn btn-primary" name="submit" value="<?php echo $lang['Submit'] ?>" accesskey="s" />
-        </div>
+		<fieldset>
+			<input type="hidden" name="form_sent" value="1" />
+			<textarea class="form-control textarea" name="req_reason" rows="5"></textarea>
+		</fieldset>
+		<div class="panel-footer">
+			<input type="submit" class="btn btn-primary" name="submit" value="<?php echo $lang['Submit'] ?>" accesskey="s" />
+		</div>
 	</div>
 </form>
 <?php
@@ -954,4 +1050,19 @@ function draw_search_forum_list() {
 		echo "\t\t\t\t\t\t".'</select>'."\n";
 		echo "\t\t\t\t\t\t".'<br /></label></div>'."\n";
 	}
+}
+
+function draw_mark_read($class, $page) {
+	global $lang, $luna_user;
+	
+	if (!empty($class))
+		$classes = ' class="'.$class.'"';
+		
+	if ($page == 'index')
+		$url = 'misc.php?action=markread';
+	elseif ($page == 'forumview')
+		$url = 'misc.php?action=markforumread&amp;fid='.$id;
+
+	if (!$luna_user['is_guest'])
+		echo '<a'.$classes.' href="'.$url.'">'.$lang['Mark as read'].'</a>';
 }

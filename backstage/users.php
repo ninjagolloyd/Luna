@@ -4,16 +4,14 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', '../');
 require FORUM_ROOT.'include/common.php';
 
-if (!$luna_user['is_admmod']) {
-    header("Location: ../login.php");
-}
-
+if (!$luna_user['is_admmod'])
+	header("Location: ../login.php");
 // Show IP statistics for a certain user ID
 if (isset($_GET['ip_stats'])) {
 	$ip_stats = intval($_GET['ip_stats']);
@@ -40,10 +38,10 @@ if (isset($_GET['ip_stats'])) {
 
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?php echo $lang['Results head'] ?></h3>
-    </div>
-    <div class="panel-body">
+	<div class="panel-heading">
+		<h3 class="panel-title"><?php echo $lang['Results head'] ?></h3>
+	</div>
+	<div class="panel-body">
 		<?php echo $paging_links ?>
 	</div>
 	<table class="table table-striped table-hover">
@@ -114,10 +112,10 @@ if (isset($_GET['show_users'])) {
 
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?php echo $lang['Results head'] ?></h3>
-    </div>
-    <div class="panel-body">
+	<div class="panel-heading">
+		<h3 class="panel-title"><?php echo $lang['Results head'] ?></h3>
+	</div>
+	<div class="panel-body">
 		<?php echo $paging_links ?>
 	</div>
 	<table class="table table-striped table-hover">
@@ -197,7 +195,7 @@ if (isset($_GET['show_users'])) {
 
 
 // Move multiple users to other user groups
-else if (isset($_POST['move_users']) || isset($_POST['move_users_comply'])) {
+elseif (isset($_POST['move_users']) || isset($_POST['move_users_comply'])) {
 	if ($luna_user['g_id'] > FORUM_ADMIN)
 		message_backstage($lang['No permission'], false, '403 Forbidden');
 
@@ -278,16 +276,16 @@ else if (isset($_POST['move_users']) || isset($_POST['move_users_comply'])) {
 
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?php echo $lang['Move users'] ?></h3>
-    </div>
-    <div class="panel-body">
-        <form class="form-horizontal" name="confirm_move_users" method="post" action="users.php">
-            <input type="hidden" name="users" value="<?php echo implode(',', $user_ids) ?>" />
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['New group label'] ?><span class="help-block"><?php echo $lang['New group help'] ?></span></label>
-                    <div class="col-sm-9">
+	<div class="panel-heading">
+		<h3 class="panel-title"><?php echo $lang['Move users'] ?></h3>
+	</div>
+	<div class="panel-body">
+		<form class="form-horizontal" name="confirm_move_users" method="post" action="users.php">
+			<input type="hidden" name="users" value="<?php echo implode(',', $user_ids) ?>" />
+			<fieldset>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['New group label'] ?><span class="help-block"><?php echo $lang['New group help'] ?></span></label>
+					<div class="col-sm-9">
 						<div class="input-group">
 							<select class="form-control" name="new_group" tabindex="1">
 	<?php foreach ($all_groups as $gid => $group) : ?>											<option value="<?php echo $gid ?>"><?php echo luna_htmlspecialchars($group) ?></option>
@@ -295,10 +293,10 @@ else if (isset($_POST['move_users']) || isset($_POST['move_users_comply'])) {
 							</select>
 							<span class="input-group-btn"><input class="btn btn-primary" type="submit" name="move_users_comply" value="<?php echo $lang['Save'] ?>" tabindex="2" /></span>
 						</div>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
+					</div>
+				</div>
+			</fieldset>
+		</form>
 	</div>
 </div>
 <?php
@@ -308,7 +306,7 @@ else if (isset($_POST['move_users']) || isset($_POST['move_users_comply'])) {
 
 
 // Delete multiple users
-else if (isset($_POST['delete_users']) || isset($_POST['delete_users_comply'])) {
+elseif (isset($_POST['delete_users']) || isset($_POST['delete_users_comply'])) {
 	if ($luna_user['g_id'] > FORUM_ADMIN)
 		message_backstage($lang['No permission'], false, '403 Forbidden');
 
@@ -416,14 +414,14 @@ else if (isset($_POST['delete_users']) || isset($_POST['delete_users_comply'])) 
 
 ?>
 <form name="confirm_del_users" method="post" action="users.php">
-    <div class="panel panel-danger">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Delete users'] ?></h3>
-        </div>
-        <div class="panel-body">
-            <input type="hidden" name="users" value="<?php echo implode(',', $user_ids) ?>" />
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Delete users'] ?></h3>
+		</div>
+		<div class="panel-body">
+			<input type="hidden" name="users" value="<?php echo implode(',', $user_ids) ?>" />
 			<fieldset>
-            	<p><?php echo $lang['Delete warning'] ?></p>
+				<p><?php echo $lang['Delete warning'] ?></p>
 				<div class="checkbox">
 					<label>
 						<input type="checkbox" name="delete_posts" value="1" checked />
@@ -431,12 +429,11 @@ else if (isset($_POST['delete_users']) || isset($_POST['delete_users_comply'])) 
 					</label>
 				</div>
 			</fieldset>
-        </div>
-        <div class="panel-footer">
-            <input class="btn btn-danger" type="submit" name="delete_users_comply" value="<?php echo $lang['Delete'] ?>" />
-            <a class="btn btn-link" href="javascript:history.go(-1)"><?php echo $lang['Go back'] ?></a>
-        </div>
-    </div>
+		</div>
+		<div class="panel-footer">
+			<button class="btn btn-danger" type="submit" name="delete_users_comply"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></button>
+		</div>
+	</div>
 </form>
 <?php
 
@@ -445,7 +442,7 @@ else if (isset($_POST['delete_users']) || isset($_POST['delete_users_comply'])) 
 
 
 // Ban multiple users
-else if (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
+elseif (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 	if ($luna_user['g_id'] != FORUM_ADMIN && ($luna_user['g_moderator'] != '1' || $luna_user['g_mod_ban_users'] == '0'))
 		message_backstage($lang['No permission'], false, '403 Forbidden');
 
@@ -575,7 +572,7 @@ else if (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 <?php
 
 	require 'footer.php';
-} else if (isset($_GET['find_user'])) {
+} elseif (isset($_GET['find_user'])) {
 	$form = isset($_GET['form']) ? $_GET['form'] : array();
 
 	// trim() all elements in $form
@@ -703,9 +700,9 @@ else if (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 
 ?>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?php echo $lang['Results head'] ?></h3>
-    </div>
+	<div class="panel-heading">
+		<h3 class="panel-title"><?php echo $lang['Results head'] ?></h3>
+	</div>
 	<form id="search-users-form" action="users.php" method="post">
 		<div class="panel-body">
 			<?php echo $paging_links ?>
@@ -715,7 +712,7 @@ else if (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 						<?php if ($can_ban) : ?>
 						<input class="btn btn-danger" type="submit" name="ban_users" value="<?php echo $lang['Ban'] ?>" />
 						<?php endif; if ($can_delete) : ?>
-						<input class="btn btn-danger" type="submit" name="delete_users" value="<?php echo $lang['Delete'] ?>" />
+						<button class="btn btn-danger" type="submit" name="delete_users"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></button>
 						<?php endif; if ($can_move) : ?>
 						<input class="btn btn-primary" type="submit" name="move_users" value="<?php echo $lang['Change group'] ?>" />
 						<?php endif; ?>
@@ -748,12 +745,12 @@ else if (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 			if (($user_data['g_id'] == '' || $user_data['g_id'] == FORUM_UNVERIFIED) && $user_title != $lang['Banned'])
 				$user_title = '<span class="warntext">'.$lang['Not verified'].'</span>';
 
-			$actions = '<a href="users.php?ip_stats='.$user_data['id'].'">'.$lang['Results view IP link'].'</a> &middot <a href="../search.php?action=show_user_posts&amp;user_id='.$user_data['id'].'">'.$lang['Posts table'].'</a>';
+			$actions = '<a href="users.php?ip_stats='.$user_data['id'].'">'.$lang['Results view IP link'].'</a> &middot; <a href="../search.php?action=show_user_posts&amp;user_id='.$user_data['id'].'">'.$lang['Posts table'].'</a>';
 
 ?>
 				<tr>
 					<td><?php echo '<a href="../me.php?id='.$user_data['id'].'">'.luna_htmlspecialchars($user_data['username']).'</a>' ?></td>
-					<td><a href="mailto:<?php echo luna_htmlspecialchars($user_data['email']) ?>"><?php echo luna_htmlspecialchars($user_data['email']) ?></a></td>                 <td><?php echo $user_title ?></td>
+					<td><a href="mailto:<?php echo luna_htmlspecialchars($user_data['email']) ?>"><?php echo luna_htmlspecialchars($user_data['email']) ?></a></td>				 <td><?php echo $user_title ?></td>
 					<td class="text-center"><?php echo forum_number_format($user_data['num_posts']) ?></td>
 					<td><?php echo ($user_data['admin_note'] != '') ? luna_htmlspecialchars($user_data['admin_note']) : '&#160;' ?></td>
 					<td><?php echo $actions ?></td>
@@ -777,7 +774,7 @@ else if (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 						<?php if ($can_ban) : ?>
 						<input class="btn btn-danger" type="submit" name="ban_users" value="<?php echo $lang['Ban'] ?>" />
 						<?php endif; if ($can_delete) : ?>
-						<input class="btn btn-danger" type="submit" name="delete_users" value="<?php echo $lang['Delete'] ?>" />
+						<button class="btn btn-danger" type="submit" name="delete_users"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></button>
 						<?php endif; if ($can_move) : ?>
 						<input class="btn btn-primary" type="submit" name="move_users" value="<?php echo $lang['Change group'] ?>" />
 						<?php endif; ?>
@@ -803,13 +800,13 @@ if (isset($_GET['deleted']))
 	echo '<div class="alert alert-danger"><h4>'.$lang['User deleted'].'</h4></div>';
 ?>
 <form id="find_user" method="get" action="users.php">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['User search'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="find_user" value="<?php echo $lang['Submit search'] ?>" tabindex="1" /></span></h3>
-        </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['User search'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="find_user" value="<?php echo $lang['Search'] ?>" tabindex="1" /></span></h3>
+		</div>
 		<fieldset>
 			<div class="panel-body">
-                <p><?php echo $lang['User search info'] ?></p>
+				<p><?php echo $lang['User search info'] ?></p>
 			</div>
 			<table class="table">
 				<tr>
@@ -907,25 +904,25 @@ if (isset($_GET['deleted']))
 				</tr>
 			</table>
 		</fieldset>
-    </div>
+	</div>
 </form>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title"><?php echo $lang['IP search head'] ?></h3>
-    </div>
-    <div class="panel-body">
-        <form method="get" action="users.php">
-            <fieldset>
-                <div class="input-group">
+	<div class="panel-heading">
+		<h3 class="panel-title"><?php echo $lang['IP search head'] ?></h3>
+	</div>
+	<div class="panel-body">
+		<form method="get" action="users.php">
+			<fieldset>
+				<div class="input-group">
 					<input type="text" class="form-control" name="show_users" maxlength="15" tabindex="24" />
 					<span class="input-group-btn">
 						<input class="btn btn-primary" type="submit" value="<?php echo $lang['Find IP address'] ?>" tabindex="25" />
 					</span>
 				</div>
-                <span class="help-block"><?php echo $lang['IP address help'] ?></span>
-            </fieldset>
-        </form>
-    </div>
+				<span class="help-block"><?php echo $lang['IP address help'] ?></span>
+			</fieldset>
+		</form>
+	</div>
 </div>
 <?php
 

@@ -4,16 +4,14 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', '../');
 require FORUM_ROOT.'include/common.php';
 
-if (!$luna_user['is_admmod']) {
-    header("Location: ../login.php");
-}
-
+if (!$luna_user['is_admmod'])
+	header("Location: ../login.php");
 if ($luna_user['g_id'] != FORUM_ADMIN)
 	message_backstage($lang['No permission'], false, '403 Forbidden');
 
@@ -33,7 +31,7 @@ if (isset($_POST['add_forum'])) {
 }
 
 // Delete a forum
-else if (isset($_GET['del_forum'])) {
+elseif (isset($_GET['del_forum'])) {
 	confirm_referrer('backstage/board.php');
 	
 	$forum_id = intval($_GET['del_forum']);
@@ -77,17 +75,17 @@ else if (isset($_GET['del_forum'])) {
 ?>
 <form method="post" action="board.php?del_forum=<?php echo $forum_id ?>">
 	<fieldset>
-    	<div class="panel panel-danger">
-        	<div class="panel-heading">
-            	<h3 class="panel-title"><?php echo $lang['Confirm delete head'] ?></h3>
-            </div>
-            <div class="panel-body">
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				<h3 class="panel-title"><?php echo $lang['Confirm delete head'] ?></h3>
+			</div>
+			<div class="panel-body">
 				<p><?php printf($lang['Confirm delete forum info'], $forum_name) ?> <?php echo $lang['Confirm delete forum'] ?></p>
-            </div>
-            <div class="panel-footer">
-            	<input class="btn btn-danger" type="submit" name="del_forum_comply" value="<?php echo $lang['Delete'] ?>" /><a class="btn btn-link" href="javascript:history.go(-1)"><?php echo $lang['Go back'] ?></a>
-            </div>
-        </div>
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-danger" type="submit" name="del_forum_comply"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></button>
+			</div>
+		</div>
 	</fieldset>
 </form>
 <?php
@@ -97,7 +95,7 @@ else if (isset($_GET['del_forum'])) {
 }
 
 // Update forum positions
-else if (isset($_POST['update_positions'])) {
+elseif (isset($_POST['update_positions'])) {
 	confirm_referrer('backstage/board.php');
 	
 	foreach ($_POST['position'] as $forum_id => $disp_position) {
@@ -109,7 +107,7 @@ else if (isset($_POST['update_positions'])) {
 	}
 
 	redirect('backstage/board.php?saved=true');
-} else if (isset($_GET['edit_forum'])) {
+} elseif (isset($_GET['edit_forum'])) {
 	$forum_id = intval($_GET['edit_forum']);
 	if ($forum_id < 1)
 		message_backstage($lang['Bad request'], false, '404 Not Found');
@@ -160,7 +158,7 @@ else if (isset($_POST['update_positions'])) {
 		}
 
 		redirect('backstage/board.php?saved=true');
-	} else if (isset($_POST['revert_perms'])) {
+	} elseif (isset($_POST['revert_perms'])) {
 		confirm_referrer('backstage/board.php');
 	
 		$db->query('DELETE FROM '.$db->prefix.'forum_perms WHERE forum_id='.$forum_id) or error('Unable to delete group forum permissions', __FILE__, __LINE__, $db->error());
@@ -190,27 +188,27 @@ else if (isset($_POST['update_positions'])) {
 
 ?>
 <form id="edit_forum" class="form-horizontal" method="post" action="board.php?edit_forum=<?php echo $forum_id ?>">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Edit details subhead'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="save" value="<?php echo $lang['Save'] ?>" tabindex="<?php echo $cur_index++ ?>" /></span></h3>
-        </div>
-        <div class="panel-body">
-            <fieldset>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Forum name label'] ?></label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" name="forum_name" maxlength="80" value="<?php echo luna_htmlspecialchars($cur_forum['forum_name']) ?>" tabindex="1" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Forum description label'] ?></label>
-                    <div class="col-sm-9">
-                        <textarea class="form-control" name="forum_desc" rows="3" tabindex="2"><?php echo luna_htmlspecialchars($cur_forum['forum_desc']) ?></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Parent section</label>
-                    <div class="col-sm-9">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Edit details subhead'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="save" value="<?php echo $lang['Save'] ?>" tabindex="<?php echo $cur_index++ ?>" /></span></h3>
+		</div>
+		<div class="panel-body">
+			<fieldset>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Forum name label'] ?></label>
+					<div class="col-sm-9">
+						<input type="text" class="form-control" name="forum_name" maxlength="80" value="<?php echo luna_htmlspecialchars($cur_forum['forum_name']) ?>" tabindex="1" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Forum description label'] ?></label>
+					<div class="col-sm-9">
+						<textarea class="form-control" name="forum_desc" rows="3" tabindex="2"><?php echo luna_htmlspecialchars($cur_forum['forum_desc']) ?></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Parent section</label>
+					<div class="col-sm-9">
 						<select name="parent_id" class="form-control">
 							<option value="0">No parent forum selected</option>
 <?php
@@ -238,11 +236,11 @@ else if (isset($_POST['update_positions'])) {
 ?>
 							</optgroup>
 						</select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Category label'] ?></label>
-                    <div class="col-sm-9">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Category label'] ?></label>
+					<div class="col-sm-9">
 						<select class="form-control" name="cat_id" tabindex="3">
 <?php
 
@@ -254,22 +252,22 @@ else if (isset($_POST['update_positions'])) {
 
 ?>
 						</select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label"><?php echo $lang['Sort by label'] ?></label>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label"><?php echo $lang['Sort by label'] ?></label>
 					<div class="col-sm-9">
-                        <select class="form-control" name="sort_by" tabindex="4">
-                            <option value="0"<?php if ($cur_forum['sort_by'] == '0') echo ' selected' ?>><?php echo $lang['Last post'] ?></option>
-                            <option value="1"<?php if ($cur_forum['sort_by'] == '1') echo ' selected' ?>><?php echo $lang['Topic start'] ?></option>
-                            <option value="2"<?php if ($cur_forum['sort_by'] == '2') echo ' selected' ?>><?php echo $lang['Subject'] ?></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Forum color</label>
-                    <div class="col-sm-9">
-                        <div class="btn-group accent-group" data-toggle="buttons">
+						<select class="form-control" name="sort_by" tabindex="4">
+							<option value="0"<?php if ($cur_forum['sort_by'] == '0') echo ' selected' ?>><?php echo $lang['Last post'] ?></option>
+							<option value="1"<?php if ($cur_forum['sort_by'] == '1') echo ' selected' ?>><?php echo $lang['Topic start'] ?></option>
+							<option value="2"<?php if ($cur_forum['sort_by'] == '2') echo ' selected' ?>><?php echo $lang['Subject'] ?></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Forum color</label>
+					<div class="col-sm-9">
+						<div class="btn-group accent-group" data-toggle="buttons">
 							<label class="btn btn-primary color-accent accent-blue<?php if ($cur_forum['color'] == '#14a3ff') echo ' active' ?>">
 								<input type="radio" name="color" id="blue" value="#14a3ff"<?php if ($cur_forum['color'] == '#14a3ff') echo ' checked' ?>>
 							</label>
@@ -306,20 +304,20 @@ else if (isset($_POST['update_positions'])) {
 							<label class="btn btn-primary color-accent accent-black<?php if ($cur_forum['color'] == '#444444') echo ' active' ?>">
 								<input type="radio" name="color" id="black" value="#444444"<?php if ($cur_forum['color'] == '#444444') echo ' checked' ?>>
 							</label>
-                        </div>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?php echo $lang['Group permissions subhead'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="save" value="<?php echo $lang['Save'] ?>" tabindex="<?php echo $cur_index++ ?>" /></span></h3>
-        </div>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Group permissions subhead'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="save" value="<?php echo $lang['Save'] ?>" tabindex="<?php echo $cur_index++ ?>" /></span></h3>
+		</div>
 		<fieldset>
 			<div class="panel-body">
-                <p><?php printf($lang['Group permissions info'], '<a href="groups.php">'.$lang['User groups'].'</a>') ?></p>
-                <div><input class="btn btn-warning pull-right" type="submit" name="revert_perms" value="<?php echo $lang['Revert to default'] ?>" tabindex="<?php echo $cur_index++ ?>" /></div>
+				<p><?php printf($lang['Group permissions info'], '<a href="groups.php">'.$lang['User groups'].'</a>') ?></p>
+				<div><input class="btn btn-warning pull-right" type="submit" name="revert_perms" value="<?php echo $lang['Revert to default'] ?>" tabindex="<?php echo $cur_index++ ?>" /></div>
 			</div>
 			<table class="table">
 				<thead>
@@ -369,7 +367,7 @@ else if (isset($_POST['update_positions'])) {
 				</tbody>
 			</table>
 		</fieldset>
-    </div>
+	</div>
 </form>
 
 <?php
@@ -378,7 +376,7 @@ else if (isset($_POST['update_positions'])) {
 }
 
 // Add a new category
-else if (isset($_POST['add_cat'])) {
+elseif (isset($_POST['add_cat'])) {
 	confirm_referrer('backstage/board.php');
 	
 	$new_cat_name = luna_trim($_POST['new_cat_name']);
@@ -391,7 +389,7 @@ else if (isset($_POST['add_cat'])) {
 }
 
 // Delete a category
-else if (isset($_POST['del_cat']) || isset($_POST['del_cat_comply'])) {
+elseif (isset($_POST['del_cat']) || isset($_POST['del_cat_comply'])) {
 	confirm_referrer('backstage/board.php');
 	
 	$cat_to_delete = intval($_POST['cat_to_delete']);
@@ -444,20 +442,20 @@ else if (isset($_POST['del_cat']) || isset($_POST['del_cat_comply'])) {
 
 ?>
 <form method="post" action="board.php">
-    <input type="hidden" name="cat_to_delete" value="<?php echo $cat_to_delete ?>" />
-    <fieldset>
-    	<div class="panel panel-danger">
-        	<div class="panel-heading">
-            	<h3 class="panel-title"><?php echo $lang['Confirm delete cat head'] ?></h3>
-            </div>
-            <div class="panel-body">
+	<input type="hidden" name="cat_to_delete" value="<?php echo $cat_to_delete ?>" />
+	<fieldset>
+		<div class="panel panel-danger">
+			<div class="panel-heading">
+				<h3 class="panel-title"><?php echo $lang['Confirm delete cat head'] ?></h3>
+			</div>
+			<div class="panel-body">
 				<p><?php printf($lang['Confirm delete cat info'], $forum_name) ?> <?php echo $lang['Delete category warn'] ?></p>
-            </div>
-            <div class="panel-footer">
-            	<input class="btn btn-danger" type="submit" name="del_cat_comply" value="<?php echo $lang['Delete'] ?>" /><a class="btn btn-link" href="javascript:history.go(-1)"><?php echo $lang['Go back'] ?></a>
-            </div>
-        </div>
-    </fieldset>
+			</div>
+			<div class="panel-footer">
+				<button class="btn btn-danger" type="submit" name="del_cat_comply"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></button>
+			</div>
+		</div>
+	</fieldset>
 </form>
 <?php
 
@@ -512,7 +510,7 @@ else if (isset($_POST['del_cat']) || isset($_POST['del_cat_comply'])) {
 ?>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title"><?php echo $lang['Add forum'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="add_forum" value="<?php echo $lang['Add'] ?>" tabindex="2" /></span></h3>
+					<h3 class="panel-title"><?php echo $lang['Add forum'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="add_forum" tabindex="2"><span class="fa fa-plus"></span> <?php echo $lang['Add'] ?></button></span></h3>
 				</div>
 				<fieldset>
 					<table class="table">
@@ -541,7 +539,7 @@ else if (isset($_POST['del_cat']) || isset($_POST['del_cat_comply'])) {
 		<form method="post" action="board.php">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title"><?php echo $lang['Add categories head'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="add_cat" value="<?php echo $lang['Add'] ?>" tabindex="2" /></span></h3>
+					<h3 class="panel-title"><?php echo $lang['Add categories head'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="add_cat" tabindex="2"><span class="fa fa-plus"></span> <?php echo $lang['Add'] ?></button></span></h3>
 				</div>
 				<fieldset>
 					<table class="table">
@@ -558,7 +556,7 @@ else if (isset($_POST['del_cat']) || isset($_POST['del_cat_comply'])) {
 		<form method="post" action="board.php">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title"><?php echo $lang['Delete categories head'] ?><span class="pull-right"><input class="btn btn-danger" type="submit" name="del_cat" value="<?php echo $lang['Delete'] ?>" tabindex="4" /></span></h3>
+					<h3 class="panel-title"><?php echo $lang['Delete categories head'] ?><span class="pull-right"><button class="btn btn-danger" type="submit" name="del_cat" tabindex="4"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></button></span></h3>
 				</div>
 				<fieldset>
 					<table class="table">
@@ -622,7 +620,7 @@ while ($cur_forum = $db->fetch_assoc($result)) {
 
 ?>
 							<tr>
-								<td class="col-xs-3"><div class="btn-group"><a class="btn btn-primary" href="board.php?edit_forum=<?php echo $cur_forum['fid'] ?>" tabindex="<?php echo $cur_index++ ?>"><?php echo $lang['Edit'] ?></a><a class="btn btn-danger" href="board.php?del_forum=<?php echo $cur_forum['fid'] ?>" tabindex="<?php echo $cur_index++ ?>"><?php echo $lang['Delete'] ?></a></div></td>
+								<td class="col-xs-3"><div class="btn-group"><a class="btn btn-primary" href="board.php?edit_forum=<?php echo $cur_forum['fid'] ?>" tabindex="<?php echo $cur_index++ ?>"><?php echo $lang['Edit'] ?></a><a class="btn btn-danger" href="board.php?del_forum=<?php echo $cur_forum['fid'] ?>" tabindex="<?php echo $cur_index++ ?>"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></a></div></td>
 								<td class="col-xs-4"><strong><?php echo luna_htmlspecialchars($cur_forum['forum_name']) ?></strong></td>
 								<td class="col-xs-5"><input type="text" class="form-control" name="position[<?php echo $cur_forum['fid'] ?>]" maxlength="3" value="<?php echo $cur_forum['disp_position'] ?>" tabindex="<?php echo $cur_index++ ?>" /></td>
 							</tr>

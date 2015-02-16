@@ -4,7 +4,7 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 // Make sure no one attempts to run this script "directly"
@@ -22,10 +22,10 @@ $p = isset($p) ? $p : null;
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" type="text/css" href="../include/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="ROBOTS" content="NOINDEX, FOLLOW" />
-        <title>Backstage</title>
+		<meta name="ROBOTS" content="NOINDEX, FOLLOW" />
+		<title>Backstage</title>
 	</head>
 	<body>
 <?php

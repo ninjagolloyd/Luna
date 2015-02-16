@@ -4,18 +4,29 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', '../');
 require FORUM_ROOT.'include/common.php';
 
-if (!$luna_user['is_admmod']) {
-    header("Location: ../login.php");
+if (!$luna_user['is_admmod'])
+	header("Location: ../login.php");
+
+// Check if install.php is a thing
+if ($action == 'remove_install_file') {
+	$deleted = @unlink(FORUM_ROOT.'install.php');
+
+	if ($deleted)
+		redirect('index.php');
+	else
+		message_backstage($lang['Delete install.php failed']);
 }
 
+$install_file_exists = is_file(FORUM_ROOT.'install.php');
+
 if (isset($_POST['form_sent'])) {
-	confirm_referrer('backstage/index.php', $lang['Bad HTTP Referer message']);
+	confirm_referrer('backstage/index.php');
 
 	$db->query('UPDATE '.$db->prefix.'config SET conf_value=\''.luna_htmlspecialchars($_POST['form']['admin_note']).'\' WHERE conf_name=\'o_admin_note\'') or error('Unable to update board config', __FILE__, __LINE__, $db->error());
 
@@ -30,7 +41,7 @@ if (isset($_POST['form_sent'])) {
 }
 
 if (isset($_POST['first_run_disable'])) {
-	confirm_referrer('backstage/index.php', $lang['Bad HTTP Referer message']);
+	confirm_referrer('backstage/index.php');
 
 	$db->query('UPDATE '.$db->prefix.'config SET conf_value=1 WHERE conf_name=\'o_first_run_backstage\'') or error('Unable to update board config', __FILE__, __LINE__, $db->error());
 
@@ -91,6 +102,12 @@ if(is_writable(FORUM_ROOT.'config.php')): ?>
 <div class="alert alert-warning">The config file is writeable at this moment, you might want to set the CHMOD to 640 or 644.</div>
 <?php endif;
 
+if ($install_file_exists) : ?>
+<div class="alert alert-warning">
+	<p><?php echo $lang['Install file exists'] ?> <span class="pull-right"><a href="index.php?action=remove_install_file"><?php echo $lang['Delete install file'] ?></a></span></p>
+</div>
+<?php endif;
+
 if ($luna_config['o_first_run_backstage'] == 0) { ?>
 <div class="panel panel-primary hidden-xs">
 	<div class="panel-heading">
@@ -138,7 +155,7 @@ if ($luna_config['o_first_run_backstage'] == 0) { ?>
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><?php echo $lang['New reports head'] ?><span class="pull-right"><a class="btn btn-primary" href="reports.php"><?php echo $lang['View all'] ?></a></span></h3>
+						<h3 class="panel-title"><?php echo $lang['New reports head'] ?><span class="pull-right"><a class="btn btn-primary" href="reports.php"><span class="fa fa-eye"></span> <?php echo $lang['View all'] ?></a></span></h3>
 					</div>
 					<table class="table">
 						<thead>

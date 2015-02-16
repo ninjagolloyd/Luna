@@ -1,0 +1,19 @@
+/* List group items */
+.list-group-item h3 {
+	margin: 0;
+}
+
+/* Forum */
+.jumbotron h2 {
+	margin-bottom: 0;
+}
+
+.forum-entry {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-bottom: #ddd 1px solid;
+}
+
+.forum-desc {
+	color: #fff;
+}

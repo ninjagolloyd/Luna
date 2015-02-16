@@ -475,15 +475,15 @@ function check_username($username, $exclude_id = null) {
 	// Validate username
 	if (luna_strlen($username) < 2)
 		$errors[] = $lang['Username too short'];
-	else if (luna_strlen($username) > 25) // This usually doesn't happen since the form element only accepts 25 characters
+	elseif (luna_strlen($username) > 25) // This usually doesn't happen since the form element only accepts 25 characters
 		$errors[] = $lang['Username too long'];
-	else if (!strcasecmp($username, 'Guest') || !utf8_strcasecmp($username, $lang['Guest']))
+	elseif (!strcasecmp($username, 'Guest') || !utf8_strcasecmp($username, $lang['Guest']))
 		$errors[] = $lang['Username guest'];
-	else if (preg_match('%[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}%', $username) || preg_match('%((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))%', $username))
+	elseif (preg_match('%[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}%', $username) || preg_match('%((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))%', $username))
 		$errors[] = $lang['Username IP'];
-	else if ((strpos($username, '[') !== false || strpos($username, ']') !== false) && strpos($username, '\'') !== false && strpos($username, '"') !== false)
+	elseif ((strpos($username, '[') !== false || strpos($username, ']') !== false) && strpos($username, '\'') !== false && strpos($username, '"') !== false)
 		$errors[] = $lang['Username reserved chars'];
-	else if (preg_match('%(?:\[/?(?:b|u|s|ins|del|em|i|h|colou?r|quote|code|img|url|email|list|\*|topic|post|forum|user)\]|\[(?:img|url|quote|list)=)%i', $username))
+	elseif (preg_match('%(?:\[/?(?:b|u|s|ins|del|em|i|h|colou?r|quote|code|img|url|email|list|\*|topic|post|forum|user)\]|\[(?:img|url|quote|list)=)%i', $username))
 		$errors[] = $lang['Username BBCode'];
 
 	// Check username for any censored words
@@ -529,7 +529,7 @@ function update_users_online() {
 			if ($cur_user['logged'] < ($now-$luna_config['o_timeout_visit'])) {
 				$db->query('UPDATE '.$db->prefix.'users SET last_visit='.$cur_user['logged'].' WHERE id='.$cur_user['user_id']) or error('Unable to update user visit data', __FILE__, __LINE__, $db->error());
 				$db->query('DELETE FROM '.$db->prefix.'online WHERE user_id='.$cur_user['user_id']) or error('Unable to delete from online list', __FILE__, __LINE__, $db->error());
-			} else if ($cur_user['idle'] == '0')
+			} elseif ($cur_user['idle'] == '0')
 				$db->query('UPDATE '.$db->prefix.'online SET idle=1 WHERE user_id='.$cur_user['user_id']) or error('Unable to insert into online list', __FILE__, __LINE__, $db->error());
 		}
 	}
@@ -728,11 +728,16 @@ function delete_avatar($user_id) {
 //
 // Delete a topic and all of its posts
 //
-function delete_topic($topic_id) {
+function delete_topic($topic_id, $type) {
 	global $db;
 
 	// Delete the topic and any redirect topics
-	$db->query('DELETE FROM '.$db->prefix.'topics WHERE id='.$topic_id.' OR moved_to='.$topic_id) or error('Unable to delete topic', __FILE__, __LINE__, $db->error());
+	if ($type == "hard")
+		$db->query('DELETE FROM '.$db->prefix.'topics WHERE id='.$topic_id.' OR moved_to='.$topic_id) or error('Unable to delete topic', __FILE__, __LINE__, $db->error());
+	elseif ($type == "soft")
+		$db->query('UPDATE '.$db->prefix.'topics SET soft = 1 WHERE id='.$topic_id.' OR moved_to='.$topic_id) or error('Unable to soft delete topic', __FILE__, __LINE__, $db->error());
+	else
+		$db->query('UPDATE '.$db->prefix.'topics SET soft = 0 WHERE id='.$topic_id.' OR moved_to='.$topic_id) or error('Unable to soft delete topic', __FILE__, __LINE__, $db->error());
 
 	// Create a list of the post IDs in this topic
 	$post_ids = '';
@@ -742,14 +747,22 @@ function delete_topic($topic_id) {
 
 	// Make sure we have a list of post IDs
 	if ($post_ids != '') {
-		strip_search_index($post_ids);
-
-		// Delete posts in topic
-		$db->query('DELETE FROM '.$db->prefix.'posts WHERE topic_id='.$topic_id) or error('Unable to delete posts', __FILE__, __LINE__, $db->error());
+		if ($type == "hard") {
+			strip_search_index($post_ids);
+			// Delete posts in topic
+			$db->query('DELETE FROM '.$db->prefix.'posts WHERE topic_id='.$topic_id) or error('Unable to delete posts', __FILE__, __LINE__, $db->error());
+		} else {
+			if ($type == "soft")
+				$db->query('UPDATE '.$db->prefix.'posts SET soft = 1 WHERE topic_id='.$topic_id) or error('Unable to soft delete posts', __FILE__, __LINE__, $db->error());
+			else
+				$db->query('UPDATE '.$db->prefix.'posts SET soft = 0 WHERE topic_id='.$topic_id) or error('Unable to soft delete posts', __FILE__, __LINE__, $db->error());
+		}
 	}
 
-	// Delete any subscriptions for this topic
-	$db->query('DELETE FROM '.$db->prefix.'topic_subscriptions WHERE topic_id='.$topic_id) or error('Unable to delete subscriptions', __FILE__, __LINE__, $db->error());
+	if ($type != "reset") {
+		// Delete any subscriptions for this topic
+		$db->query('DELETE FROM '.$db->prefix.'topic_subscriptions WHERE topic_id='.$topic_id) or error('Unable to delete subscriptions', __FILE__, __LINE__, $db->error());
+	}
 }
 
 
@@ -861,13 +874,13 @@ function get_title($user) {
 	if ($user['title'] != '')
 		$user_title = luna_htmlspecialchars($user['title']);
 	// If the user is banned
-	else if (in_array(utf8_strtolower($user['username']), $ban_list))
+	elseif (in_array(utf8_strtolower($user['username']), $ban_list))
 		$user_title = $lang['Banned'];
 	// If the user group has a default user title
-	else if ($user['g_user_title'] != '')
+	elseif ($user['g_user_title'] != '')
 		$user_title = luna_htmlspecialchars($user['g_user_title']);
 	// If the user is a guest
-	else if ($user['g_id'] == FORUM_GUEST)
+	elseif ($user['g_id'] == FORUM_GUEST)
 		$user_title = $lang['Guest'];
 	else {
 		// Are there any ranks?
@@ -922,7 +935,7 @@ function paginate($num_pages, $cur_page, $link) {
 		for ($current = ($cur_page == 5) ? $cur_page - 3 : $cur_page - 2, $stop = ($cur_page + 4 == $num_pages) ? $cur_page + 4 : $cur_page + 3; $current < $stop; ++$current) {
 			if ($current < 1 || $current > $num_pages)
 				continue;
-			else if ($current != $cur_page || $link_to_all)
+			elseif ($current != $cur_page || $link_to_all)
 				$pages[] = '<li><a'.(empty($pages) ? ' class="item1"' : '').' href="'.$link.'&amp;p='.$current.'">'.forum_number_format($current).'</a></li>';
 			else
 				$pages[] = '<li class="active"><span>'.forum_number_format($current).' <span class="sr-only">(current)</span></span></li>';
@@ -973,7 +986,7 @@ function simple_paginate($num_pages, $cur_page, $link) {
 		for ($current = ($cur_page == 5) ? $cur_page - 3 : $cur_page - 2, $stop = ($cur_page + 4 == $num_pages) ? $cur_page + 4 : $cur_page + 3; $current < $stop; ++$current) {
 			if ($current < 1 || $current > $num_pages)
 				continue;
-			else if ($current != $cur_page || $link_to_all)
+			elseif ($current != $cur_page || $link_to_all)
 				$pages[] = '<a'.(empty($pages) ? ' class="item1"' : '').' href="'.$link.'&amp;p='.$current.'">'.forum_number_format($current).'</a>';
 			else
 				$pages[] = '<a>'.forum_number_format($current).'</a>';
@@ -1103,13 +1116,13 @@ function format_time($timestamp, $date_only = false, $date_format = null, $time_
 	if(!$no_text) {
 		if ($date == $today)
 			$date = $lang['Today'];
-		else if ($date == $yesterday)
+		elseif ($date == $yesterday)
 			$date = $lang['Yesterday'];
 	}
 
 	if ($date_only)
 		return $date;
-	else if ($time_only)
+	elseif ($time_only)
 		return gmdate($time_format, $timestamp);
 	else
 		return $date.' '.gmdate($time_format, $timestamp);
@@ -1134,7 +1147,7 @@ function random_key($len, $readable = false, $hash = false) {
 
 	if ($hash)
 		return substr(bin2hex($key), 0, $len);
-	else if ($readable) {
+	elseif ($readable) {
 		$chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 		$result = '';
@@ -1204,7 +1217,7 @@ function luna_hash($str) {
 // Compute a hash of $str with SHA512
 //
 function luna_sha2($str, $salt) {
-    return hash("sha512", $salt . hash("sha512", $str));
+	return hash("sha512", $salt . hash("sha512", $str));
 }
 
 
@@ -1307,7 +1320,7 @@ function array_insert(&$input, $offset, $element, $key = null) {
 	// Out of bounds checks
 	if ($offset > count($input))
 		$offset = count($input);
-	else if ($offset < 0)
+	elseif ($offset < 0)
 		$offset = 0;
 
 	$input = array_merge(array_slice($input, 0, $offset), array($key => $element), array_slice($input, $offset));
@@ -1410,17 +1423,17 @@ function error($message, $file = null, $line = null, $db_error = false) {
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<?php $page_title = array(luna_htmlspecialchars($luna_config['o_board_title']), 'Error') ?>
-        <title><?php echo generate_page_title($page_title) ?></title>
+		<title><?php echo generate_page_title($page_title) ?></title>
 		<style type="text/css">
 			body { margin: 10% 20% auto 20%; font: 14px "Segoe UI Light", "Segoe UI", Verdana, Arial, Helvetica, sans-serif; letter-spacing: 1px; }
 			h2 { margin: 0; color: #00a5f5; font-size: 26px; padding: 0 4px; font-weight: 100; }
 			#errorbox div { padding: 0 5px; }
-        </style>
-    </head>
-    <body>
-        <div id="errorbox">
-            <h2>An error was encountered</h2>
-            <div>
+		</style>
+	</head>
+	<body>
+		<div id="errorbox">
+			<h2>An error was encountered</h2>
+			<div>
 <?php
 
 	if (defined('FORUM_DEBUG') && !is_null($file) && !is_null($line)) {
@@ -1436,9 +1449,9 @@ function error($message, $file = null, $line = null, $db_error = false) {
 		echo "\t\t".'Error: <strong>'.$message.'.</strong>'."\n";
 
 ?>
-            </div>
-        </div>
-    </body>
+			</div>
+		</div>
+	</body>
 </html>
 <?php
 
@@ -2002,35 +2015,58 @@ function get_template_path($tpl_file) {
 //
 // Get the view that is required
 //
-function get_view_path($tpl_file) {
-	global $luna_user;
-
-	if (file_exists(FORUM_ROOT.'style/'.$luna_user['style'].'/objects/'.$tpl_file)) {
-		return FORUM_ROOT.'style/'.$luna_user['style'].'/objects/'.$tpl_file;
-	} else {
-		return FORUM_ROOT.'style/Core/templates/views/'.$tpl_file;
-	}
+function get_view_path($object) {
+	global $luna_user, $luna_config;
+	
+	include FORUM_ROOT.'/style/'.$luna_config['o_default_style'].'/information.php';
+	$style_info = new SimpleXMLElement($xmlstr);
+	
+	if (($style_info->parent_theme == '') || (file_exists(FORUM_ROOT.'style/'.$luna_user['style'].'/objects/'.$object)))
+		return FORUM_ROOT.'style/'.$luna_user['style'].'/objects/'.$object;
+	else
+		return FORUM_ROOT.'style/'.$style_info->parent_theme.'/objects/'.$object;
 }
 
 //
 // Get the view that is required
 //
 function load_page($page) {
-	global $luna_user;
+	global $luna_user, $luna_config;
+	
+	include FORUM_ROOT.'/style/'.$luna_config['o_default_style'].'/information.php';
+	$style_info = new SimpleXMLElement($xmlstr);
+	
+	if (($style_info->parent_theme == '') || (file_exists(FORUM_ROOT.'style/'.$luna_config['o_default_style'].'/'.$page)))
+		return FORUM_ROOT.'style/'.$luna_config['o_default_style'].'/'.$page;
+	else
+		return FORUM_ROOT.'style/'.$style_info->parent_theme.'/'.$page;
+}
 
-	return FORUM_ROOT.'style/'.$luna_user['style'].'/'.$page;
+//
+// Get the styles that are required
+//
+function load_css() {
+	global $luna_config;
+	
+	include FORUM_ROOT.'/style/'.$luna_config['o_default_style'].'/information.php';
+	$style_info = new SimpleXMLElement($xmlstr);
+	
+	if ($style_info->parent_theme != '')
+		echo '<link rel="stylesheet" type="text/css" href="style/'.$style_info->parent_theme.'/style.css" />';
+
+	echo '<link rel="stylesheet" type="text/css" href="style/'.$luna_config['o_default_style'].'/style.css" />';
 }
 
 //
 // Delete all content in a folder
 //
 function delete_all($path) {
-    $dir = dir($path);
+	$dir = dir($path);
 
-    while ($file = $dir->read()) {
-        if ($file == '.' || $file == '..') continue;
+	while ($file = $dir->read()) {
+		if ($file == '.' || $file == '..') continue;
 
-        $file = $path.'/'.$file;
+		$file = $path.'/'.$file;
 
 		if ($file != $path.'/.htaccess') { // Never remove a .htaccess
 			if (is_dir($file)) {
@@ -2040,7 +2076,7 @@ function delete_all($path) {
 				unlink($file);
 			}
 		}
-    }
+	}
 }
 
 
@@ -2087,18 +2123,18 @@ function validate_redirect($redirect_url, $fallback_url)
 function num_users_online() {
 	global $db;
 
-    $result_num_users = $db->query('SELECT user_id FROM '.$db->prefix.'online WHERE idle=0 AND user_id>1', false) or error('Unable to fetch online users list', __FILE__, __LINE__, $db->error());
+	$result_num_users = $db->query('SELECT user_id FROM '.$db->prefix.'online WHERE idle=0 AND user_id>1', false) or error('Unable to fetch online users list', __FILE__, __LINE__, $db->error());
 
-    return $db->num_rows($result_num_users);
+	return $db->num_rows($result_num_users);
 }
 
 // Number of guests online
 function num_guests_online() {
 	global $db;
 
-    $result_num_guests = $db->query('SELECT user_id FROM '.$db->prefix.'online WHERE idle=0 AND user_id=1', true) or error('Unable to fetch online guests list', __FILE__, __LINE__, $db->error());
+	$result_num_guests = $db->query('SELECT user_id FROM '.$db->prefix.'online WHERE idle=0 AND user_id=1', true) or error('Unable to fetch online guests list', __FILE__, __LINE__, $db->error());
 
-    return $db->num_rows($result_num_guests);
+	return $db->num_rows($result_num_guests);
 }
 
 // Get forum_id by post_id
@@ -2106,12 +2142,12 @@ function get_forum_id($post_id)
 {
 	global $db;
 
-    $result_fid = $db->query('SELECT t.forum_id FROM '.$db->prefix.'posts as p INNER JOIN '.$db->prefix.'topics as t ON p.topic_id = t.id WHERE p.id='.intval($post_id), true) or error('Unable to fetch forum id', __FILE__, __LINE__, $db->error());
+	$result_fid = $db->query('SELECT t.forum_id FROM '.$db->prefix.'posts as p INNER JOIN '.$db->prefix.'topics as t ON p.topic_id = t.id WHERE p.id='.intval($post_id), true) or error('Unable to fetch forum id', __FILE__, __LINE__, $db->error());
 
-    $row = $db->fetch_row($result_fid);
+	$row = $db->fetch_row($result_fid);
 
-    if($row)
-        return $row[0];
-    else
-        return false;
+	if($row)
+		return $row[0];
+	else
+		return false;
 }

@@ -4,16 +4,14 @@
  * Copyright (C) 2013-2015 Luna
  * Based on code by FluxBB copyright (C) 2008-2012 FluxBB
  * Based on code by Rickard Andersson copyright (C) 2002-2008 PunBB
- * Licensed under GPLv3 (http://modernbb.be/license.php)
+ * Licensed under GPLv3 (http://getluna.org/license.php)
  */
 
 define('FORUM_ROOT', '../');
 require FORUM_ROOT.'include/common.php';
 
-if (!$luna_user['is_admmod']) {
-    header("Location: ../login.php");
-}
-
+if (!$luna_user['is_admmod'])
+	header("Location: ../login.php");
 if ($luna_user['g_id'] != FORUM_ADMIN)
 	message_backstage($lang['No permission'], false, '403 Forbidden');
 
@@ -39,7 +37,7 @@ if (isset($_POST['add_word'])) {
 }
 
 // Update a censor word
-else if (isset($_POST['update'])) {
+elseif (isset($_POST['update'])) {
 	confirm_referrer('backstage/censoring.php');
 	
 	$id = intval(key($_POST['update']));
@@ -62,7 +60,7 @@ else if (isset($_POST['update'])) {
 }
 
 // Remove a censor word
-else if (isset($_POST['remove'])) {
+elseif (isset($_POST['remove'])) {
 	confirm_referrer('backstage/censoring.php');
 	
 	$id = intval(key($_POST['remove']));
@@ -90,7 +88,7 @@ require 'header.php';
 		<form id="censoring" method="post" action="censoring.php">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title"><?php echo $lang['Add word subhead'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="add_word" value="<?php echo $lang['Add'] ?>" tabindex="3" /></span></h3>
+					<h3 class="panel-title"><?php echo $lang['Add word subhead'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="add_word" tabindex="3"><span class="fa fa-plus"></span> <?php echo $lang['Add'] ?></button></span></h3>
 				</div>
 					<fieldset>
 					<div class="panel-body">
