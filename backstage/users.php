@@ -155,7 +155,7 @@ if (isset($_GET['show_users'])) {
 			$actions = '<a href="users.php?ip_stats='.$user_data[$cur_poster['poster_id']]['id'].'">'.$lang['Results view IP link'].'</a> &middot; <a href="../search.php?action=show_user_posts&amp;user_id='.$user_data[$cur_poster['poster_id']]['id'].'">'.$lang['Posts table'].'</a>';
 ?>
 			<tr>
-				<td><?php echo '<a href="../me.php?id='.$user_data[$cur_poster['poster_id']]['id'].'">'.luna_htmlspecialchars($user_data[$cur_poster['poster_id']]['username']).'</a>' ?></td>
+				<td><?php echo '<a href="../profile.php?id='.$user_data[$cur_poster['poster_id']]['id'].'">'.luna_htmlspecialchars($user_data[$cur_poster['poster_id']]['username']).'</a>' ?></td>
 				<td><a href="mailto:<?php echo luna_htmlspecialchars($user_data[$cur_poster['poster_id']]['email']) ?>"><?php echo luna_htmlspecialchars($user_data[$cur_poster['poster_id']]['email']) ?></a></td>
 				<td><?php echo $user_title ?></td>
 				<td class="text-center"><?php echo forum_number_format($user_data[$cur_poster['poster_id']]['num_posts']) ?></td>
@@ -431,7 +431,7 @@ elseif (isset($_POST['delete_users']) || isset($_POST['delete_users_comply'])) {
 			</fieldset>
 		</div>
 		<div class="panel-footer">
-			<button class="btn btn-danger" type="submit" name="delete_users_comply"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></button>
+			<button class="btn btn-danger" type="submit" name="delete_users_comply"><span class="fa fa-fw fa-minus"></span> <?php echo $lang['Delete'] ?></button>
 		</div>
 	</div>
 </form>
@@ -712,7 +712,7 @@ elseif (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 						<?php if ($can_ban) : ?>
 						<input class="btn btn-danger" type="submit" name="ban_users" value="<?php echo $lang['Ban'] ?>" />
 						<?php endif; if ($can_delete) : ?>
-						<button class="btn btn-danger" type="submit" name="delete_users"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></button>
+						<button class="btn btn-danger" type="submit" name="delete_users"><span class="fa fa-fw fa-minus"></span> <?php echo $lang['Delete'] ?></button>
 						<?php endif; if ($can_move) : ?>
 						<input class="btn btn-primary" type="submit" name="move_users" value="<?php echo $lang['Change group'] ?>" />
 						<?php endif; ?>
@@ -749,7 +749,7 @@ elseif (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 
 ?>
 				<tr>
-					<td><?php echo '<a href="../me.php?id='.$user_data['id'].'">'.luna_htmlspecialchars($user_data['username']).'</a>' ?></td>
+					<td><?php echo '<a href="../profile.php?id='.$user_data['id'].'">'.luna_htmlspecialchars($user_data['username']).'</a>' ?></td>
 					<td><a href="mailto:<?php echo luna_htmlspecialchars($user_data['email']) ?>"><?php echo luna_htmlspecialchars($user_data['email']) ?></a></td>				 <td><?php echo $user_title ?></td>
 					<td class="text-center"><?php echo forum_number_format($user_data['num_posts']) ?></td>
 					<td><?php echo ($user_data['admin_note'] != '') ? luna_htmlspecialchars($user_data['admin_note']) : '&#160;' ?></td>
@@ -774,7 +774,7 @@ elseif (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 						<?php if ($can_ban) : ?>
 						<input class="btn btn-danger" type="submit" name="ban_users" value="<?php echo $lang['Ban'] ?>" />
 						<?php endif; if ($can_delete) : ?>
-						<button class="btn btn-danger" type="submit" name="delete_users"><span class="fa fa-minus"></span> <?php echo $lang['Delete'] ?></button>
+						<button class="btn btn-danger" type="submit" name="delete_users"><span class="fa fa-fw fa-minus"></span> <?php echo $lang['Delete'] ?></button>
 						<?php endif; if ($can_move) : ?>
 						<input class="btn btn-primary" type="submit" name="move_users" value="<?php echo $lang['Change group'] ?>" />
 						<?php endif; ?>
@@ -802,7 +802,7 @@ if (isset($_GET['deleted']))
 <form id="find_user" method="get" action="users.php">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo $lang['User search'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="find_user" value="<?php echo $lang['Search'] ?>" tabindex="1" /></span></h3>
+			<h3 class="panel-title"><?php echo $lang['User search'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="find_user"><span class="fa fa-fw fa-search"></span> <?php echo $lang['Search'] ?></button></span></h3>
 		</div>
 		<fieldset>
 			<div class="panel-body">
@@ -916,7 +916,7 @@ if (isset($_GET['deleted']))
 				<div class="input-group">
 					<input type="text" class="form-control" name="show_users" maxlength="15" tabindex="24" />
 					<span class="input-group-btn">
-						<input class="btn btn-primary" type="submit" value="<?php echo $lang['Find IP address'] ?>" tabindex="25" />
+						<button class="btn btn-primary" type="submit"><span class="fa fa-fw fa-search"></span> <?php echo $lang['Find IP address'] ?></button>
 					</span>
 				</div>
 				<span class="help-block"><?php echo $lang['IP address help'] ?></span>

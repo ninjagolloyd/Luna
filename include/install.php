@@ -10,7 +10,7 @@
 class Installer {
 	
 	const DEFAULT_LANG = 'English';
-	const DEFAULT_STYLE = 'Sunrise';
+	const DEFAULT_STYLE = 'Luna';
 	
 	public static function is_supported_php_version() {
 		return function_exists('version_compare') && version_compare(PHP_VERSION, Version::MIN_PHP_VERSION, '>=');
@@ -1466,6 +1466,7 @@ class Installer {
 			'o_pms_mess_per_page'		=> 10,
 			'o_pms_max_receiver'		=> 5,
 			'o_pms_notification'		=> 1,
+			'o_emoji'					=> 0,
 			'o_emoji_size'				=> 16,
 			'o_back_to_top'				=> 1,
 			'o_show_copyright'			=> 1,
@@ -1474,6 +1475,7 @@ class Installer {
 			'o_header_search'			=> 1,
 			'o_board_statistics'		=> 1,
 			'o_notification_flyout'		=> 1,
+			'o_url_scheme'				=> "Folder_based_(fancy)",
 			'p_message_img_tag'			=> 1,
 			'p_message_all_caps'		=> 1,
 			'p_subject_all_caps'		=> 1,

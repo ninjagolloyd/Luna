@@ -67,6 +67,8 @@ require 'header.php';
 				<a href="#p2u2" class="list-group-item">Preview 2 Update 2</a>
 				<a href="#p3" class="list-group-item">Preview 3</a>
 				<a href="#p3u1" class="list-group-item">Preview 3 Update 1</a>
+				<a href="#p3u2" class="list-group-item">Preview 3 Update 2</a>
+				<a href="#p4" class="list-group-item">Preview 4</a>
 			</div>
 		</div>
 	</div>
@@ -114,7 +116,7 @@ require 'header.php';
 				</div>
 				<h4>Emojis</h4>
 				<img class="img-responsive" src="../img/about/emoji.png" />
-				<p>The emoticons we introduced in ModernBB 2.0 have served well, but now, it's time to move on to the next generation: emojis. Unlike the regular emoticons, these icons don't take any bandwidth as they are a font and not an image, which makes them also ready for high DPI screens and improve performance. The Emojis also change according to your device. If you're using Windows or Windows Phone, they look like the emoticons shown above. Unlike emoticons, you can change the size of the emojis across your whole board (and they'll stay nice).</p>
+				<p>The emoticons we introduced in ModernBB 2.0 have served well, but now, it's time to move on to the next generation: emojis. Unlike the regular emoticons, these icons don't take any bandwidth as they are a font and not an image, which makes them also ready for high DPI screens and improve performance. The Emojis also change according to your device. If you're using Windows or Windows Phone, they look like the emoticons shown above. Unlike emoticons, you can change the size of the emojis across your whole board (and they'll stay nice). Emojis will be, however, optional and are disabled by default due to old platforms like Windows 7 not completely supporting them.</p>
 				<div class="row">
 					<div class="col-sm-6">
 						<h4>Smarter editor</h4>
@@ -193,26 +195,32 @@ require 'header.php';
 					</div>
 					<div class="col-sm-6">
 						<h4>Child themes</h4>
-						<p>Luna comes with support for child-themes. Thanks to this, themes can be based upon one another without the need to hae duplicated files for 2 themes. Luna's own Sunrise (parent) and Sunset (child) themes are an example of this new behavior.</p>
+						<p>Luna comes with support for child-themes. Thanks to this, themes can be based upon one another without the need to hae duplicated files for 2 themes. Luna's own Luna (parent) and Sunrise (child) themes are an example of this new behavior.</p>
 					</div>
 				</div>
-				<h4>Sunrise</h4>
+				<h4>Luna</h4>
 				<img class="img-responsive" src="../img/about/sunrise.png" />
-				<p>Due to the new Theme Engine, we had to rebuild our styles anyway, so why not throw in something new and fresh? That's why you're now free to use our brand new default theme, Sunrise, which will replace Random. Sunrise uses new features from Luna to show off its capabilities. For example, Sunrise doesn't replace just Random, but also Awesome, Kind, Luna (the theme from ModernBB that is), Pinkie, Magic, Radical, Happy and Shy. In 1 theme, you get 12 different colorschemes available to you and your users.</p>
+				<p>Due to the new Theme Engine, we had to rebuild our styles anyway, so why not throw in something new and fresh? That's why you're now free to use our brand new default theme, Luna, which will replace Random. Luna uses new features from Luna to show off its capabilities. For example, Luna doesn't replace just Random, but also Awesome, Kind, Luna (the theme from ModernBB that is), Pinkie, Magic, Radical, Happy and Shy. In 1 theme, you get 12 different colorschemes available to you and your users.</p>
 				<div class="row">
 					<div class="col-sm-6">
 						<h4>Revamped index</h4>
-						<p>The index has been redesigned to replace not only the original index, but also the forum view. This is a Sunrise-thing, and thus, other themes can use the classic Index > Forum > Topic structure. Sunrise provides this all on one page, though. Also taking a step down from categories.</p>
+						<p>The index has been redesigned to replace not only the original index, but also the forum view. This is a Luna-thing, and thus, other themes can use the classic Index > Forum > Topic structure. Luna provides this all on one page, though. Also taking a step down from categories.</p>
 					</div>
 					<div class="col-sm-6">
 						<h4>Fresh ideas</h4>
-						<p>Sunrise will give you a refreshed experience from the ground up. Because not just the index has been redone, every page has. The result is a beautiful native experience that uses all power Luna has to provide. And as it is a first version, expect more in later updates.</p>
+						<p>Luna will give you a refreshed experience from the ground up. Because not just the index has been redone, every page has. The result is a beautiful native experience that uses all power Luna has to provide. And as it is a first version, expect more in later updates.</p>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-sm-12">
-						<h4>Sunset</h4>
-						<p>Sunset is a theme based on Sunrise, however, it uses a more classic view on forum software. This is a nice team if you want to kick off with a fresh design, yet like the old way of working with forum software better.</p>
+						<h4>Sunrise</h4>
+						<p>Sunrise is a theme based on Luna, however, it uses a more classic view on forum software. This is a nice team if you want to kick off with a fresh design, yet like the old way of working with forum software better.</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<h4>Random</h4>
+						<p>While no longer the default, in Luna 1.0, Random returns. Our classic ModernBB theme has been revamped to work with Luna, uses some of its new capabilities and is ready for the fun on every device. Unlike the Random design you've seen in ModernBB 3.6, 3.7 and 3.8, we've decided to include the ModernBB 3.5 version instead.</p>
 					</div>
 				</div>
 				<a id="others"></a><h3>Other improvements and notes</h3>
@@ -233,11 +241,11 @@ require 'header.php';
 						<b>Font Awesome</b> has been updated from version 4.1.0 to 4.3.0.<br />
 						<b>jQuery</b> has been updated from version 2.1.1 to 2.1.3.<br />
 						<b>PrismJS</b> has been added.<br />
-						<b>Core</b> has been updated from version 0.0.37.2592 to 0.3.3802.</p>
+						<b>Core</b> has been updated from version 0.0.37.2592 to 0.4.3900.</p>
 					</div>
 					<div class="col-sm-6">
 						<h4>Bugfixes</h4>
-						<p>70 bugs have been fixed.</p>
+						<p>72 bugs have been fixed.</p>
 						<h4>Security fixes</h4>
 						<p>5 security issue has been fixed.</p>
 					</div>
@@ -320,7 +328,7 @@ require 'header.php';
 								<span class="label label-primary">3361</span> First Run is now back to its previous panel design<br />
 								<span class="label label-primary">3361</span> Start of development for support of notifications<br />
 								<span class="label label-primary">3361</span> Improvements to the Theme engine have been made<br />
-								<span class="label label-primary">3361</span> Improvements to Sunrise<br />
+								<span class="label label-primary">3361</span> Improvements to Luna<br />
 								<span class="label label-primary">3361</span> Improved support for large touchscreens<br />
 								<span class="label label-primary">3361</span> The description of multiple fields have been improved
 							</p>
@@ -415,7 +423,7 @@ require 'header.php';
 								<span class="label label-primary">3660</span> The copyright notice now can be altered by admins<br />
 								<span class="label label-primary">3660</span> Moderation tools are now a Backstage feature<br />
 								<span class="label label-primary">3660</span> The profile now shows the user's URL again<br />
-								<span class="label label-primary">3660</span> Multiple design improvements to Sunrise<br />
+								<span class="label label-primary">3660</span> Multiple design improvements to Luna<br />
 								<span class="label label-primary">3660</span> Help page design has been improved<br />
 								<span class="label label-primary">3660</span> Improved design for the "Mark as read" button<br />
 								<span class="label label-primary">3660</span> The thread design has been majorly improved<br />
@@ -471,7 +479,7 @@ require 'header.php';
 								<span class="label label-primary">3754</span> Improved edit interface<br />
 								<span class="label label-primary">3754</span> A security issue with the installer has been fixed<br />
 								<span class="label label-primary">3754</span> Major improvements to the responsive design<br />
-								<span class="label label-primary">3754</span> Sunset is added as a build-in style<br />
+								<span class="label label-primary">3754</span> Sunrise is added as a build-in style<br />
 								<span class="label label-primary">3754</span> The Theme settings have been improved<br />
 								<span class="label label-primary">3754</span> Improvements to the topic view have been made<br />
 								<span class="label label-primary">3754</span> More improvements to Theme engine 6<br />
@@ -503,8 +511,55 @@ require 'header.php';
 								<span class="label label-primary">3802</span> Database has been added under "Maintenance"<br />
 								<span class="label label-primary">3802</span> Further usability improvements to Inbox<br />
 								<span class="label label-primary">3802</span> More parts of Inbox are now part of the Theme Engine<br />
-								<span class="label label-primary">3802</span> Design improvements to Sunrise and Sunset<br />
+								<span class="label label-primary">3802</span> Design improvements to Luna and Sunrise<br />
 								<span class="label label-primary">3802</span> Multiple bugfixes
+							</p>
+						</div>
+					</div>
+					<h4><a id="p3u2"></a>Preview 3 Update 2 &middot; Build 3827</h4>
+					<div class="row">
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">3827</span> Continued improvements to Inbox<br />
+								<span class="label label-primary">3827</span> You can now prune notifications from the Backstage<br />
+								<span class="label label-primary">3827</span> More improvements to coding conventions<br />
+								<span class="label label-primary">3827</span> The registration form has been updated<br />
+								<span class="label label-primary">3827</span> Emotioncs are now the default smilies<br />
+								<span class="label label-primary">3827</span> Some Backstage pages have an improved design
+							</p>
+						</div>
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">3827</span> Luna can now check for updates again<br />
+								<span class="label label-primary">3827</span> The Moderation tools in the Backstage have been finished<br />
+								<span class="label label-primary">3827</span> You can now choose to use emoticons or emojis<br />
+								<span class="label label-primary">3827</span> Icons are now used all over the Backstage<br />
+								<span class="label label-primary">3827</span> Small code optimalizations throughout the software<br />
+								<span class="label label-primary">3827</span> Multiple bugfixes
+							</p>
+						</div>
+					</div>
+					<h4><a id="p4"></a>Preview 4 &middot; Build 3900</h4>
+					<div class="row">
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">3900</span> Improvements for color schemes in Luna and Sunrise<br />
+								<span class="label label-primary">3900</span> Announcements now work again<br />
+								<span class="label label-primary">3900</span> Inbox has been given an updated design<br />
+								<span class="label label-primary">3900</span> Emoticons now can be resized<br />
+								<span class="label label-primary">3900</span> Random has been added as an experimental theme<br />
+								<span class="label label-primary">3900</span> Improvements to the language files<br />
+								<span class="label label-primary">3900</span> The Sunrise theme is now named Luna
+							</p>
+						</div>
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">3900</span> The profile is now named profile.php instead of me.php<br />
+								<span class="label label-primary">3900</span> A new emoticon set has been added<br />
+								<span class="label label-primary">3900</span> Bootstrap, Font Awesome and jQuery from CDNs<br />
+								<span class="label label-primary">3900</span> Theme color schemes are now ID based<br />
+								<span class="label label-primary">3900</span> The Sunset theme is now named Sunrise<br />
+								<span class="label label-primary">3900</span> Multiple bugfixes
 							</p>
 						</div>
 					</div>

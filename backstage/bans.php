@@ -17,7 +17,7 @@ if ($luna_user['g_id'] != FORUM_ADMIN && ($luna_user['g_moderator'] != '1' || $l
 // Add/edit a ban (stage 1)
 if (isset($_REQUEST['add_ban']) || isset($_GET['edit_ban'])) {
 	if (isset($_GET['add_ban']) || isset($_POST['add_ban'])) {
-		// If the ID of the user to ban was provided through GET (a link from ../me.php)
+		// If the ID of the user to ban was provided through GET (a link from ../profile.php)
 		if (isset($_GET['add_ban'])) {
 			$user_id = intval($_GET['add_ban']);
 			if ($user_id < 2)
@@ -374,7 +374,7 @@ elseif (isset($_GET['find_ban'])) {
 				<td class="tc3"><?php echo ($ban_data['ip'] != '') ? luna_htmlspecialchars($ban_data['ip']) : '&#160;' ?></td>
 				<td class="tc4"><?php echo $expire ?></td>
 				<td class="tc5"><?php echo ($ban_data['message'] != '') ? luna_htmlspecialchars($ban_data['message']) : '&#160;' ?></td>
-				<td class="tc6"><?php echo ($ban_data['ban_creator_username'] != '') ? '<a href="../me.php?id='.$ban_data['ban_creator'].'">'.luna_htmlspecialchars($ban_data['ban_creator_username']).'</a>' : $lang['Unknown'] ?></td>
+				<td class="tc6"><?php echo ($ban_data['ban_creator_username'] != '') ? '<a href="../profile.php?id='.$ban_data['ban_creator'].'">'.luna_htmlspecialchars($ban_data['ban_creator_username']).'</a>' : $lang['Unknown'] ?></td>
 				<td class="tcr"><?php echo $actions ?></td>
 			</tr>
 <?php
@@ -412,7 +412,7 @@ require 'header.php';
 				<div class="input-group">
 					<input type="text" class="form-control" name="new_ban_user" maxlength="25" tabindex="1" />
 					<span class="input-group-btn">
-						<button class="btn btn-danger" type="submit" name="add_ban" tabindex="2"><span class="fa fa-plus"></span> <?php echo $lang['Add'] ?></button>
+						<button class="btn btn-danger" type="submit" name="add_ban" tabindex="2"><span class="fa fa-fw fa-plus"></span> <?php echo $lang['Add'] ?></button>
 					</span>
 				</div>
 				<span class="help-block"><?php echo $lang['Username advanced help'] ?></span>
@@ -423,7 +423,7 @@ require 'header.php';
 <form id="find_bans" method="get" action="bans.php">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo $lang['Ban search head'] ?><span class="pull-right"><input class="btn btn-primary" type="submit" name="find_ban" value="<?php echo $lang['Search'] ?>" tabindex="12" /></span></h3>
+			<h3 class="panel-title"><?php echo $lang['Ban search head'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="find_ban"><span class="fa fa-fw fa-search"></span> <?php echo $lang['Search'] ?></button></span></h3>
 		</div>
 		<fieldset>
 			<div class="panel-body">
@@ -451,15 +451,22 @@ require 'header.php';
 				<tr>
 					<th><?php echo $lang['Order by label'] ?></th>
 					<td colspan="3">
-						<select class="form-control" name="order_by" tabindex="10">
-							<option value="username" selected><?php echo $lang['Username'] ?></option>
-							<option value="ip"><?php echo $lang['Order by ip'] ?></option>
-							<option value="email"><?php echo $lang['Email'] ?></option>
-							<option value="expire"><?php echo $lang['Order by expire'] ?></option>
-						</select>&#160;&#160;&#160;<select class="form-control" name="direction" tabindex="11">
-							<option value="ASC" selected><?php echo $lang['Ascending'] ?></option>
-							<option value="DESC"><?php echo $lang['Descending'] ?></option>
-						</select>
+						<div class="row">
+							<div class="col-sm-6">
+								<select class="form-control" name="order_by" tabindex="10">
+									<option value="username" selected><?php echo $lang['Username'] ?></option>
+									<option value="ip"><?php echo $lang['Order by ip'] ?></option>
+									<option value="email"><?php echo $lang['Email'] ?></option>
+									<option value="expire"><?php echo $lang['Order by expire'] ?></option>
+								</select>
+							</div>
+							<div class="col-sm-6">
+								<select class="form-control" name="direction" tabindex="11">
+									<option value="ASC" selected><?php echo $lang['Ascending'] ?></option>
+									<option value="DESC"><?php echo $lang['Descending'] ?></option>
+								</select>
+							</div>
+						</div>
 					</td>
 				</tr>
 			</table>

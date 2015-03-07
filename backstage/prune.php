@@ -24,7 +24,7 @@ if ($action == 'prune') {
 	$prune_sticky = intval($_POST['prune_sticky']);
 
 	if (isset($_POST['prune_comply'])) {
-		confirm_referrer('backstage/maintenance.php');
+		confirm_referrer('backstage/prune.php');
 		
 		$prune_days = intval($_POST['prune_days']);
 		$prune_date = ($prune_days) ? time() - ($prune_days * 86400) : -1;
@@ -58,14 +58,12 @@ if ($action == 'prune') {
 			$db->query('DELETE FROM '.$db->prefix.'topics WHERE id IN('.implode(',', $orphans).')') or error('Unable to delete redirect topics', __FILE__, __LINE__, $db->error());
 		}
 
-		redirect('backstage/maintenance.php');
+		redirect('backstage/prune.php');
 	}
 
 	$prune_days = luna_trim($_POST['req_prune_days']);
-	if ($prune_days == '' || preg_match('%[^0-9]%', $prune_days)) {
-		load_admin_nav('maintenance', 'prune');
+	if ($prune_days == '' || preg_match('%[^0-9]%', $prune_days))
 		message_backstage($lang['Days must be integer message']);
-	}
 
 	$prune_date = time() - ($prune_days * 86400);
 
@@ -105,7 +103,7 @@ if ($action == 'prune') {
 		<h3 class="panel-title"><?php echo $lang['Prune'] ?></h3>
 	</div>
 	<div class="panel-body">
-		<form method="post" action="maintenance.php">
+		<form method="post" action="prune.php">
 			<input type="hidden" name="action" value="prune" />
 			<input type="hidden" name="prune_days" value="<?php echo $prune_days ?>" />
 			<input type="hidden" name="prune_sticky" value="<?php echo $prune_sticky ?>" />
@@ -117,7 +115,6 @@ if ($action == 'prune') {
 			</fieldset>
 			<div class="btn-group">
 				<input class="btn btn-primary" type="submit" name="prune_comply" value="<?php echo $lang['Prune'] ?>" />
-				<a class="btn btn-link" href="javascript:history.go(-1)"><?php echo $lang['Go back'] ?></a>
 			</div>
 		</form>
 	</div>
@@ -131,6 +128,19 @@ if ($action == 'prune') {
 if (!defined('FORUM_CACHE_FUNCTIONS_LOADED'))
 	require FORUM_ROOT.'include/cache.php';
 
+if (isset($_POST['notiprune'])) {
+	if ($_POST['prune_type'] == 1)
+		$type = ' WHERE viewed = 1';
+	elseif ($_POST['prune_type'] == 2)
+		$type = ' WHERE viewed = 0';
+	else
+		$type = '';
+
+	$db->query('DELETE FROM '.$db->prefix.'notifications'.$type) or error('Unable to delete notifications', __FILE__, __LINE__, $db->error());
+	
+	message_backstage('Pruning complete. Notifications pruned.');
+}
+
 if (isset($_POST['userprune'])) {
 	// Make sure something something was entered
 	if ((trim($_POST['days']) == '') || trim($_POST['posts']) == '') {
@@ -138,11 +148,10 @@ if (isset($_POST['userprune'])) {
 		message_backstage('You need to set all settings!');
 	}
 
-	if ($_POST['admods_delete']) {
+	if ($_POST['admods_delete'])
 		$admod_delete = 'group_id > 0';
-	} else {
+	else
 		$admod_delete = 'group_id > 3';
-	}
 
 	if ($_POST['verified'] == 1)
 		$verified = '';
@@ -169,7 +178,6 @@ if (isset($_POST['userprune'])) {
 	generate_users_info_cache();
 
 	$users_pruned = count($user_ids);
-	load_admin_nav('maintenance', 'prune');
 	message_backstage('Pruning complete. Users pruned '.$users_pruned.'.');
 }
 
@@ -185,10 +193,40 @@ require 'header.php';
 	load_admin_nav('maintenance', 'prune');
 ?>
 
-<form class="form-horizontal" method="post" action="maintenance.php" onsubmit="return process_form(this)">
+<form class="form-horizontal" id="notiprune" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo $lang['Prune subhead'] ?><span class="pull-right"><button class="btn btn-primary" name="prune" tabindex="8"><span class="fa fa-recycle"></span> <?php echo $lang['Prune'] ?></button></span></h3>
+			<h3 class="panel-title">Prune notifications<span class="pull-right"><button class="btn btn-primary" name="notiprune" tabindex="8"><span class="fa fa-fw fa-recycle"></span> <?php echo $lang['Prune'] ?></button></span></h3>
+		</div>
+		<div class="panel-body">
+			<input type="hidden" name="action" value="notiprune" />
+			<fieldset>
+				<p><?php printf($lang['Prune info'], '<a href="maintenance.php#maintenance">'.$lang['Maintenance mode'].'</a>') ?></p>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Type</label>
+					<div class="col-sm-9">
+						<label class="radio-inline">
+							<input type="radio" name="prune_type" value="0" tabindex="6" />
+							All notifications
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="prune_type" value="1" checked />
+							Seen notifications
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="prune_type" value="2" />
+							New notifications
+						</label>
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+</form>
+<form class="form-horizontal" method="post" action="prune.php" onsubmit="return process_form(this)">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?php echo $lang['Prune subhead'] ?><span class="pull-right"><button class="btn btn-primary" name="prune" tabindex="8"><span class="fa fa-fw fa-recycle"></span> <?php echo $lang['Prune'] ?></button></span></h3>
 		</div>
 		<div class="panel-body">
 			<input type="hidden" name="action" value="prune" />
@@ -247,7 +285,7 @@ require 'header.php';
 <form class="form-horizontal" id="userprune" method="post" action="<?php echo $_SERVER['REQUEST_URI'] ?>">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo $lang['Prune users head'] ?><span class="pull-right"><button class="btn btn-primary" name="userprune" tabindex="2"><span class="fa fa-recycle"></span> <?php echo $lang['Prune'] ?></button></span></h3>
+			<h3 class="panel-title"><?php echo $lang['Prune users head'] ?><span class="pull-right"><button class="btn btn-primary" name="userprune" tabindex="2"><span class="fa fa-fw fa-recycle"></span> <?php echo $lang['Prune'] ?></button></span></h3>
 		</div>
 		<div class="panel-body">
 			<fieldset>

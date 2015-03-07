@@ -86,10 +86,10 @@ $num_notifications = $db->result($result);
 
 if ($luna_config['o_notification_flyout'] == 1) {
 	if ($num_notifications == '0') {
-		$notificon = '<span class="fa fa-circle-o"></span>';
+		$notificon = '<span class="fa fa-fw fa-circle-o"></span>';
 		$ind_notification[] = '<li><a href="notifications.php?id='.$luna_user['id'].'">No new notifications</a></li>';
 	} else {
-		$notificon = $num_notifications.' <span class="fa fa-circle"></span>';
+		$notificon = $num_notifications.' <span class="fa fa-fw fa-circle"></span>';
 		
 		$notification_result = $db->query('SELECT * FROM '.$db->prefix.'notifications WHERE user_id = '.$luna_user['id'].' AND viewed = 0 ORDER BY time DESC LIMIT 10') or error ('Unable to load notifications', __FILE__, __LINE__, $db->error());
 		while ($cur_notifi = $db->fetch_assoc($notification_result)) {
@@ -107,14 +107,14 @@ if ($luna_config['o_notification_flyout'] == 1) {
 						<li class="divider"></li>
 						'.$notifications.'
 						<li class="divider"></li>
-						<li><a class="pull-right" href="notifications.php?id='.$luna_user['id'].'">More <i class="fa fa-arrow-right"></i></a></li>
+						<li><a class="pull-right" href="notifications.php?id='.$luna_user['id'].'">More <i class="fa fa-fw fa-arrow-right"></i></a></li>
 					</ul>
 				</li>';
 } else {
 	if ($num_notifications == '0')
-		$notificon = '<span class="fa fa-circle-o"></span>';
+		$notificon = '<span class="fa fa-fw fa-circle-o"></span>';
 	else
-		$notificon = $num_notifications.' <span class="fa fa-circle"></span>';
+		$notificon = $num_notifications.' <span class="fa fa-fw fa-circle"></span>';
 
 	$notification_menu_item = '<li><a href="notifications.php?id='.$luna_user['id'].'">'.$notificon.'<span class="visible-xs-inline"> Notifications</span></a></li>';
 }
@@ -132,11 +132,11 @@ if ($luna_user['is_guest'])
 				 <li><a href="#" data-toggle="modal" data-target="#login">'.$lang['Login'].'</a></li>';
 else
 	$usermenu = $backstage.$notification_menu_item.'
-				<li><a href="inbox.php">'.$new_inbox.'<span class="fa fa-paper-plane-o"></span><span class="visible-xs-inline"> Inbox</span></a></li>
+				<li><a href="inbox.php">'.$new_inbox.'<span class="fa fa-fw fa-paper-plane-o"></span><span class="visible-xs-inline"> Inbox</span></a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle avatar-item" data-toggle="dropdown">'.luna_htmlspecialchars($luna_user['username']).' '.$user_avatar.' <span class="fa fa-fw fa-angle-down"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="me.php?id='.$luna_user['id'].'">'.$lang['Profile'].'</a></li>
+						<li><a href="profile.php?id='.$luna_user['id'].'">'.$lang['Profile'].'</a></li>
 						<li><a href="settings.php">Settings</a></li>
 						<li class="divider"></li>
 						<li><a href="help.php">'.$lang['Help'].'</a></li>
@@ -150,9 +150,3 @@ if ($db->num_rows($result) > 0)
 	while ($cur_item = $db->fetch_assoc($result))
 		if ($cur_item['visible'] == '1')
 			$links[] = '<li><a href="'.$cur_item['url'].'">'.$cur_item['name'].'</a></li>';
-
-// Announcement
-if ($luna_config['o_announcement'] == '1')
-	$announcement = '<div class="alert alert-info announcement"><div>'.$luna_config['o_announcement_message'].'</div></div>';
-else
-	$announcement = '';

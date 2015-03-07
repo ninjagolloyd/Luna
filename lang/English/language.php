@@ -146,8 +146,6 @@ $lang = array(
 'Size unit PiB'						=>	'%s PiB',
 'Size unit EiB'						=>	'%s EiB',
 
-// Checked untill this line
-
 // Language for installation
 'Choose install language'		=>	'Choose the install script language',
 'Choose install language info'	=>	'The language used for this install script. The default language used for the board itself can be set below.',
@@ -155,8 +153,8 @@ $lang = array(
 'Change language'				=>	'Change language',
 'Already installed'				=>	'It seems like Luna is already installed. You should go <a href="index.php">here</a> instead.',
 'You are running error'			=>	'You are running %1$s version %2$s. Luna %3$s requires at least %1$s %4$s to run properly. You must upgrade your %1$s installation before you can continue.',
-'My Luna Forum'				=>	'My Luna Forum',
-'Description'					=>	'You can do anything',
+'My Luna Forum'					=>	'My Luna Forum',
+'Description'					=>	'You can do anything', // Do not translate this string
 'Username 1'					=>	'Usernames must be at least 2 characters long.',
 'Username 2'					=>	'Usernames must not be more than 25 characters long.',
 'Username 3'					=>	'The username guest is reserved.',
@@ -177,7 +175,7 @@ $lang = array(
 'Board title'					=>	'Board title',
 'Base URL'						=>	'No trailing slash',
 'Required field'				=>	'is a required field in this form.',
-'Luna Installation'			=>	'Luna Installation',
+'Luna Installation'				=>	'Luna Installation',
 'Install'						=>	'Install Luna %s',
 'Errors'						=>	'The following errors need to be corrected:',
 'Database setup'				=>	'Database setup',
@@ -188,7 +186,6 @@ $lang = array(
 'Info 3'						=>	'The database name',
 'Database server hostname'		=>	'Server hostname',
 'Database name'					=>	'Name',
-'Database enter informations'	=>	'Enter your database username and password',
 'Database username'				=>	'Username',
 'Info 4'						=>	'Your database username',
 'Info 5'						=>	'Set for more Luna installation in this database',
@@ -217,17 +214,16 @@ $lang = array(
 'Alert cache'					=>	'<strong>The cache directory is currently not writable!</strong> In order for Luna to function properly, the directory <em>%s</em> must be writable by PHP. Use chmod to set the appropriate directory permissions. If in doubt, chmod to 0777.',
 'Alert avatar'					=>	'<strong>The avatar directory is currently not writable!</strong> If you want users to be able to upload their own avatar images you must see to it that the directory <em>%s</em> is writable by PHP. You can later choose to save avatar images in a different directory (see Admin/Options). Use chmod to set the appropriate directory permissions. If in doubt, chmod to 0777.',
 'Alert upload'					=>	'<strong>File uploads appear to be disallowed on this server!</strong> If you want users to be able to upload their own avatar images you must enable the file_uploads configuration setting in PHP. Once file uploads have been enabled, avatar uploads can be enabled in Administration/Options/Features.',
-'Luna has been installed'	=>	'Luna has been installed. To finalize the installation please follow the instructions below.',
+'Luna has been installed'		=>	'Luna has been installed. To finalize the installation please follow the instructions below.',
 'Info 8'						=>	'To finalize the installation, you need to click on the button below to download a file called config.php. You then need to upload this file to the root directory of your Luna installation.',
 'Info 9'						=>	'Once you have uploaded config.php, Luna will be fully installed! At that point, you may <a href="index.php">go to the forum index</a>.',
 'Download config.php file'		=>	'Download config.php file',
-'Luna fully installed'		=>	'Luna has been fully installed! You may now <a href="index.php">go to the forum index</a>.',
+'Luna fully installed'			=>	'Luna has been fully installed! You may now <a href="index.php">go to the forum index</a>.',
 
 // Language for updating
-'Update Luna'				=>	'Update Luna',
+'Update Luna'					=>	'Update Luna',
 'Down'							=>	'The forums are temporarily down for maintenance. Please try again in a few minutes.',
 
-'Version mismatch error'		=>	'Version mismatch. The database \'%s\' doesn\'t seem to be running a Luna database schema supported by this update script.',
 'No update error'				=>	'Your forum is already as up-to-date as this script can make it',
 
 'Start update'					=>	'Start update',
@@ -252,6 +248,8 @@ $lang = array(
 
 // Language for help.php
 'produces'				=>	'produces',
+
+// Checked untill this line
 
 'BBCode info'			=>	'BBCode is a collection of tags that are used to change the look of text in this forum. Below you can find all the available BBCodes and how to use them. Administrators have the ability to disable BBCode. You can tell if BBCode is disabled whenever you post a message or edit your signature.',
 
@@ -457,7 +455,7 @@ $lang = array(
 'Silent edit'		=>	'Silent edit (don\'t display "Edited by ..." in topic view)',
 'Edit post'			=>	'Edit post',
 
-// Language for both me.php and register.php
+// Language for both profile.php and register.php
 'Email legend'				=>	'Enter a valid email address',
 'Time zone'					=>	'Time zone',
 'DST'						=>	'Advance time by 1 hour for daylight saving.',
@@ -485,7 +483,7 @@ $lang = array(
 'Sig too many lines'		=>	'Signatures cannot have more than %s lines.',
 'Bad ICQ'					=>	'You entered an invalid ICQ UIN. Please go back and correct.',
 
-// Language for me.php
+// Language for profile.php
 'Section personality'			=>	'Personality',
 'Section admin'					=>	'Administration',
 
@@ -1074,6 +1072,7 @@ $lang = array(
 'Essentials subhead'				=>	'Essentials',
 'Board desc help'					=>	'What\'s this board about?',
 'Base URL label'					=>	'Board URL',
+'URL scheme'						=> 'URL scheme',
 'Base URL problem'					=>  'Your installation does not support automatic conversion of internationalized domain names. As your base URL contains special characters, you <strong>must</strong> use an online converter.',
 'Timezone label'					=>	'Default time zone',
 'DST help'							=>	'Advance time by 1 hour for daylight saving.',
@@ -1347,7 +1346,6 @@ $lang = array(
 
 // General actions and more
 'Admin'					=>	'Admin',
-'Go back'				=>	'Go back',
 'Update'				=>	'Update',
 'Add'					=>	'Add',
 'Remove'				=>	'Remove',
@@ -1367,24 +1365,16 @@ $lang = array(
 'No plugin message'		=>	'There is no plugin called %s in the plugin directory.',
 'Plugin failed message'	=>	'Loading of the plugin - <strong>%s</strong> - failed.',
 
-
 // Common
 'Login required'		=>	'You must be logged in to use the privates messages system',
 'Disabled PM'			=>	'You have disable the privates messages system',
 'Private Messages'		=>	'Private Messages',
-'PM'					=>	'<acronym title="Private Message">PM</acronym>',
+'PM'					=>	'PM',
 'Quick message'			=>	'Send private message',
 'Write message'			=>	'Send new message',
 'Inbox'					=>	'Inbox',
 'Outbox'				=>	'Sent',
-'Contacts'				=>	'Contacts',
-'Delete'				=>	'Delete',
 'Please confirm'		=>	'Please confirm',
-'New message'			=>	'You have a private message not read!',
-'New messages'			=>	'You have %s privates messages not read!',
-'See new'				=>	'See the new message',
-'See news'				=>	'See the new messages',
-'No new'				=>	'No new message',
 'Full boxes'			=>	'Your private message boxes are full!',
 'Empty boxes'			=>	'Your private message boxes are empty.',
 'Full to'				=>	'Private message boxes full to %s',
@@ -1401,11 +1391,8 @@ $lang = array(
 'Sender'				=>	'Sender',
 'Receiver'				=>	'Receiver(s)',
 'Mark as read select'	=>	'Mark as read',
-'Read redirect'			=>	'Messages marked as read. Redirecting...',
 'Mark as unread select'	=>	'Mark as unread',
-'Unread redirect'		=>	'Messages marked as unread. Redirecting...',
 'Mark all'				=>	'Mark all messages as read',
-'Read all redirect'		=>	'All messages marked as read. Redirecting...',
 'Must select'			=>	'You must select some messages',
 'No messages'			=>	'No messages',
 'Unknown'				=>	'Unknown',
@@ -1434,73 +1421,18 @@ $lang = array(
 'User blocked'			=>	'%s refuses the private messages.',
 'User disable PM'		=>	'%s disabled the private messages.',
 'User left'				=>	'%s has left the conversation.',
-'Others'				=>	'Others',
-'RE'					=>	'RE: ',
-'Shared message'		=>	'If you have entered more than one receiver, check this box if you want to start a shared discussion (together)',
 
 // Multidelete
 'Multidelete'			=>	'Delete multiple messages',
 'Delete messages comply'=>	'Are you sure you want to delete the selected messages?',
-'Deleted redirect'		=>	'Messages deleted. Redirecting ...',
 
 // Delete
 'Delete message'		=>	'Delete message',
 'Delete message comply'	=>	'Are you sure you want to delete the message?',
-'Del redirect'			=>	'Message deleted, redirecting...',
 'Topic warning info'	=>	'The topic will be deleted from your inbox, but it will stays in the others receivers\' boxes.',
 'Delete for everybody'	=>	'If you tick this checkbox, you will delete the message (or the topic) for all the receivers (available only for admins &amp; mods)',
 
-// Contacts
-'Contacts list'			=>	'Contacts list',
-'Rights contact'		=>	'Contacts rights',
-'Authorized messages'	=>	'Authorized messages',
-'Authorize'				=>	'Authorize',
-'Authorize from'		=>	'Authorize %s to send you private message',
-'Refused messages'		=>	'Refused messages',
-'Refuse'				=>	'Refuse',
-'Refuse from'			=>	'Refused private messages from %s',
-'Refuse user'			=>	'Refuse privates messages coming from this contact',
-'Add to contacts'		=>	'Add to contacts',
-'Add contact'			=>	'Add a contact',
-'Contact name'			=>	'Contact name',
-'User already contact'	=>	'This user is already in your contacts list',
-'User cannot use'		=>	'User can not use private message system.',
-'User not exists'		=>	'User does not seems to exists.',
-'Added contact redirect'=>	'Contact added. Redirecting...',
-'Add'					=>	'Add',
-'Quick message x'		=>	'Send private message to %s',
-'Status redirect'		=>	'Contact status edited. Redirecting...',
-'Multiples status redirect'=>	'Contacts status edited. Redirecting...',
-'No contacts'			=>	'No contact',
-'Must select contacts'	=>	'You must select some contacts',
-
-// Multidelete contacts
-'Multidelete contacts'	=>	'Delete multiple contacts',
-'Delete contacts comply'=>	'Are you sure you want to delete the selected contacts?',
-'Deleted contacts redirect'=>	'Contacts deleted. Redirecting ...',
-
-// Delete contact
-'Delete x'				=>	'Delete contact %s',
-'Delete contact confirm'=>	'Are you sure you want to delete this contact?',
-'Deleted contact redirect'=>	'Contact deleted. Redirecting...',
-
-// Sending lists
-'List name'				=>	'List name',
-'List usernames'		=>	'List usernames',
-'No sending lists'		=>	'No sending lists',
-'Add a list'			=>	'Add a list',
-'Multidelete lists'		=>	'Delete multiple lists',
-'Delete list confirm'	=>	'Are you sure you want to delete this sending list?',
-'Delete lists comply'	=>	'Are you sure you want to delete the selected lists?',
-'Deleted list redirect'	=>	'Sending list deleted. Redirecting...',
-'Must select lists'		=>	'You must select some lists',
-'Select a list'			=>	'Select a list',
-'Delete this list'		=>	'Delete this list',
-'List usernames comma'	=>	'List usernames (separated by commas)',
-'JS required'			=>	'JavaScript is required in order to use the sending lists.',
-'Yourself'				=>	'You cannot add yourself to a sending list.',
-
-// me.php
+// profile.php
 'use_pm_option'			=>	'Enable privates messages system',
 'email_option_infos'	=>	'With this enabled, an e-mail will be sent for all new private message.',
 'email_option'			=>	'Privates messages notification by e-mail',
