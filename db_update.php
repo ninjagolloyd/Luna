@@ -173,7 +173,7 @@ if (empty($stage)) {
 	<head>
 		<meta charset="utf-8">
 		<title><?php echo $lang['Maintenance'] ?></title>
-		<link href="include/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<link href="backstage/css/style.css" type="text/css" rel="stylesheet">
 	</head>
 	<body>
@@ -194,7 +194,7 @@ if (empty($stage)) {
 		<title>Luna &middot; <?php echo $lang['Update'] ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="robots" content="noindex, nofollow">
-		<link href="include/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 		<link href="backstage/css/style.css" type="text/css" rel="stylesheet">
 	</head>
 	<body onload="document.getElementById('install').start.disabled=false;">
@@ -349,9 +349,6 @@ switch ($stage) {
 		// Since 0.0.40.3048: Remove obsolete o_additional_navlinks permission from config table
 		if (array_key_exists('o_additional_navlinks', $luna_config))
 			$db->query('DELETE FROM '.$db->prefix.'config WHERE conf_name = \'o_additional_navlinks\'') or error('Unable to remove config value \'o_additional_navlinks\'', __FILE__, __LINE__, $db->error());
-
-		// Since 0.0.3122: Add the color column to the forums table
-		$db->add_field('forums', 'color', 'VARCHAR(25)', false, '#0d4382') or error('Unable to add column "color" to table "forums"', __FILE__, __LINE__, $db->error());
 
 		// Since 0.0.3177: Add the color column to the users table
 		$db->add_field('users', 'color', 'VARCHAR(25)', false, '#0d4382') or error('Unable to add column "color" to table "users"', __FILE__, __LINE__, $db->error());
@@ -641,7 +638,7 @@ switch ($stage) {
 			$db->query('UPDATE '.$db->prefix.'groups SET g_soft_delete_posts = 1 WHERE g_id < 3') or error('Unable to update moderator powers', __FILE__, __LINE__, $db->error());
 		}
 		
-		// Since 0.3.3765: Add new g_soft_delete_posts field to the groups table
+		// Since 0.3.3765: Add new g_soft_delete_topics field to the groups table
 		if (!$db->field_exists('groups', 'g_soft_delete_topics')) {
 			// Add g_moderator column to groups table
 			$db->add_field('groups', 'g_soft_delete_topics', 'TINYINT(1)', false, 0, 'g_user_title') or error('Unable to add g_soft_delete_topics field', __FILE__, __LINE__, $db->error());
@@ -653,6 +650,16 @@ switch ($stage) {
 		// Since 0.3.3800: Remove obsolete o_post_responsive permission from config table
 		if (array_key_exists('o_post_responsive', $luna_config))
 			$db->query('DELETE FROM '.$db->prefix.'config WHERE conf_name = \'o_post_responsive\'') or error('Unable to remove config value \'o_post_responsive\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.3.3814: Add o_emoji feature
+		if (!array_key_exists('o_emoji', $luna_config))
+			$db->query('INSERT INTO '.$db->prefix.'config (conf_name, conf_value) VALUES (\'o_emoji\', \'0\')') or error('Unable to insert config value \'o_emoji\'', __FILE__, __LINE__, $db->error());
+
+		// Since 0.4.3861: Add the color_scheme column to the users table
+		$db->add_field('users', 'color_scheme', 'INT(25)', false, '3') or error('Unable to add column "color_scheme" to table "users"', __FILE__, __LINE__, $db->error());
+
+		// Since 0.4.3861: Drop the color column to the users table
+		$db->drop_field($db->prefix.'users', 'color', 'VARCHAR(25)', true, 0) or error('Unable to drop color field', __FILE__, __LINE__, $db->error());
 
 		break;
 
@@ -803,8 +810,8 @@ switch ($stage) {
 			$db->query('UPDATE '.$db->prefix.'config SET conf_value = \'English\' WHERE conf_name = \'o_default_lang\'') or error('Unable to update default language', __FILE__, __LINE__, $db->error());
 
 		// Check the default style still exists!
-		if (!file_exists(FORUM_ROOT.'style/'.$luna_config['o_default_style'].'/style.css'))
-			$db->query('UPDATE '.$db->prefix.'config SET conf_value = \'Sunrise\' WHERE conf_name = \'o_default_style\'') or error('Unable to update default style', __FILE__, __LINE__, $db->error());
+		if (!file_exists(FORUM_ROOT.'themes/'.$luna_config['o_default_style'].'/style.css'))
+			$db->query('UPDATE '.$db->prefix.'config SET conf_value = \'Luna\' WHERE conf_name = \'o_default_style\'') or error('Unable to update default style', __FILE__, __LINE__, $db->error());
 
 		// This feels like a good time to synchronize the forums
 		$result = $db->query('SELECT id FROM '.$db->prefix.'forums') or error('Unable to fetch forum IDs', __FILE__, __LINE__, $db->error());

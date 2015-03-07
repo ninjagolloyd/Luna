@@ -117,7 +117,7 @@ if ($luna_config['o_first_run_backstage'] == 0) { ?>
 			<span class="pull-right">
 				<form class="form-horizontal" method="post" action="index.php">
 					<input type="hidden" name="first_run_disable" value="1" />
-					<button class="btn btn-success" type="submit" name="save"><span class="fa fa-check"></span> Got it</button>
+					<button class="btn btn-success" type="submit" name="save"><span class="fa fa-fw fa-check"></span> Got it</button>
 				</form>
 			</span>
 		</h3>
@@ -157,7 +157,7 @@ if ($luna_config['o_first_run_backstage'] == 0) { ?>
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title"><?php echo $lang['New reports head'] ?><span class="pull-right"><a class="btn btn-primary" href="reports.php"><span class="fa fa-eye"></span> <?php echo $lang['View all'] ?></a></span></h3>
+						<h3 class="panel-title"><?php echo $lang['New reports head'] ?><span class="pull-right"><a class="btn btn-primary" href="reports.php"><span class="fa fa-fw fa-eye"></span> <?php echo $lang['View all'] ?></a></span></h3>
 					</div>
 					<table class="table">
 						<thead>
@@ -174,7 +174,7 @@ $result = $db->query('SELECT r.id, r.topic_id, r.forum_id, r.reported_by, r.crea
 
 if ($db->num_rows($result)) {
 	while ($cur_report = $db->fetch_assoc($result)) {
-		$reporter = ($cur_report['reporter'] != '') ? '<a href="../me.php?id='.$cur_report['reported_by'].'">'.luna_htmlspecialchars($cur_report['reporter']).'</a>' : $lang['Deleted user'];
+		$reporter = ($cur_report['reporter'] != '') ? '<a href="../profile.php?id='.$cur_report['reported_by'].'">'.luna_htmlspecialchars($cur_report['reporter']).'</a>' : $lang['Deleted user'];
 		$forum = ($cur_report['forum_name'] != '') ? '<span><a href="../viewforum.php?id='.$cur_report['forum_id'].'">'.luna_htmlspecialchars($cur_report['forum_name']).'</a></span>' : '<span>'.$lang['Deleted'].'</span>';
 		$topic = ($cur_report['subject'] != '') ? '<span> <span class="divider">/</span> <a href="../viewtopic.php?id='.$cur_report['topic_id'].'">'.luna_htmlspecialchars($cur_report['subject']).'</a></span>' : '<span>»&#160;'.$lang['Deleted'].'</span>';
 		$post = str_replace("\n", '<br />', luna_htmlspecialchars($cur_report['message']));
@@ -250,7 +250,7 @@ if (version_compare(Version::FORUM_VERSION, $latest_version, '<')) {
 					<input type="hidden" name="form_sent" value="1" />
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Admin notes<span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
+							<h3 class="panel-title">Admin notes<span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-fw fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
 						</div>
 						<div class="panel-body">
 							<textarea class="form-control" name="form[admin_note]" placeholder="Add a note..." accesskey="n" rows="10"><?php echo $luna_config['o_admin_note'] ?></textarea>

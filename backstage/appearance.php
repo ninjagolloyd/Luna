@@ -22,6 +22,7 @@ if (isset($_POST['form_sent'])) {
 		'show_user_info'		=> isset($_POST['form']['show_user_info']) ? '1' : '0',
 		'show_post_count'		=> isset($_POST['form']['show_post_count']) ? '1' : '0',
 		'moderated_by'			=> isset($_POST['form']['moderated_by']) ? '1' : '0',
+		'emoji'					=> isset($_POST['form']['emoji']) ? '1' : '0',
 		'emoji_size'			=> intval($_POST['form']['emoji_size']),
 		'topic_review'			=> (intval($_POST['form']['topic_review']) >= 0) ? intval($_POST['form']['topic_review']) : 0,
 		'disp_topics_default'	=> intval($_POST['form']['disp_topics_default']),
@@ -80,7 +81,7 @@ if (isset($_GET['saved']))
 	<input type="hidden" name="form_sent" value="1" />
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo $lang['Display head'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
+			<h3 class="panel-title"><?php echo $lang['Display head'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-fw fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
 		</div>
 		<div class="panel-body">
 			<fieldset>
@@ -112,8 +113,20 @@ if (isset($_GET['saved']))
 						</div>
 					</div>
 				</div>
+				<hr />
 				<div class="form-group">
-					<label class="col-sm-3 control-label">Emojis<span class="help-block">The font size emojis should be displayed in</span></label>
+					<label class="col-sm-3 control-label">Emoji</label>
+					<div class="col-sm-9">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="form[emoji]" value="1" <?php if ($luna_config['o_emoji'] == '1') echo ' checked' ?> />
+								Use emojis instead of emoticons.
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Smilies size<span class="help-block">The emoticons and emojis are shown, don't go above 33 pixels when using normal emoticons</span></label>
 					<div class="col-sm-9">
 						<div class="input-group">
 							<input type="text" class="form-control" name="form[emoji_size]" maxlength="2" value="<?php echo $luna_config['o_emoji_size'] ?>" />
@@ -145,7 +158,7 @@ if (isset($_GET['saved']))
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Header settings<span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
+			<h3 class="panel-title">Header settings<span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-fw fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
 		</div>
 		<div class="panel-body">
 			<fieldset>
@@ -177,7 +190,7 @@ if (isset($_GET['saved']))
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Footer settings<span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
+			<h3 class="panel-title">Footer settings<span class="pull-right"><button class="btn btn-primary" type="submit" name="save"><span class="fa fa-fw fa-check"></span> <?php echo $lang['Save'] ?></button></span></h3>
 		</div>
 		<div class="panel-body">
 			<fieldset>
@@ -187,7 +200,7 @@ if (isset($_GET['saved']))
 						<div class="checkbox">
 							<label>
 								<input type="checkbox" name="form[board_statistics]" value="1" <?php if ($luna_config['o_board_statistics'] == '1') echo ' checked' ?> />
-								Show the board statistics in the footer.
+								Show the board statistics.
 							</label>
 						</div>
 					</div>
