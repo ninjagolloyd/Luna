@@ -69,6 +69,7 @@ require 'header.php';
 				<a href="#p3u1" class="list-group-item">Preview 3 Update 1</a>
 				<a href="#p3u2" class="list-group-item">Preview 3 Update 2</a>
 				<a href="#p4" class="list-group-item">Preview 4</a>
+				<a href="#p4u1" class="list-group-item">Preview 4 Update 1</a>
 			</div>
 		</div>
 	</div>
@@ -241,11 +242,11 @@ require 'header.php';
 						<b>Font Awesome</b> has been updated from version 4.1.0 to 4.3.0.<br />
 						<b>jQuery</b> has been updated from version 2.1.1 to 2.1.3.<br />
 						<b>PrismJS</b> has been added.<br />
-						<b>Core</b> has been updated from version 0.0.37.2592 to 0.4.3900.</p>
+						<b>Core</b> has been updated from version 0.0.37.2592 to 0.4.3935.</p>
 					</div>
 					<div class="col-sm-6">
 						<h4>Bugfixes</h4>
-						<p>72 bugs have been fixed.</p>
+						<p>73 bugs have been fixed.</p>
 						<h4>Security fixes</h4>
 						<p>5 security issue has been fixed.</p>
 					</div>
@@ -560,6 +561,28 @@ require 'header.php';
 								<span class="label label-primary">3900</span> Theme color schemes are now ID based<br />
 								<span class="label label-primary">3900</span> The Sunset theme is now named Sunrise<br />
 								<span class="label label-primary">3900</span> Multiple bugfixes
+							</p>
+						</div>
+					</div>
+					<h4><a id="p4"></a>Preview 4 Update 1 &middot; Build 3935</h4>
+					<div class="row">
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">3935</span> New options for checking for updates<br />
+								<span class="label label-primary">3935</span> Improvements to the Theme Engine<br />
+								<span class="label label-primary">3935</span> Major documentation improvements<br />
+								<span class="label label-primary">3935</span> Core version is now displayed for Nightly and Preview<br />
+								<span class="label label-primary">3935</span> Grey color schemes now work better for Luna and Sunrise<br />
+								<span class="label label-primary">3935</span> Improvements to mobile design
+							</p>
+						</div>
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">3935</span> New design for topic lists in Luna and Sunrise<br />
+								<span class="label label-primary">3935</span> The forum list now alo indicates new topics<br />
+								<span class="label label-primary">3935</span> Fixed a bug with long names in the user list<br />
+								<span class="label label-primary">3935</span> The Luna theme now has some additional options<br />
+								<span class="label label-primary">3935</span> Multiple bugfixes
 							</p>
 						</div>
 					</div>
