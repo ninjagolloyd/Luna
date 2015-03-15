@@ -1392,6 +1392,7 @@ class Installer {
 		$luna_config = array(
 			'o_cur_version'				=> Version::FORUM_VERSION,
 			'o_core_version'			=> Version::FORUM_CORE_VERSION,
+			'o_code_name'				=> Version::FORUM_CODE_NAME,
 			'o_database_revision'		=> Version::FORUM_DB_VERSION,
 			'o_searchindex_revision'	=> Version::FORUM_SI_VERSION,
 			'o_parser_revision'			=> Version::FORUM_PARSER_VERSION,
@@ -1475,7 +1476,7 @@ class Installer {
 			'o_header_search'			=> 1,
 			'o_board_statistics'		=> 1,
 			'o_notification_flyout'		=> 1,
-			'o_url_scheme'				=> "Folder_based_(fancy)",
+			'o_update_ring'				=> 1,
 			'p_message_img_tag'			=> 1,
 			'p_message_all_caps'		=> 1,
 			'p_subject_all_caps'		=> 1,

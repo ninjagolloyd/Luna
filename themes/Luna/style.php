@@ -78,11 +78,15 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 	border-color: <?php echo $tertiary_color ?>;
 }
 
-.list-group-forum a.list-group-item:hover {
+.list-group-forum a.list-group-item:hover, .list-group-topic .list-group-item:hover {
 	border-left-color: <?php echo $primary_color ?>;
 }
 
-.nav > li > a, a.list-group-item:hover {
+a, a:focus, .pagination > li > a, .pagination > li > span {
+	color: <?php echo $secondary_color ?>;
+}
+
+.nav > li > a, a.list-group-item:hover, a:hover, a:active {
 	color: <?php echo $tertiary_color ?>;
 }
 
@@ -106,21 +110,17 @@ a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.acti
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
 	text-shadow: 0px 0px 5px 1px rgba(0,0,0,0.2);
 }
+<?php endif; if ($luna_user['color_scheme'] > 9): ?>
+a, a:focus, .pagination > li > a, .pagination > li > span {
+	color: #2a6496;
+}
+
+.nav > li > a, a.list-group-item:hover, a:hover, a:active {
+	color: #23527c;
+}
 <?php endif; ?>
 
 .emoji {
 	font-size: <?php echo $luna_config['o_emoji_size'] ?>px;
 }
-
-<?php if ($luna_config['o_board_statistics'] == 0): ?>
-#main {
-	padding-bottom: 55px;
-}
-
-.footer {
-	margin-top: -55px;
-	height: 55px;
-	padding-top: 15px;
-}
-<?php endif; ?>
 </style>
