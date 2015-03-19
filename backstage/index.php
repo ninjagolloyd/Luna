@@ -58,17 +58,6 @@ if (isset($_POST['first_run_disable'])) {
 }
 
 // Collect some statistics from the database
-if (file_exists(FORUM_CACHE_DIR.'cache_users_info.php'))
-	include FORUM_CACHE_DIR.'cache_users_info.php';
-
-if (!defined('FORUM_USERS_INFO_LOADED')) {
-	if (!defined('FORUM_CACHE_FUNCTIONS_LOADED'))
-		require FORUM_ROOT.'include/cache.php';
-
-	generate_users_info_cache();
-	require FORUM_CACHE_DIR.'cache_users_info.php';
-}
-
 if (file_exists(FORUM_CACHE_DIR.'cache_update.php'))
 	include FORUM_CACHE_DIR.'cache_update.php';
 
@@ -234,7 +223,7 @@ if ($db->num_rows($result)) {
 	<div class="col-sm-4">
 <?php
 //Update checking
-if (version_compare(Version::FORUM_VERSION, $update_cache, '<')) {
+if (version_compare(Version::FORUM_CORE_VERSION, $update_cache, 'lt')) {
 ?>
 		<div class="alert alert-info">
 			<h4><?php echo sprintf($lang['Available'], $update_cache, '<a href="update.php">'.$lang['update now'].'</a>') ?></h4>

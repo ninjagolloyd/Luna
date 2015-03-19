@@ -417,12 +417,29 @@ a.list-group-item-cat:hover .forum-description {
 }
 
 /* Forumview */
+h2.forum-title {
+	margin: 10px 0 5px;
+	color: #fff !important;
+}
+
+h2.forum-title .btn {
+	border: none;
+}
+
+.forum-desc {
+	margin-bottom: 10px;
+}
+
 .forumview {
 	margin-top: 10px;
 }
 
+.forum-desc {
+	color: #fff;
+}
+
 /* Modal forms */
-#login .modal-xs {
+#login-form .modal-xs {
 	max-width: 300px;
 }
 
@@ -461,7 +478,7 @@ a.list-group-item-cat:hover .forum-description {
 	background: #e8e8e8;
 }
 
-#login .form-control, #newmail .form-control, #newpass .form-control {
+#login-form .form-control, #newmail .form-control, #newpass .form-control {
 	margin-bottom: 10px;
 }
 
@@ -588,7 +605,7 @@ textarea.textarea, textarea.textarea:focus {
 
 .textarea-toolbar .btn {
 	border: none;
-	padding: 13px 18px 13px;
+	padding: 14px 18px;
 }
 
 .dropdown-emoji {
@@ -889,7 +906,7 @@ a.active.list-group-item, a.active.list-group-item:hover, a.active.list-group-it
 }
 
 .btn-primary:active, .btn-primary.active {
-	background-color: #0062a8 9;
+	background-color: #0062a8;
 }
 
 .btn-post {

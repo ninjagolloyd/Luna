@@ -1,11 +1,11 @@
-<div class="modal fade modal-form" id="login" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade modal-form" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
 	<div class="modal-dialog modal-xs">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">Login</h4>
 			</div>
 			<div class="modal-body">
-				<form id="login" method="post" action="login.php?action=in" onsubmit="return process_form(this)">
+				<form id="login-fr" method="post" action="login.php?action=in" onsubmit="return process_form(this)">
 					<fieldset>
 						<input type="hidden" name="form_sent" value="1" />
 						<input type="hidden" name="redirect_url" value="<?php echo luna_htmlspecialchars($redirect_url) ?>" />
@@ -47,7 +47,7 @@
 				</form>
 			</div>
 			<div class="modal-footer">
-				<a href="#" data-toggle="modal" data-target="#login" data-dismiss="modal">Back</a>
+				<a href="#" data-toggle="modal" data-target="#login-form" data-dismiss="modal">Back</a>
 			</div>
 		</div>
 	</div>

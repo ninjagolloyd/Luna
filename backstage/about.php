@@ -70,6 +70,7 @@ require 'header.php';
 				<a href="#p3u2" class="list-group-item">Preview 3 Update 2</a>
 				<a href="#p4" class="list-group-item">Preview 4</a>
 				<a href="#p4u1" class="list-group-item">Preview 4 Update 1</a>
+				<a href="#p4u2" class="list-group-item">Preview 4 Update 2</a>
 			</div>
 		</div>
 	</div>
@@ -238,15 +239,15 @@ require 'header.php';
 				<div class="row">
 					<div class="col-sm-6">
 						<h4>Packages</h4>
-						<p><b>Bootstrap</b> has been updated from version 3.2.0 to 3.3.2.<br />
+						<p><b>Bootstrap</b> has been updated from version 3.2.0 to 3.3.4.<br />
 						<b>Font Awesome</b> has been updated from version 4.1.0 to 4.3.0.<br />
 						<b>jQuery</b> has been updated from version 2.1.1 to 2.1.3.<br />
 						<b>PrismJS</b> has been added.<br />
-						<b>Core</b> has been updated from version 0.0.37.2592 to 0.4.3935.</p>
+						<b>Core</b> has been updated from version 0.0.37.2592 to 0.4.39xx.</p>
 					</div>
 					<div class="col-sm-6">
 						<h4>Bugfixes</h4>
-						<p>73 bugs have been fixed.</p>
+						<p>119 bugs have been fixed.</p>
 						<h4>Security fixes</h4>
 						<p>5 security issue has been fixed.</p>
 					</div>
@@ -460,7 +461,7 @@ require 'header.php';
 								<span class="label label-primary">3754</span> Moved topics aren't displayed on the index anymore<br />
 								<span class="label label-primary">3754</span> Improved forum display for moved topics<br />
 								<span class="label label-primary">3754</span> The update dialogue now has a similar design as login<br />
-								<span class="label label-primary">3754</span> Bootstrap has been updated to version 3.3.2<br />
+								<span class="label label-primary">3754</span> Bootstrap has been updated to version 3.3.4<br />
 								<span class="label label-primary">3754</span> Updated design for the user list<br />
 								<span class="label label-primary">3754</span> Font Awesome has been updated to version 4.3.0<br />
 								<span class="label label-primary">3754</span> Users can no longer select a per-user style<br />
@@ -564,7 +565,7 @@ require 'header.php';
 							</p>
 						</div>
 					</div>
-					<h4><a id="p4"></a>Preview 4 Update 1 &middot; Build 3935</h4>
+					<h4><a id="p4u1"></a>Preview 4 Update 1 &middot; Build 3935</h4>
 					<div class="row">
 						<div class="col-sm-6">
 							<p>
@@ -583,6 +584,29 @@ require 'header.php';
 								<span class="label label-primary">3935</span> Fixed a bug with long names in the user list<br />
 								<span class="label label-primary">3935</span> The Luna theme now has some additional options<br />
 								<span class="label label-primary">3935</span> Multiple bugfixes
+							</p>
+						</div>
+					</div>
+					<h4><a id="p4u2"></a>Preview 4 Update 2 &middot; Build 39xx</h4>
+					<div class="row">
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">39xx</span> Hovering over a username now shows the full username<br />
+								<span class="label label-primary">39xx</span> Improvements to Luna theme<br />
+								<span class="label label-primary">39xx</span> 2 CSS3 errors have been corrected<br />
+								<span class="label label-primary">39xx</span> Bootstrap has been updated to version 3.3.4<br />
+								<span class="label label-primary">39xx</span> Admins no longer see a limit to their Inbox messages<br />
+								<span class="label label-primary">39xx</span> 23 fixes to the Luna core
+							</p>
+						</div>
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">39xx</span> Improvements to the coding conventions<br />
+								<span class="label label-primary">39xx</span> 20 HTML5 errors have been corrected<br />
+								<span class="label label-primary">39xx</span> Jumbotrons have been replaced with navbars<br />
+								<span class="label label-primary">39xx</span> The Inbox navbar has been updated with a better design<br />
+								<span class="label label-primary">39xx</span> Updates to the language files<br />
+								<span class="label label-primary">39xx</span> Multiple bugfixes
 							</p>
 						</div>
 					</div>

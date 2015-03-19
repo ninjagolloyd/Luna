@@ -5,13 +5,11 @@ if (!defined('FORUM'))
 	exit;
 
 ?>
-</div>
-<div class="jumbotron" style="background:#999;">
-	<div class="container">
-		<h2><?php echo $lang['Help'] ?></h2>
+<nav class="navbar navbar-default" role="navigation">
+	<div class="navbar-header">
+		<a href="help.php" class="navbar-brand"><span class="fa fa-fw fa-info-circle"></span> Help</a>
 	</div>
-</div>
-<div class="container">
+</nav>
 <?php if ($luna_config['o_rules'] == '1') { ?>
 <div class="panel panel-default">
 	<div id="rules-block" class="panel-heading">
@@ -27,7 +25,7 @@ if (!defined('FORUM'))
 		<h3 class="panel-title"><?php echo $lang['BBCode'] ?></h3>
 	</div>
 	<div class="panel-body">
-		<p><a name="bbcode"></a><?php echo $lang['BBCode info'] ?></p>
+		<p><a id="bbcode"></a><?php echo $lang['BBCode info'] ?></p>
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#text" data-toggle="tab"><?php echo $lang['Text style'] ?></a></li>
 			<li><a href="#links" data-toggle="tab"><?php echo $lang['Multimedia'] ?></a></li>
@@ -56,7 +54,7 @@ if (!defined('FORUM'))
 				<p><code>[url]<?php echo luna_htmlspecialchars(get_base_url(true).'/') ?>[/url]</code> <?php echo $lang['produces'] ?> <a href="<?php echo luna_htmlspecialchars(get_base_url(true).'/') ?>"><?php echo luna_htmlspecialchars(get_base_url(true).'/') ?></a></p>
 				<p><code>[email]myname@example.com[/email]</code> <?php echo $lang['produces'] ?> <a href="mailto:myname@example.com">myname@example.com</a></p>
 				<p><code>[email=myname@example.com]<?php echo $lang['My email address'] ?>[/email]</code> <?php echo $lang['produces'] ?> <a href="mailto:myname@example.com"><?php echo $lang['My email address'] ?></a></p>
-				<p><a name="img"></a><?php echo $lang['Images info'] ?></p>
+				<p><a id="img"></a><?php echo $lang['Images info'] ?></p>
 				<p><code>[img=<?php echo $lang['Luna bbcode test'] ?>]<?php echo luna_htmlspecialchars(get_base_url(true)) ?>/img/test.png[/img]</code> <?php echo $lang['produces'] ?> <img style="height: 21px" src="<?php echo luna_htmlspecialchars(get_base_url(true)) ?>/img/test.png" alt="<?php echo $lang['Luna bbcode test'] ?>" /></p>
 				<br />
 				<p><?php echo $lang['Video info'] ?></p>
@@ -75,25 +73,24 @@ if (!defined('FORUM'))
 				<p><?php echo $lang['produces code box'] ?></p>
 				<pre><code><?php echo $lang['Code text'] ?></code></pre>
 				<p><?php echo $lang['Syntax info'] ?></p>
-				<p><pre>
+				<pre>
 [code]
 [[php]]	
 if ($db->num_rows($result) > 0)
 	while ($cur_item = $db->fetch_assoc($result))
 		if ($cur_item['visible'] == '1')
-			$links[] = '<li><a href="'.$cur_item['url'].'">'.$cur_item['name'].'</a></li>';
+			$links[] = '&lt;li&gt;&lt;a href="'.$cur_item['url'].'"&gt;'.$cur_item['name'].'&lt;/a&gt;&lt;/li&gt;';
 [/code]
-				</pre></p>
+				</pre>
 				<p><?php echo $lang['produces code box'] ?></p>
-<div class="codebox"><pre class=" language-php"><code class=" language-php">if ($db->num_rows($result) > 0)
+				<div class="codebox"><pre><code class="language-php">if ($db->num_rows($result) > 0)
 	while ($cur_item = $db->fetch_assoc($result))
 		if ($cur_item['visible'] == '1')
-			$links[] = '<li><a href="'.$cur_item['url'].'">'.$cur_item['name'].'</a></li>';
-</code></pre></div>
+			$links[] = '&lt;li&gt;&lt;a href="'.$cur_item['url'].'"&gt;'.$cur_item['name'].'&lt;/a&gt;&lt;/li&gt;'; </code></pre></div>
 				<p><code>[c]<?php echo $lang['Code text'] ?>[/c]</code> <?php echo $lang['produces code box'] ?> <code><?php echo $lang['Code text'] ?></code></p>
 			</div>
 			<div class="tab-pane" id="lists">
-				<p><a name="lists"></a><?php echo $lang['List info'] ?></p>
+				<p><a id="list"></a><?php echo $lang['List info'] ?></p>
 				<p><code>[list][*]<?php echo $lang['List text 1'] ?>[/*][*]<?php echo $lang['List text 2'] ?>[/*][*]<?php echo $lang['List text 3'] ?>[/*][/list]</code>
 				<br /><span><?php echo $lang['produces list'] ?></span></p>
 				<div class="postmsg">
@@ -106,7 +103,7 @@ if ($db->num_rows($result) > 0)
 				</div>
 			</div>
 			<div class="tab-pane" id="smilies">
-				<p><a name="smilies"></a><?php echo $lang['Smilies info'] ?></p>
+				<p><a id="emoticons"></a><?php echo $lang['Smilies info'] ?></p>
 				<div class="row">
 <?php
 

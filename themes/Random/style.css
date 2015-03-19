@@ -462,7 +462,7 @@ a.list-group-item-cat:hover .forum-description {
 }
 
 /* Modal forms */
-#login .modal-xs {
+#login-form .modal-xs {
 	max-width: 300px;
 }
 
@@ -501,7 +501,7 @@ a.list-group-item-cat:hover .forum-description {
 	background: #e8e8e8;
 }
 
-#login .form-control, #newmail .form-control, #newpass .form-control {
+#login-form .form-control, #newmail .form-control, #newpass .form-control {
 	margin-bottom: 10px;
 }
 
@@ -866,14 +866,6 @@ a.active.list-group-item, a.active.list-group-item:hover, a.active.list-group-it
 	border-bottom: #eee solid 1px;
 	font-size: 20px;
 	line-height: 0.8;
-}
-
-input[type="text"].power-control {
-	border: none;
-	background-color: transparent;
-	font-size: 20px;
-	line-height: 0.8;
-	margin-top: 10px;
 }
 
 #commentform > .panel {
