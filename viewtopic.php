@@ -86,22 +86,16 @@ $is_admmod = ($luna_user['g_id'] == FORUM_ADMIN || ($luna_user['g_moderator'] ==
 if ($is_admmod)
 $admin_ids = get_admin_ids();
 
-// Can we or can we not post replies?
-if ($luna_config['o_post_responsive'] == 0)
-	$responsive_post = ' hidden-sm hidden-xs';
-else
-	$responsive_post = '';
-
 if ($cur_topic['closed'] == '0') {
 	if (($cur_topic['post_replies'] == '' && $luna_user['g_post_replies'] == '1') || $cur_topic['post_replies'] == '1' || $is_admmod)
-		$post_link = "\t\t\t".'<a class="btn btn-primary btn-post pull-right'.$responsive_post.'" href="post.php?tid='.$id.'">'.$lang['Post reply'].'</a>'."\n";
+		$post_link = "\t\t\t".'<a class="btn btn-primary btn-post pull-right" href="post.php?tid='.$id.'">'.$lang['Post reply'].'</a>'."\n";
 	else
 		$post_link = '';
 } else {
-	$post_link = '<a class="btn disabled btn-warning btn-post pull-right'.$responsive_post.'">'.$lang['Topic closed'].'</a>';
+	$post_link = '<a class="btn disabled btn-warning btn-post pull-right">'.$lang['Topic closed'].'</a>';
 
 	if ($is_admmod)
-		$post_link .= '<a class="btn btn-primary btn-post pull-right'.$responsive_post.'" href="post.php?tid='.$id.'">'.$lang['Post reply'].'</a>';
+		$post_link .= '<a class="btn btn-primary btn-post pull-right" href="post.php?tid='.$id.'">'.$lang['Post reply'].'</a>';
 
 	$post_link = $post_link."\n";
 }
@@ -124,6 +118,17 @@ $start_from = $luna_user['disp_posts'] * ($p - 1);
 // Generate paging links
 $paging_links = paginate($num_pages, $p, 'viewtopic.php?id='.$id);
 
+$quickpost = false;
+if (($cur_topic['post_replies'] == '1' || ($cur_topic['post_replies'] == '' && $luna_user['g_post_replies'] == '1')) && ($cur_topic['closed'] == '0' || $is_admmod)) {
+	$required_fields = array('req_message' => $lang['Message']);
+	if ($luna_user['is_guest']) {
+		$required_fields['req_username'] = $lang['Guest name'];
+		if ($luna_config['p_force_guest_email'] == '1')
+			$required_fields['req_email'] = $lang['Email'];
+	}
+
+	$quickpost = true;
+}
 
 if ($luna_config['o_censoring'] == '1')
 	$cur_topic['subject'] = censor_words($cur_topic['subject']);

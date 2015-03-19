@@ -26,41 +26,6 @@ header('X-Frame-Options: deny');
 // Define $p if it's not set to avoid a PHP notice
 $p = isset($p) ? $p : null;
 
-if (isset($required_fields)) {
-// Output JavaScript to validate form (make sure required fields are filled out)
-
-?>
-<script type="text/javascript">
-/* <![CDATA[ */
-function process_form(the_form) {
-	var required_fields = {
-<?php
-	// Output a JavaScript object with localised field names
-	$tpl_temp = count($required_fields);
-	foreach ($required_fields as $elem_orig => $elem_trans) {
-		echo "\t\t\"".$elem_orig.'": "'.addslashes(str_replace('&#160;', ' ', $elem_trans));
-		if (--$tpl_temp) echo "\",\n";
-		else echo "\"\n\t};\n";
-	}
-?>
-	if (document.all || document.getElementById) {
-		for (var i = 0; i < the_form.length; ++i) {
-			var elem = the_form.elements[i];
-			if (elem.name && required_fields[elem.name] && !elem.value && elem.type && (/^(?:text(?:area)?|password|file)$/i.test(elem.type))) {
-				alert('"' + required_fields[elem.name] + '" <?php echo $lang['required field'] ?>');
-				elem.focus();
-				return false;
-			}
-		}
-	}
-	return true;
-}
-/* ]]> */
-</script>
-<?php
-
-}
-
 // Generate avatar
 $user_avatar = draw_user_avatar($luna_user['id'], 'avatar');
 
@@ -129,7 +94,7 @@ $result = $db->query('SELECT id, url, name, disp_position, visible FROM '.$db->p
 
 if ($luna_user['is_guest'])
 	$usermenu = '<li id="navregister"'.((FORUM_ACTIVE_PAGE == 'register') ? ' class="active"' : '').'><a href="register.php">'.$lang['Register'].'</a></li>
-				 <li><a href="#" data-toggle="modal" data-target="#login">'.$lang['Login'].'</a></li>';
+				 <li><a href="#" data-toggle="modal" data-target="#login-form">'.$lang['Login'].'</a></li>';
 else
 	$usermenu = $backstage.$notification_menu_item.'
 				<li><a href="inbox.php">'.$new_inbox.'<span class="fa fa-fw fa-paper-plane-o"></span><span class="visible-xs-inline"> Inbox</span></a></li>
