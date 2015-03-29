@@ -23,11 +23,11 @@ require 'header.php';
 	<div class="col-sm-3">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">Welcome to the Luna Preview</h3>
+				<h3 class="panel-title">Welcome to the Luna Beta</h3>
 			</div>
 			<div class="panel-body">
-				<p>Welcome to the Luna Preview. It's great that you are using this software. This preview is meant to show what's coming next to Luna.</p>
-				<p>Feedback is very important for us, it would be great if you give us some. Feedback can be about everything: bugs that need to be fixed, features you would like to see, etc. Be sure to check our shiplist (see links below) before you request a feature or fill a bug, as it might be noted already.</p>
+				<p>Welcome to the Luna Beta. It's great that you are using this software. This beta is meant to show what's coming next to Luna.</p>
+				<p>Feedback is very important for us, it would be great if you give us some. For now we're looking for bugs. Be sure to check our shiplist (see links below) before you fill a bug, as it might be noted already.</p>
 			</div>
 			<div class="panel-footer">
 				<div class="btn-group">
@@ -55,7 +55,6 @@ require 'header.php';
 				<h3 class="panel-title">Updates</h3>
 			</div>
 			<div class="list-group">
-				<a href="#updates" class="list-group-item">Updates</a>
 				<a href="#p0" class="list-group-item">Preview 0</a>
 				<a href="#p0u1" class="list-group-item">Preview 0 Update 1</a>
 				<a href="#p0u2" class="list-group-item">Preview 0 Update 2</a>
@@ -71,13 +70,16 @@ require 'header.php';
 				<a href="#p4" class="list-group-item">Preview 4</a>
 				<a href="#p4u1" class="list-group-item">Preview 4 Update 1</a>
 				<a href="#p4u2" class="list-group-item">Preview 4 Update 2</a>
+				<a href="#b1" class="list-group-item">Beta 1</a>
+				<a href="#b2" class="list-group-item">Beta 2</a>
+				<a href="#b3" class="list-group-item">Beta 3</a>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">About Luna 1.0 Preview</h3>
+				<h3 class="panel-title">About Luna 1.0 Beta</h3>
 			</div>
 			<div class="panel-body panel-about">
 				<a id="brand"></a><h3><span class="fa fa-fw fa-moon-o"></span>New brand</h3>
@@ -219,12 +221,6 @@ require 'header.php';
 						<p>Sunrise is a theme based on Luna, however, it uses a more classic view on forum software. This is a nice team if you want to kick off with a fresh design, yet like the old way of working with forum software better.</p>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<h4>Random</h4>
-						<p>While no longer the default, in Luna 1.0, Random returns. Our classic ModernBB theme has been revamped to work with Luna, uses some of its new capabilities and is ready for the fun on every device. Unlike the Random design you've seen in ModernBB 3.6, 3.7 and 3.8, we've decided to include the ModernBB 3.5 version instead.</p>
-					</div>
-				</div>
 				<a id="others"></a><h3>Other improvements and notes</h3>
 				<div class="row">
 					<div class="col-sm-6">
@@ -243,17 +239,17 @@ require 'header.php';
 						<b>Font Awesome</b> has been updated from version 4.1.0 to 4.3.0.<br />
 						<b>jQuery</b> has been updated from version 2.1.1 to 2.1.3.<br />
 						<b>PrismJS</b> has been added.<br />
-						<b>Core</b> has been updated from version 0.0.37.2592 to 0.4.39xx.</p>
+						<b>Core</b> has been updated from version 0.0.37.2592 to 0.7.40xx.</p>
 					</div>
 					<div class="col-sm-6">
 						<h4>Bugfixes</h4>
-						<p>119 bugs have been fixed.</p>
+						<p>125 bugs have been fixed.</p>
 						<h4>Security fixes</h4>
 						<p>5 security issue has been fixed.</p>
 					</div>
 				</div>
 				<hr />
-				<a id="updates"></a><h3>Luna 1.0 Updates</h3>
+				<h3><a id="updates"></a>Luna 1.0 Updates</h3>
 				<span class="change-list">
 					<h4><a id="p0"></a>Preview 0 &middot; Build 3112</h4>
 					<div class="row">
@@ -587,26 +583,79 @@ require 'header.php';
 							</p>
 						</div>
 					</div>
-					<h4><a id="p4u2"></a>Preview 4 Update 2 &middot; Build 39xx</h4>
+					<h4><a id="p4u2"></a>Preview 4 Update 2 &middot; Build 3999</h4>
 					<div class="row">
 						<div class="col-sm-6">
 							<p>
-								<span class="label label-primary">39xx</span> Hovering over a username now shows the full username<br />
-								<span class="label label-primary">39xx</span> Improvements to Luna theme<br />
-								<span class="label label-primary">39xx</span> 2 CSS3 errors have been corrected<br />
-								<span class="label label-primary">39xx</span> Bootstrap has been updated to version 3.3.4<br />
-								<span class="label label-primary">39xx</span> Admins no longer see a limit to their Inbox messages<br />
-								<span class="label label-primary">39xx</span> 23 fixes to the Luna core
+								<span class="label label-primary">3999</span> Hovering over a username now shows the full username<br />
+								<span class="label label-primary">3999</span> Improvements to Luna theme<br />
+								<span class="label label-primary">3999</span> 2 CSS3 errors have been corrected<br />
+								<span class="label label-primary">3999</span> Bootstrap has been updated to version 3.3.4<br />
+								<span class="label label-primary">3999</span> Admins no longer see a limit to their Inbox messages<br />
+								<span class="label label-primary">3999</span> Major improvements to Random<br />
+								<span class="label label-primary">3999</span> 23 fixes to the Luna core
 							</p>
 						</div>
 						<div class="col-sm-6">
 							<p>
-								<span class="label label-primary">39xx</span> Improvements to the coding conventions<br />
-								<span class="label label-primary">39xx</span> 20 HTML5 errors have been corrected<br />
-								<span class="label label-primary">39xx</span> Jumbotrons have been replaced with navbars<br />
-								<span class="label label-primary">39xx</span> The Inbox navbar has been updated with a better design<br />
-								<span class="label label-primary">39xx</span> Updates to the language files<br />
-								<span class="label label-primary">39xx</span> Multiple bugfixes
+								<span class="label label-primary">3999</span> Improvements to the coding conventions<br />
+								<span class="label label-primary">3999</span> 20 HTML5 errors have been corrected<br />
+								<span class="label label-primary">3999</span> Jumbotrons have been replaced with navbars<br />
+								<span class="label label-primary">3999</span> The Inbox navbar has been updated with a better design<br />
+								<span class="label label-primary">3999</span> Updates to the language files<br />
+								<span class="label label-primary">3999</span> Multiple bugfixes
+							</p>
+						</div>
+					</div>
+					<h4><a id="b1"></a>Beta 1 &middot; Build 4008</h4>
+					<div class="row">
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">4008</span> Cleaned-up language files<br />
+								<span class="label label-primary">4008</span> Major improvements to Random
+							</p>
+						</div>
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">4008</span> Multiple bugfixes
+							</p>
+						</div>
+					</div>
+					<h4><a id="b2"></a>Beta 2 &middot; Build 4049</h4>
+					<div class="row">
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">4049</span> Backstage is now fully translatable again<br />
+								<span class="label label-primary">4049</span> Mainstage is now fully translatable again<br />
+								<span class="label label-primary">4049</span> Luna is now fully translatable again<br />
+								<span class="label label-primary">4049</span> Features that where disabled are available again<br />
+								<span class="label label-primary">4049</span> Code-tags without language default back to Bootstrap<br />
+								<span class="label label-primary">4049</span> Improvements to Random
+							</p>
+						</div>
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">4049</span> Sunrise is now fully translatable again<br />
+								<span class="label label-primary">4049</span> Random is now fully translatable again<br />
+								<span class="label label-primary">4049</span> Language clean-up<br />
+								<span class="label label-primary">4049</span> The post screen has been fixed<br />
+								<span class="label label-primary">4049</span> Multiple bugfixes
+							</p>
+						</div>
+					</div>
+					<h4><a id="b3"></a>Beta 3 &middot; Build 40xx</h4>
+					<div class="row">
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">40xx</span> Random is no longer part of the package<br />
+								<span class="label label-primary">40xx</span> Update graphics for themes<br />
+								<span class="label label-primary">40xx</span> Your own topics are no longer marked as new
+							</p>
+						</div>
+						<div class="col-sm-6">
+							<p>
+								<span class="label label-primary">40xx</span> Readed topics are no longer marked as new<br />
+								<span class="label label-primary">40xx</span> Multiple bugfixes
 							</p>
 						</div>
 					</div>

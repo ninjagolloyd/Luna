@@ -189,7 +189,7 @@ function AddTag(type, tag) {
 }
 
 function draw_topics_list() {
-	global $luna_user, $luna_config, $db, $sort_by, $start_from, $id, $lang, $db_type;
+	global $luna_user, $luna_config, $db, $sort_by, $start_from, $id, $lang, $db_type, $tracked_topics;
 	
 	// Retrieve a list of topic IDs, LIMIT is (really) expensive so we only fetch the IDs here then later fetch the remaining data
 	if ($luna_user['g_soft_delete_view'])
@@ -301,7 +301,7 @@ function draw_topics_list() {
 		}
 	
 	} else {
-		echo '<h3 class="nothing">There are no thread in this forum, <a href="post.php?fid='.$id.'">be the first one!</a></h3>';
+		'<h3 class="nothing">'.printf($lang['No threads'], $id).'</h3>';
 	}
 	
 }
@@ -470,7 +470,7 @@ function draw_section_info($current_id) {
 }
 
 function draw_index_topics_list($section_id) {
-	global $luna_user, $luna_config, $db, $start_from, $id, $lang, $sort_by, $start_from, $db_type, $cur_topic;
+	global $luna_user, $luna_config, $db, $start_from, $id, $lang, $sort_by, $start_from, $db_type, $cur_topic, $tracked_topics;
 	
 	// Retrieve a list of topic IDs, LIMIT is (really) expensive so we only fetch the IDs here then later fetch the remaining data
 	if ($section_id != 0)
@@ -596,9 +596,9 @@ function draw_index_topics_list($section_id) {
 		}
 	
 	} elseif ($section_id != 0) {
-		echo '<h3 class="nothing">There are no thread in this forum, <a href="post.php?fid='.$id.'">be the first one!</a></h3>';
+		'<h3 class="nothing">'.printf($lang['No threads'], $id).'</h3>';
 	} else {
-		echo '<h3 class="nothing">There are no thread on this board, choose a forum and be the first one.</h3>';
+		echo '<h3 class="nothing">'.$lang['No threads board'].'</h3>';
 	}
 	
 }
@@ -900,7 +900,7 @@ function draw_soft_delete_form($id) {
 
 ?>
 		<form method="post" action="delete.php?id=<?php echo $id ?>&action=soft">
-			<p><?php echo ($is_topic_post) ? '<strong>'.$lang['Topic warning'].'</strong>' : '' ?><br />The post you have chosen to delete is set out below for you to review before proceeding. Deleting this post is not permanent. If you want to delete a post permanently, please use delete instead.</p>
+			<p><?php echo ($is_topic_post) ? '<strong>'.$lang['Topic warning'].'</strong>' : '' ?><br /><?php echo $lang['Soft delete info'] ?></p>
 			<input type="submit" class="btn btn-danger" name="soft_delete" value="Soft delete" />
 		</form>
 <?php
@@ -911,7 +911,7 @@ function draw_soft_reset_form($id) {
 
 ?>
 		<form method="post" action="delete.php?id=<?php echo $id ?>&action=reset">
-			<p>This post has been soft deleted. We'll enable it again with a click on the button.</p>
+			<p><?php echo $lang['Revert soft delete'] ?></p>
 			<input type="submit" class="btn btn-primary" name="reset" value="Reset post" />
 		</form>
 <?php
@@ -1004,7 +1004,7 @@ function draw_rules_form() {
 }
 
 function draw_search_results() {
-	global $search_set, $cur_search, $luna_user, $luna_config, $topic_count, $lang, $cur_topic, $subject_status, $last_post_date;
+	global $search_set, $cur_search, $luna_user, $luna_config, $topic_count, $lang, $cur_topic, $subject_status, $last_post_date, $tracked_topics;
 
 	foreach ($search_set as $cur_search) {
 		$forum = '<a href="viewforum.php?id='.$cur_search['forum_id'].'">'.luna_htmlspecialchars($cur_search['forum_name']).'</a>';
@@ -1089,7 +1089,7 @@ function draw_report_form($post_id) {
 <form id="report" method="post" action="misc.php?report=<?php echo $post_id ?>" onsubmit="this.submit.disabled=true;if(process_form(this)){return true;}else{this.submit.disabled=false;return false;}">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">Tell us why you are reporting this</h3>
+			<h3 class="panel-title"><?php echo $lang['Report reason'] ?></h3>
 		</div>
 		<fieldset>
 			<input type="hidden" name="form_sent" value="1" />

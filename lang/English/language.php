@@ -187,6 +187,7 @@ $lang = array(
 'Database server hostname'		=>	'Server hostname',
 'Database name'					=>	'Name',
 'Database username'				=>	'Username',
+'Database password'             =>  'Password',
 'Info 4'						=>	'Your database username',
 'Info 5'						=>	'Set for more Luna installation in this database',
 'Table prefix'					=>	'Table prefix',
@@ -696,14 +697,10 @@ $lang = array(
 'Category position label'		=>	'Position',
 'Category name label'			=>	'Name',
 
-// Checked untill this line
-
 // Language fox censoring.php
 'Must enter word message'	=>	'You must enter a word to censor.',
 'Add word subhead'			=>	'Add word',
 'Add word info'				=>	'Enter a word that you want to censor and the replacement text for this word. Wildcards are accepted.',
-'Censoring enabled'			=>	'<strong>Censoring is enabled in %s.</strong>',
-'Censoring disabled'		=>	'<strong>Censoring is disabled in %s.</strong>',
 'Censored word label'		=>	'Censored word',
 'Replacement label'			=>	'Replacement word',
 'Edit remove words'			=>	'Manage words',
@@ -744,19 +741,12 @@ $lang = array(
 'Timeout error message'				=>	'The value of "Timeout online" must be smaller than the value of "Timeout visit".',
 
 // Language for appearance.php
-'Header appearance'					=>	'Header appearance',
-'Footer appearance'					=>	'Footer appearance',
-'Footer'							=>	'Footer',
 'Display head'						=>	'Display settings',
-'Default style help'				=>	'The default style will be used by new users and guests. Users can change the style they use, so changing the default style here won\'t change the design for already existing users. You can also force a style, this will reset the style setting for every user except the guest user.',
 'About style'						=>	'About %s',
 'version'							=>	'version %s',
 'Released on'						=>	'Released on %s',
 'Designed for'						=>	'Designed for Luna %s to %s',
-'Force style'						=>	'Force style',
-'Set as default'					=>	'Set as default',
 'About'								=>	'About',
-'Version number help'				=>	'Show Luna version number in footer.',
 'Info in posts help'				=>	'Show information about the poster under the username in topic view.',
 'Post count help'					=>	'Show the number of posts a user has made in topic view, profile and user list.',
 'Smilies help'						=>	'Convert smilies to small graphic icons in forum posts.',
@@ -769,28 +759,16 @@ $lang = array(
 'Posts per page help'				=>	'Default amount of posts per page',
 'Indent label'						=>	'Indent size',
 'Index panels head'					=>	'Index settings',
-'Moderated by help'				 =>  'Show the "Moderated by" list when moderators are set on a per-forum base.',
+'Moderated by help'				 	=>  'Show the "Moderated by" list when moderators are set on a per-forum base (requires theme support).',
 'Index statistics help'				=>	'Show the statistics panel on the index.',
 'Indent help'						=>	'Amount of spaces that represent a tab',
 'Quote depth label'					=>	'Maximum [quote] depth',
 'Quote depth help'					=>	'Maximum [quote] can be used in [quote]',
-'Video height'					  =>  'Video height',
-'Video height help'				 =>  'Height of an embedded video',
-'Video width'					   =>  'Video width',
-'Video width help'				  =>  'Width of an embedded video',
-'Menu items head'					=>	'Additional menu items',
-'Menu items help'					=>	'This feature allows you to add more menu items to the navigation bar on every page. The format for adding new links is <code>X = &lt;a href="URL"&gt;LINK&lt;/a&gt;</code> where X is the position at which the link should be inserted. Separate entries with a line break.',
-'Default menu'						=>	'Default menu items',
-'Menu show index'					=>	'Show the index menu item.',
-'Menu show user list'				=>	'Show the user list menu item.',
-'Menu show search'					=>	'Show the search menu item.',
-'Menu show rules'					=>	'Show the rules menu item.',
+'Video height'						=>  'Video height',
+'Video height help'					=>  'Height of an embedded video',
+'Video width'						=>  'Video width',
+'Video width help'					=>  'Width of an embedded video',
 'User profile head'					=>	'User profile',
-'Title settings head'				=>	'Title settings',
-'Title in menu'						=>	'Show board title in menu.',
-'Title in header'					=>	'Show board title in header.',
-'Description in header'				=>	'Show board description in header.',
-'Description settings head'			=>	'Description settings',
 
 // Language for email.php
 'Contact head'						=>	'Contact settings',
@@ -812,14 +790,11 @@ $lang = array(
 'SMTP SSL help'						=>	'Encrypts the connection to the SMTP server using SSL, only when required and supported.',
 
 // Language for features.php
-'Features head'						=>	'Features settings',
 'General'							=>	'General',
 'Topics and posts'					=>	'Topics and posts',
 'User features'						=>	'User features',
 'Search'							=>	'Search',
 'Advanced'							=>	'Advanced',
-'Quick post help'					=>	'Show a quick post form so users can post a reaction from the topic view.',
-'Responsive post help'			  =>  'Show "Post" and "Preview" button in topic view on small screens, leave quick post enabled when this is disabled to allow small devices to post comments.',
 'Users online help'					=>	'Display info on the index page about users currently browsing the board.',
 'Censor words help'					=>	'Censor words in posts. See %s for more info.',
 'Signatures help'					=>	'Allow users to attach a signature to their posts.',
@@ -839,11 +814,9 @@ $lang = array(
 
 // Language for forums.php
 'Post must be integer message'	=>	'Position must be a positive integer value.',
-'New forum'						=>	'New forum',
 
 // Entry page
 'Add forum'					=>	'Add forum',
-'Update positions'			=>	'Update positions',
 'Confirm delete head'		=>	'Confirm delete forum',
 'Confirm delete forum info'	=>	'Are you sure that you want to delete the forum <strong>%s</strong>?',
 'Confirm delete forum'		=>	'Warning! Deleting a forum will delete all posts (if any) in that forum!',
@@ -857,9 +830,8 @@ $lang = array(
 'Sort by label'				=>	'Sort topics by',
 'Topic start'				=>	'Topic start',
 'User groups'				=>	'User groups',
-'Redirect label'			=>	'Redirect URL',
 'Group permissions subhead'	=>	'Edit group permissions',
-'Group permissions info'	=>	'In this form, you can set the forum specific permissions for the different user groups. Administrators always have full permissions. Permission settings that differ from the default permissions for the user group are marked red. Some permissions are disabled under some conditions.',
+'Group permissions info'	=>	'Here you can set the forum specific permissions for the different user groups. Administrators always have full permissions. Permission settings that differ from the default permissions for the user group are marked red. Some permissions are disabled under some conditions.',
 'Read forum label'			=>	'Read forum',
 'Post replies label'		=>	'Post replies',
 'Post topics label'			=>	'Post topics',
@@ -927,13 +899,11 @@ $lang = array(
 'seconds'						=>	'seconds',
 
 // Language used in index.php and update.php for Backstage
-'Luna intro'					=>	'Welcome to Luna',
 'Backup head'						=>	'Back-up',
 'Backup info'						=>	'Create new database backup.',
 'Backup button'						=>	'Create new backup',
 'New reports head'					=>	'New reports',
 'Statistics head'					=>	'Statistics',
-'Updates'							=>	'Updates',
 'View all'							=>	'View all',
 'posts'								=>	'posts',
 'replies'							=>	'replies',
@@ -945,19 +915,9 @@ $lang = array(
 
 'Not available'						=>	'Not available',
 'NA'								=>	'N/A',
-'About head'						=>	'About Luna',
-'Luna version label'			=>	'Luna version',
-'Luna version data'				=>	'Luna version ',
-'Server statistics label'			=>	'Server statistics',
-'View server statistics'			=>	'View server statistics',
 
-'Luna software updates'			=>	'Luna software updates',
-'Luna updates'					=>	'Luna updates',
+'Luna updates'						=>	'Luna software updates',
 'Check for updates'					=>	'Check for updates',
-'New version'						=>	'It\'s time to update, a new version is available',
-'Latest version'					=>	'Thanks for using the latest version of Luna',
-'Development version'				=>	'You\'re using a development release',
-'Warning head'						=>	'Warning', 
 'Install file exists'				=>	'The file install.php still exists, but should be removed.', 
 'Delete install file'				=>	'Delete it', 
 'Delete install.php failed'			=>	'Could not remove install.php. Please do so by hand.', 
@@ -1011,14 +971,10 @@ $lang = array(
 'Delete only verified'		=>	'Delete only verified',
 'Delete only unverified'	=>	'Delete only unverified',
 
-// Language for settings.php
-'Options head'						=>	'Global settings',
-
 // Essentials section
 'Essentials subhead'				=>	'Essentials',
 'Board desc help'					=>	'What\'s this board about?',
 'Base URL label'					=>	'Board URL',
-'URL scheme'						=> 'URL scheme',
 'Base URL problem'					=>  'Your installation does not support automatic conversion of internationalized domain names. As your base URL contains special characters, you <strong>must</strong> use an online converter.',
 'Timezone label'					=>	'Default time zone',
 'DST help'							=>	'Advance time by 1 hour for daylight saving.',
@@ -1066,10 +1022,11 @@ $lang = array(
 'UTC+13:00'							=>	'(UTC+13:00) Tonga, Phoenix Islands, Kamchatka',
 'UTC+14:00'							=>	'(UTC+14:00) Line Islands',
 
+// Checked untill this line
+
 // Timeout Section
 'Timeouts subhead'					=>	'Time and timeouts',
 'PHP manual'						=>	'PHP manual',
-'Time format help'					=>	'Now: %s. See %s for more info',
 'Date format help'					=>	'Now: %s. See %s for more info',
 'Visit timeout label'				=>	'Visit timeout',
 'Visit timeout help'				=>	'Time before a visit ends',
@@ -1137,7 +1094,6 @@ $lang = array(
 // Language for permissions.php
 'All caps'					=>	'All caps',
 'Posting subhead'			=>	'Posting',
-'BBCode help'				=>	'Allow BBCode in posts (recommended).',
 'Image tag help'			=>	'Allow the BBCode [img] tag in posts.',
 'All caps message help'		=>	'Allow a message to contain only capital letters.',
 'All caps subject help'		=>	'Allow a subject to contain only capital letters.',
@@ -1196,7 +1152,7 @@ $lang = array(
 'eAccelerator link'					=>	'www.eaccelerator.net/',
 'XCache'							=>	'XCache',
 'XCache link'						=>	'xcache.lighttpd.net/',
-'Database label'					=>	'Database',
+'Database'					=>	'Database',
 'Database data rows'				=>	'Rows: %s',
 'Database data size'				=>	'Size: %s',
 
@@ -1261,7 +1217,6 @@ $lang = array(
 // Main menu
 'Content'				=>	'Content',
 'Forums'				=>	'Forums',
-'Forum settings'		=>	'Forum settings',
 'Categories'			=>	'Categories',
 'Board'					=>	'Board',
 'Board structure'		=>	'Board structure',
@@ -1273,20 +1228,15 @@ $lang = array(
 'Permissions'			=>	'Permissions',
 'Bans'					=>	'Bans',
 'Settings'				=>	'Settings',
-'Global'				=>	'Global',
 'Registration'			=>	'Registration',
 'Email'					=>	'Email',
-'Database'				=>	'Database management',
 'Extensions'			=>	'Extensions',
-
-// Others
 'Prune'					=>	'Prune',
 'Server statistics'		=>  'Server statistics',
 
 // Update service
 'Available'				=>	'Luna v%s is available, %s!',
 'update now'			=>	'update now',
-'Development'			=>	'You are running version %s, the latest stable release is version %s.',
 'Download'				=>	'Download v%s',
 'Changelog'				=>	'Changelog',
 
@@ -1312,27 +1262,13 @@ $lang = array(
 'Plugin failed message'	=>	'Loading of the plugin - <strong>%s</strong> - failed.',
 
 // Common
-'Login required'		=>	'You must be logged in to use the privates messages system',
-'Disabled PM'			=>	'You have disable the privates messages system',
 'Private Messages'		=>	'Private Messages',
 'PM'					=>	'PM',
-'Quick message'			=>	'Send private message',
-'Write message'			=>	'Send new message',
 'Inbox'					=>	'Inbox',
-'Outbox'				=>	'Sent',
-'Please confirm'		=>	'Please confirm',
-'Full boxes'			=>	'Your private message boxes are full!',
-'Empty boxes'			=>	'Your private message boxes are empty.',
-'Full to'				=>	'Private message boxes full to %s',
 'Select'				=>	'Select',
-'For select'			=>	'For the selection:',
 'Messages'				=>	'Messages',
-'OK'					=>	'OK',
-'PM Menu'				=>	'Private messaging',
-'Sending lists'			=>	'Sending lists',
 
 // List a box
-'Date'					=>	'Date',
 'Subject'				=>	'Subject',
 'Sender'				=>	'Sender',
 'Receiver'				=>	'Receiver(s)',
@@ -1346,17 +1282,11 @@ $lang = array(
 // View a message
 'View'					=>	'View a private discussion',
 'Reply'					=>	'Reply',
-'Deleted User'			=>	'Deleted User',
-'Deleted'				=>	'(deleted)',
 'With'					=>	'with',
 
 // Send a message
 'Send a message'		=>	'Send a message',
 'Send to'				=>	'Send to',
-'Send multiple'			=>	'You can send the message to several receivers by separating them by commas. Maximum: ',
-'Save message'			=>	'Save message in "Sent" box',
-'Send'					=>	'Send',
-'Sent redirect'			=>	'Messages sent to user, redirecting...',
 'No user'				=>	'There\'s no user with the username "%s".',
 'Dest full'				=>	'%s inbox is full, you can not send you message to this user.',
 'Sender full'			=>	'Can\'t save message, your boxes are full.',
@@ -1373,15 +1303,8 @@ $lang = array(
 
 // Delete
 'Delete message'		=>	'Delete message',
-'Delete message comply'	=>	'Are you sure you want to delete the message?',
 'Topic warning info'	=>	'The topic will be deleted from your inbox, but it will stays in the others receivers\' boxes.',
 'Delete for everybody'	=>	'If you tick this checkbox, you will delete the message (or the topic) for all the receivers (available only for admins &amp; mods)',
-
-// profile.php
-'use_pm_option'			=>	'Enable privates messages system',
-'email_option_infos'	=>	'With this enabled, an e-mail will be sent for all new private message.',
-'email_option'			=>	'Privates messages notification by e-mail',
-'email_option_full'		=>	'Include private messages content',
 
 // Email templtes
 // Email - activate_email.tpl
@@ -1589,21 +1512,6 @@ To administer this account, please visit the following page:
 <board_mailer> Mailer
 (Do not reply to this message)',
 
-// Email - rename.tpl
-'rename.tpl'		  =>
-'Subject: User account renamed
-
-During an upgrade to the forums at <base_url> it was determined your username is too similar to an existing user. Your username has been changed accordingly.
-
-Old username: <old_username>
-New username: <new_username>
-
-We apologise for any inconvenience caused.
-
---
-<board_mailer> Mailer
-(Do not reply to this message)',
-
 // Email - welcome.tpl
 'welcome.tpl'		  =>
 'Subject: Welcome to <board_title>!
@@ -1618,5 +1526,155 @@ Login at <login_url> to activate the account.
 --
 <board_mailer> Mailer
 (Do not reply to this message)',
+
+// New translations
+
+// Shared
+'Toggle navigation'		=>	'Toggle navigation',
+
+// Mainstage
+'Reply'					=>	'Reply',
+'Compose'				=>	'Compose',
+'Notifications'			=>	'Notifications',
+
+'No threads'			=>	'There are no thread in this forum, <a href="post.php?fid=%s">be the first one!</a>',
+'No threads board'		=>	'There are no thread on this board, choose a forum and be the first one.',
+
+'Soft delete info'		=>	'The post you have chosen to delete is set out below for you to review before proceeding. Deleting this post is not permanent. If you want to delete a post permanently, please use delete instead.',
+'Revert soft delete'	=>	'This post has been soft deleted. We\'ll enable it again with a click on the button.',
+'Report reason'			=>	'Tell us why you are reporting this.',
+
+'No new notifications'	=>	'No new notifications',
+
+'No users online'		=>	'No users online',
+
+// Backstage
+'Luna update'			=>	'Luna software update',
+'About Luna'			=>	'About Luna',
+'System info'			=>	'System info',
+'Tools'					=>	'Tools',
+'Menu'					=>	'Menu',
+'Theme'					=>	'Theme',
+
+'Emoji'					=>	'Emoji',
+'Use emojis'			=>	'Use emojis instead of emoticons.',
+'Smilie size'			=>	'Smilie size',
+'Smilie size info'		=>	'The emoticons and emojis are shown, don\'t go above 29 pixels when using normal emoticons',
+'Header settings'		=>	'Header settings',
+'Notification fly-out'	=>	'Show a fly-out when clicking the notification icon instead of going to the notification page. Disableing this feature might improve performance.',
+'Search bar visible'	=>	'Show the search bar in the heading.',
+'Footer settings'		=>	'Footer settings',
+'Statistics'			=>	'Statistics',
+'Show board statistics'	=>	'Show the board statistics.',
+'Back to top'			=>	'Back to top',
+'Show back'				=>	'Show a "Back to top" link in the footer.',
+'Copyright'				=>	'Copyright',
+'Show copyright notice'	=>	'Show the copyright notice in the footer.',
+'Copyright content'		=>	'Copyright content',
+'Show default copyright'=>	'Show default copyright',
+'Show personalized'		=>	'Show personalized copyright notices:',
+'Your copyright'		=>	'Your copyright',
+
+'Forum color'			=>	'Forum color',
+
+'No file uploaded'		=>	'No file was uploaded or the upload failed, the database was not restored.',
+'Not restored'			=>	'Sorry the database could not be restored.',
+'File format error'		=>	'Error the file name or file format caused an error, the database was not restored.',
+'Debug info'			=>	'Debug info',
+'Imported error'		=>	'Error imported backup file, the database probably has not been restored.',
+'Restore completed'		=>	'Restore completed',
+'Failed repair'			=>	'Tables error, repair failed.',
+'Failed repair SQL'		=>	'SQL error, repair failed.',
+'Failed optimize'		=>	'Tables error, optimise failed.',
+'Failed optimize SQL'	=>	'SQL error, optimise failed.',
+
+'Use Inbox'				=>	'Use Inbox', // "Inbox" is the name of a feature, capital required
+'Allow Inbox'			=>	'Allow users to use Inbox.',
+'Receivers'				=>	'Receivers',
+'Number receivers'		=>	'The number of receivers an Inbox message can have.',
+
+'Show deleted content'	=>	'Show deleted content',
+'Allow soft deleted'	=>	'Allow users to view topics and posts that have been soft deleted.',
+'Soft delete posts'		=>	'Soft delete posts',
+'Allow post soft delete'	=>	'Allow users to soft delete posts from all users.',
+'Soft delete topics'	=>	'Soft delete topics',
+'Allow topic soft delete'	=> 'Allow users soft delete topics from all users.',
+'Inbox messages'		=>	'The maximum amount of messages a user in this group can have in his Inbox. 0 is no limit.',
+
+'Config warning'		=>	'The config file is writeable at this moment, you might want to set the CHMOD to 640 or 644.',
+'Welcome to Luna'		=>	'Welcome to Luna',
+'Welcome to Luna info 1'=>	'Welcome to the Backstage. Here, you can manage your newly set up board. We\'re ready to go now, but there might be a couple of settings you might want to change. So let us help you with that first!',
+'Welcome to Luna info 2'=>	'If you\'re done, you can click on "Got it" in the upper right corner of this panel to disable this field.',
+'Got it'				=>	'Got it',
+'What\'s new'			=>	'What\'s new',
+'Create new sections'	=>	'Create new sections',
+'Censor words'			=>	'Censor words',
+'Add more groups'		=>	'Add more groups',
+'Add additional ranks'	=>	'Add additional ranks',
+'Customize the menu'	=>	'Customize the menu',
+'Change the appearance'	=>	'Change the appearance',
+'Alter functionality'	=>	'Alter functionality',
+'Change settings'		=>	'Change settings',
+'Admin notes'			=>	'Admin notes',
+'Add a note...'			=>	'Add a note...',
+
+'New menu item'			=>	'New menu item',
+'Name'					=>	'Name',
+'Position'				=>	'Position',
+'Show'					=>	'Show',
+
+'Moderate content'		=>	'Moderate content',
+'Visit to moderate'		=>	'Visit a forum or topic and choose "Moderate" in the moderator bar to moderate content.',
+
+'Prune complete notifications'	=>	'Pruning complete. Notifications pruned.',
+'Pruned users'			=>	'Pruning complete. Users pruned %s.',
+'Prune notifications'	=>	'Prune notifications',
+'Type'					=>	'Type',
+'All notifications'		=>	'All notifications',
+'Seen notifications'	=>	'Seen notifications',
+'New notifications'		=>	'New notifications',
+
+'Manage ranks'			=>	'Manage ranks',
+
+'Version information'	=>	'Luna version information',
+'Version'				=>	'Version',
+'Software version'		=>	'Software version',
+'Bootstrap version'		=>	'Bootstrap version',
+'Core version'			=>	'Core version',
+'Font Awesome version'	=>	'Font Awesome version',
+'Database version'		=>	'Database version',
+'jQuery version'		=>	'jQuery version',
+
+'Current theme'			=>	'Current theme',
+'Theme settings for'	=>	'Theme settings for %s',
+'Available themes'		=>	'Here are all themes we could find in the <code>/themes/</code>-folder of your Luna installation. You can choose them to become default here, we set, theme options will appear above.',
+'Use'					=>	'Use',
+
+'Update ring'			=>	'Update ring',
+'Slow'					=>	'Slow',
+'Normal'				=>	'Normal',
+'Preview'				=>	'Preview',
+'Nightly'				=>	'Nightly',
+'New version'			=>	'A new version is available!',
+'New version info'		=>	'A new version, Luna %s has been released. It\'s a good idea to update to the latest version of Luna, as it contains not only new features, improvements and bugfixes, but also the latest security updates.',
+'Latest version'		=>	'You\'re using the latest version of Luna!',
+'Latest version info'	=>	'You\'re on our latest release! Nothing to worry about.',
+'Preview version'		=>	'You\'re using a development version of Luna. Be sure to stay up-to-date.',
+'Preview version info 1'=>	'We release every now and then a new build for Luna, one more stable then the other, for you to check out. You can keep track of this at <a href="http://getluna.org/lunareleases.php">our website</a>. New builds can contain new features, improved features, and/or bugfixes.',
+'Preview version info 2'=>	'At this point, we can only tell you that a new you\'re beyond the latest release. We can\'t tell you if there is a new preview available. You\'ll have to find out for yourself.',
+    
+// Theme languages
+'Back to index'         =>  'Back to index',
+'Subforums'             =>  'Subforums',
+'Confirm deletion'      =>  'Confirm deletion',
+'Write message'         =>  'Write message',
+'Request password'      =>  'Request password',
+'New topic in'          =>  'New topic in "%s"',
+'New comment in'        =>  'New comment in "%s"',
+'About user'            =>  'About user',
+'Keryword'              =>  'Keyword',
+'Author'                =>  'Author',
+'Color'                 =>  'Color',
+'By username'           =>  'By %s',
 
 );
