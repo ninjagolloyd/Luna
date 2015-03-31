@@ -70,7 +70,74 @@
 					</div>
 				</div>
 				<div class="col-xs-10">
-					<h1>Hello, Edge!</h1>
+					<h1>Welcome back, Edge!</h1>
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h3 class="panel-title">Reports</h3>
+										</div>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Reported by</th>
+													<th>Time</th>
+													<th>Message</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Aero</td>
+													<td>21:05 31.03.'15</td>
+													<td>This is just not polite in any meaning of the word.</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h3 class="panel-title">Statistics</h3>
+										</div>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Posts</th>
+													<th>Topics</th>
+													<th>Users</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>1.421</td>
+													<td>389</td>
+													<td>426</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h3 class="panel-title">Statistics</h3>
+										</div>
+										<div class="panel-body">
+											<a class="btn btn-default btn-block" href="http://getluna.org/edge.php">About Edge</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-5">
+							<h2>Admin notes</h2>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
