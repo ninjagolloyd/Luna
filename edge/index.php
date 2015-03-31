@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Luna / Edge</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/edge.css" rel="stylesheet">
 	</head>
 	<body>
@@ -44,7 +45,7 @@
 		</nav>
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-xs-2">
+				<div class="col-xs-3 col-sm-3 col-md-2 col-no-padding">
 					<div class="list-group">
 						<a class="list-group-item" href="index.php">Backstage</a>
 					</div>
@@ -56,7 +57,7 @@
 						<a class="list-group-item" href="about.php">About Luna</a>
 					</div>
 				</div>
-				<div class="col-xs-10">
+				<div class="col-xs-9 col-sm-9 col-md-10">
 					<h1>Welcome back, Edge!</h1>
 					<div class="row">
 						<div class="col-sm-7">
@@ -123,6 +124,32 @@
 						</div>
 						<div class="col-sm-5">
 							<h2>Admin notes</h2>
+							<div class="media admin-note">
+								<div class="media-left">
+									<a href="#">
+										<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
+									</a>
+								</div>
+								<div class="media-body">
+									<h4 class="media-heading">Aero</h4>
+									<p>We need to update Luna to version 1.1, it's important to stay up-to-date and to keep security tight!</p>
+									<a class="btn btn-success" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a>
+									<a class="btn btn-danger" href="index.php"><span class="fa fa-fw fa-trash"></span> Remove</a>
+								</div>
+							</div>
+							<div class="media admin-note">
+								<div class="media-left">
+									<a href="#">
+										<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
+									</a>
+								</div>
+								<div class="media-body">
+									<h4 class="media-heading">Aero</h4>
+									<p>Update the rules, they are out of date.</p>
+									<a class="btn btn-success" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a>
+									<a class="btn btn-danger" href="index.php"><span class="fa fa-fw fa-trash"></span> Remove</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
