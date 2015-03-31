@@ -56,7 +56,23 @@
 			</div>
 		</nav>
 		<div class="container-fluid">
-			<h1>Hello, Edge!</h1>
+			<div class="row">
+				<div class="col-xs-2">
+					<div class="list-group">
+						<a class="list-group-item" href="index.php">Backstage</a>
+					</div>
+					<div class="list-group">
+						<a class="list-group-item" href="settings.php">Settings</a>
+						<a class="list-group-item" href="features.php">Features</a>
+					</div>
+					<div class="list-group">
+						<a class="list-group-item" href="about.php">About Luna</a>
+					</div>
+				</div>
+				<div class="col-xs-10">
+					<h1>Hello, Edge!</h1>
+				</div>
+			</div>
 		</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
