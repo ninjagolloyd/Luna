@@ -113,7 +113,7 @@
 								<div class="col-sm-6">
 									<div class="panel panel-default">
 										<div class="panel-heading">
-											<h3 class="panel-title">Statistics</h3>
+											<h3 class="panel-title">About Edge</h3>
 										</div>
 										<div class="panel-body">
 											<a class="btn btn-default btn-block" href="http://getluna.org/edge.php">About Edge</a>
@@ -123,44 +123,55 @@
 							</div>
 						</div>
 						<div class="col-sm-5">
-							<h2>Admin notes</h2>
-							<div class="media admin-note">
-								<div class="media-left">
-									<a href="#">
-										<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
-									</a>
+							<div class="widget admin-widget">
+								<div class="widget-heading">
+									<h2>Admin notes</h2>
 								</div>
-								<div class="media-body">
-									<h4 class="media-heading">Aero</h4>
-									<p>We need to update Luna to version 1.1, it's important to stay up-to-date and to keep security tight!</p>
-									<a class="btn btn-success" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a>
-									<a class="btn btn-danger" href="index.php"><span class="fa fa-fw fa-trash"></span> Remove</a>
-								</div>
-							</div>
-							<div class="media admin-note">
-								<div class="media-left">
-									<a href="#">
-										<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
-									</a>
-								</div>
-								<div class="media-body">
-									<h4 class="media-heading">Bittersweet Shimmer</h4>
-									<p>1.1 Beta is out, we should start testing!</p>
-									<a class="btn btn-success" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a>
-									<a class="btn btn-danger" href="index.php"><span class="fa fa-fw fa-trash"></span> Remove</a>
-								</div>
-							</div>
-							<div class="media admin-note">
-								<div class="media-left">
-									<a href="#">
-										<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
-									</a>
-								</div>
-								<div class="media-body">
-									<h4 class="media-heading">Aero</h4>
-									<p>Update the rules, they are out of date.</p>
-									<a class="btn btn-success" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a>
-									<a class="btn btn-danger" href="index.php"><span class="fa fa-fw fa-trash"></span> Remove</a>
+								<div class="widget-body">
+									<div class="media admin-note">
+										<div class="media-left">
+											<a href="#">
+												<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
+											</a>
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">Aero<span class="pull-right"><a class="btn btn-success btn-xs" href="#"><span class="fa fa-fw fa-check"></span> Add</a></span></h4>
+											<textarea class="form-control" placeholder="Add a note"></textarea>
+										</div>
+									</div>
+									<div class="media admin-note">
+										<div class="media-left">
+											<a href="#">
+												<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
+											</a>
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">Aero<span class="pull-right"><a class="btn btn-success btn-xs" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a></span></h4>
+											<p>We need to update Luna to version 1.1, it's important to stay up-to-date and to keep security tight!</p>
+										</div>
+									</div>
+									<div class="media admin-note">
+										<div class="media-left">
+											<a href="#">
+												<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
+											</a>
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">Bittersweet Shimmer<span class="pull-right"><a class="btn btn-success btn-xs" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a></span></h4>
+											<p>1.1 Beta is out, we should start testing!</p>
+										</div>
+									</div>
+									<div class="media admin-note">
+										<div class="media-left">
+											<a href="#">
+												<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
+											</a>
+										</div>
+										<div class="media-body">
+											<h4 class="media-heading">Aero<span class="pull-right"><a class="btn btn-success btn-xs" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a></span></h4>
+											<p>Update the rules, they are out of date.</p>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
