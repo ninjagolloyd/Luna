@@ -144,6 +144,19 @@
 									</a>
 								</div>
 								<div class="media-body">
+									<h4 class="media-heading">Bittersweet Shimmer</h4>
+									<p>1.1 Beta is out, we should start testing!</p>
+									<a class="btn btn-success" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a>
+									<a class="btn btn-danger" href="index.php"><span class="fa fa-fw fa-trash"></span> Remove</a>
+								</div>
+							</div>
+							<div class="media admin-note">
+								<div class="media-left">
+									<a href="#">
+										<img class="media-object" src="../img/avatars/placeholder.png" alt="..." height="100">
+									</a>
+								</div>
+								<div class="media-body">
 									<h4 class="media-heading">Aero</h4>
 									<p>Update the rules, they are out of date.</p>
 									<a class="btn btn-success" href="index.php"><span class="fa fa-fw fa-check"></span> Done</a>
