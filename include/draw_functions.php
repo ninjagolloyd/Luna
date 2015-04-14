@@ -168,9 +168,9 @@ function draw_editor($height) {
 					<button class="btn btn-default btn-editor" title="<?php echo $lang['Strike']; ?>" onclick="wswgEditor.doClick('strikethrough');" type="button"><span class="fa fa-fw fa-strikethrough fa-fw"></span></button>
 				</div>
 				<div class="btn-group">
-					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','h');" title="<?php echo $lang['Heading']; ?>" tabindex="-1"><span class="fa fa-fw fa-header fa-fw"></span></a>
-					<a class="btn btn-default btn-editor hidden-md hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','sub');" title="<?php echo $lang['Subscript']; ?>" tabindex="-1"><span class="fa fa-fw fa-subscript fa-fw"></span></a>
-					<a class="btn btn-default btn-editor hidden-md hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','sup');" title="<?php echo $lang['Superscript']; ?>" tabindex="-1"><span class="fa fa-fw fa-superscript fa-fw"></span></a>
+					<button class="btn btn-default btn-editor" title="<?php echo $lang['Heading']; ?>" onclick="wswgEditor.doClick('heading');" type="button"><span class="fa fa-fw fa-header fa-fw"></span></button>
+					<button class="btn btn-default btn-editor" title="<?php echo $lang['Subscript']; ?>" onclick="wswgEditor.doClick('sub');" type="button"><span class="fa fa-fw fa-subscript fa-fw"></span></button>
+					<button class="btn btn-default btn-editor" title="<?php echo $lang['Superscript']; ?>" onclick="wswgEditor.doClick('sup');" type="button"><span class="fa fa-fw fa-superscript fa-fw"></span></button>
 				</div>
 				<div class="btn-group">
 					<button class="btn btn-default btn-editor" class="btn btn-default btn-editor" title="<?php echo $lang['Quote']; ?>" onclick="wswgEditor.doQuote();" type="button"><span class="fa fa-fw fa-quote-left fa-fw"></span></button>

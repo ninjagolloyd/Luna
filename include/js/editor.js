@@ -144,12 +144,12 @@ var wswgEditor = new function () {
 		rep(/<br(\s[^<>]*)?>/gi, "\n");
 		rep(/<p(\s[^<>]*)?>/gi, "");
 		rep(/<\/p>/gi, "\n");
-		rep(/<ul>/gi, "[ul]");
-		rep(/<\/ul>/gi, "[/ul]");
+		rep(/<ul>/gi, "[list]");
+		rep(/<\/ul>/gi, "[/list]");
 		rep(/<ol>/gi, "[ol]");
 		rep(/<\/ol>/gi, "[/ol]");
-		rep(/<li>/gi, "[li]");
-		rep(/<\/li>/gi, "[/li]");
+		rep(/<li>/gi, "[\*]");
+		rep(/<\/li>/gi, "[/\*]");
 		rep(/<\/div>\s*<div([^<>]*)>/gi, "</span>\n<span$1>"); //chrome-safari fix to prevent double linefeeds
 		rep(/<div([^<>]*)>/gi, "<span$1>");
 		rep(/<\/div>/gi, "</span>");
@@ -219,12 +219,12 @@ var wswgEditor = new function () {
 		rep(/\>/gi, "&gt;");
 
 		rep(/\n/gi, "<br />");
-		rep(/\[ul\]/gi, "<ul>");
-		rep(/\[\/ul\]/gi, "</ul>");
+		rep(/\[list\]/gi, "<ul>");
+		rep(/\[\/list\]/gi, "</ul>");
 		rep(/\[ol\]/gi, "<ol>");
 		rep(/\[\/ol\]/gi, "</ol>");
-		rep(/\[li\]/gi, "<li>");
-		rep(/\[\/li\]/gi, "</li>");
+		rep(/\[\*\]/gi, "<li>");
+		rep(/\[\/\*\]/gi, "</li>");
 
 		if (browser) {
 			rep(/\[b\]/gi, "<strong>");
@@ -337,7 +337,7 @@ var wswgEditor = new function () {
 				case 'strikethrough':
 					AddTag('[s]', '[/s]'); break;
 				case 'InsertUnorderedList':
-					AddTag('[ul][li]', '[/li][/ul]'); break;
+					AddTag('[list][\*]', '[/\*][/list]'); break;
 			}
 		}
 	}
