@@ -171,6 +171,25 @@ function draw_editor($height) {
 				<button class="btn btn-with-text btn-primary" type="submit" name="submit" accesskey="s" tabindex="<?php echo $cur_index++ ?>"><span class="fa fa-fw fa-plus"></span> <?php echo $lang['Submit'] ?></button>
 			</div>
 		</div>
+        		<div class="editbar">
+			<button class="btn btn-default btn-editor" title="bold" onclick="wswgEditor.doClick('bold');" type="button"><span class="fa fa-fw fa-bold fa-fw"></span></button>
+			<button class="btn btn-default btn-editor" title="italic" onclick="wswgEditor.doClick('italic');" type="button"><span class="fa fa-fw fa-italic fa-fw"></span></button>
+			<button class="btn btn-default btn-editor" title="underline" onclick="wswgEditor.doClick('underline');" type="button"><span class="fa fa-fw fa-underline fa-fw"></span></button>
+			<button class="btn btn-default btn-editor" title="hyperlink" onclick="wswgEditor.doLink();" type="button"><span class="fa fa-fw fa-link fa-fw"></span></button>
+			<button class="btn btn-default btn-editor" title="image" onclick="wswgEditor.doImage();" type="button"><span class="fa fa-fw fa-image fa-fw"></span></button>
+			<button class="btn btn-default btn-editor" title="list" onclick="wswgEditor.doClick('InsertUnorderedList');" type="button"><span class="fa fa-fw fa-list fa-fw"></span></button>
+			<button class="btn btn-default btn-editor" class="btn btn-default btn-editor" title="quote" onclick="wswgEditor.doQuote();" type="button"><span class="fa fa-fw fa-quote-left fa-fw"></span></button>
+			<button class="btn btn-default btn-editor" title="youtube" onclick="wswgEditor.InsertYoutube();" type="button"><span class="fa fa-fw fa-play-circle fa-fw"></span></button>
+			<button class="btn btn-default btn-editor" title="switch to source" type="button" onclick="wswgEditor.SwitchEditor()"><span class="fa fa-fw fa-terminal fa-fw"></span></button>
+		</div>
+		<textarea class="form-control textarea" placeholder="<?php echo $lang['Start typing'] ?>" name="req_message" id="post_field" rows="<?php echo $height ?>" tabindex="<?php echo $cur_index++ ?>"><?php
+			if (FORUM_ACTIVE_PAGE == 'post')
+				echo isset($_POST['req_message']) ? luna_htmlspecialchars($orig_message) : (isset($quote) ? $quote : '');
+			elseif (FORUM_ACTIVE_PAGE == 'edit')
+				echo luna_htmlspecialchars(isset($_POST['req_message']) ? $message : $cur_post['message']);
+			elseif (FORUM_ACTIVE_PAGE == 'new-inbox')
+				echo luna_htmlspecialchars(isset($p_message) ? $p_message : '');
+		?></textarea>
 	</fieldset>
 </div>
 <script>

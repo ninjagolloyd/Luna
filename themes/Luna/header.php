@@ -15,6 +15,11 @@ require ('header.php');
 		<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="include/js/prism.js"></script>
+		<script src="include/js/editor.js"></script>
+		<script type="text/javascript">
+            wswgEditor.initEditor("post_field", true);
+        </script>
+        <link href="themes/Luna/editor.css" rel="stylesheet" type="text/css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <?php
 // Allow childs
