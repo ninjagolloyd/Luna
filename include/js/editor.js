@@ -290,7 +290,7 @@ var wswgEditor = new function () {
 			}
 		}
 		else {
-			AddTag('[quote=]', '[/quote]');
+			AddTag('[quote]', '[/quote]');
 		}
 	}
 
