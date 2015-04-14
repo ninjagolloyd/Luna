@@ -25,26 +25,6 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
-
-/* Example Extra BBCodes
-
-[center]{TEXT}[/center]
-
-<span style="text-align: center; display: block;">{TEXT}</span>
-
-[left]{TEXT}[/left]
-
-<span style="text-align: left; display: block;">{TEXT}</span>
-
-[right]{TEXT}[/right]
-
-<span style="text-align: right; display: block;">{TEXT}</span>
-
-// From http://www.batiburrillo.net/foros/topic7510.html
-[youtube]{TEXT}[/youtube]
-
-<object width="425" height="350"><param name="movie" value="http://www.youtube.com/v/{TEXT}"></param><param name="wmode" value="transparent"></param><embed src="http://www.youtube.com/v/{TEXT}" type="application/x-shockwave-flash" wmode="transparent" width="425" height="350"></embed></object>
 
 */
 var wswgEditor = new function () {
@@ -151,16 +131,6 @@ var wswgEditor = new function () {
 	}
 
 	function html2bbcode() {
-		rep(/<(font)\s[^<>]*?size=\"?1?\"?>\s*([^<]*?)<\/\1>/gi, "[size=50]$2[/size]");
-		rep(/<(font)\s[^<>]*?size=\"?2?\"?>\s*([^<]*?)<\/\1>/gi, "[size=85]$2[/size]");
-		rep(/<(font)\s[^<>]*?size=\"?3?\"?>\s*([^<]*?)<\/\1>/gi, "$2");
-		rep(/<(font)\s[^<>]*?size=\"?5?\"?>\s*([^<]*?)<\/\1>/gi, "[size=150]$2[/size]");
-		rep(/<(font)\s[^<>]*?size=\"?7?\"?>\s*([^<]*?)<\/\1>/gi, "[size=200]$2[/size]");
-		
-		rep(/<(span|div)\s[^>]*?style=\"?text-align:\s*?center;?\"?>(.*?)<\/\1>/gi, "[center]$2[/center]");
-		rep(/<(span|div)\s[^>]*?style=\"?text-align:\s*?left;?\"?>(.*?)<\/\1>/gi, "[left]$2[/left]");
-		rep(/<(span|div)\s[^>]*?style=\"?text-align:\s*?right;?\"?>(.*?)<\/\1>/gi, "[right]$2[/right]");
-		
 		rep(/<img\s[^<>]*?src=\"?([^<>]*?)\"?(\s[^<>]*)?\/?>/gi, "[img]$1[/img]");
 		rep(/<\/(strong|b)>/gi, "[/b]");
 		rep(/<(strong|b)(\s[^<>]*)?>/gi, "[b]");
@@ -183,13 +153,6 @@ var wswgEditor = new function () {
 		rep(/<\/div>\s*<div([^<>]*)>/gi, "</span>\n<span$1>"); //chrome-safari fix to prevent double linefeeds
 		rep(/<div([^<>]*)>/gi, "<span$1>");
 		rep(/<\/div>/gi, "</span>");
-		
-		rep(/<table([^<>]*)>/gi, "[table]");
-		rep(/<\/table>/gi, "[/table]");
-		rep(/<tr([^<>]*)>/gi, "[tr]");
-		rep(/<tr([^<>]*)>/gi, "[tr]");
-		rep(/<td([^<>]*)>/gi, "[td]");
-		rep(/<td([^<>]*)>/gi, "[td]");
 
 		rep(/&nbsp;/gi, " ");
 		rep(/&quot;/gi, "\"");
@@ -215,9 +178,8 @@ var wswgEditor = new function () {
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?font-style: ?italic;?\"?\s*([^<]*?)<\/\1>/gi, "[i]<$1 style=$2</$1>[/i]");
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?font-style: ?normal;?\"?\s*([^<]*?)<\/\1>/gi, "<$1 style=$2</$1>");
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?underline;?\"?\s*([^<]*?)<\/\1>/gi, "[u]<$1 style=$2</$1>[/u]");
+			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?line-through;?\"?\s*([^<]*?)<\/\1>/gi, "[u]<$1 style=$2</$1>[/u]");
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?none;?\"?\s*([^<]*?)<\/\1>/gi, "<$1 style=$2</$1>");
-			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?color: ?([^<>]*?);\"?\s*([^<]*?)<\/\1>/gi, "[color=$2]<$1 style=$3</$1>[/color]");
-			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?font-family: ?([^<>]*?);\"?\s*([^<]*?)<\/\1>/gi, "[font=$2]<$1 style=$3</$1>[/font]");
 			rep(/<(blockquote|pre)\s[^<>]*?style=\"?\"? (class=|id=)([^<>]*)>([^<>]*?)<\/\1>/gi, "<$1 $2$3>$4</$1>");
 			rep(/<pre>([^<>]*?)<\/pre>/gi, "[code]$1[/code]");
 			rep(/<span\s[^<>]*?style=\"?\"?>([^<>]*?)<\/span>/gi, "$1");
@@ -232,10 +194,9 @@ var wswgEditor = new function () {
 
 		do {
 			sc = content;
-			rep(/\[(b|i|u)\]\[quote([^\]]*)\]([\s\S]*?)\[\/quote\]\[\/\1\]/gi, "[quote$2][$1]$3[/$1][/quote]");
+			rep(/\[(b|i|u|s)\]\[quote([^\]]*)\]([\s\S]*?)\[\/quote\]\[\/\1\]/gi, "[quote$2][$1]$3[/$1][/quote]");
 			rep(/\[color=([^\]]*)\]\[quote([^\]]*)\]([\s\S]*?)\[\/quote\]\[\/color\]/gi, "[quote$2][color=$1]$3[/color][/quote]");
-			rep(/\[(b|i|u)\]\[code\]([\s\S]*?)\[\/code\]\[\/\1\]/gi, "[code][$1]$2[/$1][/code]");
-			rep(/\[color=([^\]]*)\]\[code\]([\s\S]*?)\[\/code\]\[\/color\]/gi, "[code][color=$1]$2[/color][/code]");
+			rep(/\[(b|i|u|s)\]\[code\]([\s\S]*?)\[\/code\]\[\/\1\]/gi, "[code][$1]$2[/$1][/code]");
 		} while (sc != content)
 
 		//clean up empty tags
@@ -244,11 +205,11 @@ var wswgEditor = new function () {
 			rep(/\[b\]\[\/b\]/gi, "");
 			rep(/\[i\]\[\/i\]/gi, "");
 			rep(/\[u\]\[\/u\]/gi, "");
+			rep(/\[s\]\[\/s\]/gi, "");
 			rep(/\[quote[^\]]*\]\[\/quote\]/gi, "");
 			rep(/\[code\]\[\/code\]/gi, "");
 			rep(/\[url=([^\]]+)\]\[\/url\]/gi, "");
 			rep(/\[img\]\[\/img\]/gi, "");
-			rep(/\[color=([^\]]*)\]\[\/color\]/gi, "");
 		} while (sc != content)
 	}
 
@@ -265,28 +226,6 @@ var wswgEditor = new function () {
 		rep(/\[li\]/gi, "<li>");
 		rep(/\[\/li\]/gi, "</li>");
 
-		rep(/\[table\]/gi, "<table border='1'>");
-		rep(/\[\/table\]/gi, "</table>");
-		rep(/\[tr\]/gi, "<tr>");
-		rep(/\[\/tr\]/gi, "</tr>");
-		rep(/\[td\]/gi, "<td>");
-		rep(/\[\/td\]/gi, "</td>");
-		
-		rep(/\[center\]/gi, "<div style=\"text-align: center\">");
-		rep(/\[\/center\]/gi, "</div>");
-
-		rep(/\[left\]/gi, "<div style=\"text-align: left\">");
-		rep(/\[\/left\]/gi, "</div>");
-
-		rep(/\[right\]/gi, "<div style=\"text-align: right\">");
-		rep(/\[\/right\]/gi, "</div>");
-		
-		rep(/\[size=50\]/gi, "<font size=\"1\">");
-		rep(/\[size=85\]/gi, "<font size=\"2\">");
-		rep(/\[size=150\]/gi, "<font size=\"5\">");
-		rep(/\[size=200\]/gi, "<font size=\"7\">");
-		rep(/\[\/size\]/gi, "</font>");
-
 		if (browser) {
 			rep(/\[b\]/gi, "<strong>");
 			rep(/\[\/b\]/gi, "</strong>");
@@ -294,11 +233,14 @@ var wswgEditor = new function () {
 			rep(/\[\/i\]/gi, "</em>");
 			rep(/\[u\]/gi, "<u>");
 			rep(/\[\/u\]/gi, "</u>");
+			rep(/\[s\]/gi, "<span style=\"text-decoration: line-through;\">");
+			rep(/\[\/s\]/gi, "</span>");
 		} else {
 			rep(/\[b\]/gi, "<span style=\"font-weight: bold;\">");
 			rep(/\[i\]/gi, "<span style=\"font-style: italic;\">");
 			rep(/\[u\]/gi, "<span style=\"text-decoration: underline;\">");
-			rep(/\[\/(b|i|u)\]/gi, "</span>");
+			rep(/\[s\]/gi, "<span style=\"text-decoration: line-through;\">");
+			rep(/\[\/(b|i|u|s)\]/gi, "</span>");
 		}
 		rep(/\[img\]([^\"]*?)\[\/img\]/gi, "<img src=\"$1\" />");
 		var sc;
@@ -306,14 +248,6 @@ var wswgEditor = new function () {
 			sc = content;
 			rep(/\[url=([^\]]+)\]([\s\S]*?)\[\/url\]/gi, "<a href=\"$1\">$2</a>");
 			rep(/\[url\]([\s\S]*?)\[\/url\]/gi, "<a href=\"$1\">$1</a>");
-			
-			if (browser) {
-				rep(/\[color=([^\]]*?)\]([\s\S]*?)\[\/color\]/gi, "<font color=\"$1\">$2</font>");
-				rep(/\[font=([^\]]*?)\]([\s\S]*?)\[\/font\]/gi, "<font face=\"$1\">$2</font>");
-			} else {
-				rep(/\[color=([^\]]*?)\]([\s\S]*?)\[\/color\]/gi, "<span style=\"color: $1;\">$2</span>");
-				rep(/\[font=([^\]]*?)\]([\s\S]*?)\[\/font\]/gi, "<span style=\"font-family: $1;\">$2</span>");
-			}
 			rep(/\[code\]([\s\S]*?)\[\/code\]/gi, "<pre>$1</pre>&nbsp;");
 		} while (sc != content);
 	}
@@ -345,14 +279,14 @@ var wswgEditor = new function () {
 			ifm.contentWindow.focus();
 			if (isIE) {
 				textRange = ifm.contentWindow.document.selection.createRange();
-				var newTxt = "[quote=]" + textRange.text + "[/quote]";
+				var newTxt = "[quote]" + textRange.text + "[/quote]";
 				textRange.text = newTxt;
 			}
 			else {
 				var edittext = ifm.contentWindow.getSelection().getRangeAt(0);
 				var original = edittext.toString();
 				edittext.deleteContents();
-				edittext.insertNode(ifm.contentWindow.document.createTextNode("[quote=]" + original + "[/quote]"));
+				edittext.insertNode(ifm.contentWindow.document.createTextNode("[quote]" + original + "[/quote]"));
 			}
 		}
 		else {
@@ -400,30 +334,12 @@ var wswgEditor = new function () {
 					AddTag('[i]', '[/i]'); break;
 				case 'underline':
 					AddTag('[u]', '[/u]'); break;
+				case 'strikethrough':
+					AddTag('[s]', '[/s]'); break;
 				case 'InsertUnorderedList':
 					AddTag('[ul][li]', '[/li][/ul]'); break;
-				case 'justifyCenter':
-					AddTag("[center]", "[/center]"); break;
-				case 'justifyLeft':
-					AddTag("[left]", "[/left]"); break;
-				case 'justifyRight':
-					AddTag("[right]", "[/right]"); break;
-				case 'fontSize':
-					var t = {1:50,2:85,5:150,7:200};
-					if(t[extra]) {
-						AddTag("[size="+t[extra]+"]","[/size]");
-					}; break;
 			}
 		}
-	}
-
-	function doColor(color) {
-		ifm.contentWindow.focus();
-		if (isIE) {
-			textRange = ifm.contentWindow.document.selection.createRange();
-			textRange.select();
-		}
-		myeditor.execCommand('forecolor', false, color);
 	}
 
 	this.doLink = function () {
@@ -453,13 +369,6 @@ var wswgEditor = new function () {
 		else {
 			AddTag('[url=', ']click here[/url]');
 		}
-	}
-	
-	this.doFlash = function () {
-	  var mylink = prompt("Introduzca la URL del swf:", "http://example.com/aswffile.swf");
-	  var resx = prompt("Introduzca el ancho del swf:", "128");
-	  var resy = prompt("Introduzca el alto del swf:", "128");
-	  this.InsertText(" [flash="+resx+","+resy+"]"+mylink+"[/flash] ");
 	}
 	
 	this.doImage = function () {
@@ -522,60 +431,4 @@ var wswgEditor = new function () {
 			element.value = element.value + t1 + t2;
 		}
 	}
-
-	//=======color picker
-	function getScrollY() { var scrOfX = 0, scrOfY = 0; if (typeof (window.pageYOffset) == 'number') { scrOfY = window.pageYOffset; scrOfX = window.pageXOffset; } else if (document.body && (document.body.scrollLeft || document.body.scrollTop)) { scrOfY = document.body.scrollTop; scrOfX = document.body.scrollLeft; } else if (document.documentElement && (document.documentElement.scrollLeft || document.documentElement.scrollTop)) { scrOfY = document.documentElement.scrollTop; scrOfX = document.documentElement.scrollLeft; } return scrOfY; }
-
-	document.write("<style type='text/css'>.colorpicker201{visibility:hidden;display:none;position:absolute;background:#FFF;z-index:999;filter:progid:DXImageTransform.Microsoft.Shadow(color=#D0D0D0,direction=135);}.o5582brd{padding:0;width:12px;height:14px;border-bottom:solid 1px #DFDFDF;border-right:solid 1px #DFDFDF;}a.o5582n66,.o5582n66,.o5582n66a{font-family:arial,tahoma,sans-serif;text-decoration:underline;font-size:9px;color:#666;border:none;}.o5582n66,.o5582n66a{text-align:center;text-decoration:none;}a:hover.o5582n66{text-decoration:none;color:#FFA500;cursor:pointer;}.a01p3{padding:1px 4px 1px 2px;background:whitesmoke;border:solid 1px #DFDFDF;}</style>");
-
-	function getTop2() { csBrHt = 0; if (typeof (window.innerWidth) == 'number') { csBrHt = window.innerHeight; } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) { csBrHt = document.documentElement.clientHeight; } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) { csBrHt = document.body.clientHeight; } ctop = ((csBrHt / 2) - 115) + getScrollY(); return ctop; }
-	var nocol1 = "&#78;&#79;&#32;&#67;&#79;&#76;&#79;&#82;",
-clos1 = "X";
-
-	function getLeft2() { var csBrWt = 0; if (typeof (window.innerWidth) == 'number') { csBrWt = window.innerWidth; } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) { csBrWt = document.documentElement.clientWidth; } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) { csBrWt = document.body.clientWidth; } cleft = (csBrWt / 2) - 125; return cleft; }
-
-	//function setCCbldID2(val, textBoxID) { document.getElementById(textBoxID).value = val; }
-	function setCCbldID2(val) { if (editorVisible) doColor(val); else AddTag('[color=' + val + ']', '[/color]'); }
-
-	function setCCbldSty2(objID, prop, val) {
-		switch (prop) {
-			case "bc": if (objID != 'none') { document.getElementById(objID).style.backgroundColor = val; }; break;
-			case "vs": document.getElementById(objID).style.visibility = val; break;
-			case "ds": document.getElementById(objID).style.display = val; break;
-			case "tp": document.getElementById(objID).style.top = val; break;
-			case "lf": document.getElementById(objID).style.left = val; break;
-		}
-	}
-
-	this.putOBJxColor2 = function (Samp, pigMent, textBoxId) { if (pigMent != 'x') { setCCbldID2(pigMent, textBoxId); setCCbldSty2(Samp, 'bc', pigMent); } setCCbldSty2('colorpicker201', 'vs', 'hidden'); setCCbldSty2('colorpicker201', 'ds', 'none'); }
-
-	this.showColorGrid2 = function (Sam, textBoxId) {
-		var objX = new Array('00', '33', '66', '99', 'CC', 'FF');
-		var c = 0;
-		var xl = '"' + Sam + '","x", "' + textBoxId + '"'; var mid = '';
-		mid += '<table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="0" style="border:solid 0px #F0F0F0;padding:2px;"><tr>';
-		mid += "<td colspan='9' align='left' style='margin:0;padding:2px;height:12px;' ><input class='o5582n66' type='text' size='12' id='o5582n66' value='#FFFFFF'><input class='o5582n66a' type='text' size='2' style='width:14px;' id='o5582n66a' onclick='javascript:alert(\"click on selected swatch below...\");' value='' style='border:solid 1px #666;'></td><td colspan='9' align='right'><a class='o5582n66' href='javascript:onclick=wswgEditor.putOBJxColor2(" + xl + ")'><span class='a01p3'>" + clos1 + "</span></a></td></tr><tr>";
-		var br = 1;
-		for (o = 0; o < 6; o++) {
-			mid += '</tr><tr>';
-			for (y = 0; y < 6; y++) {
-				if (y == 3) { mid += '</tr><tr>'; }
-				for (x = 0; x < 6; x++) {
-					var grid = '';
-					grid = objX[o] + objX[y] + objX[x];
-					var b = "'" + Sam + "','" + grid + "', '" + textBoxId + "'";
-					mid += '<td class="o5582brd" style="background-color:#' + grid + '"><a class="o5582n66"  href="javascript:onclick=wswgEditor.putOBJxColor2(' + b + ');" onmouseover=javascript:document.getElementById("o5582n66").value="#' + grid + '";javascript:document.getElementById("o5582n66a").style.backgroundColor="#' + grid + '";  title="#' + grid + '"><div style="width:12px;height:14px;"></div></a></td>';
-					c++;
-				}
-			}
-		}
-		mid += "</tr></table>";
-		//var ttop=getTop2();
-		//setCCbldSty2('colorpicker201','tp',ttop);
-		//document.getElementById('colorpicker201').style.left=getLeft2();
-		document.getElementById('colorpicker201').innerHTML = mid;
-		setCCbldSty2('colorpicker201', 'vs', 'visible');
-		setCCbldSty2('colorpicker201', 'ds', 'inline');
-	}
-
 }
