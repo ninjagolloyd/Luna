@@ -144,6 +144,12 @@ var wswgEditor = new function () {
 		rep(/<br(\s[^<>]*)?>/gi, "\n");
 		rep(/<p(\s[^<>]*)?>/gi, "");
 		rep(/<\/p>/gi, "\n");
+		rep(/<sub>/gi, "[sub]");
+		rep(/<\/sub>/gi, "[/sub]");
+		rep(/<sup>/gi, "[sup]");
+		rep(/<\/sup>/gi, "[/sup]");
+		rep(/<h3>/gi, "[h]");
+		rep(/<\/h3>/gi, "[/h]");
 		rep(/<ul>/gi, "[list]");
 		rep(/<\/ul>/gi, "[/list]");
 		rep(/<ol>/gi, "[ol]");
@@ -178,7 +184,7 @@ var wswgEditor = new function () {
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?font-style: ?italic;?\"?\s*([^<]*?)<\/\1>/gi, "[i]<$1 style=$2</$1>[/i]");
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?font-style: ?normal;?\"?\s*([^<]*?)<\/\1>/gi, "<$1 style=$2</$1>");
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?underline;?\"?\s*([^<]*?)<\/\1>/gi, "[u]<$1 style=$2</$1>[/u]");
-			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?line-through;?\"?\s*([^<]*?)<\/\1>/gi, "[u]<$1 style=$2</$1>[/u]");
+			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?line-through;?\"?\s*([^<]*?)<\/\1>/gi, "[s]<$1 style=$2</$1>[/s]");
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?none;?\"?\s*([^<]*?)<\/\1>/gi, "<$1 style=$2</$1>");
 			rep(/<(blockquote|pre)\s[^<>]*?style=\"?\"? (class=|id=)([^<>]*)>([^<>]*?)<\/\1>/gi, "<$1 $2$3>$4</$1>");
 			rep(/<pre>([^<>]*?)<\/pre>/gi, "[code]$1[/code]");
@@ -194,9 +200,9 @@ var wswgEditor = new function () {
 
 		do {
 			sc = content;
-			rep(/\[(b|i|u|s)\]\[quote([^\]]*)\]([\s\S]*?)\[\/quote\]\[\/\1\]/gi, "[quote$2][$1]$3[/$1][/quote]");
+			rep(/\[(b|i|u|s|h|sub|sup)\]\[quote([^\]]*)\]([\s\S]*?)\[\/quote\]\[\/\1\]/gi, "[quote$2][$1]$3[/$1][/quote]");
 			rep(/\[color=([^\]]*)\]\[quote([^\]]*)\]([\s\S]*?)\[\/quote\]\[\/color\]/gi, "[quote$2][color=$1]$3[/color][/quote]");
-			rep(/\[(b|i|u|s)\]\[code\]([\s\S]*?)\[\/code\]\[\/\1\]/gi, "[code][$1]$2[/$1][/code]");
+			rep(/\[(b|i|u|s|h|sub|sup)\]\[code\]([\s\S]*?)\[\/code\]\[\/\1\]/gi, "[code][$1]$2[/$1][/code]");
 		} while (sc != content)
 
 		//clean up empty tags
@@ -206,6 +212,9 @@ var wswgEditor = new function () {
 			rep(/\[i\]\[\/i\]/gi, "");
 			rep(/\[u\]\[\/u\]/gi, "");
 			rep(/\[s\]\[\/s\]/gi, "");
+			rep(/\[h\]\[\/h\]/gi, "");
+			rep(/\[sub\]\[\/sub\]/gi, "");
+			rep(/\[sup\]\[\/sup\]/gi, "");
 			rep(/\[quote[^\]]*\]\[\/quote\]/gi, "");
 			rep(/\[code\]\[\/code\]/gi, "");
 			rep(/\[url=([^\]]+)\]\[\/url\]/gi, "");
@@ -225,6 +234,12 @@ var wswgEditor = new function () {
 		rep(/\[\/ol\]/gi, "</ol>");
 		rep(/\[\*\]/gi, "<li>");
 		rep(/\[\/\*\]/gi, "</li>");
+		rep(/\[sub\]/gi, "<sub>");
+		rep(/\[\/sub\]/gi, "</sub>");
+		rep(/\[sup\]/gi, "<sup>");
+		rep(/\[\/sup\]/gi, "</sup>");
+		rep(/\[h\]/gi, "<h3>");
+		rep(/\[\/h\]/gi, "</h3>");
 
 		if (browser) {
 			rep(/\[b\]/gi, "<strong>");
@@ -336,6 +351,12 @@ var wswgEditor = new function () {
 					AddTag('[u]', '[/u]'); break;
 				case 'strikethrough':
 					AddTag('[s]', '[/s]'); break;
+				case 'heading':
+					AddTag('[h]', '[/h]'); break;
+				case 'sub':
+					AddTag('[sub]', '[/sub]'); break;
+				case 'sup':
+					AddTag('[sup]', '[/sup]'); break;
 				case 'InsertUnorderedList':
 					AddTag('[list][\*]', '[/\*][/list]'); break;
 			}
