@@ -1,6 +1,5 @@
 ﻿.editorWYSIWYG {font: 10pt Arial;border:none;}
 .editorBBCODE {font: 9pt "Courier New";}
 
-div.richeditor div.container {border-top:none;border-bottom:1px solid silver;border-left:1px solid silver;border-right:1px solid silver;}
-div.richeditor textarea{padding:0px 0px 0px 0px;border:none;display:block}
-div.richeditor iframe{background-color:#ffffff;border:none;display:block}
+.richeditor textarea{padding:0px 0px 0px 0px;border:none;display:block;}
+.richeditor iframe{background-color:#ffffff;border:none;display:block;width:100% !important;}

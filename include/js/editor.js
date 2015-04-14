@@ -60,8 +60,8 @@ var wswgEditor = new function () {
 			enableWysiwyg = true;
 		body_id = textarea_id;
 		textboxelement = document.getElementById(body_id);
-		textboxelement.setAttribute('class', 'editorBBCODE');
-		textboxelement.className = "editorBBCODE";
+		textboxelement.setAttribute('class', 'form-control editorBBCODE');
+		textboxelement.className = "form-control editorBBCODE";
 		if (enableWysiwyg) {
 			if (!document.getElementById("rte")) { //to prevent recreation
 				ifm = document.createElement("iframe");
