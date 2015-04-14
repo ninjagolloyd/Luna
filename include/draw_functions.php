@@ -84,10 +84,10 @@ function draw_editor($height) {
 				<?php echo $pin_btn ?>
 				<?php echo $silence_btn ?>
 				<div class="btn-group">
-					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','b');" title="<?php echo $lang['Bold']; ?>" tabindex="-1"><span class="fa fa-fw fa-bold fa-fw"></span></a>
-					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','u');" title="<?php echo $lang['Underline']; ?>" tabindex="-1"><span class="fa fa-fw fa-underline fa-fw"></span></a>
-					<a class="btn btn-default btn-editor hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','i');" title="<?php echo $lang['Italic']; ?>" tabindex="-1"><span class="fa fa-fw fa-italic fa-fw"></span></a>
-					<a class="btn btn-default btn-editor hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','s');" title="<?php echo $lang['Strike']; ?>" tabindex="-1"><span class="fa fa-fw fa-strikethrough fa-fw"></span></a>
+					<a class="btn btn-default btn-editor disabled" href="javascript:void(0);" onclick="AddTag('inline','b');" title="<?php echo $lang['Bold']; ?>" tabindex="-1"><span class="fa fa-fw fa-bold fa-fw"></span></a>
+					<a class="btn btn-default btn-editor disabled" href="javascript:void(0);" onclick="AddTag('inline','u');" title="<?php echo $lang['Underline']; ?>" tabindex="-1"><span class="fa fa-fw fa-underline fa-fw"></span></a>
+					<a class="btn btn-default btn-editor disabled hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','i');" title="<?php echo $lang['Italic']; ?>" tabindex="-1"><span class="fa fa-fw fa-italic fa-fw"></span></a>
+					<a class="btn btn-default btn-editor disabled hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','s');" title="<?php echo $lang['Strike']; ?>" tabindex="-1"><span class="fa fa-fw fa-strikethrough fa-fw"></span></a>
 				</div>
 				<div class="btn-group">
 					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','h');" title="<?php echo $lang['Heading']; ?>" tabindex="-1"><span class="fa fa-fw fa-header fa-fw"></span></a>
@@ -95,18 +95,18 @@ function draw_editor($height) {
 					<a class="btn btn-default btn-editor hidden-md hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','sup');" title="<?php echo $lang['Superscript']; ?>" tabindex="-1"><span class="fa fa-fw fa-superscript fa-fw"></span></a>
 				</div>
 				<div class="btn-group">
-					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','quote');" title="<?php echo $lang['Quote']; ?>" tabindex="-1"><span class="fa fa-fw fa-quote-left fa-fw"></span></a>
+					<a class="btn btn-default btn-editor disabled" href="javascript:void(0);" onclick="AddTag('inline','quote');" title="<?php echo $lang['Quote']; ?>" tabindex="-1"><span class="fa fa-fw fa-quote-left fa-fw"></span></a>
 					<a class="btn btn-default btn-editor hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('code','code');" title="<?php echo $lang['Code']; ?>" tabindex="-1"><span class="fa fa-fw fa-code fa-fw"></span></a>
 					<a class="btn btn-default btn-editor hidden-md hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','c');" title="<?php echo $lang['Inline code']; ?>" tabindex="-1"><span class="fa fa-fw fa-file-code-o fa-fw"></span></a>
 				</div>
 				<div class="btn-group">
-					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','url');" title="<?php echo $lang['URL']; ?>" tabindex="-1"><span class="fa fa-fw fa-link fa-fw"></span></a>
-					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','img');" title="<?php echo $lang['Image']; ?>" tabindex="-1"><span class="fa fa-fw fa-image fa-fw"></span></a>
+					<a class="btn btn-default btn-editor disabled" href="javascript:void(0);" onclick="AddTag('inline','url');" title="<?php echo $lang['URL']; ?>" tabindex="-1"><span class="fa fa-fw fa-link fa-fw"></span></a>
+					<a class="btn btn-default btn-editor disabled" href="javascript:void(0);" onclick="AddTag('inline','img');" title="<?php echo $lang['Image']; ?>" tabindex="-1"><span class="fa fa-fw fa-image fa-fw"></span></a>
 					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','video');" title="<?php echo $lang['Video']; ?>" tabindex="-1"><span class="fa fa-fw fa-play-circle fa-fw"></span></a>
 				</div>
 				<div class="btn-group">
-					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('list', 'list');" title="<?php echo $lang['List']; ?>" tabindex="-1"><span class="fa fa-fw fa-list-ul fa-fw"></span></a>
-					<a class="btn btn-default btn-editor" href="javascript:void(0);" onclick="AddTag('inline','*');" title="<?php echo $lang['List item']; ?>" tabindex="-1"><span class="fa fa-fw fa-asterisk fa-fw"></span></a>
+					<a class="btn btn-default btn-editor disabled" href="javascript:void(0);" onclick="AddTag('list', 'list');" title="<?php echo $lang['List']; ?>" tabindex="-1"><span class="fa fa-fw fa-list-ul fa-fw"></span></a>
+					<a class="btn btn-default btn-editor disabled" href="javascript:void(0);" onclick="AddTag('inline','*');" title="<?php echo $lang['List item']; ?>" tabindex="-1"><span class="fa fa-fw fa-asterisk fa-fw"></span></a>
 				</div>
 				<div class="btn-group">
 <?php if ($luna_config['o_emoji'] == 1) { ?>
