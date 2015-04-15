@@ -13,7 +13,7 @@ if(!isset($_SESSION['luna_finished']))
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Luna</title>
-        <link href="../include/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link href="install.css" rel="stylesheet">
     </head>
     <body class="ready">
@@ -32,7 +32,7 @@ if(!isset($_SESSION['luna_finished']))
                 </div>
             </div>
         </div>
-        <script src="../include/js/jquery.js"></script>
-        <script src="../include/js/bootstrap.min.js"></script>
+		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </body>
 </html>

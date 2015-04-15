@@ -2,7 +2,7 @@
 
 session_start();
 
-if(!isset($_SESSION['luna_install_terms']))
+if(!isset($_SESSION['luna_install_check']))
 	die('Installation access denied.');
 
 if (isset($_POST['form_sent'])) {
@@ -18,7 +18,7 @@ if (isset($_POST['form_sent'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Install Luna</title>
-        <link href="../include/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link href="install.css" rel="stylesheet">
     </head>
     <body class="default">
@@ -88,7 +88,7 @@ if (isset($_POST['form_sent'])) {
                 </div>
             </div>
         </div>
-        <script src="../include/js/jquery.js"></script>
-        <script src="../include/js/bootstrap.min.js"></script>
+		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </body>
 </html>

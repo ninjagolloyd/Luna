@@ -51,6 +51,7 @@ body {
 .masthead-brand {
 	font-size: 70px;
 	text-transform: uppercase;
+	font-family: "Segoe UI Light";
 }
 
 .luna-brand {

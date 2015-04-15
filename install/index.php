@@ -42,7 +42,7 @@ if($config_chmods < '666') {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Install Luna</title>
-        <link href="../include/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
         <link href="install.css" rel="stylesheet">
     </head>
 <?php
@@ -54,19 +54,19 @@ if($check['php'] === true && $check['config_chm'] === true && $check['avatars_ch
             <div class="site-wrapper-inner">
                 <div class="cover-container">
                     <div class="masthead clearfix">
-						<h3 class="masthead-brand"><span class="luna-brand">Luna</span>Preview<span class="luna-brand">setup</span></h3>
+						<h3 class="masthead-brand"><span class="luna-brand">Luna</span>setup</h3>
                     </div>
                     <div class="inner cover">
                         <h1 class="cover-heading">You can do anything</h1>
                         <p class="lead">
-                            <a href="terms.php" class="btn btn-lg btn-default">Let's get started</a>
+                            <a href="setup.php" class="btn btn-lg btn-default">Let's get started</a>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="../include/js/jquery.js"></script>
-        <script src="../include/js/bootstrap.min.js"></script>
+		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </body>
 <?php } else { ?>
     <body class="error">
@@ -122,8 +122,8 @@ if($check['php'] === true && $check['config_chm'] === true && $check['avatars_ch
 				</div>
 			</div>
 		</div>
-        <script src="../include/js/jquery.js"></script>
-        <script src="../include/js/bootstrap.min.js"></script>
+		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     </body>
 <?php } ?>
 </html>
