@@ -137,9 +137,11 @@ var wswgEditor = new function () {
 		rep(/<\/(em|i)>/gi, "[/i]");
 		rep(/<(em|i)(\s[^<>]*)?>/gi, "[i]");
 		rep(/<\/u>/gi, "[/u]");
+		rep(/<u(\s[^<>]*)?>/gi, "[u]");
 		rep(/\n/gi, " ");
 		rep(/\r/gi, " ");
-		rep(/<u(\s[^<>]*)?>/gi, "[u]");
+		rep(/<\/strike>/gi, "[/s]");
+		rep(/<strike(\s[^<>]*)?>/gi, "[s]");
 		rep(/<div><br(\s[^<>]*)?>/gi, "<div>"); //chrome-safari fix to prevent double linefeeds
 		rep(/<br(\s[^<>]*)?>/gi, "\n");
 		rep(/<p(\s[^<>]*)?>/gi, "");
@@ -248,8 +250,8 @@ var wswgEditor = new function () {
 			rep(/\[\/i\]/gi, "</em>");
 			rep(/\[u\]/gi, "<u>");
 			rep(/\[\/u\]/gi, "</u>");
-			rep(/\[s\]/gi, "<span style=\"text-decoration: line-through;\">");
-			rep(/\[\/s\]/gi, "</span>");
+			rep(/\[s\]/gi, "<strike>");
+			rep(/\[\/s\]/gi, "</strike>");
 		} else {
 			rep(/\[b\]/gi, "<span style=\"font-weight: bold;\">");
 			rep(/\[i\]/gi, "<span style=\"font-style: italic;\">");
