@@ -96,10 +96,9 @@ var wswgEditor = new function () {
 		bbcode2html();
 		myeditor.designMode = "on";
 		myeditor.open();
-		myeditor.write('<html><head><link href="'+this.css_uri+'" rel="Stylesheet" type="text/css" /></head>');
-		myeditor.write('<body style="margin:0px 0px 0px 0px" class="editorWYSIWYG">');
+		myeditor.write('<div class="editorWYSIWYG">');
 		myeditor.write(content);
-		myeditor.write('</body></html>');
+		myeditor.write('</div>');
 		myeditor.close();
 		myeditor.body.contentEditable = true;
 		ifm.contentEditable = true;
