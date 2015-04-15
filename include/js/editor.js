@@ -141,6 +141,8 @@ var wswgEditor = new function () {
 		rep(/\r/gi, " ");
 		rep(/<\/strike>/gi, "[/s]");
 		rep(/<strike(\s[^<>]*)?>/gi, "[s]");
+		rep(/<\/h3>/gi, "[/h]");
+		rep(/<h3(\s[^<>]*)?>/gi, "[h]");
 		rep(/<div><br(\s[^<>]*)?>/gi, "<div>"); //chrome-safari fix to prevent double linefeeds
 		rep(/<br(\s[^<>]*)?>/gi, "\n");
 		rep(/<p(\s[^<>]*)?>/gi, "");
@@ -149,8 +151,6 @@ var wswgEditor = new function () {
 		rep(/<\/sub>/gi, "[/sub]");
 		rep(/<sup>/gi, "[sup]");
 		rep(/<\/sup>/gi, "[/sup]");
-		rep(/<h3>/gi, "[h]");
-		rep(/<\/h3>/gi, "[/h]");
 		rep(/<ul>/gi, "[list]");
 		rep(/<\/ul>/gi, "[/list]");
 		rep(/<ol>/gi, "[ol]");
@@ -186,7 +186,7 @@ var wswgEditor = new function () {
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?font-style: ?normal;?\"?\s*([^<]*?)<\/\1>/gi, "<$1 style=$2</$1>");
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?underline;?\"?\s*([^<]*?)<\/\1>/gi, "[u]<$1 style=$2</$1>[/u]");
 			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?line-through;?\"?\s*([^<]*?)<\/\1>/gi, "[s]<$1 style=$2</$1>[/s]");
-			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?text-decoration: ?none;?\"?\s*([^<]*?)<\/\1>/gi, "<$1 style=$2</$1>");
+			rep(/<(span|blockquote|pre)\s[^<>]*?style=\"?font-size: ?25px;?\"?\s*([^<]*?)<\/\1>/gi, "[h]<$1 style=$2</$1>[/h]");
 			rep(/<(blockquote|pre)\s[^<>]*?style=\"?\"? (class=|id=)([^<>]*)>([^<>]*?)<\/\1>/gi, "<$1 $2$3>$4</$1>");
 			rep(/<pre>([^<>]*?)<\/pre>/gi, "[code]$1[/code]");
 			rep(/<span\s[^<>]*?style=\"?\"?>([^<>]*?)<\/span>/gi, "$1");

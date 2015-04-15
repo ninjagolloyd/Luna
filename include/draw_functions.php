@@ -173,8 +173,8 @@ function draw_editor($height) {
 					<button class="btn btn-default btn-editor" title="<?php echo $lang['Superscript']; ?>" onclick="wswgEditor.doClick('sup');" type="button"><span class="fa fa-fw fa-superscript fa-fw"></span></button>
 				</div>
 				<div class="btn-group">
-					<button class="btn btn-default btn-editor" class="btn btn-default btn-editor" title="<?php echo $lang['Quote']; ?>" onclick="wswgEditor.doQuote();" type="button"><span class="fa fa-fw fa-quote-left fa-fw"></span></button>
-					<a class="btn btn-default btn-editor hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('code','code');" title="<?php echo $lang['Code']; ?>" tabindex="-1"><span class="fa fa-fw fa-code fa-fw"></span></a>
+					<button class="btn btn-default btn-editor" title="<?php echo $lang['Quote']; ?>" onclick="wswgEditor.doQuote();" type="button"><span class="fa fa-fw fa-quote-left fa-fw"></span></button>
+					<button class="btn btn-default btn-editor" title="<?php echo $lang['Code']; ?>" onclick="wswgEditor.doClick('code');" type="button"><span class="fa fa-fw fa-code fa-fw"></span></button>
 					<a class="btn btn-default btn-editor hidden-md hidden-sm hidden-xs" href="javascript:void(0);" onclick="AddTag('inline','c');" title="<?php echo $lang['Inline code']; ?>" tabindex="-1"><span class="fa fa-fw fa-file-code-o fa-fw"></span></a>
 				</div>
 				<div class="btn-group">
