@@ -459,7 +459,7 @@ elseif (isset($_GET['find_ban'])) {
 <form id="find_bans" method="get" action="bans.php">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo $lang['Ban search head'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="find_ban"><span class="fa fa-fw fa-search"></span> <?php echo $lang['Search'] ?></button></span></h3>
+			<h3 class="panel-title"><?php echo $lang['Ban search head'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="find_ban"><span class="luni luni-fw luni-search"></span> <?php echo $lang['Search'] ?></button></span></h3>
 		</div>
 		<fieldset>
 			<div class="panel-body">

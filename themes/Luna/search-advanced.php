@@ -9,7 +9,7 @@ if (!defined('FORUM'))
 <form id="search" method="get" action="search.php?section=advanced">
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
-			<a href="search.php" class="navbar-brand"><span class="fa fa-fw fa-search"></span> <?php echo $lang['Search'] ?></a>
+			<a href="search.php" class="navbar-brand"><span class="luni luni-fw luni-search"></span> <?php echo $lang['Search'] ?></a>
 		</div>
 		<div class="collapse navbar-collapse hidden-xs" id="search-nav">
 			<ul class="navbar-form navbar-right">

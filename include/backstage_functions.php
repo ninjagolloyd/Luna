@@ -31,7 +31,7 @@ function load_admin_nav($section, $page) {
 		$page_title = '<span class="fa fa-fw fa-exclamation-triangle"></span> '.$lang['Reports'];
 
 	elseif ($page == 'users')
-		$page_title = '<span class="fa fa-fw fa-search"></span> '.$lang['Search'];
+		$page_title = '<span class="luni luni-fw luni-search"></span> '.$lang['Search'];
 	elseif ($page == 'tools')
 		$page_title = '<span class="fa fa-fw fa-wrench"></span> '.$lang['Tools'];
 	elseif ($page == 'ranks')
@@ -157,7 +157,7 @@ function load_admin_nav($section, $page) {
 			</ul>
 			<?php } if ($section == 'users') { ?>
 			<ul class="nav nav-tabs" role="tablist">
-				<li<?php if($page == 'users') echo ' class="active"' ?>><a href="users.php"><span class="fa fa-fw fa-search"></span><span class="hidden-xs"> <?php echo $lang['Search'] ?></span></a></li>
+				<li<?php if($page == 'users') echo ' class="active"' ?>><a href="users.php"><span class="luni luni-fw luni-search"></span><span class="hidden-xs"> <?php echo $lang['Search'] ?></span></a></li>
 				<li<?php if($page == 'tools') echo ' class="active"' ?>><a href="tools.php"><span class="fa fa-fw fa-wrench"></span><span class="hidden-xs"> <?php echo $lang['Tools'] ?></span></a></li>
 				<li<?php if($page == 'ranks') echo ' class="active"' ?>><a href="ranks.php"><span class="fa fa-fw fa-chevron-up"></span><span class="hidden-xs"> <?php echo $lang['Ranks'] ?></span></a></li>
 				<li<?php if($page == 'groups') echo ' class="active"' ?>><a href="groups.php"><span class="fa fa-fw fa-group"></span><span class="hidden-xs"> <?php echo $lang['Groups'] ?></span></a></li>

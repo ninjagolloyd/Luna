@@ -845,7 +845,7 @@ elseif (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 <form id="find_user" method="get" action="users.php">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><?php echo $lang['User search'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="find_user"><span class="fa fa-fw fa-search"></span> <?php echo $lang['Search'] ?></button></span></h3>
+			<h3 class="panel-title"><?php echo $lang['User search'] ?><span class="pull-right"><button class="btn btn-primary" type="submit" name="find_user"><span class="luni luni-fw luni-search"></span> <?php echo $lang['Search'] ?></button></span></h3>
 		</div>
 		<fieldset>
 			<div class="panel-body">
@@ -959,7 +959,7 @@ elseif (isset($_POST['ban_users']) || isset($_POST['ban_users_comply'])) {
 				<div class="input-group">
 					<input type="text" class="form-control" name="show_users" maxlength="15" tabindex="24" />
 					<span class="input-group-btn">
-						<button class="btn btn-primary" type="submit"><span class="fa fa-fw fa-search"></span> <?php echo $lang['Find IP address'] ?></button>
+						<button class="btn btn-primary" type="submit"><span class="luni luni-fw luni-search"></span> <?php echo $lang['Find IP address'] ?></button>
 					</span>
 				</div>
 				<span class="help-block"><?php echo $lang['IP address help'] ?></span>

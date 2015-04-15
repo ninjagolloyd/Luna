@@ -12,6 +12,7 @@ require ('header.php');
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="include/css/prism.css" />
+		<link rel="stylesheet" type="text/css" href="include/css/lunicons.css" />
 		<script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 		<script src="include/js/prism.js"></script>
@@ -53,7 +54,7 @@ required_fields();
 											<input class="form-control" type="text" name="keywords" placeholder="<?php echo $lang['Search in posts'] ?>" maxlength="100" />
 											<span class="input-group-btn">
 												<button class="btn btn-default btn-search" type="submit" name="search" accesskey="s">
-													<span class="fa fa-fw fa-search"></span>
+													<span class="luni luni-fw luni-search"></span>
 												</button>
 											</span>
 										</div>
