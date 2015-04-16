@@ -124,7 +124,7 @@ function draw_editor($height) {
 						<li><a href="javascript:void(0);" title="<?php echo $lang['Tongue']; ?>" onclick="AddTag('emoji', ':P');"><span class="text-emoji emoji-ed">&#x1f60b;</span></a></li>
 						<li><a href="javascript:void(0);" title="<?php echo $lang['Happy']; ?>" onclick="AddTag('emoji', '^.^');"><span class="text-emoji emoji-ed">&#x1f600;</span></a></li>
 						<li><a href="javascript:void(0);" title="<?php echo $lang['Angry']; ?>" onclick="AddTag('emoji', ':@');"><span class="text-emoji emoji-ed">&#x1f620;</span></a></li>
-						<li><a href="javascript:void(0);" title="<?php echo $lang['Eye roll']; ?>" onclick="AddTag('emoji', '%)');"><span class="text-emoji emoji-ed">&#x1f606;</span></a></li>
+						<li><a href="javascript:void(0);" title="<?php echo $lang['Roll eye']; ?>" onclick="AddTag('emoji', '%)');"><span class="text-emoji emoji-ed">&#x1f606;</span></a></li>
 						<li><a href="javascript:void(0);" title="<?php echo $lang['Cool']; ?>" onclick="AddTag('emoji', 'B:');"><span class="text-emoji emoji-ed">&#x1f60e;</span></a></li>
 						<li><a href="javascript:void(0);" title="<?php echo $lang['Happy cry']; ?>" onclick="AddTag('emoji', ':hc:');"><span class="text-emoji emoji-ed">&#x1f605;</span></a></li>
 						<li><a href="javascript:void(0);" title="<?php echo $lang['Angel']; ?>" onclick="AddTag('emoji', '(a)');"><span class="text-emoji emoji-ed">&#x1f607;</span></a></li>
@@ -1073,12 +1073,12 @@ function draw_mail_form($recipient_id) {
 ?>
 
 <form id="email" method="post" action="misc.php?email=<?php echo $recipient_id ?>" onsubmit="this.submit.disabled=true;if(process_form(this)){return true;}else{this.submit.disabled=false;return false;}">
-	<input class="info-textfield form-control" placeholder="<?php echo $lang['Subject'] ?>" type="text" name="req_subject" maxlength="70" tabindex="1" />
+	<input class="info-textfield form-control" placeholder="<?php echo $lang['Subject'] ?>" type="text" name="req_subject" maxlength="70" tabindex="<?php echo $cur_index++ ?>" autofocus />
 	<div class="panel panel-default panel-editor">
 		<fieldset class="postfield">
 			<input type="hidden" name="form_sent" value="1" />
 			<input type="hidden" name="redirect_url" value="<?php echo luna_htmlspecialchars($redirect_url) ?>" />
-			<textarea name="req_message" class="form-control textarea" rows="10" tabindex="2"></textarea>
+			<textarea name="req_message" class="form-control textarea" rows="10" tabindex="<?php echo $cur_index++ ?>"></textarea>
 			<div class="btn-toolbar textarea-toolbar textarea-bottom">
 				<div class="btn-group pull-right">
 					<button class="btn btn-with-text btn-primary" type="submit" name="submit" accesskey="s" tabindex="<?php echo $cur_index++ ?>"><span class="fa fa-fw fa-envelope-o"></span> <?php echo $lang['Send'] ?></button>
