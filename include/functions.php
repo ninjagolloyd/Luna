@@ -1594,6 +1594,34 @@ function forum_list_styles() {
 
 
 //
+// Fetch a list of available frontend styles
+//
+function forum_list_accents($stage) {
+	global $luna_config;
+
+	$accents = array();
+
+	if ($stage = 'main' && is_dir(FORUM_ROOT.'themes/'.$luna_config['o_default_style'].'/accents/'))
+		$d = dir(FORUM_ROOT.'themes/'.$luna_config['o_default_style'].'/accents/');
+	if ($stage = 'back')
+		$d = dir(FORUM_ROOT.'backstage/css/accents/');
+
+	while (($entry = $d->read()) !== false) {
+		if ($entry{0} == '.')
+			continue;
+
+		if (substr($entry, -4) == '.css')
+			$accents[] = substr($entry, 0, -4);
+	}
+	$d->close();
+
+	natcasesort($accents);
+
+	return $accents;
+}
+
+
+//
 // Fetch a list of available language packs
 //
 function forum_list_langs() {
@@ -2038,15 +2066,28 @@ function load_page($page) {
 // Get the styles that are required
 //
 function load_css() {
-	global $luna_config;
+	global $luna_config, $luna_user;
 	
 	include FORUM_ROOT.'/themes/'.$luna_config['o_default_style'].'/information.php';
 	$theme_info = new SimpleXMLElement($xmlstr);
 	
-	if ($theme_info->parent_theme != '')
+	if ($theme_info->parent_theme != '') {
 		echo '<link rel="stylesheet" type="text/css" href="themes/'.$theme_info->parent_theme.'/style.css" />';
+		if (file_exists('themes/'.$theme_info->parent_theme.'/accents/'.$luna_user['color_scheme'].'.css')) {
+			if ($luna_user['is_guest'])
+				echo '<link rel="stylesheet" type="text/css" href="themes/'.$luna_config['o_default_style'].'/accents/'.$luna_config['o_default_accent'].'.css" />';
+			else
+				echo '<link rel="stylesheet" type="text/css" href="themes/'.$theme_info->parent_theme.'/accents/'.$luna_user['color_scheme'].'.css" />';
+		}
+	}
 
 	echo '<link rel="stylesheet" type="text/css" href="themes/'.$luna_config['o_default_style'].'/style.css" />';
+	if (file_exists('themes/'.$luna_config['o_default_style'].'/accents/'.$luna_user['color_scheme'].'.css')) {
+		if ($luna_user['is_guest'])
+			echo '<link rel="stylesheet" type="text/css" href="themes/'.$luna_config['o_default_style'].'/accents/'.$luna_config['o_default_accent'].'.css" />';
+		else
+			echo '<link rel="stylesheet" type="text/css" href="themes/'.$luna_config['o_default_style'].'/accents/'.$luna_user['color_scheme'].'.css" />';
+	}
 }
 
 //
