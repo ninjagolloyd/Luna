@@ -13,7 +13,7 @@ require FORUM_ROOT.'include/common.php';
 if (!$luna_user['is_admmod'])
 	header("Location: login.php");
 $action = isset($_GET['action']) ? $_GET['action'] : null;
-$page_title = array(luna_htmlspecialchars($luna_config['o_board_title']), $lang['Admin'], $lang['Update']);
+$page_title = array(luna_htmlspecialchars($luna_config['o_board_title']), __('Admin', 'luna'), __('Update', 'luna'));
 define('FORUM_ACTIVE_PAGE', 'admin');
 require 'header.php';
 	load_admin_nav('backstage', 'about');
@@ -30,6 +30,7 @@ require 'header.php';
 				<a href="#board" class="list-group-item"><span class="fa fa-fw fa-align-justify"></span> Board</a>
 				<a href="#backstage" class="list-group-item"><span class="fa fa-fw fa-dashboard"></span> Backstage</a>
 				<a href="#theme" class="list-group-item"><span class="fa fa-fw fa-paint-brush"></span> Themes</a>
+				<a href="#dev" class="list-group-item"><span class="fa fa-fw fa-terminal"></span> Developers</a>
 				<a href="#others" class="list-group-item">Other improvements and notes</a>
 				<a href="#updates" class="list-group-item">Updates</a>
 			</div>
@@ -51,15 +52,23 @@ require 'header.php';
 				<a id="board"></a><h3><span class="fa fa-fw fa-align-justify"></span> Board</h3>
 				<div class="row">
 					<div class="col-sm-6">
-						<h4></h4>
-						<p></p>
+						<h4>Night mode</h4>
+						<p>Reading in a dark environment can be a pain when the design of the website you're looking at is bright. And Luna's default design is bright. So we're introducing a "Night mode", which allows your users to make the interface darker permanent, or depending on the time of day. This also works for the Backstage.</p>
+					</div>
+					<div class="col-sm-6">
+						<h4>Contact links</h4>
+						<p>When an user adds a Twitter, Facebook, Microsoft Account, e-mail, website or Google+ account to his profile, the add-ons in his profile are now clickable to give you and your users easy access to your user's accounts on these social networks.</p>
 					</div>
 				</div>
 				<a id="backstage"></a><h3><span class="fa fa-fw fa-dashboard"></span> Backstage</h3>
 				<div class="row">
 					<div class="col-sm-6">
-						<h4></h4>
-						<p></p>
+						<h4>A personal touch</h4>
+						<p>When a theme supports more then one accent color, you can choose the default color your board should have. This applies to guests and new users.</p>
+					</div>
+					<div class="col-sm-6">
+						<h4>Backstage accents</h4>
+						<p>Similar to the Mainstage design, you can now change the accent color of the Backstage. We also took the time to make a small update to the design.</p>
 					</div>
 				</div>
 				<a id="theme"></a><h3><span class="fa fa-fw fa-paint-brush"></span> Themes</h3>
@@ -69,11 +78,18 @@ require 'header.php';
 						<p>After the major revamp from Aero, Bittersweet Shimmer continues to improve our themes with a more simplified system, better support for accents, night mode and so much more.</p>
 					</div>
 				</div>
+				<a id="dev"></a><h3><span class="fa fa-fw fa-terminal"></span> Developers</h3>
+				<div class="row">
+					<div class="col-sm-6">
+						<h4>Notification API</h4>
+						<p>We're introducing a brand new Notification API. This API will allow you to create new notification more easly from different locations. You can read all about it in the <a href="http://getluna.org/docs/notification.php">documentation</a>.</p>
+					</div>
+				</div>
 				<a id="others"></a><h3>Other improvements and notes</h3>
 				<div class="row">
 					<div class="col-sm-6">
 						<h4>Packages</h4>
-						<p><b>Core</b> has been updated from version 1.0.4275 to 1.1.4289.</p>
+						<p><b>Core</b> has been updated from version 1.0.4275 to 1.1.4381.</p>
 					</div>
 					<div class="col-sm-6">
 						<h4>Bugfixes</h4>
